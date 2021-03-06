@@ -6,7 +6,7 @@ import { app, protocol, BrowserWindow, ipcMain, Menu } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { loadDb, addProject, getAllProjects } from "./database";
-import { generateMenu } from "./ui/menu";
+import { generateContextMenu, generateMenu } from "./ui/menus";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
@@ -38,6 +38,11 @@ async function createWindow() {
     // Load the index.html when not in development
     mainWindow.loadURL("app://./index.html");
   }
+
+  // Add event listener for context menu
+  mainWindow.webContents.on("context-menu", () => {
+    generateContextMenu().popup();
+  });
 
   // Create app menu based on OS
   Menu.setApplicationMenu(generateMenu(mainWindow));

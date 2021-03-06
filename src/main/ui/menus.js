@@ -13,6 +13,11 @@ export function generateMenu(mainWindow) {
   return mainMenu;
 }
 
+export function generateContextMenu() {
+  const contextMenu = Menu.buildFromTemplate([{ role: "editMenu" }]);
+  return contextMenu;
+}
+
 function buildDarwinTemplate() {
   console.log("Darwin! You don't have a menu template yet! Oops!");
   return {};
@@ -46,6 +51,7 @@ function buildDefaultTemplate(mainWindow) {
         }
       ]
     },
+    { role: "editMenu" },
     {
       label: "&View",
       submenu:
