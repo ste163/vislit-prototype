@@ -2,15 +2,19 @@
 
 // Entry point for main process
 
-import { app, protocol, BrowserWindow } from "electron";
+import { app, protocol, BrowserWindow, ipcMain } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
+import { loadDb, addProject, getAllProjects } from "./database";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { secure: true, standard: true } }
 ]);
+
+// For now, loadDb here for testing
+loadDb();
 
 async function createWindow() {
   // Create the browser window.
@@ -79,3 +83,22 @@ if (isDevelopment) {
     });
   }
 }
+
+// Event Listeners
+
+// Database Listeners
+ipcMain.handle("db-projects-get-all", () => {
+  const response = getAllProjects();
+  return response;
+});
+
+ipcMain.handle("db-projects-add", (e, object) => {
+  const response = addProject(object);
+  return response;
+  // Every successfully add (responses should probably be booleans?)
+  // have the .then response have a .then(ipcRenderer.invoke('get-whatever-since-you-made-a-change')).catch('unable to read database')
+});
+
+// Need a listener that handles when a db-project-change has occured
+// This will run the 'getAllProjects' code to run
+// then, if it returns successfully, returns the list
