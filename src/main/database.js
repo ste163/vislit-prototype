@@ -5,7 +5,7 @@ import { nanoid } from "nanoid/non-secure";
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 // Load lowdb database from 'userData' dir or create if no db in dir
-// On Linux, default location is: /userName/.config/Electron for development
+// On Linux, default location is: /userName/.config/projectTitle
 // POSSIBILITY
 // Maybe have the user be able to decide where the database file should load from. As in, on app load
 // Initially check localStorage for a db location. So the user could place the db in cloud storage
@@ -15,7 +15,6 @@ let db;
 
 function getDbPath() {
   const userDataDirPath = app.getPath("userData");
-  console.log("DATA PATH", userDataDirPath);
   return `${userDataDirPath}/vislit-database.json`;
 }
 

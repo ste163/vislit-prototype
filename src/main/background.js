@@ -37,6 +37,10 @@ async function createWindow() {
     // Load the index.html when not in development
     win.loadURL("app://./index.html");
   }
+
+  // Need to build a menu - (following from react-boilerplate):
+  // const menuBuilder = new MenuBuilder(mainWindow);
+  // menuBuilder.buildMenu();
 }
 
 // Quit when all windows are closed.

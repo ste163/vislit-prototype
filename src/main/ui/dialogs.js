@@ -1,6 +1,6 @@
 import { app, BrowserWindow, dialog } from "electron";
-import { exportDatabase, importDatabase } from "./database";
-import { generateDate } from "./utils";
+import { exportDatabase, importDatabase } from "../database";
+import { generateDate } from "../utils/utils";
 
 function showImportDialog() {
   const result = dialog.showOpenDialogSync({
