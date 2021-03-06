@@ -1,24 +1,39 @@
-# prototype_vislit_vue
+# Vislit Vue Prototype
 
-## Project setup
-```
-yarn install
-```
+> The main project's [github repo](https://github.com/ste163/vislit)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+Vue-version of Vislit prototype
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Features Roadmap
 
-### Lints and fixes files
-```
-yarn lint
-```
+### Dashboard
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Simple dashboard UI for creating writing projects
+- List of projects in database
+- Selecting projects animates in empty info cards in main dashboard content section
+- Animating changes in state/dashboard views
+
+### Data Viz
+
+- State-based progress bar
+
+### Storage
+
+- Export and Import database file for allowing the user to backup their data however they want
+- CRUD for projects
+
+### Writing
+
+- Use Quill or TipTap to write inside of Vislit.
+- Write notes and export them as Word documents or PDFs
+- Write actual stories in Quill
+- Possibly have linking to Google Docs and Word Online
+
+## Technologies to Test
+
+- ~~[Lowdb](https://github.com/typicode/lowdb) - data storage~~
+- ~~[nanoid](https://github.com/ai/nanoid/) - unique id generator for lowdb~~
+- [D3.js](https://d3js.org/) - data visualizations
+- [TipTap](https://github.com/ueberdosis/tiptap) - rich text editor under MIT, made for Vue, with a V2 coming very soon. Exports to HTML for easy conversion to word or reloading into the app.
+- [Quilljs](https://quilljs.com/) - rich text editor (Will require copyright notice in Documentation). Exports to Deltas (Quill's file format)
+- [vue-smooth-dnd](https://github.com/kutlugsahin/vue-smooth-dnd) - animated drag and drop feature
