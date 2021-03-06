@@ -1,23 +1,23 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Summary from "../views/Summary.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  // May need to have "/" always redirect to /summary/:projectId
   {
     path: "/",
-    name: "Home",
-    component: Home
+    name: "Summary",
+    component: Summary
   },
   {
-    path: "/about",
-    name: "About",
+    path: "/viz",
+    name: "Viz",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+    component: () => import(/* webpackChunkName: "about" */ "../views/Viz.vue")
   }
 ];
 
