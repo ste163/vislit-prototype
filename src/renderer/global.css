@@ -1,0 +1,111 @@
+/* Fonts, Root, Default-overrides */
+@font-face {
+  font-family: "Noto";
+  src: url(./assets/fonts/NotoSerif-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Noto";
+  src: url(./assets/fonts/NotoSerif-Bold.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Heebo";
+  src: url(./assets/fonts/Heebo-Thin.ttf);
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Heebo";
+  src: url(./assets/fonts/Heebo-ExtraLight.ttf);
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Heebo";
+  src: url(./assets/fonts/Heebo-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Heebo";
+  src: url(./assets/fonts/Heebo-Medium.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Heebo";
+  src: url(./assets/fonts/Heebo-Regular.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Heebo";
+  src: url(./assets/fonts/Heebo-SemiBold.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Heebo";
+  src: url(./assets/fonts/Heebo-Bold.ttf);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Heebo";
+  src: url(./assets/fonts/Heebo-ExtraBold.ttf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Heebo";
+  src: url(./assets/fonts/Heebo-Black.ttf);
+  font-weight: 900;
+}
+
+:root {
+  /* Fonts */
+  --fontFamilySans: "Heebo", sans-serif;
+  --fontFamilySerif: "Noto", serif;
+  --weightLightest: 100;
+  --weightLighter: 200;
+  --weightLight: 300;
+  --weightRegular: 400;
+  --weightBold: 500;
+  --weightBolder: 600;
+  --weightBoldest: 700;
+  --weightBlack: 800;
+  --weightBlackest: 900;
+
+  /* Colors */
+  --darkestBlack: #333333;
+
+  --darkestGray: #434343;
+  --darkGray: #484848;
+  --gray: #f0f0f0;
+  --lightGray: #e6e6e6;
+
+  --darkestWhite: #f6f6f6;
+  --darkWhite: #cecece;
+  --white: #ffffff;
+
+  --vislitDarkBlue: #2b6e6a;
+  --vislitBlue: #76cdc7;
+}
+
+#root {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 100vh;
+}
+
+body {
+  font-family: "Heebo";
+  font-weight: var(--weightLight);
+  background-color: var(--darkestWhite);
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
