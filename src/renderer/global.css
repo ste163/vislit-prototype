@@ -95,12 +95,6 @@
   --vislitBlue: #76cdc7;
 }
 
-#root {
-  display: flex;
-  flex-flow: row nowrap;
-  height: 100vh;
-}
-
 body {
   font-family: "Heebo";
   font-weight: var(--weightLight);
