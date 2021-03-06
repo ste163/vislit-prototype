@@ -2,10 +2,11 @@
 
 // Entry point for main process
 
-import { app, protocol, BrowserWindow, ipcMain } from "electron";
+import { app, protocol, BrowserWindow, ipcMain, Menu } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { loadDb, addProject, getAllProjects } from "./database";
+import { generateMenu } from "./ui/menu";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
@@ -38,9 +39,8 @@ async function createWindow() {
     win.loadURL("app://./index.html");
   }
 
-  // Need to build a menu - (following from react-boilerplate):
-  // const menuBuilder = new MenuBuilder(mainWindow);
-  // menuBuilder.buildMenu();
+  // Create app menu based on OS
+  Menu.setApplicationMenu(generateMenu());
 }
 
 // Quit when all windows are closed.
