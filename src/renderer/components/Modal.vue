@@ -1,3 +1,5 @@
+// Modals take in: - getter/setter for open/close state, - ModalTypeHeader, -
+ContentComponent
 <template>
   <div class="container">
     <transition name="fade">
@@ -9,7 +11,9 @@
     </transition>
     <transition name="slide">
       <section v-if="isProjectFormOpen" class="card modal">
-        <h1>Modal</h1>
+        <h1>Modal Type</h1>
+        <button>X Close</button>
+        <!-- Modal Content goes here -->
       </section>
     </transition>
   </div>
@@ -51,7 +55,7 @@ export default {
 }
 
 .modal {
-  transform: translateY(-20px);
+  transform: translateY(-15px);
   z-index: 99;
 }
 
@@ -75,6 +79,6 @@ export default {
 .slide-enter,
 .slide-leave-to {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(15px);
 }
 </style>
