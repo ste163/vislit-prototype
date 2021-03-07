@@ -6,11 +6,11 @@ ContentComponent
       <section
         class="background"
         @click="handleClosing"
-        v-if="isProjectFormOpen"
+        v-if="this.isOpen"
       ></section>
     </transition>
     <transition name="slide">
-      <section v-if="isProjectFormOpen" class="card modal">
+      <section v-if="this.isOpen" class="card modal">
         <h1>Modal Type</h1>
         <button>X Close</button>
         <!-- Modal Content goes here -->
@@ -20,18 +20,17 @@ ContentComponent
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 // Will need to take in an isOpen state
 export default {
+  props: {
+    isOpen: Boolean
+  },
   methods: {
     ...mapMutations(["setProjectFormOpen"]),
     handleClosing() {
-      const isOpen = !this.isProjectFormOpen;
-      this.setProjectFormOpen(isOpen);
+      this.setProjectFormOpen(!this.isOpen);
     }
-  },
-  computed: {
-    ...mapState(["isProjectFormOpen"])
   }
 };
 </script>

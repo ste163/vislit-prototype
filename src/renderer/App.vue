@@ -12,18 +12,22 @@ selects any of those
 
     <!-- Container for modals away from main content -->
     <div class="modals">
-      <modal />
+      <modal :isOpen="isProjectFormOpen" />
     </div>
   </section>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Controls from "./components/Controls.vue";
 import Modal from "./components/Modal.vue";
 import Sidebar from "./components/Sidebar.vue";
 
 export default {
-  components: { Sidebar, Controls, Modal }
+  components: { Sidebar, Controls, Modal },
+  computed: {
+    ...mapState(["isProjectFormOpen"])
+  }
 };
 </script>
 
