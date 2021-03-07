@@ -81,9 +81,11 @@
   --weightBoldest: 700;
   --weightBlack: 800;
   --weightBlackest: 900;
+  --spacingSmall: 0.1em;
 
   /* Colors */
-  --darkestBlack: #333333;
+  --darkBlack: #252525;
+  --black: #333333;
 
   --darkestGray: #434343;
   --darkGray: #484848;
@@ -97,6 +99,9 @@
 
   --vislitDarkBlue: #2b6e6a;
   --vislitBlue: #76cdc7;
+
+  /* Borders */
+  --borderRadius: 20px;
 }
 
 /* Default overrides */
@@ -104,15 +109,39 @@ body {
   font-family: "Heebo";
   font-weight: var(--weightLight);
   background-color: var(--darkestWhite);
-  color: var(--darkestBlack);
+  color: var(--black);
   margin: 0;
   height: 100vh;
   width: 100vw;
 }
 
+h2 {
+  font-weight: var(--weightLight);
+  letter-spacing: var(--spacingSmall);
+}
+
 button {
   border: none;
+  border-radius: var(--borderRadius);
   background: transparent;
   outline: none;
   cursor: pointer;
+  font-weight: var(--weightRegular);
+
+  font-size: 0.8em;
+  margin: 0;
+  padding: 0.5em 1em;
+}
+
+.btn-dark {
+  color: var(--white);
+  background-color: var(--darkGray);
+}
+
+.btn-dark:hover {
+  background-color: var(--darkestGray);
+}
+
+.btn-dark:active {
+  background-color: var(--darkBlack);
 }

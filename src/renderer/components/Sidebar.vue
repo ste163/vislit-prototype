@@ -1,7 +1,14 @@
 <template>
   <section class="sidebar__container">
     <h1>VISLIT</h1>
-    <button @click="handleOpen">+ Project</button>
+    <!-- Sidebar content changes dynamical based on routes -->
+    <!-- When on Summary page, show Projects, when on Graphs & Progress, auto-minimize -->
+    <!-- When on Notes, show a list of notes for that project -->
+    <h2>Projects</h2>
+    <div class="buttons">
+      <button class="btn-dark" @click="handleOpen">+ Project</button>
+      <button class="btn-dark">- Filter</button>
+    </div>
     <!-- Filter button for filtering the state of the current project list -->
 
     <!-- For each project in filteredProjects, show the right projects -->
@@ -33,6 +40,12 @@ export default {
   display: flex;
   flex-flow: column nowrap;
   color: var(--white);
-  background: var(--darkestBlack);
+  background: var(--black);
+}
+
+.buttons {
+  display: flex;
+  flex-flow: row nowrap;
+  place-content: space-evenly;
 }
 </style>
