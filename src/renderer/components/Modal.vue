@@ -8,7 +8,7 @@
       ></section>
     </transition>
     <transition name="slide">
-      <section class="card modal">
+      <section v-if="isProjectFormOpen" class="card modal">
         <h1>Modal</h1>
       </section>
     </transition>
@@ -67,6 +67,14 @@ export default {
 }
 
 /* modal card transition */
-.slide {
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.5s;
+}
+
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
 }
 </style>
