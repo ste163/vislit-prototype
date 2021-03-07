@@ -1,0 +1,59 @@
+form {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.form__h3 {
+  margin: 0 0 0.5em 0;
+  padding: 0;
+}
+
+fieldset {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0;
+  padding: 0.5em 0;
+  border: none;
+}
+
+input,
+textarea {
+  font-family: "Heebo";
+  font-weight: var(--weightLighter);
+  font-size: 0.9em;
+  letter-spacing: var(--spacingSmaller);
+  width: 90%;
+  border: none;
+  border-radius: var(--borderRadius);
+  background-color: var(--lighterGray);
+  box-shadow: var(--shadowCentered);
+  padding: 5px 10px;
+  outline: none;
+}
+
+textarea {
+  border-radius: 10px;
+}
+
+input:invalid {
+  border: 1px solid var(--red);
+}
+
+input:focus {
+  background-color: var(--gray);
+}
+
+.btn-form {
+  margin-top: 20px;
+  width: 50%;
+  align-self: center;
+}
+
+.btn-form:hover {
+  color: var(--white);
+  background-color: var(--vislitBlue);
+}
+
+.btn-form:active {
+  background-color: var(--vislitDarkBlue);
+}

@@ -12,6 +12,8 @@ selects any of those
 
     <!-- Container for modals -->
     <div class="modals">
+      <!-- MAYBE!!! Just have a single modal whose content changes dynamically for what's in Vuex -->
+      <!-- So then each component that needs to call the modal, would just update that Vuex state -->
       <modal
         :contentComponent="formComponent"
         :modalType="'Form'"

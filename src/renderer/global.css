@@ -15,12 +15,6 @@
 
 @font-face {
   font-family: "Heebo";
-  src: url(./assets/fonts/Heebo-Thin.ttf);
-  font-weight: 100;
-}
-
-@font-face {
-  font-family: "Heebo";
   src: url(./assets/fonts/Heebo-ExtraLight.ttf);
   font-weight: 200;
 }
@@ -72,7 +66,6 @@
   /* Fonts */
   --fontFamilySans: "Heebo", sans-serif;
   --fontFamilySerif: "Noto", serif;
-  --weightLightest: 100;
   --weightLighter: 200;
   --weightLight: 300;
   --weightRegular: 400;
@@ -81,6 +74,7 @@
   --weightBoldest: 700;
   --weightBlack: 800;
   --weightBlackest: 900;
+  --spacingSmaller: 0.05em;
   --spacingSmall: 0.1em;
 
   /* Colors */
@@ -91,6 +85,7 @@
   --darkGray: #484848;
   --gray: #f0f0f0;
   --lightGray: #e6e6e6;
+  --lighterGray: #f7f7f7;
 
   /* If darkestWhite changes, update the background.js to new background color */
   --darkestWhite: #f6f6f6;
@@ -99,6 +94,9 @@
 
   --vislitDarkBlue: #2b6e6a;
   --vislitBlue: #76cdc7;
+  --vislitLightBlue: #e5f6f4;
+
+  --red: rgb(241, 116, 116);
 
   /* Borders */
   --borderRadius: 20px;
@@ -106,6 +104,9 @@
   /* Shadows */
   --shadowCentered: 0 0 5px rgba(0, 0, 0, 0.1);
   --shadowRight: 2px 0 5px rgba(0, 0, 0, 0.1);
+
+  /* transitions */
+  --btnHover: all 0.5s;
 }
 
 /* Default overrides */
@@ -124,18 +125,24 @@ h2 {
   letter-spacing: var(--spacingSmall);
 }
 
+h3 {
+  font-weight: var(--weightLight);
+  letter-spacing: var(--spacingSmall);
+}
+
 button {
   border: none;
   border-radius: var(--borderRadius);
   background: transparent;
   outline: none;
   cursor: pointer;
-  font-weight: var(--weightRegular);
+  font-weight: var(--weightBold);
   box-shadow: var(--shadowCentered);
 
   font-size: 0.8em;
   margin: 0;
   padding: 0.5em 1em;
+  transition: var(--btnHover);
 }
 
 .btn-light {
