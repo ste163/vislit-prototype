@@ -25,5 +25,27 @@ export default {
 @import "./global.css";
 
 /* #app is a grid holding sidebar, controls, router-view */
+#app {
+  display: grid;
+  grid-template-rows: 50px auto;
+  grid-template-columns: 250px auto;
+  height: 100%;
+  width: 100%;
+}
+
+.sidebar {
+  grid-column: 1;
+  grid-row: 1 /3;
+}
+
+.controls {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.dashboard {
+  grid-column: 2;
+  grid-row: 2;
+}
 /* Lay stuff out correctly and when screen size gets so small, auto hide sidebar */
 </style>

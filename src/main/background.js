@@ -20,6 +20,8 @@ loadDb();
 async function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    minWidth: 500,
+    minHeight: 400,
     width: 1024,
     height: 768,
     backgroundColor: "#f6f6f6",

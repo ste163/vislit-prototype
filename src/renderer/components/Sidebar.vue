@@ -15,4 +15,9 @@
 export default {};
 </script>
 
-<style></style>
+<style scoped>
+section {
+  color: var(--white);
+  background: var(--darkestBlack);
+}
+</style>

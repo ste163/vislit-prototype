@@ -29,6 +29,10 @@ Vue-version of Vislit prototype
 - Write actual stories in Quill
 - Possibly have linking to Google Docs and Word Online
 
+### Quality of Life
+
+- Write a way to save and load the last window size and position. One way: https://github.com/electron/electron/issues/526
+
 ## Technologies to Test
 
 - ~~[Lowdb](https://github.com/typicode/lowdb) - data storage~~
