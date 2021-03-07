@@ -9,6 +9,7 @@ import { mapState, mapMutations } from "vuex";
 // Will need to take in an isOpen state
 export default {
   methods: {
+    ...mapState(["isProjectFormOpen"]),
     ...mapMutations(["setProjectFormOpen"]),
     handleClosing() {
       this.setProjectFormOpen(this.isProjectFormOpen, !this.isProjectFormOpen);

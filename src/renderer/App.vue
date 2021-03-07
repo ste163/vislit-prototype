@@ -8,16 +8,18 @@ selects any of those
   <section id="app">
     <sidebar class="sidebar" />
     <controls class="controls" />
+    <modal />
     <router-view class="dashboard" />
   </section>
 </template>
 
 <script>
 import Controls from "./components/Controls.vue";
+import Modal from "./components/Modal.vue";
 import Sidebar from "./components/Sidebar.vue";
 
 export default {
-  components: { Sidebar, Controls }
+  components: { Sidebar, Controls, Modal }
 };
 </script>
 
