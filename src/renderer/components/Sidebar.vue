@@ -2,6 +2,7 @@
   <section>
     Sidebar
     <!-- Create projects button that onclick opens modal with create proj form inside. Vuex state change? -->
+    <button @click="handleOpen">+ Project</button>
     <!-- Filter button for filtering the state of the current project list -->
 
     <!-- For each project in filteredProjects, show the right projects -->
@@ -12,7 +13,19 @@
 </template>
 
 <script>
-export default {};
+import { mapState, mapMutations } from "vuex";
+
+export default {
+  methods: {
+    ...mapMutations(["setProjectFormOpen"]),
+    ...mapState(["isProjectFormOpen"]),
+    handleOpen() {
+      const isOpen = this.isProjectFormOpen;
+      console.log(isOpen);
+      this.setProjectFormOpen(isOpen);
+    }
+  }
+};
 </script>
 
 <style scoped>
