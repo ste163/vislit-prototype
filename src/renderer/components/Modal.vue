@@ -5,7 +5,7 @@ ContentComponent
     <transition name="fade">
       <section
         class="background"
-        @click="handleClosing"
+        @click="handleVisibility"
         v-if="this.isOpen"
       ></section>
     </transition>
@@ -20,16 +20,14 @@ ContentComponent
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-// Will need to take in an isOpen state
 export default {
   props: {
-    isOpen: Boolean
+    isOpen: Boolean,
+    setIsOpen: Function
   },
   methods: {
-    ...mapMutations(["setProjectFormOpen"]),
-    handleClosing() {
-      this.setProjectFormOpen(!this.isOpen);
+    handleVisibility() {
+      this.setIsOpen(!this.isOpen);
     }
   }
 };
