@@ -11,9 +11,9 @@ ContentComponent
     </transition>
     <transition name="slide">
       <section v-if="this.isOpen" class="card modal">
-        <h1>Modal Type</h1>
-        <button>X Close</button>
-        <!-- Modal Content goes here -->
+        <h2 class="modal__type">{{ this.modalType }}</h2>
+        <button class="modal__close">Close</button>
+        <component :is="contentComponent" />
       </section>
     </transition>
   </div>
@@ -22,6 +22,8 @@ ContentComponent
 <script>
 export default {
   props: {
+    modalType: String,
+    contentComponent: Object,
     isOpen: Boolean,
     setIsOpen: Function
   },
@@ -54,6 +56,16 @@ export default {
 .modal {
   transform: translateY(-15px);
   z-index: 99;
+}
+
+.modal__type {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  font-weight: var(--weightLight);
+}
+
+.modal__close {
 }
 
 /* modal background transition */

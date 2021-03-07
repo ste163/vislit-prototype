@@ -10,9 +10,14 @@ selects any of those
     <controls class="controls" />
     <router-view class="dashboard" />
 
-    <!-- Container for modals away from main content -->
+    <!-- Container for modals -->
     <div class="modals">
-      <modal :isOpen="isProjectFormOpen" :setIsOpen="setProjectFormOpen" />
+      <modal
+        :contentComponent="formComponent"
+        :modalType="'Form'"
+        :isOpen="isProjectFormOpen"
+        :setIsOpen="setProjectFormOpen"
+      />
     </div>
   </section>
 </template>
@@ -22,9 +27,15 @@ import { mapState, mapMutations } from "vuex";
 import Controls from "./components/Controls.vue";
 import Modal from "./components/Modal.vue";
 import Sidebar from "./components/Sidebar.vue";
+import ProjectForm from "./forms/ProjectForm";
 
 export default {
   components: { Sidebar, Controls, Modal },
+  data() {
+    return {
+      formComponent: ProjectForm
+    };
+  },
   methods: {
     ...mapMutations(["setProjectFormOpen"])
   },
