@@ -1,7 +1,6 @@
 <template>
-  <section>
+  <section class="sidebar">
     Sidebar
-    <!-- Create projects button that onclick opens modal with create proj form inside. Vuex state change? -->
     <button @click="handleOpen">+ Project</button>
     <!-- Filter button for filtering the state of the current project list -->
 
@@ -30,7 +29,7 @@ export default {
 </script>
 
 <style scoped>
-section {
+.sidebar {
   color: var(--white);
   background: var(--darkestBlack);
 }

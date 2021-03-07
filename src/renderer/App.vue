@@ -10,7 +10,7 @@ selects any of those
     <controls class="controls" />
     <router-view class="dashboard" />
 
-    <!-- Container for modals to live happily in, away from everyone else -->
+    <!-- Container for modals away from main content -->
     <div class="modals">
       <modal />
     </div>
