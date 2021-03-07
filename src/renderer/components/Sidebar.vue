@@ -41,6 +41,7 @@ export default {
   flex-flow: column nowrap;
   color: var(--white);
   background: var(--black);
+  box-shadow: var(--shadowRight);
 }
 
 .buttons {

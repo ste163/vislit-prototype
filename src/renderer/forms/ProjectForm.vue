@@ -23,7 +23,7 @@
     <!-- GOAL FORM -->
     <!-- Word count goal per day -->
     <!-- Goal Frequency (daily, weekly, monthly) -->
-    <button type="submit">Save</button>
+    <button class="btn-light" type="submit">Save</button>
   </form>
 </template>
 

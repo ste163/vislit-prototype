@@ -102,6 +102,10 @@
 
   /* Borders */
   --borderRadius: 20px;
+
+  /* Shadows */
+  --shadowCentered: 0 0 5px rgba(0, 0, 0, 0.1);
+  --shadowRight: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Default overrides */
@@ -127,10 +131,15 @@ button {
   outline: none;
   cursor: pointer;
   font-weight: var(--weightRegular);
+  box-shadow: var(--shadowCentered);
 
   font-size: 0.8em;
   margin: 0;
   padding: 0.5em 1em;
+}
+
+.btn-light {
+  background-color: var(--gray);
 }
 
 .btn-dark {
