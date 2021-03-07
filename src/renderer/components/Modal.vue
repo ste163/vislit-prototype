@@ -12,7 +12,7 @@ ContentComponent
     <transition name="slide">
       <section v-if="this.isOpen" class="card modal">
         <h2 class="modal__type">{{ this.modalType }}</h2>
-        <button class="modal__close">Close</button>
+        <button class="modal__close" @click="handleVisibility">Close</button>
         <component :is="contentComponent" />
       </section>
     </transition>
