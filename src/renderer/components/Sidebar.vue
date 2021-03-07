@@ -17,12 +17,14 @@ import { mapState, mapMutations } from "vuex";
 
 export default {
   methods: {
-    ...mapState(["isProjectFormOpen"]),
     ...mapMutations(["setProjectFormOpen"]),
     handleOpen() {
-      const isOpen = !this.isProjectFormOpen();
+      const isOpen = !this.isProjectFormOpen;
       this.setProjectFormOpen(isOpen);
     }
+  },
+  computed: {
+    ...mapState(["isProjectFormOpen"])
   }
 };
 </script>

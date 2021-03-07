@@ -19,7 +19,7 @@ Vue-version of Vislit prototype
 
 ### Storage
 
-- Export and Import database file for allowing the user to backup their data however they want
+- ~~Export and Import database file for allowing the user to backup their data however they want~~
 - CRUD for projects
 
 ### Writing

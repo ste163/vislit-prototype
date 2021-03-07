@@ -8,8 +8,12 @@ selects any of those
   <section id="app">
     <sidebar class="sidebar" />
     <controls class="controls" />
-    <modal />
     <router-view class="dashboard" />
+
+    <!-- Container for modals to live happily in, away from everyone else -->
+    <div class="modals">
+      <modal />
+    </div>
   </section>
 </template>
 
@@ -37,7 +41,7 @@ export default {
 
 .sidebar {
   grid-column: 1;
-  grid-row: 1 /3;
+  grid-row: 1 / 3;
 }
 
 .controls {
@@ -49,5 +53,9 @@ export default {
   grid-column: 2;
   grid-row: 2;
 }
-/* Lay stuff out correctly and when screen size gets so small, auto hide sidebar */
+
+.modals {
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+}
 </style>

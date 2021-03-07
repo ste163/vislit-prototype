@@ -1,5 +1,5 @@
 <template>
-  <section v-if="isProjectFormOpen">
+  <section class="background" @click="handleClosing" v-if="isProjectFormOpen">
     <h1>Modal</h1>
   </section>
 </template>
@@ -9,10 +9,11 @@ import { mapState, mapMutations } from "vuex";
 // Will need to take in an isOpen state
 export default {
   methods: {
-    ...mapState(["isProjectFormOpen"]),
+    // ...mapState(["isProjectFormOpen"]),
     ...mapMutations(["setProjectFormOpen"]),
     handleClosing() {
-      this.setProjectFormOpen(this.isProjectFormOpen, !this.isProjectFormOpen);
+      const isOpen = !this.isProjectFormOpen;
+      this.setProjectFormOpen(isOpen);
     }
   },
   computed: {
@@ -21,4 +22,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.background {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+</style>
