@@ -1,6 +1,6 @@
 <template>
-  <section class="sidebar">
-    Sidebar
+  <section class="sidebar__container">
+    <h1>VISLIT</h1>
     <button @click="handleOpen">+ Project</button>
     <!-- Filter button for filtering the state of the current project list -->
 
@@ -29,7 +29,9 @@ export default {
 </script>
 
 <style scoped>
-.sidebar {
+.sidebar__container {
+  display: flex;
+  flex-flow: column nowrap;
   color: var(--white);
   background: var(--darkestBlack);
 }
