@@ -106,7 +106,7 @@
   --shadowRight: 2px 0 5px rgba(0, 0, 0, 0.1);
 
   /* transitions */
-  --btnHover: all 0.5s;
+  --btnHover: all 0.2s;
 }
 
 /* Default overrides */
@@ -127,14 +127,13 @@ h2 {
 
 h3 {
   font-weight: var(--weightLight);
-  letter-spacing: var(--spacingSmall);
+  letter-spacing: var(--spacingSmaller);
 }
 
 button {
   border: none;
   border-radius: var(--borderRadius);
   background: transparent;
-  outline: none;
   cursor: pointer;
   font-weight: var(--weightBold);
   box-shadow: var(--shadowCentered);
@@ -143,6 +142,11 @@ button {
   margin: 0;
   padding: 0.5em 1em;
   transition: var(--btnHover);
+}
+
+a:focus,
+button:focus {
+  outline: 1px solid var(--vislitBlue);
 }
 
 .btn-light {
