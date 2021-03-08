@@ -41,3 +41,5 @@ Vue-version of Vislit prototype
 - [TipTap](https://github.com/ueberdosis/tiptap) - rich text editor under MIT, made for Vue, with a V2 coming very soon. Exports to HTML for easy conversion to word or reloading into the app.
 - [Quilljs](https://quilljs.com/) - rich text editor (Will require copyright notice in Documentation). Exports to Deltas (Quill's file format)
 - [vue-smooth-dnd](https://github.com/kutlugsahin/vue-smooth-dnd) - animated drag and drop feature
+- [vee-validate](https://github.com/logaretm/vee-validate) - form validation
+- [vue-good-table](https://github.com/xaksis/vue-good-table) - advanced tables
