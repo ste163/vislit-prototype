@@ -22,11 +22,9 @@
       O Settings
     </button>
 
-    <div class="sidebar__close">
-      <button class="btn-none arrow__container" @click="handleSidebarOpen">
-        <div :class="{ arrow: true, 'arrow--active': isSidebarOpen }"></div>
-      </button>
-    </div>
+    <button class="btn-none arrow__container" @click="handleSidebarOpen">
+      <div :class="{ arrow: true, 'arrow--active': isSidebarOpen }"></div>
+    </button>
   </section>
 </template>
 
@@ -110,17 +108,15 @@ export default {
   align-self: center;
 }
 
-.sidebar__close {
+.arrow__container {
   display: flex;
-  margin-top: 10px;
-  background-color: var(--darkBlack);
   height: 50px;
   width: 100%;
+  margin-top: 10px;
+  padding-right: 30px;
+  background-color: var(--darkestGray);
   justify-content: flex-end;
-}
-
-.arrow__container {
-  margin-right: 10px;
+  align-items: center;
 }
 
 .arrow::after,
