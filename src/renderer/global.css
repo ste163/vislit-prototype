@@ -175,3 +175,8 @@ button:focus {
 .btn-dark:active {
   background-color: var(--darkBlack);
 }
+
+.btn-none {
+  box-shadow: none;
+  border-radius: 0;
+}

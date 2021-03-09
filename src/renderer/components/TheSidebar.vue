@@ -18,8 +18,10 @@
       <component :is="renderContentPerRoute" />
     </section>
 
-    <button class="btn-dark" @click="openSettings">O Settings</button>
-    <button class="btn-dark sidebar__arrow">Close</button>
+    <button class="btn-dark sidebar__settings" @click="openSettings">
+      O Settings
+    </button>
+    <button class="btn-none sidebar__arrow">Close</button>
   </section>
 </template>
 
@@ -72,7 +74,7 @@ export default {
   color: var(--white);
   background: var(--black);
   box-shadow: var(--shadowRight);
-  padding: 10px 0;
+  padding-top: 10px;
 }
 
 .sidebar__heading {
@@ -93,5 +95,15 @@ export default {
 
 .sidebar__content {
   flex-grow: 1;
+}
+
+.sidebar__settings {
+  width: 50%;
+  align-self: center;
+}
+
+.sidebar__arrow {
+  margin-top: 10px;
+  background-color: var(--darkBlack);
 }
 </style>
