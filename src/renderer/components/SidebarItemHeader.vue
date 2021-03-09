@@ -16,6 +16,7 @@ export default {};
 }
 
 .container__title {
+  user-select: none;
   margin: 5px 0;
 }
 </style>

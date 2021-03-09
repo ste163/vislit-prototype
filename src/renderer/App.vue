@@ -38,8 +38,9 @@ export default {
   display: grid;
   grid-template-rows: 50px auto;
   grid-template-columns: 250px auto;
-  height: 100%;
+  height: 100vh;
   width: 100%;
+  overflow: hidden;
 
   transition: grid-template-columns 1s;
 }

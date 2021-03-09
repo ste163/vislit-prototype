@@ -81,6 +81,8 @@
   /* Colors */
   --darkBlack: #252525;
   --black: #333333;
+  --lighterBlack: #363636;
+  --lightestBlack: #3f3f3f;
 
   --darkestGray: #434343;
   --darkGray: #484848;
@@ -141,6 +143,7 @@ hr {
 }
 
 button {
+  user-select: none;
   border: none;
   border-radius: var(--borderRadius);
   background: transparent;

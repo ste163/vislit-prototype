@@ -81,6 +81,7 @@ export default {
   background: var(--black);
   box-shadow: var(--shadowRight);
   padding-top: 10px;
+  overflow-y: auto;
 }
 
 .sidebar__heading {
@@ -110,13 +111,21 @@ export default {
 
 .arrow__container {
   display: flex;
-  height: 50px;
-  width: 100%;
-  margin-top: 10px;
-  padding-right: 30px;
   background-color: var(--darkestGray);
+  height: 50px;
+  margin-top: 10px;
+  padding: 10px 0;
+  padding-right: 30px;
   justify-content: flex-end;
   align-items: center;
+}
+
+.arrow__container:hover {
+  background-color: var(--lightestBlack);
+}
+
+.arrow__container:active {
+  background-color: var(--lighterBlack);
 }
 
 .arrow::after,

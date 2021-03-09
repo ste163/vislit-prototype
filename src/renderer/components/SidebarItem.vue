@@ -17,9 +17,18 @@ export default {};
   background-color: var(--darkGray);
   margin-bottom: 10px;
   padding-left: 10px;
+
+  transition: all 0.25s;
+}
+
+.item__container:hover {
+  background-color: var(--vislitBlue);
+  color: var(--darkBlack);
+  cursor: pointer;
 }
 
 .item__header {
+  user-select: none;
   font-weight: var(--weightBolder);
   font-size: 0.9em;
   letter-spacing: var(--spacingSmaller);
@@ -27,6 +36,7 @@ export default {};
 }
 
 .item__details {
+  user-select: none;
   margin: 0;
 }
 </style>

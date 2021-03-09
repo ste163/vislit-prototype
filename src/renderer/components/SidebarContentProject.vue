@@ -15,6 +15,9 @@
       <sidebar-item />
       <sidebar-item />
       <sidebar-item />
+      <sidebar-item />
+      <sidebar-item />
+      <sidebar-item />
     </section>
   </div>
 </template>
@@ -42,7 +45,7 @@ export default {
 
 <style scoped>
 .content__container {
-  height: 100%;
+  /* height: 100%; */
 }
 
 .buttons {
@@ -54,7 +57,6 @@ export default {
 .container__items {
   display: flex;
   flex-flow: column nowrap;
-  height: 100%;
   margin-top: 10px;
 }
 </style>
