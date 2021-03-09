@@ -17,6 +17,7 @@
     <!-- Loop over the projectInfo component. Properly animate it when adding a new proj -->
     <!-- Clicking a project will GO TO the /summary/projectId to display correct info.
     This way I let the router handle everything instead of a crazy state-router again -->
+    <button class="btn-dark" @click="openSettings">Settings</button>
   </section>
 </template>
 
@@ -24,6 +25,7 @@
 import { setterMixin } from "../mixins/modalMixins";
 import ProjectFormCreate from "./ProjectFormCreate";
 import BaseLogo from "./BaseLogo";
+import UserFormSettings from "./UserFormSettings.vue";
 
 export default {
   components: { BaseLogo },
@@ -31,6 +33,9 @@ export default {
   methods: {
     createProject() {
       this.setModal("Project Form", ProjectFormCreate);
+    },
+    openSettings() {
+      this.setModal("Settings Form", UserFormSettings);
     }
   }
 };
