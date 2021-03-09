@@ -1,6 +1,6 @@
 <template>
   <section class="item__container">
-    <h3 class="item__header">Item Title</h3>
+    <h4 class="item__header">Item Title</h4>
     <p class="item__details">Optional info to show</p>
   </section>
 </template>
@@ -22,6 +22,7 @@ export default {};
 .item__header {
   font-weight: var(--weightBolder);
   font-size: 0.9em;
+  letter-spacing: var(--spacingSmaller);
   margin: 0;
 }
 

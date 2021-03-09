@@ -131,6 +131,15 @@ h3 {
   letter-spacing: var(--spacingSmaller);
 }
 
+hr {
+  border: 0 solid;
+  height: 0.3em;
+  margin: 0 0.2em 1em 0.2em;
+  border-radius: var(--borderRadius);
+  background-color: var(--darkGray);
+  border-color: var(--darkGray);
+}
+
 button {
   border: none;
   border-radius: var(--borderRadius);

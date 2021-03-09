@@ -11,6 +11,7 @@
     <!-- Clicking a project will GO TO the /summary/projectId to display correct info.
     This way I let the router handle everything instead of a crazy state-router again -->
     <section class="container__items">
+      <sidebar-item-header />
       <sidebar-item />
       <sidebar-item />
       <sidebar-item />
@@ -22,10 +23,11 @@
 import { setterMixin } from "../mixins/modalMixins";
 import ProjectFormCreate from "./ProjectFormCreate";
 import SidebarItem from "./SidebarItem.vue";
+import SidebarItemHeader from "./SidebarItemHeader.vue";
 import UserFormSettings from "./UserFormSettings.vue";
 
 export default {
-  components: { SidebarItem },
+  components: { SidebarItem, SidebarItemHeader },
   mixins: [setterMixin],
   methods: {
     createProject() {
