@@ -1,5 +1,6 @@
 <template>
   <svg
+    class="logo"
     width="48"
     height="50"
     version="1.1"
@@ -33,7 +34,7 @@ export default {};
 </script>
 
 <style scoped>
-svg {
+.logo {
   height: 40px;
   margin-right: 10px;
 }

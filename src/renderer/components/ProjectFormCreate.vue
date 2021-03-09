@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form class="form" @submit.prevent="handleSubmit">
     <h3 class="form__h3">Create Project</h3>
     <!-- Create form holds BOTH Project & Goal forms. A circle indicator at top/bottom of form can show how many steps -->
 
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style scoped>
-form {
+.form {
   width: 15em;
 }
 </style>

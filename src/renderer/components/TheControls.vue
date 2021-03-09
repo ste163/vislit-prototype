@@ -6,7 +6,7 @@
 
     <!-- Has router-links for now because idk what else to do with them -->
     <router-link to="/">Summary</router-link> |
-    <router-link to="/viz">Vizualizations</router-link>
+    <router-link to="/visualizations">Vizualizations</router-link>
   </section>
 </template>
 

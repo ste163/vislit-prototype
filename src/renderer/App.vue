@@ -13,8 +13,8 @@ selects any of those
     <!-- Container for modals -->
     <div class="modals">
       <!-- MAYBE!!! Just have a single modal whose content changes dynamically for what's in Vuex -->
-      <!-- So then each component that needs to call the modal, would just update that Vuex state -->
-      <base-modal
+      <!-- So then each component that needs to call the modal, would just update that Vuex state? -->
+      <modal-container
         :contentComponent="formComponent"
         :modalType="'Form'"
         :isOpen="isProjectFormOpen"
@@ -27,12 +27,12 @@ selects any of those
 <script>
 import { mapState, mapMutations } from "vuex";
 import TheControls from "./components/TheControls.vue";
-import BaseModal from "./components/BaseModal.vue";
+import ModalContainer from "./components/ModalContainer.vue";
 import TheSidebar from "./components/TheSidebar.vue";
 import ProjectFormCreate from "./components/ProjectFormCreate";
 
 export default {
-  components: { TheSidebar, TheControls, BaseModal },
+  components: { TheSidebar, TheControls, ModalContainer },
   data() {
     return {
       formComponent: ProjectFormCreate
