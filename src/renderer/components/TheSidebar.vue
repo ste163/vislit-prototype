@@ -19,34 +19,46 @@
     </section>
 
     <button class="btn-dark" @click="openSettings">O Settings</button>
-    <button class="btn-dark sidebar__arrow">></button>
+    <button class="btn-dark sidebar__arrow">Close</button>
   </section>
 </template>
 
 <script>
 import { setterMixin } from "../mixins/modalMixins";
 import AppLogo from "./AppLogo";
-import ProjectSidebarContent from "./ProjectSidebarContent.vue";
+import SidebarContentProject from "./SidebarContentProject.vue";
 import UserFormSettings from "./UserFormSettings.vue";
 
 export default {
-  components: { AppLogo, ProjectSidebarContent },
+  components: { AppLogo, SidebarContentProject },
+
+  data() {
+    // SET DEFAULT VALUES BASED ON USER SETTINGS (WHATEVER THE USER LAST CLICKED ON, IS WHAT YOU SHOW)
+    // ALWAYS SAVE THE LAST ROUTE USER WAS AT AND RELOAD THAT VIEW
+    return {
+      isSidebarOpen: true,
+      areDetailsVisibilty: true
+    };
+  },
+
   mixins: [setterMixin],
+
   methods: {
     openSettings() {
       this.setModal("Form", UserFormSettings);
     }
   },
+
   computed: {
     renderContentPerRoute() {
       const route = this.$route.name;
       // Add a GLOBAL Vuex state check for if it should be minimized
       switch (route) {
         case "Summary":
-          return ProjectSidebarContent;
+          return SidebarContentProject;
 
         default:
-          return ProjectSidebarContent;
+          return SidebarContentProject;
       }
     }
   }
@@ -81,11 +93,5 @@ export default {
 
 .sidebar__content {
   flex-grow: 1;
-}
-
-.buttons {
-  display: flex;
-  flex-flow: row nowrap;
-  place-content: space-evenly;
 }
 </style>
