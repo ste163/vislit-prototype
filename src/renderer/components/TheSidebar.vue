@@ -1,8 +1,8 @@
 <template>
   <section class="sidebar__container">
-    <div class="branding">
-      <base-logo />
-      <h2 class="branding__title">Projects</h2>
+    <div class="heading">
+      <app-logo />
+      <h2 class="heading__title">PROJECTS</h2>
     </div>
     <!-- Sidebar content changes dynamical based on routes -->
     <!-- When on Summary page, show Projects, when on Graphs & Progress, auto-minimize -->
@@ -17,25 +17,25 @@
     <!-- Loop over the projectInfo component. Properly animate it when adding a new proj -->
     <!-- Clicking a project will GO TO the /summary/projectId to display correct info.
     This way I let the router handle everything instead of a crazy state-router again -->
-    <button class="btn-dark" @click="openSettings">Settings</button>
+    <button class="btn-dark" @click="openSettings">O Settings</button>
   </section>
 </template>
 
 <script>
 import { setterMixin } from "../mixins/modalMixins";
 import ProjectFormCreate from "./ProjectFormCreate";
-import BaseLogo from "./BaseLogo";
+import AppLogo from "./AppLogo";
 import UserFormSettings from "./UserFormSettings.vue";
 
 export default {
-  components: { BaseLogo },
+  components: { AppLogo },
   mixins: [setterMixin],
   methods: {
     createProject() {
-      this.setModal("Project Form", ProjectFormCreate);
+      this.setModal("Form", ProjectFormCreate);
     },
     openSettings() {
-      this.setModal("Settings Form", UserFormSettings);
+      this.setModal("Form", UserFormSettings);
     }
   }
 };
@@ -51,16 +51,16 @@ export default {
   padding: 10px 0;
 }
 
-.branding {
+.heading {
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
-  align-self: center;
+  align-items: flex-end;
+  margin-left: 10px;
   margin-bottom: 20px;
 }
 
-.branding__title {
-  /* font-family: "Noto"; */
+.heading__title {
+  font-family: "Noto";
   font-weight: var(--weightThin);
   letter-spacing: var(--spacingSmall);
   margin: 0;
