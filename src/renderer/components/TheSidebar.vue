@@ -21,9 +21,12 @@
     <button class="btn-dark sidebar__settings" @click="openSettings">
       O Settings
     </button>
-    <button class="btn-none arrow__container" @click="handleSidebarOpen">
-      <div :class="{ arrow: true, 'arrow--active': isSidebarOpen }"></div>
-    </button>
+
+    <div class="sidebar__close">
+      <button class="btn-none arrow__container" @click="handleSidebarOpen">
+        <div :class="{ arrow: true, 'arrow--active': isSidebarOpen }"></div>
+      </button>
+    </div>
   </section>
 </template>
 
@@ -107,30 +110,44 @@ export default {
   align-self: center;
 }
 
-.arrow__container {
+.sidebar__close {
+  display: flex;
   margin-top: 10px;
   background-color: var(--darkBlack);
   height: 50px;
+  width: 100%;
+  justify-content: flex-end;
 }
 
-.arrow,
+.arrow__container {
+  margin-right: 10px;
+}
+
 .arrow::after,
 .arrow::before {
   content: "";
   display: block;
-  width: 100%;
-  height: 3px;
+  width: 25px;
+  height: 4px;
   border-radius: 3px;
   background-color: var(--white);
-  margin: 6px 0px;
+  margin: 3px 0px;
   transition: 0.3s;
 }
 
+.arrow::after {
+  transform: rotate(-29deg) translate(-1px, 1px);
+}
+
+.arrow::before {
+  transform: rotate(-153deg) translate(1px, 1px);
+}
+
 .arrow--active::after {
-  background-color: red;
+  transform: rotate(-145deg) translate(-8px, -1px);
 }
 
 .arrow--active::before {
-  background-color: blue;
+  transform: rotate(-35deg) translate(5px, 3px);
 }
 </style>
