@@ -21,20 +21,16 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 import BaseLogo from "./BaseLogo";
 
 export default {
   components: { BaseLogo },
   methods: {
-    ...mapMutations(["setProjectFormOpen"]),
+    ...mapMutations(["setIsModalOpen"]),
     handleOpen() {
-      const isOpen = !this.isProjectFormOpen;
-      this.setProjectFormOpen(isOpen);
+      this.setIsModalOpen(true);
     }
-  },
-  computed: {
-    ...mapState(["isProjectFormOpen"])
   }
 };
 </script>

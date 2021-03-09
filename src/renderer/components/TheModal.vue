@@ -6,11 +6,11 @@ ContentComponent
       <section
         class="background"
         @click="handleClose"
-        v-if="this.isOpen"
+        v-if="isModalOpen"
       ></section>
     </transition>
     <transition name="slide">
-      <section v-if="this.isOpen" class="card modal">
+      <section v-if="isModalOpen" class="card modal">
         <h2 class="modal__type">{{ this.modalType }}</h2>
         <button class="modal__close" @click="handleClose">X</button>
         <component class="modal__content" :is="contentComponent" />
@@ -20,17 +20,20 @@ ContentComponent
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 export default {
   props: {
     modalType: String,
-    contentComponent: Object,
-    isOpen: Boolean,
-    setIsOpen: Function
+    contentComponent: Object
   },
   methods: {
+    ...mapMutations(["setIsModalOpen"]),
     handleClose() {
-      this.setIsOpen(false);
+      this.setIsModalOpen(false);
     }
+  },
+  computed: {
+    ...mapState(["isModalOpen"])
   }
 };
 </script>

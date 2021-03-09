@@ -10,39 +10,27 @@ selects any of those
     <the-controls class="controls" />
     <router-view class="dashboard" />
 
-    <!-- Container for modals -->
-    <div class="modals">
-      <!-- MAYBE!!! Just have a single modal whose content changes dynamically for what's in Vuex -->
-      <!-- So then each component that needs to call the modal, would just update that Vuex state? -->
-      <modal-container
-        :contentComponent="formComponent"
-        :modalType="'Form'"
-        :isOpen="isProjectFormOpen"
-        :setIsOpen="setProjectFormOpen"
-      />
+    <div class="modal">
+      <!-- Modal state should be from Vuex store -->
+      <!-- Button clicks update Vuex store state -->
+      <!-- Then Modal because TheModal -->
+      <the-modal :contentComponent="formComponent" :modalType="'Form'" />
     </div>
   </section>
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
 import TheControls from "./components/TheControls.vue";
-import ModalContainer from "./components/ModalContainer.vue";
+import TheModal from "./components/TheModal.vue";
 import TheSidebar from "./components/TheSidebar.vue";
 import ProjectFormCreate from "./components/ProjectFormCreate";
 
 export default {
-  components: { TheSidebar, TheControls, ModalContainer },
+  components: { TheSidebar, TheControls, TheModal },
   data() {
     return {
       formComponent: ProjectFormCreate
     };
-  },
-  methods: {
-    ...mapMutations(["setProjectFormOpen"])
-  },
-  computed: {
-    ...mapState(["isProjectFormOpen"])
   }
 };
 </script>
@@ -74,7 +62,7 @@ export default {
   grid-row: 2;
 }
 
-.modals {
+.modal {
   grid-column: 1 / 3;
   grid-row: 1 / 3;
 }

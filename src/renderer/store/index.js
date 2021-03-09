@@ -5,11 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isProjectFormOpen: false
+    isModalOpen: false
   },
   mutations: {
-    setProjectFormOpen(state, payload) {
-      state.isProjectFormOpen = payload;
+    setIsModalOpen(state, payload) {
+      state.isModalOpen = payload;
     }
   },
   actions: {},
