@@ -1,7 +1,7 @@
 <template>
   <section class="sidebar__container">
     <div class="branding">
-      <logo />
+      <vislit-logo />
       <h2 class="branding__title">Projects</h2>
     </div>
     <!-- Sidebar content changes dynamical based on routes -->
@@ -22,10 +22,10 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
-import Logo from "./Logo";
+import VislitLogo from "../VislitLogo";
 
 export default {
-  components: { Logo },
+  components: { VislitLogo },
   methods: {
     ...mapMutations(["setProjectFormOpen"]),
     handleOpen() {

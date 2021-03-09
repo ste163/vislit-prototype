@@ -6,8 +6,8 @@ project, and then "Visualizations", "Notes", "Progress", etc. routes when user
 selects any of those
 <template>
   <section id="app">
-    <sidebar class="sidebar" />
-    <controls class="controls" />
+    <sidebar-nav class="sidebar" />
+    <dashboard-controls class="controls" />
     <router-view class="dashboard" />
 
     <!-- Container for modals -->
@@ -26,13 +26,13 @@ selects any of those
 
 <script>
 import { mapState, mapMutations } from "vuex";
-import Controls from "./components/Controls.vue";
+import DashboardControls from "./components/DashboardControls.vue";
 import Modal from "./components/Modal.vue";
-import Sidebar from "./components/Sidebar.vue";
+import SidebarNav from "./components/sidebar/SidebarNav.vue";
 import ProjectCreateForm from "./forms/ProjectCreateForm";
 
 export default {
-  components: { Sidebar, Controls, Modal },
+  components: { SidebarNav, DashboardControls, Modal },
   data() {
     return {
       formComponent: ProjectCreateForm
