@@ -5,14 +5,14 @@ ContentComponent
     <transition name="fade">
       <section
         class="background"
-        @click="handleVisibility"
+        @click="handleClose"
         v-if="this.isOpen"
       ></section>
     </transition>
     <transition name="slide">
       <section v-if="this.isOpen" class="card modal">
         <h2 class="modal__type">{{ this.modalType }}</h2>
-        <button class="modal__close" @click="handleVisibility">X</button>
+        <button class="modal__close" @click="handleClose">X</button>
         <component class="modal__content" :is="contentComponent" />
       </section>
     </transition>
@@ -28,8 +28,8 @@ export default {
     setIsOpen: Function
   },
   methods: {
-    handleVisibility() {
-      this.setIsOpen(!this.isOpen);
+    handleClose() {
+      this.setIsOpen(false);
     }
   }
 };

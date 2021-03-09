@@ -1,8 +1,7 @@
-// If passing in something we already have, change to edit form
 <template>
   <form @submit.prevent="handleSubmit">
     <h3 class="form__h3">Create Project</h3>
-    <!-- Separate these into 2 forms with a step 1 & step 2 -->
+    <!-- Create form holds BOTH Project & Goal forms. A circle indicator at top/bottom of form can show how many steps -->
 
     <!-- PROJECT FORM -->
     <fieldset>

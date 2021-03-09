@@ -29,13 +29,13 @@ import { mapState, mapMutations } from "vuex";
 import Controls from "./components/Controls.vue";
 import Modal from "./components/Modal.vue";
 import Sidebar from "./components/Sidebar.vue";
-import ProjectForm from "./forms/ProjectForm";
+import ProjectCreateForm from "./forms/ProjectCreateForm";
 
 export default {
   components: { Sidebar, Controls, Modal },
   data() {
     return {
-      formComponent: ProjectForm
+      formComponent: ProjectCreateForm
     };
   },
   methods: {
