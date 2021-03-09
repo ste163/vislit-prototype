@@ -21,7 +21,9 @@
     <button class="btn-dark sidebar__settings" @click="openSettings">
       O Settings
     </button>
-    <button class="btn-none sidebar__arrow">Close</button>
+    <button class="btn-none arrow__container" @click="handleSidebarOpen">
+      <div :class="{ arrow: true, 'arrow--active': isSidebarOpen }"></div>
+    </button>
   </section>
 </template>
 
@@ -48,6 +50,9 @@ export default {
   methods: {
     openSettings() {
       this.setModal("Form", UserFormSettings);
+    },
+    handleSidebarOpen() {
+      this.isSidebarOpen = !this.isSidebarOpen;
     }
   },
 
@@ -102,8 +107,30 @@ export default {
   align-self: center;
 }
 
-.sidebar__arrow {
+.arrow__container {
   margin-top: 10px;
   background-color: var(--darkBlack);
+  height: 50px;
+}
+
+.arrow,
+.arrow::after,
+.arrow::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  border-radius: 3px;
+  background-color: var(--white);
+  margin: 6px 0px;
+  transition: 0.3s;
+}
+
+.arrow--active::after {
+  background-color: red;
+}
+
+.arrow--active::before {
+  background-color: blue;
 }
 </style>
