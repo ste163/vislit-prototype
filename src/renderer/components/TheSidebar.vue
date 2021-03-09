@@ -3,7 +3,7 @@
     <!-- Swap contents based on route -->
     <!-- When on Summary page, show Projects, when on Graphs & Progress, auto-minimize -->
     <!-- When on Notes, show a list of notes for that project -->
-    <div class="heading">
+    <div class="sidebar__heading">
       <app-logo />
       <h2 class="heading__title">
         <!-- Computed property based on route -->
@@ -11,7 +11,7 @@
       </h2>
     </div>
 
-    <section>
+    <section class="sidebar__content">
       <!-- /Summary, /Graphs (auto-minimize), /Progress (auto-minize) - show projects -->
       <!-- /Notes - show list of Project's Notes -->
       <!-- /Thesaurus - show list of created Lexicons -->
@@ -19,17 +19,18 @@
     </section>
 
     <button class="btn-dark" @click="openSettings">O Settings</button>
+    <button class="btn-dark sidebar__arrow">></button>
   </section>
 </template>
 
 <script>
 import { setterMixin } from "../mixins/modalMixins";
 import AppLogo from "./AppLogo";
-import TheSidebarProjectContent from "./TheSidebarProjectContent.vue";
+import ProjectSidebarContent from "./ProjectSidebarContent.vue";
 import UserFormSettings from "./UserFormSettings.vue";
 
 export default {
-  components: { AppLogo, TheSidebarProjectContent },
+  components: { AppLogo, ProjectSidebarContent },
   mixins: [setterMixin],
   methods: {
     openSettings() {
@@ -42,10 +43,10 @@ export default {
       // Add a GLOBAL Vuex state check for if it should be minimized
       switch (route) {
         case "Summary":
-          return TheSidebarProjectContent;
+          return ProjectSidebarContent;
 
         default:
-          return TheSidebarProjectContent;
+          return ProjectSidebarContent;
       }
     }
   }
@@ -62,7 +63,7 @@ export default {
   padding: 10px 0;
 }
 
-.heading {
+.sidebar__heading {
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-end;
@@ -76,6 +77,10 @@ export default {
   letter-spacing: var(--spacingSmall);
   user-select: none;
   margin: 0;
+}
+
+.sidebar__content {
+  flex-grow: 1;
 }
 
 .buttons {

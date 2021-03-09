@@ -8,7 +8,10 @@ selects any of those
   <section id="app">
     <the-sidebar class="sidebar" />
     <the-controls class="controls" />
-    <router-view class="dashboard" />
+
+    <transition name="slide">
+      <router-view class="dashboard" />
+    </transition>
 
     <div class="modal">
       <the-modal />
@@ -29,7 +32,6 @@ export default {
 <style>
 @import "./global.css";
 
-/* #app is a grid holding sidebar, controls, router-view */
 #app {
   display: grid;
   grid-template-rows: 50px auto;
@@ -56,5 +58,23 @@ export default {
 .modal {
   grid-column: 1 / 3;
   grid-row: 1 / 3;
+}
+
+/* Dashboard transition animations */
+/* Currently not drilling down and then rising on reverse, will need to add that logic */
+/* https://router.vuejs.org/guide/advanced/transitions.html#route-based-dynamic-transition */
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.85s;
+}
+
+.slide-enter {
+  opacity: 0;
+  transform: translateY(200px);
+}
+
+.slide-leave-to {
+  opacity: 0;
+  transform: translateY(-200px);
 }
 </style>
