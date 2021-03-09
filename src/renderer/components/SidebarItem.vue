@@ -1,8 +1,8 @@
 <template>
-  <section class="item__container">
+  <button class="btn-none item__container">
     <h4 class="item__header">Item Title</h4>
     <p class="item__details">Optional info to show</p>
-  </section>
+  </button>
 </template>
 
 <script>
@@ -14,7 +14,9 @@ export default {};
   /* Will need to be a grid for placing the 'pinned' icon in correct place */
   display: flex;
   flex-flow: column nowrap;
+  color: var(--white);
   background-color: var(--darkGray);
+  font-size: 1em;
   margin-bottom: 10px;
   padding-left: 10px;
 
@@ -24,13 +26,17 @@ export default {};
 .item__container:hover {
   background-color: var(--vislitBlue);
   color: var(--darkBlack);
-  cursor: pointer;
+}
+
+.item__container:active {
+  background-color: var(--vislitDarkBlue);
+  color: var(--white);
 }
 
 .item__header {
   user-select: none;
   font-weight: var(--weightBolder);
-  font-size: 0.9em;
+  font-size: 1em;
   letter-spacing: var(--spacingSmaller);
   margin: 0;
 }

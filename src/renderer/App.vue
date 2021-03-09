@@ -5,7 +5,10 @@ info for all projects on no selected project, summary info on a selected
 project, and then "Visualizations", "Notes", "Progress", etc. routes when user
 selects any of those
 <template>
-  <section id="app" class="app__layout">
+  <section
+    id="app"
+    :class="{ app__layout: true, 'app__layout--minimized-sidebar': false }"
+  >
     <!-- APP listens for when the sidebar controls have been clicked -->
     <!-- When clicked, animate grid-template-columns -->
     <the-sidebar class="sidebar" />
