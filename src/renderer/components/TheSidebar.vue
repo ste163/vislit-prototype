@@ -21,19 +21,16 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { setterMixin } from "../mixins/modalMixins";
 import ProjectFormCreate from "./ProjectFormCreate";
 import BaseLogo from "./BaseLogo";
 
 export default {
   components: { BaseLogo },
+  mixins: [setterMixin],
   methods: {
-    ...mapMutations(["setIsModalOpen", "setModalType", "setModalContent"]),
-    // MIGHT BE PERFRECT FOR A MIXIN that says setModal(modalType, modalContent, isOpen)
     createProject() {
-      this.setModalType("Project Form");
-      this.setModalContent(ProjectFormCreate);
-      this.setIsModalOpen(true);
+      this.setModal("Project Form", ProjectFormCreate);
     }
   }
 };
