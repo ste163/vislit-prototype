@@ -8,6 +8,10 @@ const routes = [
   // May need to have "/" always redirect to /summary/:projectId
   {
     path: "/",
+    redirect: "/summary"
+  },
+  {
+    path: "/summary",
     name: "Summary",
     component: Summary
   },

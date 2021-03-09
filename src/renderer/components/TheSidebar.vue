@@ -1,41 +1,52 @@
 <template>
   <section class="sidebar__container">
-    <div class="heading">
-      <app-logo />
-      <h2 class="heading__title">PROJECTS</h2>
-    </div>
-    <!-- Sidebar content changes dynamical based on routes -->
+    <!-- Swap contents based on route -->
     <!-- When on Summary page, show Projects, when on Graphs & Progress, auto-minimize -->
     <!-- When on Notes, show a list of notes for that project -->
-    <div class="buttons">
-      <button class="btn-dark" @click="createProject">+ Project</button>
-      <button class="btn-dark">- Filter</button>
+    <div class="heading">
+      <app-logo />
+      <h2 class="heading__title">
+        <!-- Computed property based on route -->
+        PROJECTS
+      </h2>
     </div>
-    <!-- Filter button for filtering the state of the current project list -->
 
-    <!-- For each project in filteredProjects, show the right projects -->
-    <!-- Loop over the projectInfo component. Properly animate it when adding a new proj -->
-    <!-- Clicking a project will GO TO the /summary/projectId to display correct info.
-    This way I let the router handle everything instead of a crazy state-router again -->
+    <section>
+      <!-- /Summary, /Graphs (auto-minimize), /Progress (auto-minize) - show projects -->
+      <!-- /Notes - show list of Project's Notes -->
+      <!-- /Thesaurus - show list of created Lexicons -->
+      <component :is="renderContentPerRoute" />
+    </section>
+
     <button class="btn-dark" @click="openSettings">O Settings</button>
   </section>
 </template>
 
 <script>
 import { setterMixin } from "../mixins/modalMixins";
-import ProjectFormCreate from "./ProjectFormCreate";
 import AppLogo from "./AppLogo";
+import TheSidebarProjectContent from "./TheSidebarProjectContent.vue";
 import UserFormSettings from "./UserFormSettings.vue";
 
 export default {
-  components: { AppLogo },
+  components: { AppLogo, TheSidebarProjectContent },
   mixins: [setterMixin],
   methods: {
-    createProject() {
-      this.setModal("Form", ProjectFormCreate);
-    },
     openSettings() {
       this.setModal("Form", UserFormSettings);
+    }
+  },
+  computed: {
+    renderContentPerRoute() {
+      const route = this.$route.name;
+      // Add a GLOBAL Vuex state check for if it should be minimized
+      switch (route) {
+        case "Summary":
+          return TheSidebarProjectContent;
+
+        default:
+          return TheSidebarProjectContent;
+      }
     }
   }
 };
@@ -63,6 +74,7 @@ export default {
   font-family: "Noto";
   font-weight: var(--weightThin);
   letter-spacing: var(--spacingSmall);
+  user-select: none;
   margin: 0;
 }
 
