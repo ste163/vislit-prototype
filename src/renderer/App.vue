@@ -11,10 +11,7 @@ selects any of those
     <router-view class="dashboard" />
 
     <div class="modal">
-      <!-- Modal state should be from Vuex store -->
-      <!-- Button clicks update Vuex store state -->
-      <!-- Then Modal because TheModal -->
-      <the-modal :contentComponent="formComponent" :modalType="'Form'" />
+      <the-modal />
     </div>
   </section>
 </template>
@@ -23,15 +20,9 @@ selects any of those
 import TheControls from "./components/TheControls.vue";
 import TheModal from "./components/TheModal.vue";
 import TheSidebar from "./components/TheSidebar.vue";
-import ProjectFormCreate from "./components/ProjectFormCreate";
 
 export default {
-  components: { TheSidebar, TheControls, TheModal },
-  data() {
-    return {
-      formComponent: ProjectFormCreate
-    };
-  }
+  components: { TheSidebar, TheControls, TheModal }
 };
 </script>
 

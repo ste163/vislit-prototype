@@ -13,7 +13,7 @@ ContentComponent
       <section v-if="isModalOpen" class="card modal">
         <h2 class="modal__type">{{ this.modalType }}</h2>
         <button class="modal__close" @click="handleClose">X</button>
-        <component class="modal__content" :is="contentComponent" />
+        <component class="modal__content" :is="modalContent" />
       </section>
     </transition>
   </div>
@@ -22,10 +22,6 @@ ContentComponent
 <script>
 import { mapState, mapMutations } from "vuex";
 export default {
-  props: {
-    modalType: String,
-    contentComponent: Object
-  },
   methods: {
     ...mapMutations(["setIsModalOpen"]),
     handleClose() {
@@ -33,7 +29,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["isModalOpen"])
+    ...mapState(["isModalOpen", "modalType", "modalContent"])
   }
 };
 </script>

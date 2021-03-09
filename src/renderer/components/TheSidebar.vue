@@ -8,7 +8,7 @@
     <!-- When on Summary page, show Projects, when on Graphs & Progress, auto-minimize -->
     <!-- When on Notes, show a list of notes for that project -->
     <div class="buttons">
-      <button class="btn-dark" @click="handleOpen">+ Project</button>
+      <button class="btn-dark" @click="createProject">+ Project</button>
       <button class="btn-dark">- Filter</button>
     </div>
     <!-- Filter button for filtering the state of the current project list -->
@@ -22,13 +22,17 @@
 
 <script>
 import { mapMutations } from "vuex";
+import ProjectFormCreate from "./ProjectFormCreate";
 import BaseLogo from "./BaseLogo";
 
 export default {
   components: { BaseLogo },
   methods: {
-    ...mapMutations(["setIsModalOpen"]),
-    handleOpen() {
+    ...mapMutations(["setIsModalOpen", "setModalType", "setModalContent"]),
+    // MIGHT BE PERFRECT FOR A MIXIN that says setModal(modalType, modalContent, isOpen)
+    createProject() {
+      this.setModalType("Project Form");
+      this.setModalContent(ProjectFormCreate);
       this.setIsModalOpen(true);
     }
   }
