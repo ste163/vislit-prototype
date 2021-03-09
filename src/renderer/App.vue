@@ -6,15 +6,15 @@ project, and then "Visualizations", "Notes", "Progress", etc. routes when user
 selects any of those
 <template>
   <section id="app">
-    <sidebar-nav class="sidebar" />
-    <dashboard-controls class="controls" />
+    <the-sidebar class="sidebar" />
+    <the-controls class="controls" />
     <router-view class="dashboard" />
 
     <!-- Container for modals -->
     <div class="modals">
       <!-- MAYBE!!! Just have a single modal whose content changes dynamically for what's in Vuex -->
       <!-- So then each component that needs to call the modal, would just update that Vuex state -->
-      <modal
+      <base-modal
         :contentComponent="formComponent"
         :modalType="'Form'"
         :isOpen="isProjectFormOpen"
@@ -26,16 +26,16 @@ selects any of those
 
 <script>
 import { mapState, mapMutations } from "vuex";
-import DashboardControls from "./components/DashboardControls.vue";
-import Modal from "./components/Modal.vue";
-import SidebarNav from "./components/sidebar/SidebarNav.vue";
-import ProjectCreateForm from "./forms/ProjectCreateForm";
+import TheControls from "./components/TheControls.vue";
+import BaseModal from "./components/BaseModal.vue";
+import TheSidebar from "./components/TheSidebar.vue";
+import ProjectFormCreate from "./components/ProjectFormCreate";
 
 export default {
-  components: { SidebarNav, DashboardControls, Modal },
+  components: { TheSidebar, TheControls, BaseModal },
   data() {
     return {
-      formComponent: ProjectCreateForm
+      formComponent: ProjectFormCreate
     };
   },
   methods: {
