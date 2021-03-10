@@ -55,6 +55,7 @@ export default {
 }
 
 .sidebar {
+  flex-shrink: 0;
   width: 250px;
   transition: all 0.75s ease;
 }
