@@ -7,11 +7,14 @@ selects any of those
 <template>
   <section
     id="app"
-    :class="{ app__layout: true, 'app__layout--minimized-sidebar': false }"
+    :class="{
+      app__layout: true,
+      'app__layout--minimized': isSidebarMinimized
+    }"
   >
     <!-- APP listens for when the sidebar controls have been clicked -->
     <!-- When clicked, animate grid-template-columns -->
-    <the-sidebar class="sidebar" />
+    <the-sidebar class="sidebar" @sidebar-adjust="adjustLayout" />
     <the-controls class="controls" />
 
     <transition name="slide">
@@ -30,26 +33,39 @@ import TheModal from "./components/TheModal.vue";
 import TheSidebar from "./components/TheSidebar.vue";
 
 export default {
-  components: { TheSidebar, TheControls, TheModal }
+  components: { TheSidebar, TheControls, TheModal },
+  data() {
+    return {
+      isSidebarMinimized: false
+    };
+  },
+  methods: {
+    adjustLayout(isAdjusted) {
+      this.isSidebarMinimized = isAdjusted;
+    }
+  }
 };
 </script>
 
 <style>
 @import "./global.css";
 
+/* CHROME 89 DOES NOT SUPPORT grid-template-column ANIMATION! */
+/* WILL HAVE TO CHANGE LAYOUT FOR SIDEBAR-DASH TO FLEXBOX */
+/* FLEX-GROW ANIMATION WORKS, SUPPOSEDLY */
 .app__layout {
   display: grid;
   grid-template-rows: 50px auto;
-  grid-template-columns: 250px auto;
+  grid-template-columns: 250px;
   height: 100vh;
   width: 100%;
   overflow: hidden;
 
-  transition: grid-template-columns 1s;
+  transition: all 1s;
 }
 
-.app__layout--minimized-sidebar {
-  grid-template-columns: 100px auto;
+.app__layout--minimized {
+  grid-template-columns: 70px;
 }
 
 .sidebar {

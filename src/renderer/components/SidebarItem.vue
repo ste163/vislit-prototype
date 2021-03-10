@@ -1,4 +1,5 @@
 <template>
+  <!-- Clicking sets the id in route param -->
   <button class="btn-none item__container">
     <h4 class="item__header">Item Title</h4>
     <p class="item__details">Optional info to show</p>

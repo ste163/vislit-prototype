@@ -5,21 +5,25 @@
     <!-- When on Notes, show a list of notes for that project -->
     <div class="sidebar__heading">
       <app-logo />
-      <h2 class="heading__title">
-        <!-- Computed property based on route -->
-        PROJECTS
-      </h2>
+      <transition name="minimize">
+        <h2 v-if="!isSidebarOpen" class="heading__title">
+          <!-- Computed property based on route -->
+          PROJECTS
+        </h2>
+      </transition>
     </div>
 
-    <section class="sidebar__content">
-      <!-- /Summary, /Graphs (auto-minimize), /Progress (auto-minize) - show projects -->
-      <!-- /Notes - show list of Project's Notes -->
-      <!-- /Thesaurus - show list of created Lexicons -->
-      <component :is="renderContentPerRoute" />
-    </section>
+    <transition name="minimize">
+      <section v-if="!isSidebarOpen" class="sidebar__content">
+        <!-- /Summary, /Graphs (auto-minimize), /Progress (auto-minize) - show projects -->
+        <!-- /Notes - show list of Project's Notes -->
+        <!-- /Thesaurus - show list of created Lexicons -->
+        <component :is="renderContentPerRoute" />
+      </section>
+    </transition>
 
     <button class="btn-dark sidebar__settings" @click="openSettings">
-      O Settings
+      Settings
     </button>
 
     <button class="btn-none arrow__container" @click="handleSidebarOpen">
@@ -41,7 +45,7 @@ export default {
     // SET DEFAULT VALUES BASED ON USER SETTINGS (WHATEVER THE USER LAST CLICKED ON, IS WHAT YOU SHOW)
     // ALWAYS SAVE THE LAST ROUTE USER WAS AT AND RELOAD THAT VIEW
     return {
-      isSidebarOpen: true,
+      isSidebarOpen: false,
       areDetailsVisibilty: true
     };
   },
@@ -54,6 +58,7 @@ export default {
     },
     handleSidebarOpen() {
       this.isSidebarOpen = !this.isSidebarOpen;
+      this.$emit("sidebar-adjust", this.isSidebarOpen);
     }
   },
 

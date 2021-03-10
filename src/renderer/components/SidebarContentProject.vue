@@ -1,5 +1,5 @@
 <template>
-  <div class="content__container">
+  <div>
     <section class="buttons">
       <button class="btn-dark" @click="createProject">+ Project</button>
       <!-- Filter button for filtering the state of the current project list -->
@@ -44,10 +44,6 @@ export default {
 </script>
 
 <style scoped>
-.content__container {
-  /* height: 100%; */
-}
-
 .buttons {
   display: flex;
   flex-flow: row nowrap;
