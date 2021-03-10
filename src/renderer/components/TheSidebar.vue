@@ -139,6 +139,7 @@ export default {
   margin-top: 10px;
   padding: 10px 0;
   padding-right: 30px;
+  padding-left: 42px;
   justify-content: flex-end;
   align-items: center;
 }
