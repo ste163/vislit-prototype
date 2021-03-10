@@ -1,7 +1,7 @@
 // Modals take in: - getter/setter for open/close state, - ModalTypeHeader, -
 ContentComponent
 <template>
-  <div class="container">
+  <div class="modal__container">
     <transition name="fade">
       <section
         class="background"
@@ -35,24 +35,28 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.modal__container {
+  pointer-events: none;
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
 .background {
+  pointer-events: all;
   position: absolute;
-  width: 100%;
-  min-height: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow-x: hidden;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 98;
 }
 
 .modal {
+  pointer-events: all;
   display: grid;
   grid-gap: 10px;
   transform: translateY(-15px);

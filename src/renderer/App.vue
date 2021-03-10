@@ -5,25 +5,21 @@ info for all projects on no selected project, summary info on a selected
 project, and then "Visualizations", "Notes", "Progress", etc. routes when user
 selects any of those
 <template>
-  <section
-    id="app"
-    :class="{
-      app__layout: true,
-      'app__layout--minimized': isSidebarMinimized
-    }"
-  >
-    <!-- APP listens for when the sidebar controls have been clicked -->
-    <!-- When clicked, animate grid-template-columns -->
-    <the-sidebar class="sidebar" @sidebar-adjust="adjustLayout" />
-    <the-controls class="controls" />
+  <section id="app" class="app__layout">
+    <the-sidebar
+      :class="{ sidebar: true, 'sidebar--minimized': isSidebarMinimized }"
+      @sidebar-adjust="adjustLayout"
+    />
 
-    <transition name="slide">
-      <router-view class="dashboard" />
-    </transition>
+    <div class="main__container">
+      <the-controls class="controls" />
 
-    <div class="modal">
-      <the-modal />
+      <transition name="slide">
+        <router-view class="dashboard" />
+      </transition>
     </div>
+
+    <the-modal />
   </section>
 </template>
 
@@ -50,42 +46,21 @@ export default {
 <style>
 @import "./global.css";
 
-/* CHROME 89 DOES NOT SUPPORT grid-template-column ANIMATION! */
-/* WILL HAVE TO CHANGE LAYOUT FOR SIDEBAR-DASH TO FLEXBOX */
-/* FLEX-GROW ANIMATION WORKS, SUPPOSEDLY */
 .app__layout {
-  display: grid;
-  grid-template-rows: 50px auto;
-  grid-template-columns: 250px;
+  display: flex;
+  flex-flow: row nowrap;
   height: 100vh;
   width: 100%;
   overflow: hidden;
-
-  transition: all 1s;
-}
-
-.app__layout--minimized {
-  grid-template-columns: 70px;
 }
 
 .sidebar {
-  grid-column: 1;
-  grid-row: 1 / 3;
+  width: 250px;
+  transition: all 0.75s ease;
 }
 
-.controls {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.dashboard {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-.modal {
-  grid-column: 1 / 3;
-  grid-row: 1 / 3;
+.sidebar--minimized {
+  width: 70px;
 }
 
 /* Dashboard transition animations */
