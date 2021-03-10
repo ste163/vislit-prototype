@@ -1,5 +1,10 @@
 <template>
-  <section class="sidebar__container">
+  <section
+    :class="{
+      sidebar__container: true,
+      'sidebar__container--minimized': isSidebarOpen
+    }"
+  >
     <!-- Swap contents based on route -->
     <!-- When on Summary page, show Projects, when on Graphs & Progress, auto-minimize -->
     <!-- When on Notes, show a list of notes for that project -->
@@ -22,12 +27,14 @@
       </section>
     </transition>
 
+    <div class="sidebar__spacer" />
+
     <button class="btn-dark sidebar__settings" @click="openSettings">
       Settings
     </button>
 
     <button class="btn-none arrow__container" @click="handleSidebarOpen">
-      <div :class="{ arrow: true, 'arrow--active': isSidebarOpen }"></div>
+      <div :class="{ arrow: true, 'arrow--active': !isSidebarOpen }"></div>
     </button>
   </section>
 </template>
@@ -87,6 +94,11 @@ export default {
   box-shadow: var(--shadowRight);
   padding-top: 10px;
   overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar__container--minimized {
+  justify-content: space-between;
 }
 
 .sidebar__heading {
@@ -106,6 +118,10 @@ export default {
 }
 
 .sidebar__content {
+  flex-grow: 1;
+}
+
+.sidebar__spacer {
   flex-grow: 1;
 }
 
