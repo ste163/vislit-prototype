@@ -10,7 +10,7 @@
     <!-- When on Notes, show a list of notes for that project -->
     <div class="sidebar__heading">
       <app-logo />
-      <transition name="minimize">
+      <transition name="heading-minimize">
         <h2 v-if="!isSidebarOpen" class="heading__title">
           <!-- Computed property based on route -->
           PROJECTS
@@ -93,7 +93,7 @@ export default {
   background: var(--black);
   box-shadow: var(--shadowRight);
   padding-top: 10px;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
 }
 
@@ -119,6 +119,8 @@ export default {
 
 .sidebar__content {
   flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebar__spacer {
@@ -175,5 +177,35 @@ export default {
 
 .arrow--active::before {
   transform: rotate(-35deg) translate(5px, 3px);
+}
+
+/* State transitions */
+.minimize-enter-active,
+.heading-minimize-enter-active,
+.heading-minimize-enter-active {
+  transition: all 0.7s ease;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.minimize-enter {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+
+.minimize-leave-active,
+.heading-minimize-enter-active {
+  transition: all 1s ease;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.minimize-leave-to {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+.heading-minimize-leave-to {
+  opacity: 0;
 }
 </style>

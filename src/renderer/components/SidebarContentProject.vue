@@ -54,5 +54,7 @@ export default {
   display: flex;
   flex-flow: column nowrap;
   margin-top: 10px;
+  overflow-y: auto;
+  height: 100%;
 }
 </style>

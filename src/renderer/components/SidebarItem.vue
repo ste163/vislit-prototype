@@ -20,7 +20,7 @@ export default {};
   font-size: 1em;
   margin-bottom: 10px;
   padding-left: 10px;
-
+  overflow-x: hidden;
   transition: all 0.25s;
 }
 

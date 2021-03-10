@@ -35,7 +35,7 @@ export default {};
 
 <style scoped>
 .logo {
-  height: 40px;
-  margin-right: 10px;
+  height: 30px;
+  margin-right: 2px;
 }
 </style>
