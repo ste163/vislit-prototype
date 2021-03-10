@@ -114,7 +114,7 @@ export default {
   font-weight: var(--weightThin);
   letter-spacing: var(--spacingSmall);
   user-select: none;
-  margin: 0;
+  margin: 0 0 0 46px;
 }
 
 .sidebar__content {
@@ -181,11 +181,14 @@ export default {
 
 /* State transitions */
 .minimize-enter-active,
-.heading-minimize-enter-active,
 .heading-minimize-enter-active {
   transition: all 0.7s ease;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.heading-minimize-enter {
+  opacity: 0;
 }
 
 .minimize-enter {
@@ -194,7 +197,7 @@ export default {
 }
 
 .minimize-leave-active,
-.heading-minimize-enter-active {
+.heading-minimize-leave-active {
   transition: all 1s ease;
   overflow: hidden;
   white-space: nowrap;

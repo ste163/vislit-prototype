@@ -61,7 +61,7 @@ export default {
 }
 
 .sidebar--minimized {
-  width: 70px;
+  width: 60px;
 }
 
 /* Dashboard transition animations */
