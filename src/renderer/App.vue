@@ -44,7 +44,16 @@ export default {
     }
   },
   created() {
+    // Using created() method because we are not changing the DOM, only state.
+    // if changing the DOM, use mounted()
     this.getProjects();
+    console.log("ROUTE CHANGE:", this.$route.path);
+  },
+  watch: {
+    // Whenever the route path changes, run this code
+    $route() {
+      console.log("ROUTE CHANGE:", this.$route.path);
+    }
   }
 };
 </script>
