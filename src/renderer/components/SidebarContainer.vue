@@ -9,7 +9,7 @@
     <!-- When on Summary page, show Projects, when on Graphs & Progress, auto-minimize -->
     <!-- When on Notes, show a list of notes for that project -->
     <div class="sidebar__heading">
-      <app-logo />
+      <app-logo class="sidebar__logo" />
       <transition name="heading-minimize">
         <h2 v-if="!isSidebarOpen" class="heading__title">
           <!-- Computed property based on route -->
@@ -105,15 +105,17 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-end;
-  margin-left: 10px;
+  margin-left: 5px;
   margin-bottom: 20px;
+  height: 41px;
 }
 
 .heading__title {
-  font-family: "Noto";
-  font-weight: var(--weightThin);
+  font-size: 1.2rem;
+  font-weight: var(--weightBolder);
   letter-spacing: var(--spacingSmall);
   user-select: none;
+  align-self: center;
   margin: 0 0 0 46px;
 }
 
@@ -139,7 +141,7 @@ export default {
   margin-top: 10px;
   padding: 10px 0;
   padding-right: 30px;
-  padding-left: 42px;
+  padding-left: 38px;
   justify-content: flex-end;
   align-items: center;
 }

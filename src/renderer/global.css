@@ -135,8 +135,8 @@ h3 {
 
 hr {
   border: 0 solid;
-  height: 0.3em;
-  margin: 0 0.2em 1em 0.2em;
+  height: 0.3rem;
+  margin: 0 0.2rem 1rem 0.2rem;
   border-radius: var(--borderRadius);
   background-color: var(--darkGray);
   border-color: var(--darkGray);
@@ -151,9 +151,9 @@ button {
   font-weight: var(--weightBold);
   box-shadow: var(--shadowCentered);
 
-  font-size: 0.8em;
+  font-size: 0.8rem;
   margin: 0;
-  padding: 0.5em 1em;
+  padding: 0.5rem 1rem;
   transition: var(--btnHover);
 }
 

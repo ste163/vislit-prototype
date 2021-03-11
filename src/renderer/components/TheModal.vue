@@ -68,7 +68,7 @@ export default {
   grid-column: 1;
   margin: 0;
   padding: 0;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: var(--weightLight);
 }
 

@@ -16,6 +16,7 @@ export default {};
 }
 
 .container__title {
+  font-size: 1.1rem;
   user-select: none;
   margin: 5px 0;
 }

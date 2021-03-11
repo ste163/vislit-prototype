@@ -1,6 +1,5 @@
 <template>
   <svg
-    class="logo"
     width="48"
     height="50"
     version="1.1"
@@ -33,8 +32,8 @@
 export default {};
 </script>
 
-<style scoped>
-.logo {
+<style>
+.sidebar__logo {
   position: absolute;
   width: 30px !important;
   height: 30px !important;

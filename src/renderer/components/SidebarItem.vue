@@ -17,7 +17,7 @@ export default {};
   flex-flow: column nowrap;
   color: var(--white);
   background-color: var(--darkGray);
-  font-size: 1em;
+  font-size: 0.9rem;
   margin-bottom: 10px;
   padding-left: 10px;
   overflow-x: hidden;
@@ -37,7 +37,7 @@ export default {};
 .item__header {
   user-select: none;
   font-weight: var(--weightBolder);
-  font-size: 1em;
+  font-size: 0.9rem;
   letter-spacing: var(--spacingSmaller);
   margin: 0;
 }

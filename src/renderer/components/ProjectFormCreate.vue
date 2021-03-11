@@ -39,6 +39,6 @@ export default {
 
 <style scoped>
 .form {
-  width: 15em;
+  width: 15rem;
 }
 </style>

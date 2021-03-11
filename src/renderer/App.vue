@@ -6,7 +6,7 @@ project, and then "Visualizations", "Notes", "Progress", etc. routes when user
 selects any of those
 <template>
   <section id="app" class="app__layout">
-    <the-sidebar
+    <sidebar-container
       :class="{ sidebar: true, 'sidebar--minimized': isSidebarMinimized }"
       @sidebar-adjust="adjustLayout"
     />
@@ -26,10 +26,10 @@ selects any of those
 <script>
 import TheControls from "./components/TheControls.vue";
 import TheModal from "./components/TheModal.vue";
-import TheSidebar from "./components/TheSidebar.vue";
+import SidebarContainer from "./components/SidebarContainer.vue";
 
 export default {
-  components: { TheSidebar, TheControls, TheModal },
+  components: { SidebarContainer, TheControls, TheModal },
   data() {
     return {
       isSidebarMinimized: false
@@ -61,7 +61,7 @@ export default {
 }
 
 .sidebar--minimized {
-  width: 60px;
+  width: 50px;
 }
 
 /* Dashboard transition animations */

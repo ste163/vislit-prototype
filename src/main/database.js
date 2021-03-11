@@ -64,6 +64,9 @@ export function loadDb() {
   // Set default json structure
   db.defaults({
     database: "vislit",
+    shownWelcome: false,
+    saveDataPath:
+      "userOnFirst load will be asked to set this. Can change later",
     user: [],
     projects: [],
     types: [],
