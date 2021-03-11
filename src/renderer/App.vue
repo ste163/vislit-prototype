@@ -27,6 +27,7 @@ selects any of those
 import TheControls from "./components/TheControls.vue";
 import TheModal from "./components/TheModal.vue";
 import SidebarContainer from "./components/SidebarContainer.vue";
+import { mapActions } from "vuex";
 
 export default {
   components: { SidebarContainer, TheControls, TheModal },
@@ -36,9 +37,13 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["getProjects"]),
     adjustLayout(isAdjusted) {
       this.isSidebarMinimized = isAdjusted;
     }
+  },
+  mounted() {
+    this.getProjects();
   }
 };
 </script>

@@ -28,10 +28,15 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
+  // Create a factory function that empties input state
   methods: {
+    ...mapActions["addProject"],
     handleSubmit() {
       console.log("submitted");
+      this.addProject();
     }
   }
 };
