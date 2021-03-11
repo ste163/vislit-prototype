@@ -37,22 +37,19 @@ export default new Vuex.Store({
   },
   actions: {
     async getProjects({ commit }) {
-      // NEED ERROR HANDLING
       const response = await ipcRenderer.invoke("db-projects-get-all");
-      console.log("PROJECTS RETRIEVED FROM DB:", response);
-      commit("setProjects", response);
-      // TO SET STATE (will already be in json, so don't need to convert)
-      // const reviewData = await reviewsRes.json();
-      // commit("setMovieReviews", reviewData.results);
+      if (response) {
+        console.log("PROJECTS RETRIEVED FROM DB:", response);
+        commit("setProjects", response);
+      } else {
+        console.log("ERROR WHILE ADDING PROJECT. RESPONSE WAS:", response);
+      }
     },
-    async addProject({ commit }, payload) {
-      // Payload is the project object we want to add
-      console.log("COMMIT", commit);
-      const response = await ipcRenderer.invoke("db-projects-add", payload);
+    async addProject({ dispatch }, project) {
+      const response = await ipcRenderer.invoke("db-projects-add", project);
 
       if (response) {
-        // To get access to the getProjects action, have to do the below nonsense
-        this._actions.getProjects[0]();
+        dispatch("getProjects");
       } else {
         console.log("ERROR WHILE ADDING PROJECT. RESPONSE WAS:", response);
       }
