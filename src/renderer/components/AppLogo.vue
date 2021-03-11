@@ -35,10 +35,9 @@ export default {};
 <style>
 .sidebar__logo {
   position: absolute;
-  width: 30px !important;
-  height: 30px !important;
-  margin-right: 10px;
-  margin-left: 5px;
+  width: 28px !important;
+  height: 28px !important;
+  margin-left: 10px;
   top: 14px;
 }
 </style>

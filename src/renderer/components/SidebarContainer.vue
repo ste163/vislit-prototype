@@ -102,21 +102,23 @@ export default {
 }
 
 .sidebar__heading {
-  display: flex;
-  flex-flow: row nowrap;
+  display: grid;
+  grid-template-columns: 42px 207px;
   align-items: flex-end;
-  margin-left: 5px;
   margin-bottom: 20px;
   height: 41px;
 }
 
 .heading__title {
+  grid-column: 2;
+  place-self: self-start;
+  align-self: center;
   font-size: 1.2rem;
   font-weight: var(--weightBolder);
   letter-spacing: var(--spacingSmall);
   user-select: none;
-  align-self: center;
-  margin: 0 0 0 46px;
+  margin: 0;
+  padding-left: 8px;
 }
 
 .sidebar__content {
