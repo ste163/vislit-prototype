@@ -45,9 +45,10 @@ export default new Vuex.Store({
       // const reviewData = await reviewsRes.json();
       // commit("setMovieReviews", reviewData.results);
     },
-    async addProject(payload) {
+    async addProject({ commit }, payload) {
       // Payload is the project object we want to add
       // FROM REACT PROTOTYPE
+      console.log("COMMIT", commit);
 
       console.log("PROJECT TO ADD", payload);
       const response = await ipcRenderer.invoke("db-projects-add", payload);
@@ -56,15 +57,7 @@ export default new Vuex.Store({
       if (response) {
         this.getProjects();
       }
-      // .then((response) => {
-      //   if (response) {
-      //     getAllProjects();
-      //   } else {
-      //     console.log(
-      //       'Unable to read database. Need to send signal to Main that an error occurred so I can use the dialog module'
-      //     );
-      //   }
-      // })
+      // If we were not able to add, show error message!
     }
   },
   modules: {}

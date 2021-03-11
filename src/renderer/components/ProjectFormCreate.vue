@@ -7,17 +7,17 @@
     <fieldset>
       <!-- Need to add the 'for' for the labels -->
       <label>Title</label>
-      <input required type="text" />
+      <input required type="text" v-model="form.title" />
     </fieldset>
     <fieldset>
       <!-- OPTIONAL -->
       <!-- Have a handful of default ones, allow user to add their own -->
       <label>Description</label>
-      <textarea />
+      <textarea v-model="form.description" />
     </fieldset>
     <fieldset>
       <label>Start date</label>
-      <input required type="date" />
+      <input required type="date" v-model="form.dateCreated" />
     </fieldset>
 
     <!-- GOAL FORM -->
@@ -32,18 +32,24 @@ import { mapActions } from "vuex";
 
 export default {
   // Create a factory function that empties input state
+  data() {
+    return {
+      form: this.createProject()
+    };
+  },
   methods: {
-    ...mapActions["addProject"],
+    ...mapActions(["addProject"]),
     createProject() {
       return {
         title: "",
         description: "",
-        date: ""
+        dateCreated: ""
       };
     },
     handleSubmit() {
-      console.log("submitted");
-      this.addProject();
+      console.log("submitted", this.form);
+      this.addProject(this.form);
+      this.form = this.createProject();
     }
   }
 };
