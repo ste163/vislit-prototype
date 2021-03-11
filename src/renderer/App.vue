@@ -25,10 +25,10 @@ selects any of those
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import TheControls from "./components/TheControls.vue";
 import TheModal from "./components/TheModal.vue";
 import SidebarContainer from "./components/SidebarContainer.vue";
-import { mapActions } from "vuex";
 
 export default {
   components: { SidebarContainer, TheControls, TheModal },
@@ -43,7 +43,7 @@ export default {
       this.isSidebarMinimized = !this.isSidebarMinimized;
     }
   },
-  mounted() {
+  created() {
     this.getProjects();
   }
 };

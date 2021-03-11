@@ -1,13 +1,18 @@
 <template>
   <!-- Clicking sets the id in route param -->
   <button class="btn-none item__container">
-    <h4 class="item__header">Item Title</h4>
-    <p class="item__details">Optional info to show</p>
+    <h4 class="item__header">{{ item.title }}</h4>
+    <p class="item__details">{{ item.description }}</p>
+    <p class="item__date">{{ item.dateCreated }}</p>
   </button>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    item: Object
+  }
+};
 </script>
 
 <style>
@@ -15,12 +20,13 @@ export default {};
   /* Will need to be a grid for placing the 'pinned' icon in correct place */
   display: flex;
   flex-flow: column nowrap;
+  width: 100%;
   color: var(--white);
   background-color: var(--darkGray);
   font-size: 0.9rem;
   margin-bottom: 10px;
   padding-left: 10px;
-  overflow-x: hidden;
+  text-align: left;
   transition: all 0.25s;
 }
 
@@ -43,6 +49,11 @@ export default {};
 }
 
 .item__details {
+  user-select: none;
+  margin: 0;
+}
+
+.item__date {
   user-select: none;
   margin: 0;
 }

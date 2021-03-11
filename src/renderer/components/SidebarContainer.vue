@@ -134,6 +134,7 @@ export default {
 .sidebar__settings {
   width: 50%;
   align-self: center;
+  margin-top: 10px;
 }
 
 .arrow__container {

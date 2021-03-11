@@ -33,6 +33,8 @@ export function getAllProjects() {
 }
 
 export function addProject(project) {
+  // Need to check for if a project with that name is already in the database
+
   if (db) {
     db.get("projects")
       .push(generateId(project))
