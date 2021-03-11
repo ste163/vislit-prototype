@@ -6,18 +6,26 @@
       <button class="btn-dark">- Filter</button>
     </section>
 
-    <!-- For each project in filteredProjects, show the right projects -->
-    <!-- Loop over the projectInfo component. Properly animate it when adding a new proj -->
-    <!-- Clicking a project will GO TO the /summary/projectId to display correct info.
-    This way I let the router handle everything instead of a crazy state-router again -->
     <section class="sidebar-content__items">
-      <sidebar-item :item="allProjects" />
+      <sidebar-item
+        :item="allProjects"
+        :disabled="this.$route.params.id === undefined"
+        :class="{
+          'sidebar-content--active': this.$route.params.id === undefined
+        }"
+      />
+
       <sidebar-item-header />
+
       <transition-group name="transition-items">
         <sidebar-item
           v-for="project in projects"
           :key="project.id"
           :item="project"
+          :disabled="$route.params.id === project.id"
+          :class="{
+            'sidebar-content--active': $route.params.id === project.id
+          }"
         />
       </transition-group>
     </section>
@@ -70,6 +78,15 @@ export default {
   flex-flow: column nowrap;
   margin-top: 10px;
   height: 100%;
+}
+
+.sidebar-content--active {
+  background: var(--vislitDarkBlue);
+  cursor: auto;
+}
+
+.sidebar-content--active:hover {
+  color: var(--white);
 }
 
 /* transition-group animations */
