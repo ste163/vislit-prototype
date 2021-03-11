@@ -6,12 +6,13 @@
       <button class="btn-dark">- Filter</button>
     </section>
 
+    <!-- NEED TO SET selectedProject state in Vuex on button click. That way these checks will be based on that instead of routes -->
     <section class="sidebar-content__items">
       <sidebar-item
         :item="allProjects"
-        :disabled="this.$route.params.id === undefined"
+        :disabled="this.$route.path === `/summary/`"
         :class="{
-          'sidebar-content--active': this.$route.params.id === undefined
+          'sidebar-content--active': this.$route.path === `/summary/`
         }"
       />
 
