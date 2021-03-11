@@ -34,6 +34,13 @@ export default {
   // Create a factory function that empties input state
   methods: {
     ...mapActions["addProject"],
+    createProject() {
+      return {
+        title: "",
+        description: "",
+        date: ""
+      };
+    },
     handleSubmit() {
       console.log("submitted");
       this.addProject();

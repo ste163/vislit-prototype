@@ -7,6 +7,7 @@ selects any of those
 <template>
   <section id="app" class="app__layout">
     <sidebar-container
+      :isSidebarMinimized="isSidebarMinimized"
       :class="{ sidebar: true, 'sidebar--minimized': isSidebarMinimized }"
       @sidebar-adjust="adjustLayout"
     />
@@ -38,8 +39,8 @@ export default {
   },
   methods: {
     ...mapActions(["getProjects"]),
-    adjustLayout(isAdjusted) {
-      this.isSidebarMinimized = isAdjusted;
+    adjustLayout() {
+      this.isSidebarMinimized = !this.isSidebarMinimized;
     }
   },
   mounted() {

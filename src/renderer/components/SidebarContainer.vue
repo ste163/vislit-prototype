@@ -1,8 +1,8 @@
 <template>
   <section
+    class="sidebar__container"
     :class="{
-      sidebar__container: true,
-      'sidebar__container--minimized': isSidebarOpen
+      'sidebar__container--minimized': isSidebarMinimized
     }"
   >
     <!-- Swap contents based on route -->
@@ -11,7 +11,7 @@
     <div class="sidebar__heading">
       <app-logo class="sidebar__logo" />
       <transition name="heading-minimize">
-        <h2 v-if="!isSidebarOpen" class="heading__title">
+        <h2 v-if="!isSidebarMinimized" class="heading__title">
           <!-- Computed property based on route -->
           PROJECTS
         </h2>
@@ -19,7 +19,7 @@
     </div>
 
     <transition name="minimize">
-      <section v-if="!isSidebarOpen" class="sidebar__content">
+      <section v-if="!isSidebarMinimized" class="sidebar__content">
         <!-- /Summary, /Graphs (auto-minimize), /Progress (auto-minize) - show projects -->
         <!-- /Notes - show list of Project's Notes -->
         <!-- /Thesaurus - show list of created Lexicons -->
@@ -34,7 +34,7 @@
     </button>
 
     <button class="btn-none arrow__container" @click="handleSidebarOpen">
-      <div :class="{ arrow: true, 'arrow--active': !isSidebarOpen }"></div>
+      <div :class="{ arrow: true, 'arrow--active': !isSidebarMinimized }"></div>
     </button>
   </section>
 </template>
@@ -47,13 +47,14 @@ import UserFormSettings from "./UserFormSettings.vue";
 
 export default {
   components: { AppLogo, SidebarContentProject },
-
+  props: {
+    isSidebarMinimized: Boolean
+  },
   data() {
     // SET DEFAULT VALUES BASED ON USER SETTINGS (WHATEVER THE USER LAST CLICKED ON, IS WHAT YOU SHOW)
     // ALWAYS SAVE THE LAST ROUTE USER WAS AT AND RELOAD THAT VIEW
     return {
-      isSidebarOpen: false,
-      areDetailsVisibilty: true
+      areDetailsVisible: true
     };
   },
 
@@ -64,8 +65,7 @@ export default {
       this.setModal("Form", UserFormSettings);
     },
     handleSidebarOpen() {
-      this.isSidebarOpen = !this.isSidebarOpen;
-      this.$emit("sidebar-adjust", this.isSidebarOpen);
+      this.$emit("sidebar-adjust");
     }
   },
 
