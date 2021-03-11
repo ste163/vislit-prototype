@@ -1,6 +1,6 @@
 <template>
   <!-- Clicking sets the id in route param -->
-  <button class="btn-none item__container">
+  <button @click="selectItem" class="btn-none item__container">
     <h4 class="item__header">{{ item.title }}</h4>
     <p class="item__details">{{ item.description }}</p>
     <p class="item__date">{{ item.dateCreated }}</p>
@@ -11,6 +11,12 @@
 export default {
   props: {
     item: Object
+  },
+  methods: {
+    selectItem() {
+      console.log("SELECTED", this.item.id);
+      this.$router.replace({ path: `/summary/${this.item.id}` });
+    }
   }
 };
 </script>

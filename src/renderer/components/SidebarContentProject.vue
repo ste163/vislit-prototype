@@ -11,6 +11,7 @@
     <!-- Clicking a project will GO TO the /summary/projectId to display correct info.
     This way I let the router handle everything instead of a crazy state-router again -->
     <section class="sidebar-content__items">
+      <sidebar-item :item="allProjects" />
       <sidebar-item-header />
       <transition-group name="transition-items">
         <sidebar-item
@@ -33,6 +34,15 @@ import UserFormSettings from "./UserFormSettings.vue";
 
 export default {
   components: { SidebarItem, SidebarItemHeader },
+  data() {
+    return {
+      allProjects: {
+        id: "",
+        title: "All",
+        description: "See information on all projects"
+      }
+    };
+  },
   mixins: [setterMixin],
   methods: {
     createProject() {
