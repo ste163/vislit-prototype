@@ -34,12 +34,12 @@ export default {
   // Create a factory function that empties input state
   data() {
     return {
-      form: this.createProject()
+      form: this.createForm()
     };
   },
   methods: {
     ...mapActions(["addProject"]),
-    createProject() {
+    createForm() {
       return {
         title: "",
         description: "",
@@ -47,9 +47,8 @@ export default {
       };
     },
     handleSubmit() {
-      console.log("submitted", this.form);
       this.addProject(this.form);
-      this.form = this.createProject();
+      this.form = this.createForm();
     }
   }
 };

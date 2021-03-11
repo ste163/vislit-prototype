@@ -39,7 +39,7 @@ export default new Vuex.Store({
     async getProjects({ commit }) {
       // NEED ERROR HANDLING
       const response = await ipcRenderer.invoke("db-projects-get-all");
-      console.log("PROJECTS RETRIEVED FROM DB", response);
+      console.log("PROJECTS RETRIEVED FROM DB:", response);
       commit("setProjects", response);
       // TO SET STATE (will already be in json, so don't need to convert)
       // const reviewData = await reviewsRes.json();
@@ -47,17 +47,15 @@ export default new Vuex.Store({
     },
     async addProject({ commit }, payload) {
       // Payload is the project object we want to add
-      // FROM REACT PROTOTYPE
       console.log("COMMIT", commit);
-
-      console.log("PROJECT TO ADD", payload);
       const response = await ipcRenderer.invoke("db-projects-add", payload);
 
-      console.log(response);
       if (response) {
-        this.getProjects();
+        // To get access to the getProjects action, have to do the below nonsense
+        this._actions.getProjects[0]();
+      } else {
+        console.log("ERROR WHILE ADDING PROJECT. RESPONSE WAS:", response);
       }
-      // If we were not able to add, show error message!
     }
   },
   modules: {}
