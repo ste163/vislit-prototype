@@ -5,7 +5,7 @@
 import { app, protocol, BrowserWindow, ipcMain, Menu } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-import { loadDb, addProject, getAllProjects } from "./database";
+import { loadDb, addProject, getAllProjects, getProjectById } from "./database";
 import { generateContextMenu, generateMenu } from "./ui/menus";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -111,6 +111,11 @@ ipcMain.handle("db-projects-add", (e, object) => {
   return response;
   // Every successfully add (responses should probably be booleans?)
   // have the .then response have a .then(ipcRenderer.invoke('get-whatever-since-you-made-a-change')).catch('unable to read database')
+});
+
+ipcMain.handle("db-projects-get-selected", (e, id) => {
+  const response = getProjectById(id);
+  return response;
 });
 
 // Need a listener that handles when a db-project-change has occured

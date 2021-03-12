@@ -8,14 +8,21 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   props: {
     item: Object
   },
   methods: {
+    ...mapActions(["getSelectedProject"]),
     selectItem() {
-      console.log("SELECTED", this.item.id);
-      this.$router.replace({ path: `/summary/${this.item.id}` });
+      this.getSelectedProject(this.item.id);
+      if (this.item.id === undefined) {
+        this.$router.replace({ path: `/summary` });
+      } else {
+        this.$router.replace({ path: `/summary/${this.item.id}` });
+      }
     }
   }
 };

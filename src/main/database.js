@@ -26,8 +26,18 @@ function generateId(item) {
 
 export function getAllProjects() {
   if (db) {
-    const projects = db.get("projects").value();
-    return projects;
+    return db.get("projects").value();
+  }
+  return null;
+}
+
+export function getProjectById(id) {
+  if (db) {
+    // WILL ALSO NEED TO GET ALL LINKED DATA
+    return db
+      .get("projects")
+      .find({ id: id })
+      .value();
   }
   return null;
 }

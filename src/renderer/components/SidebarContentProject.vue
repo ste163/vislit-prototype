@@ -10,9 +10,9 @@
     <section class="sidebar-content__items">
       <sidebar-item
         :item="allProjects"
-        :disabled="this.$route.path === `/summary/`"
+        :disabled="selectedProject.id === undefined"
         :class="{
-          'sidebar-content--active': this.$route.path === `/summary/`
+          'sidebar-content--active': selectedProject.id === undefined
         }"
       />
 
@@ -23,9 +23,9 @@
           v-for="project in projects"
           :key="project.id"
           :item="project"
-          :disabled="$route.params.id === project.id"
+          :disabled="selectedProject.id === project.id"
           :class="{
-            'sidebar-content--active': $route.params.id === project.id
+            'sidebar-content--active': selectedProject.id === project.id
           }"
         />
       </transition-group>
@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       allProjects: {
-        id: "",
+        id: undefined,
         title: "All",
         description: "See information on all projects"
       }
@@ -62,7 +62,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["projects"])
+    ...mapState(["projects", "selectedProject"])
   }
 };
 </script>
