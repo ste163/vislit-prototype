@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Summary from "../views/Summary.vue";
+import ViewSummary from "../views/ViewSummary.vue";
 
 Vue.use(VueRouter);
 
@@ -13,12 +13,12 @@ const routes = [
   {
     path: "/summary",
     name: "Summary",
-    component: Summary
+    component: ViewSummary
   },
   {
     path: "/summary/:id",
     name: "Summary by Id",
-    component: Summary
+    component: ViewSummary
   },
   {
     path: "/progress",
@@ -27,28 +27,25 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Progress.vue")
+      import(/* webpackChunkName: "about" */ "../views/ViewProgress.vue")
   },
   {
     path: "/progress/:id",
     name: "Progress by Id",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Progress.vue")
+      import(/* webpackChunkName: "about" */ "../views/ViewProgress.vue")
   },
   {
     path: "/visualizations",
     name: "Visualizations",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Visualizations.vue")
+      import(/* webpackChunkName: "about" */ "../views/ViewVisualizations.vue")
   },
   {
     path: "/visualizations/:id",
     name: "Visualizations by Id",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Visualizations.vue")
+      import(/* webpackChunkName: "about" */ "../views/ViewVisualizations.vue")
   }
 ];
 

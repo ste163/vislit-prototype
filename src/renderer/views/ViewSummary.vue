@@ -1,14 +1,14 @@
 <template>
   <main name="slide" mode="out-in" class="dashboard__container">
     <!-- Progress -->
-    <summary-card>
+    <view-summary-card>
       <h3 slot="heading" class="summary__heading">Progress</h3>
       <p slot="content">Enter todays progress</p>
       <template #btn-link> </template>
-    </summary-card>
+    </view-summary-card>
 
     <!-- Visualizations -->
-    <summary-card>
+    <view-summary-card>
       <template #heading>
         <h3 class="summary__heading">Visualizations</h3>
       </template>
@@ -21,10 +21,10 @@
       <template #btn-add>
         <button>SAVE</button>
       </template>
-    </summary-card>
+    </view-summary-card>
 
     <!-- Notes -->
-    <summary-card>
+    <view-summary-card>
       <template #heading>
         <h3 class="summary__heading">Notes</h3>
       </template>
@@ -37,10 +37,10 @@
       <template #btn-add>
         <button>SAVE</button>
       </template>
-    </summary-card>
+    </view-summary-card>
 
     <!-- Thesaurus -->
-    <summary-card>
+    <view-summary-card>
       <template #heading>
         <h3 class="summary__heading">Thesaurus</h3>
       </template>
@@ -50,15 +50,15 @@
       <template #btn-link>
         <button>Add ONCLICK!</button>
       </template>
-    </summary-card>
+    </view-summary-card>
   </main>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import SummaryCard from "./SummaryCard.vue";
+import ViewSummaryCard from "./ViewSummaryCard.vue";
 export default {
-  components: { SummaryCard },
+  components: { ViewSummaryCard },
   computed: {
     ...mapState(["selectedProject"])
   },
