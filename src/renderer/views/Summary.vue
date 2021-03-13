@@ -5,7 +5,7 @@
     <!-- Progress -->
     <summary-card>
       <template #heading>
-        <h3>Progress</h3>
+        <h3 class="summary__heading">Progress</h3>
       </template>
       <template #content>
         <p>Enter todays progress</p>
@@ -18,7 +18,7 @@
     <!-- Visualizations -->
     <summary-card>
       <template #heading>
-        <h3>Visualizations</h3>
+        <h3 class="summary__heading">Visualizations</h3>
       </template>
       <template #content>
         <p>Progress bar</p>
@@ -26,12 +26,15 @@
       <template #btn-link>
         <button>Add ONCLICK!</button>
       </template>
+      <template #btn-add>
+        <button>SAVE</button>
+      </template>
     </summary-card>
 
     <!-- Notes -->
     <summary-card>
       <template #heading>
-        <h3>Notes</h3>
+        <h3 class="summary__heading">Notes</h3>
       </template>
       <template #content>
         <p>Your most recent note for this project</p>
@@ -39,12 +42,15 @@
       <template #btn-link>
         <button>Add ONCLICK!</button>
       </template>
+      <template #btn-add>
+        <button>SAVE</button>
+      </template>
     </summary-card>
 
     <!-- Thesaurus -->
     <summary-card>
       <template #heading>
-        <h3>Thesaurus</h3>
+        <h3 class="summary__heading">Thesaurus</h3>
       </template>
       <template #content>
         <p>Thesaurus search bar</p>
@@ -65,6 +71,13 @@ export default {
 </script>
 
 <style scoped>
+/* summary-card styling */
+.summary__heading {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+/* transition animations */
 .slide-enter-active,
 .slide-leave-active {
   transition: all 0.5s ease;
