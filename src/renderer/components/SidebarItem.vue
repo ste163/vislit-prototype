@@ -40,7 +40,7 @@ export default {
   margin-bottom: 10px;
   padding-left: 10px;
   text-align: left;
-  transition: all 0.25s;
+  transition: all 0.2s;
 }
 
 .item__container:hover {

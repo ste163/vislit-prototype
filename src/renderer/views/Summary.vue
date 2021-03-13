@@ -1,13 +1,25 @@
 <template>
   <main>
-    <h1 v-if="this.$route.params.id === undefined">
-      Summary of all projects (OR LAST UPDATED!)
-    </h1>
-    <h1 v-else>Summary from {{ this.$route.params.id }}</h1>
-    <!-- Show all 4 (5 if I add a writing section) of summary cards -->
+    <transition name="slide">
+      <dashboard-heading />
+    </transition>
   </main>
 </template>
 
 <script>
-export default {};
+import DashboardHeading from "../components/DashboardHeading.vue";
+export default {
+  components: { DashboardHeading }
+};
 </script>
+
+<style scoped>
+.slide-enter-active {
+  transition: all 0.5s ease;
+}
+
+.slide-enter {
+  transform: translateX(50px);
+  opacity: 0;
+}
+</style>
