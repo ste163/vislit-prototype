@@ -2,4 +2,5 @@
   background-color: var(--white);
   border-radius: 20px;
   padding: 1rem 1.5rem;
+  box-shadow: var(--shadowCentered);
 }

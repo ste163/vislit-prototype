@@ -60,6 +60,10 @@ export default {
   watch: {
     // Whenever the route path changes, run this code
     $route() {
+      // Need to ensure the user can not go back or forwards through URLs
+      // https://forum.vuejs.org/t/vue-router-is-there-a-way-to-flush-the-history/6798/3
+      // above link talks about storing the previous route to compare it to the one the user is trying to go to
+      // You can then try to intercept it and route them elsewhere to simulate disabled forward & backwards
       console.log("ROUTE CHANGE:", this.$router.currentRoute);
     }
   }
