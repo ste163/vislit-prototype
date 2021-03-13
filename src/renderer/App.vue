@@ -15,7 +15,7 @@ selects any of those
     <div class="main__container">
       <the-controls class="controls" />
 
-      <transition name="slide">
+      <transition name="slide-up">
         <router-view class="dashboard" />
       </transition>
     </div>
@@ -82,17 +82,18 @@ export default {
 /* Dashboard transition animations */
 /* Currently not drilling down and then rising on reverse, will need to add that logic */
 /* https://router.vuejs.org/guide/advanced/transitions.html#route-based-dynamic-transition */
-.slide-enter-active,
-.slide-leave-active {
+.slide-up-enter-active,
+.slide-up-leave-active {
   transition: all 0.85s;
+  position: absolute;
 }
 
-.slide-enter {
+.slide-up-enter {
   opacity: 0;
   transform: translateY(200px);
 }
 
-.slide-leave-to {
+.slide-up-leave-to {
   opacity: 0;
   transform: translateY(-200px);
 }

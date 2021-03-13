@@ -1,8 +1,6 @@
 <template>
-  <main>
-    <transition name="slide">
-      <dashboard-heading />
-    </transition>
+  <main name="slide" mode="out-in">
+    <dashboard-heading />
   </main>
 </template>
 
@@ -14,12 +12,14 @@ export default {
 </script>
 
 <style scoped>
-.slide-enter-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: all 0.5s ease;
 }
 
-.slide-enter {
-  transform: translateX(50px);
+.slide-enter,
+.slide-leave-to {
+  transform: translateX(30%);
   opacity: 0;
 }
 </style>
