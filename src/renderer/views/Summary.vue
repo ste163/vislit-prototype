@@ -1,13 +1,26 @@
 <template>
   <main name="slide" mode="out-in">
     <dashboard-heading />
+
+    <summary-card>
+      <template #heading>
+        <h3>Summary</h3>
+      </template>
+      <template #content>
+        <p>SOME content</p>
+      </template>
+      <template #btn-link>
+        <button>Add ONCLICK!</button>
+      </template>
+    </summary-card>
   </main>
 </template>
 
 <script>
 import DashboardHeading from "../components/DashboardHeading.vue";
+import SummaryCard from "./SummaryCard.vue";
 export default {
-  components: { DashboardHeading }
+  components: { DashboardHeading, SummaryCard }
 };
 </script>
 
