@@ -18,6 +18,7 @@
 
 <style scoped>
 .card__summary {
+  flex-basis: 30%;
   display: flex;
   flex-flow: column nowrap;
   margin: 10px;

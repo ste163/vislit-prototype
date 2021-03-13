@@ -72,11 +72,16 @@ export default {
 .sidebar {
   flex-shrink: 0;
   width: 250px;
+  margin-right: 30px;
   transition: all 0.75s ease;
 }
 
 .sidebar--minimized {
   width: 50px;
+}
+
+.main__container {
+  width: 100%;
 }
 
 /* Dashboard transition animations */
