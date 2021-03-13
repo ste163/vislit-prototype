@@ -77,6 +77,9 @@ export default {
         case "Summary":
           return SidebarContentProject;
 
+        case "Visualizations":
+          return SidebarContentProject;
+
         default:
           return SidebarContentProject;
       }

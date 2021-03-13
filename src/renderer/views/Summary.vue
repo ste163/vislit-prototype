@@ -1,7 +1,5 @@
 <template>
   <main name="slide" mode="out-in">
-    <dashboard-heading />
-
     <div class="dashboard__container">
       <!-- Progress -->
       <summary-card>
@@ -12,7 +10,7 @@
           <p>Enter todays progress</p>
         </template>
         <template #btn-link>
-          <button>Add ONCLICK!</button>
+          <button @click="goToProgress">Add ONCLICK!</button>
         </template>
       </summary-card>
 
@@ -65,10 +63,15 @@
 </template>
 
 <script>
-import DashboardHeading from "../components/DashboardHeading.vue";
 import SummaryCard from "./SummaryCard.vue";
 export default {
-  components: { DashboardHeading, SummaryCard }
+  components: { SummaryCard },
+  methods: {
+    goToProgress() {
+      // push to progress route for this project
+      // fetch all progress
+    }
+  }
 };
 </script>
 

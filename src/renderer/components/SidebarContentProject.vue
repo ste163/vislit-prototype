@@ -1,3 +1,4 @@
+// RE-WRITE USING SLOTS
 <template>
   <div>
     <section class="sidebar-content__buttons">

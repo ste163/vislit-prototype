@@ -14,7 +14,7 @@ selects any of those
 
     <div class="main__container">
       <the-controls class="controls" />
-
+      <the-dashboard-heading class="dashboard__heading" />
       <transition name="slide-up">
         <router-view class="dashboard" />
       </transition>
@@ -29,11 +29,13 @@ import { mapActions, mapState } from "vuex";
 import TheControls from "./components/TheControls.vue";
 import TheModal from "./components/TheModal.vue";
 import SidebarContainer from "./components/SidebarContainer.vue";
+import TheDashboardHeading from "./components/TheDashboardHeading.vue";
 
 export default {
-  components: { SidebarContainer, TheControls, TheModal },
+  components: { SidebarContainer, TheControls, TheModal, TheDashboardHeading },
   data() {
     return {
+      // Need to save this value in the database. So the user's last used settings always load first.
       isSidebarMinimized: false
     };
   },
@@ -90,7 +92,8 @@ export default {
   width: 100%;
 }
 
-.controls {
+.controls,
+.dashboard__heading {
   background-color: var(--darkestWhite);
   z-index: 5;
 }

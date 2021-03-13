@@ -30,7 +30,7 @@ export default {
 .dashboard__h1 {
   font-family: "Noto";
   font-size: 2.5rem;
-  padding: 0;
+  padding: 15px 0 0 0;
   margin: 0;
 }
 </style>

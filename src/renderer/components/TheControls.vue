@@ -30,6 +30,6 @@ export default {};
 
 .controls__hr {
   background-color: var(--lightGray);
-  margin: 15px 0;
+  margin: 15px 0 0 0;
 }
 </style>
