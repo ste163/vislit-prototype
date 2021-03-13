@@ -47,9 +47,7 @@ export default {
   // if changing the DOM, use mounted()
   ...mapState(["selectedProject"]),
   created() {
-    console.log("SELECTED", this.selectedProject);
-
-    // On page reload/refresh, state resets but not the URL, so id params exist without data, this code resets the url
+    // On page reload/refresh, state resets but not the URL, so id params exist without fetching data, this code resets the url
     if (this.selectedProject === undefined && this.$route.path !== "/summary") {
       this.$router.push("/summary");
     }
@@ -90,6 +88,15 @@ export default {
 
 .main__container {
   width: 100%;
+}
+
+.controls {
+  background-color: var(--darkestWhite);
+  z-index: 5;
+}
+
+.dashboard {
+  z-index: -1;
 }
 
 /* Dashboard transition animations */

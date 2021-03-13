@@ -18,7 +18,7 @@ export default {};
 
 <style scoped>
 .controls {
-  margin-top: 15px;
+  padding-top: 15px;
   width: 95%;
 }
 
