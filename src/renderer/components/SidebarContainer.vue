@@ -149,6 +149,15 @@ export default {
   align-items: center;
 }
 
+.arrow__container:hover > .arrow::after,
+.arrow::before {
+  background-color: var(--lightDarkGray);
+}
+
+.arrow__container:hover > .arrow::before {
+  background-color: var(--lightDarkGray);
+}
+
 .arrow__container:hover {
   background-color: var(--lightestBlack);
 }

@@ -13,9 +13,9 @@
       <!-- OPTIONAL -->
       <!-- Have a handful of default ones, allow user to add their own -->
       <label>Description</label>
-      <textarea v-model="form.description" />
+      <textarea rows="2" v-model="form.description" />
     </fieldset>
-    <fieldset>
+    <fieldset class="set__date">
       <label>Start date</label>
       <input required type="date" v-model="form.dateCreated" />
     </fieldset>
@@ -56,6 +56,10 @@ export default {
 
 <style scoped>
 .form {
-  width: 15rem;
+  width: 25rem;
+}
+
+.set__date {
+  width: min-content;
 }
 </style>
