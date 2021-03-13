@@ -25,7 +25,7 @@ selects any of those
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 import TheControls from "./components/TheControls.vue";
 import TheModal from "./components/TheModal.vue";
 import SidebarContainer from "./components/SidebarContainer.vue";
@@ -43,11 +43,19 @@ export default {
       this.isSidebarMinimized = !this.isSidebarMinimized;
     }
   },
+  // Using created() method because we are not changing the DOM, only state.
+  // if changing the DOM, use mounted()
+  ...mapState(["selectedProject"]),
   created() {
-    // Using created() method because we are not changing the DOM, only state.
-    // if changing the DOM, use mounted()
+    console.log("SELECTED", this.selectedProject);
+
+    // On page reload/refresh, state resets but not the URL, so id params exist without data, this code resets the url
+    if (this.selectedProject === undefined && this.$route.path !== "/summary") {
+      this.$router.push("/summary");
+    }
+    // Need to check, on create, if slectedProject state is === an empty object, if it is, set route to /summary
     this.getProjects();
-    console.log("ROUTE CHANGE:", this.$router.currentRoute);
+    console.log("ROUTE ON CREATE:", this.$router.currentRoute);
   },
   watch: {
     // Whenever the route path changes, run this code
