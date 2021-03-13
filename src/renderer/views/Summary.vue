@@ -63,13 +63,22 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import SummaryCard from "./SummaryCard.vue";
 export default {
   components: { SummaryCard },
+  computed: {
+    ...mapState(["selectedProject"])
+  },
   methods: {
     goToProgress() {
-      // push to progress route for this project
       // fetch all progress
+      // COPIED FROM SidebarItem.vue, maybe make this a mixin
+      if (this.selectedProject.id === undefined) {
+        this.$router.replace({ path: `/progress` });
+      } else {
+        this.$router.replace({ path: `/progress/${this.selectedProject.id}` });
+      }
     }
   }
 };

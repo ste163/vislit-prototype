@@ -21,6 +21,21 @@ const routes = [
     component: Summary
   },
   {
+    path: "/progress",
+    name: "Progress",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Progress.vue")
+  },
+  {
+    path: "/progress/:id",
+    name: "Progress by Id",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Progress.vue")
+  },
+  {
     path: "/visualizations",
     name: "Visualizations",
     // route level code-splitting
