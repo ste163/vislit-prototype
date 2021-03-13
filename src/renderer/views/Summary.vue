@@ -2,12 +2,52 @@
   <main name="slide" mode="out-in">
     <dashboard-heading />
 
+    <!-- Progress -->
     <summary-card>
       <template #heading>
-        <h3>Summary</h3>
+        <h3>Progress</h3>
       </template>
       <template #content>
-        <p>SOME content</p>
+        <p>Enter todays progress</p>
+      </template>
+      <template #btn-link>
+        <button>Add ONCLICK!</button>
+      </template>
+    </summary-card>
+
+    <!-- Visualizations -->
+    <summary-card>
+      <template #heading>
+        <h3>Visualizations</h3>
+      </template>
+      <template #content>
+        <p>Progress bar</p>
+      </template>
+      <template #btn-link>
+        <button>Add ONCLICK!</button>
+      </template>
+    </summary-card>
+
+    <!-- Notes -->
+    <summary-card>
+      <template #heading>
+        <h3>Notes</h3>
+      </template>
+      <template #content>
+        <p>Your most recent note for this project</p>
+      </template>
+      <template #btn-link>
+        <button>Add ONCLICK!</button>
+      </template>
+    </summary-card>
+
+    <!-- Thesaurus -->
+    <summary-card>
+      <template #heading>
+        <h3>Thesaurus</h3>
+      </template>
+      <template #content>
+        <p>Thesaurus search bar</p>
       </template>
       <template #btn-link>
         <button>Add ONCLICK!</button>
