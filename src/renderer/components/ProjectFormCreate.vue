@@ -56,7 +56,7 @@ export default {
 
 <style scoped>
 .form {
-  width: 25rem;
+  width: 20rem;
 }
 
 .set__date {

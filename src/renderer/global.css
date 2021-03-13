@@ -87,6 +87,7 @@
   --darkestGray: #434343;
   --darkGray: #484848;
   --lightDarkGray: #c2c1c1;
+  --lightestDarkGray: #d7d6d6;
   --gray: #f0f0f0;
   --lightGray: #e6e6e6;
   --lighterGray: #f7f7f7;
@@ -165,6 +166,18 @@ button:focus {
 
 .btn-light {
   background-color: var(--gray);
+}
+
+.btn-gray {
+  background-color: var(--lightGray);
+}
+
+.btn-gray:hover {
+  background-color: var(--lightestDarkGray);
+}
+
+.btn-gray:active {
+  background-color: var(--lightDarkGray);
 }
 
 .btn-dark {

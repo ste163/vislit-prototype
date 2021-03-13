@@ -9,7 +9,7 @@
     </slot>
     <div class="summary__buttons">
       <slot name="btn-link">
-        <button class="arrow__container">
+        <button class="btn-gray arrow__container">
           <div class="arrow"></div>
         </button>
       </slot>
@@ -24,9 +24,10 @@
 
 <style scoped>
 .card__summary {
-  flex-basis: 30%;
   display: flex;
   flex-flow: column nowrap;
+  justify-content: space-between;
+  flex-basis: 30%;
   margin: 10px;
 }
 
@@ -46,11 +47,9 @@
 .arrow__container {
   display: flex;
   background-color: var(--lightGray);
-  height: 50px;
-  margin-top: 10px;
   padding: 10px 0;
-  padding-right: 30px;
-  padding-left: 38px;
+  padding-right: 20px;
+  padding-left: 20px;
   justify-content: flex-end;
   align-items: center;
 }
@@ -65,30 +64,28 @@
 }
 
 .arrow__container:hover {
-  background-color: var(--lightestGray);
+  background-color: var(--lightestDarkGray);
 }
 
 .arrow__container:active {
-  background-color: var(--black);
+  background-color: var(--lightDarkGray);
 }
 
 .arrow::after,
 .arrow::before {
   content: "";
   display: block;
-  width: 25px;
+  width: 20px;
   height: 4px;
   border-radius: 3px;
   background-color: var(--darkGray);
-  margin: 3px 0px;
-  transition: 0.3s;
 }
 
 .arrow::after {
-  transform: rotate(-29deg) translate(-1px, 1px);
+  transform: rotate(34deg) translate(-6px, 2px);
 }
 
 .arrow::before {
-  transform: rotate(-153deg) translate(1px, 1px);
+  transform: rotate(-35deg) translate(5px, 7px);
 }
 </style>

@@ -4,52 +4,30 @@
     <view-summary-card>
       <h3 slot="heading" class="summary__heading">Progress</h3>
       <p slot="content">Enter todays progress</p>
-      <template #btn-link> </template>
+      <template #btn-link />
     </view-summary-card>
 
     <!-- Visualizations -->
     <view-summary-card>
-      <template #heading>
-        <h3 class="summary__heading">Visualizations</h3>
-      </template>
-      <template #content>
-        <p>Progress bar</p>
-      </template>
-      <template #btn-link>
-        <button>Add ONCLICK!</button>
-      </template>
-      <template #btn-add>
-        <button>SAVE</button>
-      </template>
+      <h3 slot="heading" class="summary__heading">Visualizations</h3>
+      <p slot="content">Progress bar</p>
+      <template #btn-link />
+      <button slot="btn-add" class="btn-gray">SAVE</button>
     </view-summary-card>
 
     <!-- Notes -->
     <view-summary-card>
-      <template #heading>
-        <h3 class="summary__heading">Notes</h3>
-      </template>
-      <template #content>
-        <p>Your most recent note for this project</p>
-      </template>
-      <template #btn-link>
-        <button>Add ONCLICK!</button>
-      </template>
-      <template #btn-add>
-        <button>SAVE</button>
-      </template>
+      <h3 slot="heading" class="summary__heading">Notes</h3>
+      <p class="content">Your most recent note for this project</p>
+      <template #btn-link />
+      <button slot="btn-add" class="btn-gray">SAVE</button>
     </view-summary-card>
 
     <!-- Thesaurus -->
     <view-summary-card>
-      <template #heading>
-        <h3 class="summary__heading">Thesaurus</h3>
-      </template>
-      <template #content>
-        <p>Thesaurus search bar</p>
-      </template>
-      <template #btn-link>
-        <button>Add ONCLICK!</button>
-      </template>
+      <h3 slot="heading" class="summary__heading">Thesaurus</h3>
+      <p slot="content">Thesaurus search bar</p>
+      <template #btn-link />
     </view-summary-card>
   </main>
 </template>
