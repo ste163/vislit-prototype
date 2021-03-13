@@ -1,11 +1,14 @@
 <template>
-  <section>
-    Controls
-    <!-- Search bar component. Need to pass in a what-to-search-for function that has action to mutate Vuex state of what we have selected-->
-    <!-- Date filtering drop-downs populated with currently selected projects available dates -->
+  <section class="controls">
+    <div class="controls__container">
+      <div>Search bar</div>
+      <!-- Search bar component. Need to pass in a what-to-search-for function that has action to mutate Vuex state of what we have selected-->
+      <!-- Date filtering drop-downs populated with currently selected projects available dates -->
 
-    <!-- Has router-links for now because idk what else to do with them -->
-    <router-link to="/visualizations">Vizualizations</router-link>
+      <!-- Has router-links for now because idk what else to do with them -->
+      <router-link to="/visualizations">Vizualizations</router-link>
+    </div>
+    <hr class="controls__hr" />
   </section>
 </template>
 
@@ -13,4 +16,20 @@
 export default {};
 </script>
 
-<style></style>
+<style scoped>
+.controls {
+  margin-top: 15px;
+  width: 95%;
+}
+
+.controls__container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.controls__hr {
+  background-color: var(--lightGray);
+  margin: 15px 0;
+}
+</style>
