@@ -53,6 +53,7 @@ export default {
   margin-right: 130px;
   height: 33.08px;
   transition: all 0.6s ease;
+  width: 95px;
 }
 
 .controls__add--active {
@@ -62,7 +63,7 @@ export default {
 
 .add__text {
   margin: 0;
-  margin-left: 25px;
+  margin-left: 22px;
 }
 
 .controls__filter {
@@ -70,7 +71,7 @@ export default {
 }
 
 .filter__icon {
-  margin-right: 5px;
+  margin: 0 10px 0 5px;
   transition: var(--btnHover);
 }
 
