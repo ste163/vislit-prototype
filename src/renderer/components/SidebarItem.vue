@@ -29,6 +29,7 @@ export default {
   /* Will need to be a grid for placing the 'pinned' icon in correct place */
   display: flex;
   flex-flow: column nowrap;
+  align-items: start;
   width: 100%;
   color: var(--white);
   background-color: var(--darkGray);

@@ -17,17 +17,17 @@
 .plus::before {
   content: "";
   display: block;
-  width: 15px;
-  height: 2px;
+  width: 14px;
+  height: 3px;
   border-radius: 10px;
   background-color: var(--white);
   transition: var(--btnHover);
 }
 
 .plus::after {
-  transform: rotate(90deg) translate(2.5px, 5px);
+  transform: rotate(90deg) translate(-2px, 5px);
 }
 
 .plus::before {
-  transform: translate(-5px, 5.5px);
+  transform: translate(-5px, 0.6px);
 }

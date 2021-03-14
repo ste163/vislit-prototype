@@ -7,7 +7,10 @@
         Project
       </button>
       <!-- Filter button for filtering the state of the current project list -->
-      <button class="btn-dark">- Filter</button>
+      <button class="btn-dark">
+        <app-icon-filter class="sidebar__filter" />
+        Filter
+      </button>
     </section>
 
     <!-- NEED TO SET selectedProject state in Vuex on button click. That way these checks will be based on that instead of routes -->
@@ -40,13 +43,14 @@
 <script>
 import { mapState } from "vuex";
 import { setterMixin } from "../mixins/modalMixins";
+import AppIconFilter from "./AppIconFilter";
 import ProjectFormCreate from "./ProjectFormCreate";
 import SidebarItem from "./SidebarItem.vue";
 import SidebarItemHeader from "./SidebarItemHeader.vue";
 import UserFormSettings from "./UserFormSettings.vue";
 
 export default {
-  components: { SidebarItem, SidebarItemHeader },
+  components: { SidebarItem, SidebarItemHeader, AppIconFilter },
   data() {
     return {
       allProjects: {
@@ -76,6 +80,14 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   place-content: space-evenly;
+}
+
+.sidebar__filter {
+  transition: var(--btnHover);
+}
+
+.btn-dark:hover > .sidebar__filter {
+  fill: var(--lightDarkGray);
 }
 
 .sidebar-content__items {

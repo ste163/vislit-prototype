@@ -28,10 +28,6 @@
   </svg>
 </template>
 
-<script>
-export default {};
-</script>
-
 <style>
 .sidebar__logo {
   position: absolute;

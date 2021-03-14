@@ -147,6 +147,11 @@ hr {
 }
 
 button {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+
   user-select: none;
   border: none;
   border-radius: var(--borderRadius);
