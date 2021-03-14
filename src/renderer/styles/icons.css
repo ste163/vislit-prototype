@@ -17,6 +17,7 @@
 
 .plus::after,
 .plus::before {
+  position: absolute;
   content: "";
   display: block;
   width: 14px;
@@ -27,11 +28,11 @@
 }
 
 .plus::after {
-  transform: rotate(90deg) translate(-2px, 5px);
+  transform: rotate(90deg) translate(-2px, 0px);
 }
 
 .plus::before {
-  transform: translate(-5px, 0.6px);
+  transform: translate(0px, -1.4px);
 }
 
 /* Down-facing Arrow */

@@ -57,7 +57,7 @@ export default {
   display: flex;
   flex-flow: column nowrap;
   margin-top: 10px;
-  height: 100%;
+  height: 95%;
 }
 
 .sidebar-content--active {

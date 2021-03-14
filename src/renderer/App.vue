@@ -29,8 +29,6 @@ export default {
   methods: {
     ...mapActions(["getProjects"])
   },
-  // Using created() method because we are not changing the DOM, only state.
-  // if changing the DOM, use mounted()
 
   computed: {
     ...mapState(["isSidebarMinimized"])
@@ -38,6 +36,8 @@ export default {
 
   // added ...mapState outside a method so created() can use it
   ...mapState(["selectedProject"]),
+  // Using created() method because we are not changing the DOM, only state.
+  // if changing the DOM, use mounted()
   created() {
     // On page reload/refresh, state resets but not the URL, so id params exist without fetching data, this code resets the url
     if (this.selectedProject === undefined && this.$route.path !== "/summary") {

@@ -1,13 +1,8 @@
 <template>
   <section
     class="sidebar__container"
-    :class="{
-      'sidebar__container--minimized': this.isSidebarMinimized
-    }"
+    :class="{ 'sidebar__container--minimized': this.isSidebarMinimized }"
   >
-    <!-- Swap contents based on route -->
-    <!-- When on Summary page, show Projects, when on Graphs & Progress, auto-minimize -->
-    <!-- When on Notes, show a list of notes for that project -->
     <div class="sidebar__heading">
       <app-logo class="sidebar__logo" />
       <transition name="text-minimize">
@@ -18,9 +13,7 @@
       </transition>
     </div>
 
-    <!-- Need separate component for Content Controls/Buttons (for adding/filtering list) -->
-    <!-- This will need the :isSidebarMinimized as a prop, so we can conditionally render correct buttons -->
-    <!-- (identical to settings button) -->
+    <!-- Sidebar button controls -->
     <component :is="renderControlsPerRoute" />
 
     <transition name="minimize">
@@ -163,7 +156,7 @@ export default {
 
 .sidebar__content {
   flex-grow: 1;
-  height: 75%;
+  height: 80%;
   overflow-y: auto;
   overflow-x: hidden;
 }
