@@ -1,17 +1,14 @@
 // RE-WRITE USING SLOTS
 <template>
   <div>
-    <section class="sidebar-content__buttons">
-      <button class="btn-dark plus__container" @click="createProject">
-        <div class="plus" />
+    <sidebar-controls-template
+      :handleAdd="createProject"
+      :handleFilter="filterProjects"
+    >
+      <template #addButtonText>
         Project
-      </button>
-      <!-- Filter button for filtering the state of the current project list -->
-      <button class="btn-dark">
-        <app-icon-filter class="sidebar__filter" />
-        Filter
-      </button>
-    </section>
+      </template>
+    </sidebar-controls-template>
 
     <!-- NEED TO SET selectedProject state in Vuex on button click. That way these checks will be based on that instead of routes -->
     <section class="sidebar-content__items">
@@ -43,14 +40,18 @@
 <script>
 import { mapState } from "vuex";
 import { setterMixin } from "../mixins/modalMixins";
-import AppIconFilter from "./AppIconFilter";
 import ProjectFormCreate from "./ProjectFormCreate";
+import SidebarControlsTemplate from "./SidebarControlsTemplate.vue";
 import SidebarItem from "./SidebarItem.vue";
 import SidebarItemHeader from "./SidebarItemHeader.vue";
 import UserFormSettings from "./UserFormSettings.vue";
 
 export default {
-  components: { SidebarItem, SidebarItemHeader, AppIconFilter },
+  components: {
+    SidebarItem,
+    SidebarItemHeader,
+    SidebarControlsTemplate
+  },
   data() {
     return {
       allProjects: {
@@ -65,6 +66,9 @@ export default {
     createProject() {
       this.setModal("Form", ProjectFormCreate);
     },
+    filterProjects() {
+      console.log("FILTER PROJECTS");
+    },
     openSettings() {
       this.setModal("Form", UserFormSettings);
     }
@@ -76,21 +80,6 @@ export default {
 </script>
 
 <style scoped>
-.sidebar-content__buttons {
-  display: flex;
-  flex-flow: row nowrap;
-  place-content: space-evenly;
-}
-
-.sidebar__filter {
-  margin-right: 5px;
-  transition: var(--btnHover);
-}
-
-.btn-dark:hover > .sidebar__filter {
-  fill: var(--lightDarkGray);
-}
-
 .sidebar-content__items {
   display: flex;
   flex-flow: column nowrap;

@@ -14,6 +14,8 @@
         <template #content>
           <p>Enter todays progress</p>
         </template>
+
+        <button slot="btn-add" class="btn-gray">SAVE</button>
       </view-summary-card-template>
 
       <!-- Visualizations -->
@@ -25,8 +27,6 @@
         <template #content>
           <p>Progress Bar</p>
         </template>
-
-        <button slot="btn-add" class="btn-gray">SAVE</button>
       </view-summary-card-template>
 
       <!-- Notes -->
