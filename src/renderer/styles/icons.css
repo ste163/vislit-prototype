@@ -81,6 +81,52 @@
   transform: rotate(-35deg) translate(4px, 5px);
 }
 
+/* Up-facing Arrow */
+.arrow__container--up {
+  display: flex;
+  background-color: var(--lightGray);
+  padding: 10px 0;
+  padding-right: 20px;
+  padding-left: 20px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.arrow__container--up:hover > .arrow--up::after,
+.arrow--up::before {
+  background-color: var(--black);
+}
+
+.arrow__container--up:hover > .arrow--up::before {
+  background-color: var(--black);
+}
+
+.arrow__container--up:hover {
+  background-color: var(--lightestDarkGray);
+}
+
+.arrow__container--up:active {
+  background-color: var(--lightDarkGray);
+}
+
+.arrow--up::after,
+.arrow--up::before {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 3.5px;
+  border-radius: 10px;
+  background-color: var(--darkGray);
+}
+
+.arrow--up::after {
+  transform: rotate(-35deg) translate(-6px, -5px);
+}
+
+.arrow--up::before {
+  transform: rotate(35deg) translate(6px, -1px);
+}
+
 /* Side-bar Arrow */
 .arrow__container--sidebar {
   display: flex;

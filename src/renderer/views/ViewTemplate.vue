@@ -4,9 +4,9 @@
       <button
         v-if="!this.$router.currentRoute.path.includes('summary')"
         @click="goToSummary"
-        class="btn-gray"
+        class="btn-gray arrow__container--up"
       >
-        Up
+        <div class="arrow--up" />
       </button>
       <h3 class="header__h3">
         <slot name="title">Page Title</slot>
