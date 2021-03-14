@@ -9,8 +9,8 @@
     </slot>
     <div class="summary__buttons">
       <slot name="btn-link">
-        <button class="btn-gray arrow__container">
-          <div class="arrow"></div>
+        <button @click="goToRoute" class="btn-gray arrow__container">
+          <div class="arrow" />
         </button>
       </slot>
       <slot name="btn-add"></slot>
@@ -19,7 +19,9 @@
 </template>
 
 <script>
-// Pass in the button onclick events
+export default {
+  props: { goToRoute: { type: Function, required: true } }
+};
 </script>
 
 <style scoped>
