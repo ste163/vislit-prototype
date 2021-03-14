@@ -1,62 +1,69 @@
 <template>
-  <main name="slide" mode="out-in" class="dashboard__container">
-    <!-- Progress -->
-    <view-summary-card :goToRoute="goToProgress">
-      <template #heading>
-        Progress
-      </template>
+  <view-template name="slide" mode="out-in">
+    <template #title>
+      Summary
+    </template>
 
-      <template #content>
-        <p>Enter todays progress</p>
-      </template>
-    </view-summary-card>
+    <template #content>
+      <!-- Progress -->
+      <view-summary-card-template :goToRoute="goToProgress">
+        <template #heading>
+          Progress
+        </template>
 
-    <!-- Visualizations -->
-    <view-summary-card :goToRoute="goToVisualizations">
-      <template #heading>
-        Visualizations
-      </template>
+        <template #content>
+          <p>Enter todays progress</p>
+        </template>
+      </view-summary-card-template>
 
-      <template #content>
-        <p>Progress Bar</p>
-      </template>
+      <!-- Visualizations -->
+      <view-summary-card-template :goToRoute="goToVisualizations">
+        <template #heading>
+          Visualizations
+        </template>
 
-      <button slot="btn-add" class="btn-gray">SAVE</button>
-    </view-summary-card>
+        <template #content>
+          <p>Progress Bar</p>
+        </template>
 
-    <!-- Notes -->
-    <view-summary-card :goToRoute="goToNotes">
-      <template #heading>
-        Notes
-      </template>
+        <button slot="btn-add" class="btn-gray">SAVE</button>
+      </view-summary-card-template>
 
-      <template #content>
-        <p>Most recent project notes</p>
-      </template>
+      <!-- Notes -->
+      <view-summary-card-template :goToRoute="goToNotes">
+        <template #heading>
+          Notes
+        </template>
 
-      <button slot="btn-add" class="btn-gray">SAVE</button>
-    </view-summary-card>
+        <template #content>
+          <p>Most recent project notes</p>
+        </template>
 
-    <!-- Thesaurus -->
-    <view-summary-card :goToRoute="goToThesaurus">
-      <template #heading>
-        Thesaurus
-      </template>
+        <button slot="btn-add" class="btn-gray">SAVE</button>
+      </view-summary-card-template>
 
-      <template #content>
-        <p>Thesaurus search bar</p>
-      </template>
+      <!-- Thesaurus -->
+      <view-summary-card-template :goToRoute="goToThesaurus">
+        <template #heading>
+          Thesaurus
+        </template>
 
-      <slot name="btn-link" />
-    </view-summary-card>
-  </main>
+        <template #content>
+          <p>Thesaurus search bar</p>
+        </template>
+
+        <slot name="btn-link" />
+      </view-summary-card-template>
+    </template>
+  </view-template>
 </template>
 
 <script>
 import { pathMixin } from "../mixins/routerMixins";
-import ViewSummaryCard from "./ViewSummaryCard.vue";
+import ViewSummaryCardTemplate from "./ViewSummaryCardTemplate.vue";
+import ViewTemplate from "./ViewTemplate.vue";
 export default {
-  components: { ViewSummaryCard },
+  components: { ViewSummaryCardTemplate, ViewTemplate },
   mixins: [pathMixin],
   methods: {
     goToProgress() {
@@ -80,11 +87,6 @@ export default {
 </script>
 
 <style scoped>
-.dashboard__container {
-  display: flex;
-  flex-flow: row wrap;
-}
-
 /* transition animations */
 .slide-enter-active,
 .slide-leave-active {

@@ -57,7 +57,7 @@ export default {
     }
     // Need to check, on create, if slectedProject state is === an empty object, if it is, set route to /summary
     this.getProjects();
-    console.log("ROUTE ON CREATE:", this.$router.currentRoute);
+    console.log("ROUTE ON CREATE:", this.$router.currentRoute.path);
   },
 
   watch: {

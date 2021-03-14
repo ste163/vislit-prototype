@@ -1,29 +1,43 @@
 <template>
-  <section>
+  <main>
     <header class="view__header">
-      <button @click="goToSummary" class="btn-gray">Up</button>
+      <button
+        v-if="!this.$router.currentRoute.path.includes('summary')"
+        @click="goToSummary"
+        class="btn-gray"
+      >
+        Up
+      </button>
       <h3 class="header__h3">
         <slot name="title">Page Title</slot>
       </h3>
     </header>
 
-    <main>
+    <section class="dashboard__container">
       <slot name="content"></slot>
-    </main>
-  </section>
+    </section>
+  </main>
 </template>
 
 <script>
+import { pathMixin } from "../mixins/routerMixins";
+
 export default {
+  mixins: [pathMixin],
   methods: {
     goToSummary() {
-      console.log("GO!");
+      this.changeRoute("summary");
     }
   }
 };
 </script>
 
 <style>
+.dashboard__container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 .view__header {
   display: flex;
   margin: 10px 0;

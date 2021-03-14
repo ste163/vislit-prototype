@@ -1,4 +1,3 @@
-// Used to dynamically inject & style different summary cards
 <template>
   <section class="card card__summary">
     <h4 class="summary__heading">

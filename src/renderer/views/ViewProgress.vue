@@ -9,10 +9,6 @@
       <article>Sorted Excel-like Table of Progress</article>
     </template>
   </view-template>
-
-  <!-- Show all progress -->
-  <!-- Have a card with a button for going up -->
-  <!-- MAYBE have an AppView that uses slots? -->
 </template>
 
 <script>
