@@ -14,8 +14,8 @@
 
     <!-- Buttons are setup differently than above sections because add button is optional -->
     <div class="summary__buttons">
-      <button @click="goToRoute" class="btn-gray arrow__container">
-        <div class="arrow" />
+      <button @click="goToRoute" class="btn-gray arrow__container--down">
+        <div class="arrow--down" />
       </button>
 
       <slot @click="handleAdd" name="btn-add"></slot>
@@ -50,51 +50,5 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
-}
-
-/* arrow buttons */
-.arrow__container {
-  display: flex;
-  background-color: var(--lightGray);
-  padding: 10px 0;
-  padding-right: 20px;
-  padding-left: 20px;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.arrow__container:hover > .arrow::after,
-.arrow::before {
-  background-color: var(--black);
-}
-
-.arrow__container:hover > .arrow::before {
-  background-color: var(--black);
-}
-
-.arrow__container:hover {
-  background-color: var(--lightestDarkGray);
-}
-
-.arrow__container:active {
-  background-color: var(--lightDarkGray);
-}
-
-.arrow::after,
-.arrow::before {
-  content: "";
-  display: block;
-  width: 20px;
-  height: 4px;
-  border-radius: 3px;
-  background-color: var(--darkGray);
-}
-
-.arrow::after {
-  transform: rotate(34deg) translate(-6px, 2px);
-}
-
-.arrow::before {
-  transform: rotate(-35deg) translate(5px, 7px);
 }
 </style>

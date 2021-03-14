@@ -75,7 +75,6 @@ export default {
   flex-flow: row nowrap;
   height: 100vh;
   width: 100%;
-  overflow: hidden;
 }
 
 .sidebar {
