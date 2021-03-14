@@ -19,6 +19,8 @@
     </div>
 
     <!-- Need separate component for Content Controls/Buttons (for adding/filtering list) -->
+    <!-- This will need the :isSidebarMinimized as a prop, so we can conditionally render correct buttons -->
+    <!-- (identical to settings button) -->
 
     <transition name="minimize">
       <section v-if="!isSidebarMinimized" class="sidebar__content">
@@ -32,7 +34,6 @@
 
     <div class="sidebar__spacer" />
 
-    <!-- Have conditional class that changes the button width -->
     <button
       class="btn-dark sidebar__settings"
       :class="{ 'sidebar__settings--active': isSidebarMinimized }"
@@ -94,12 +95,8 @@ export default {
   computed: {
     renderContentPerRoute() {
       const route = this.$route.name;
-      // Add a GLOBAL Vuex state check for if it should be minimized
       switch (route) {
         case "Summary":
-          return SidebarContentProject;
-
-        case "Visualizations":
           return SidebarContentProject;
 
         default:
@@ -161,7 +158,7 @@ export default {
   align-self: center;
   margin-top: 10px;
   width: 110px;
-  transition: all 0.5s;
+  transition: all 0.6s;
 }
 
 .sidebar__settings--active {
