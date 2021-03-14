@@ -2,32 +2,51 @@
   <main name="slide" mode="out-in" class="dashboard__container">
     <!-- Progress -->
     <view-summary-card :goToRoute="goToProgress">
-      <h3 slot="heading" class="summary__heading">Progress</h3>
-      <p slot="content">Enter todays progress</p>
+      <template #heading>
+        Progress
+      </template>
 
-      <slot name="btn-link" />
+      <template #content>
+        <p>Enter todays progress</p>
+      </template>
     </view-summary-card>
 
     <!-- Visualizations -->
     <view-summary-card :goToRoute="goToVisualizations">
-      <h3 slot="heading" class="summary__heading">Visualizations</h3>
-      <p slot="content">Progress bar</p>
-      <slot name="btn-link" />
+      <template #heading>
+        Visualizations
+      </template>
+
+      <template #content>
+        <p>Progress Bar</p>
+      </template>
+
       <button slot="btn-add" class="btn-gray">SAVE</button>
     </view-summary-card>
 
     <!-- Notes -->
     <view-summary-card :goToRoute="goToNotes">
-      <h3 slot="heading" class="summary__heading">Notes</h3>
-      <p class="content">Your most recent note for this project</p>
-      <slot name="btn-link" />
+      <template #heading>
+        Notes
+      </template>
+
+      <template #content>
+        <p>Most recent project notes</p>
+      </template>
+
       <button slot="btn-add" class="btn-gray">SAVE</button>
     </view-summary-card>
 
     <!-- Thesaurus -->
     <view-summary-card :goToRoute="goToThesaurus">
-      <h3 slot="heading" class="summary__heading">Thesaurus</h3>
-      <p slot="content">Thesaurus search bar</p>
+      <template #heading>
+        Thesaurus
+      </template>
+
+      <template #content>
+        <p>Thesaurus search bar</p>
+      </template>
+
       <slot name="btn-link" />
     </view-summary-card>
   </main>

@@ -1,18 +1,24 @@
 // Used to dynamically inject & style different summary cards
 <template>
   <section class="card card__summary">
-    <slot name="heading">
-      <h4>Summary Heading</h4>
-    </slot>
-    <slot name="content">
-      <p>Section Content. Router Link fetches data for this stuff</p>
-    </slot>
-    <div class="summary__buttons">
-      <slot name="btn-link">
-        <button @click="goToRoute" class="btn-gray arrow__container">
-          <div class="arrow" />
-        </button>
+    <h4 class="summary__heading">
+      <slot name="heading">
+        Summary Heading
       </slot>
+    </h4>
+
+    <section>
+      <slot name="content">
+        <p>Section Content</p>
+      </slot>
+    </section>
+
+    <!-- Buttons are setup differently than above sections because add button is optional -->
+    <div class="summary__buttons">
+      <button @click="goToRoute" class="btn-gray arrow__container">
+        <div class="arrow" />
+      </button>
+
       <slot @click="handleAdd" name="btn-add"></slot>
     </div>
   </section>
@@ -34,6 +40,8 @@ export default {
 }
 
 .summary__heading {
+  font-size: 1.2rem;
+  font-weight: var(--weightThin);
   text-align: center;
   margin: 0;
   padding: 0;
