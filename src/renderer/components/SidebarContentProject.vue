@@ -2,7 +2,10 @@
 <template>
   <div>
     <section class="sidebar-content__buttons">
-      <button class="btn-dark" @click="createProject">+ Project</button>
+      <button class="btn-dark plus__container" @click="createProject">
+        <div class="plus" />
+        Project
+      </button>
       <!-- Filter button for filtering the state of the current project list -->
       <button class="btn-dark">- Filter</button>
     </section>

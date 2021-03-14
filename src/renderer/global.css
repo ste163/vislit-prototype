@@ -1,5 +1,7 @@
 @import "./styles/cards.css";
 @import "./styles/forms.css";
+@import "./styles/icons.css";
+@import "./styles/buttons.css";
 /* fonts, :root, default-overrides */
 @font-face {
   font-family: "Noto";
@@ -162,40 +164,6 @@ button {
 a:focus,
 button:focus {
   outline: 1px solid var(--vislitBlue);
-}
-
-.btn-light {
-  background-color: var(--gray);
-}
-
-.btn-gray {
-  background-color: var(--lightGray);
-}
-
-.btn-gray:hover {
-  background-color: var(--lightestDarkGray);
-}
-
-.btn-gray:active {
-  background-color: var(--lightDarkGray);
-}
-
-.btn-dark {
-  color: var(--white);
-  background-color: var(--darkGray);
-}
-
-.btn-dark:hover {
-  background-color: var(--darkestGray);
-}
-
-.btn-dark:active {
-  background-color: var(--darkBlack);
-}
-
-.btn-none {
-  box-shadow: none;
-  border-radius: 0;
 }
 
 /* Scroll bars */

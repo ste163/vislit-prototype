@@ -1,0 +1,35 @@
+/* For default overrides, see global.css */
+.btn-light {
+  background-color: var(--gray);
+}
+
+.btn-gray {
+  background-color: var(--lightGray);
+}
+
+.btn-gray:hover {
+  background-color: var(--lightestDarkGray);
+}
+
+.btn-gray:active {
+  background-color: var(--lightDarkGray);
+}
+
+.btn-dark {
+  color: var(--white);
+  background-color: var(--darkGray);
+}
+
+.btn-dark:hover {
+  color: var(--lightDarkGray);
+  background-color: var(--darkestGray);
+}
+
+.btn-dark:active {
+  background-color: var(--darkBlack);
+}
+
+.btn-none {
+  box-shadow: none;
+  border-radius: 0;
+}
