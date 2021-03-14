@@ -9,7 +9,7 @@
     </view-summary-card>
 
     <!-- Visualizations -->
-    <view-summary-card :goToRoute="goToProgress">
+    <view-summary-card :goToRoute="goToVisualizations">
       <h3 slot="heading" class="summary__heading">Visualizations</h3>
       <p slot="content">Progress bar</p>
       <slot name="btn-link" />
@@ -17,7 +17,7 @@
     </view-summary-card>
 
     <!-- Notes -->
-    <view-summary-card :goToRoute="goToProgress">
+    <view-summary-card :goToRoute="goToNotes">
       <h3 slot="heading" class="summary__heading">Notes</h3>
       <p class="content">Your most recent note for this project</p>
       <slot name="btn-link" />
@@ -25,7 +25,7 @@
     </view-summary-card>
 
     <!-- Thesaurus -->
-    <view-summary-card :goToRoute="goToProgress">
+    <view-summary-card :goToRoute="goToThesaurus">
       <h3 slot="heading" class="summary__heading">Thesaurus</h3>
       <p slot="content">Thesaurus search bar</p>
       <slot name="btn-link" />
@@ -43,6 +43,18 @@ export default {
     goToProgress() {
       // FETCH PROGRESS
       this.changeRoute("progress");
+    },
+    goToVisualizations() {
+      // FETCH PROGRESS
+      this.changeRoute("visualizations");
+    },
+    goToNotes() {
+      // FETCH NOTES
+      this.changeRoute("notes");
+    },
+    goToThesaurus() {
+      // FETCH COLLECTIONS (will probably need to get these on initial load (at least their names for search bar))
+      this.changeRoute("thesaurus");
     }
   }
 };
