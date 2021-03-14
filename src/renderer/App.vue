@@ -81,7 +81,7 @@ export default {
   flex-shrink: 0;
   width: 250px;
   margin-right: 30px;
-  transition: all 0.75s ease;
+  transition: all 0.35s ease;
 }
 
 .sidebar--minimized {
@@ -107,7 +107,7 @@ export default {
 /* https://router.vuejs.org/guide/advanced/transitions.html#route-based-dynamic-transition */
 .slide-up-enter-active,
 .slide-up-leave-active {
-  transition: all 0.85s;
+  transition: all 0.8s;
   position: absolute;
 }
 

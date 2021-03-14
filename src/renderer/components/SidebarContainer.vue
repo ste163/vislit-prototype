@@ -189,7 +189,7 @@ export default {
 /* State transitions */
 .minimize-enter-active,
 .text-minimize-enter-active {
-  transition: all 0.7s ease;
+  transition: all 0.6s ease;
   overflow: hidden;
 }
 
@@ -201,7 +201,7 @@ export default {
 
 .minimize-leave-active,
 .text-minimize-leave-active {
-  transition: all 1s ease;
+  transition: all 0.6s ease;
   overflow: hidden;
 }
 
