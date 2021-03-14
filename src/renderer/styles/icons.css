@@ -44,7 +44,7 @@
   margin-top: 10px;
   padding: 10px 0;
   padding-right: 30px;
-  padding-left: 38px;
+  padding-left: 35px;
   justify-content: flex-end;
   align-items: center;
 }
@@ -70,26 +70,26 @@
 .arrow--sidebar::before {
   content: "";
   display: block;
-  width: 25px;
-  height: 4px;
-  border-radius: 3px;
+  width: 18px;
+  height: 3.5px;
+  border-radius: 10px;
   background-color: var(--white);
   margin: 3px 0px;
   transition: 0.3s;
 }
 
 .arrow--sidebar::after {
-  transform: rotate(-29deg) translate(-1px, 1px);
+  transform: rotate(-29deg) translate(-2px, 0px);
 }
 
 .arrow--sidebar::before {
-  transform: rotate(-153deg) translate(1px, 1px);
+  transform: rotate(-153deg) translate(1px, 0px);
 }
 
 .arrow--sidebar--active::after {
-  transform: rotate(-145deg) translate(-8px, -1px);
+  transform: rotate(-145deg) translate(-7px, 0px);
 }
 
 .arrow--sidebar--active::before {
-  transform: rotate(-35deg) translate(5px, 3px);
+  transform: rotate(-35deg) translate(4px, 4px);
 }
