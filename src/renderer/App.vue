@@ -1,9 +1,3 @@
-// Will hold sidebar (which means projects will be router-links---NO clicking
-changes selectedProj state. OR maybe it is and there are sub routes...), top
-controls for searching & date sorting, and the router-view that cycles between
-info for all projects on no selected project, summary info on a selected
-project, and then "Visualizations", "Notes", "Progress", etc. routes when user
-selects any of those
 <template>
   <section id="app" class="app__layout">
     <sidebar-container
