@@ -1,4 +1,6 @@
 /* CSS-derived icons */
+
+/* Plus Icon */
 .plus__container {
   display: flex;
   flex-flow: row nowrap;
@@ -31,3 +33,5 @@
 .plus::before {
   transform: translate(-5px, 0.6px);
 }
+
+/* Down-facing Arrow */

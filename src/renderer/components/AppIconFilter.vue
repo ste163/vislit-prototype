@@ -22,13 +22,3 @@
     />
   </svg>
 </template>
-
-<style scoped>
-.icon__filter {
-  margin-right: 5px;
-}
-
-svg:hover {
-  fill: red;
-}
-</style>

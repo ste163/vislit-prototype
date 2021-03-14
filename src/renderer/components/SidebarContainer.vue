@@ -18,11 +18,14 @@
       </transition>
     </div>
 
+    <!-- Need separate component for Content Controls/Buttons (for adding/filtering list) -->
+
     <transition name="minimize">
       <section v-if="!isSidebarMinimized" class="sidebar__content">
-        <!-- /Summary, /Graphs (auto-minimize), /Progress (auto-minize) - show projects -->
+        <!-- /Summary, /Graphs - show projects -->
         <!-- /Notes - show list of Project's Notes -->
         <!-- /Thesaurus - show list of created Lexicons -->
+        <!-- /Write - show version history?? -->
         <component :is="renderContentPerRoute" />
       </section>
     </transition>
@@ -30,6 +33,7 @@
     <div class="sidebar__spacer" />
 
     <button class="btn-dark sidebar__settings" @click="openSettings">
+      <app-icon-gear class="settings__gear" />
       Settings
     </button>
 
@@ -42,11 +46,12 @@
 <script>
 import { setterMixin } from "../mixins/modalMixins";
 import AppLogo from "./AppLogo";
+import AppIconGear from "./AppIconGear";
 import SidebarContentProject from "./SidebarContentProject.vue";
 import UserFormSettings from "./UserFormSettings.vue";
 
 export default {
-  components: { AppLogo, SidebarContentProject },
+  components: { AppLogo, SidebarContentProject, AppIconGear },
   props: {
     isSidebarMinimized: Boolean
   },
@@ -135,9 +140,19 @@ export default {
 }
 
 .sidebar__settings {
-  width: 50%;
   align-self: center;
   margin-top: 10px;
+}
+
+.settings__gear {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  transition: var(--btnHover);
+}
+
+.sidebar__settings:hover > .settings__gear {
+  fill: var(--lightDarkGray);
 }
 
 .arrow__container {

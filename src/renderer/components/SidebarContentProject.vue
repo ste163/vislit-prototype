@@ -83,6 +83,7 @@ export default {
 }
 
 .sidebar__filter {
+  margin-right: 5px;
   transition: var(--btnHover);
 }
 
