@@ -24,6 +24,7 @@
 
     <transition name="minimize">
       <section v-if="!isSidebarMinimized" class="sidebar__content">
+        <!-- WILL MOST LIKELY WANT TO MAKE SidebarContentTemplate USING SLOTS -->
         <!-- /Summary, /Graphs - show projects -->
         <!-- /Notes - show list of Project's Notes -->
         <!-- /Thesaurus - show list of created Lexicons -->
