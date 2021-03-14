@@ -34,11 +34,23 @@
 
     <button class="btn-dark sidebar__settings" @click="openSettings">
       <app-icon-gear class="settings__gear" />
-      Settings
+      <transition name="button-minimize">
+        <p class="settings__text" v-if="!isSidebarMinimized">
+          Settings
+        </p>
+      </transition>
     </button>
 
-    <button class="btn-none arrow__container" @click="handleSidebarOpen">
-      <div :class="{ arrow: true, 'arrow--active': !isSidebarMinimized }"></div>
+    <button
+      class="btn-none arrow__container--sidebar"
+      @click="handleSidebarOpen"
+    >
+      <div
+        :class="{
+          'arrow--sidebar': true,
+          'arrow--sidebar--active': !isSidebarMinimized
+        }"
+      ></div>
     </button>
   </section>
 </template>
@@ -147,69 +159,17 @@ export default {
 .settings__gear {
   width: 20px;
   height: 20px;
-  margin-right: 5px;
   transition: var(--btnHover);
+}
+
+.settings__text {
+  padding: 0;
+  margin: 0;
+  margin-left: 5px;
 }
 
 .sidebar__settings:hover > .settings__gear {
   fill: var(--lightDarkGray);
-}
-
-.arrow__container {
-  display: flex;
-  background-color: var(--darkestGray);
-  height: 50px;
-  margin-top: 10px;
-  padding: 10px 0;
-  padding-right: 30px;
-  padding-left: 38px;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.arrow__container:hover > .arrow::after,
-.arrow::before {
-  background-color: var(--lightDarkGray);
-}
-
-.arrow__container:hover > .arrow::before {
-  background-color: var(--lightDarkGray);
-}
-
-.arrow__container:hover {
-  background-color: var(--lightestBlack);
-}
-
-.arrow__container:active {
-  background-color: var(--lighterBlack);
-}
-
-.arrow::after,
-.arrow::before {
-  content: "";
-  display: block;
-  width: 25px;
-  height: 4px;
-  border-radius: 3px;
-  background-color: var(--white);
-  margin: 3px 0px;
-  transition: 0.3s;
-}
-
-.arrow::after {
-  transform: rotate(-29deg) translate(-1px, 1px);
-}
-
-.arrow::before {
-  transform: rotate(-153deg) translate(1px, 1px);
-}
-
-.arrow--active::after {
-  transform: rotate(-145deg) translate(-8px, -1px);
-}
-
-.arrow--active::before {
-  transform: rotate(-35deg) translate(5px, 3px);
 }
 
 /* State transitions */
@@ -217,7 +177,6 @@ export default {
 .heading-minimize-enter-active {
   transition: all 0.7s ease;
   overflow: hidden;
-  white-space: nowrap;
 }
 
 .heading-minimize-enter {
@@ -233,7 +192,6 @@ export default {
 .heading-minimize-leave-active {
   transition: all 1s ease;
   overflow: hidden;
-  white-space: nowrap;
 }
 
 .minimize-leave-to {
@@ -242,6 +200,23 @@ export default {
 }
 
 .heading-minimize-leave-to {
+  opacity: 0;
+}
+
+/* State transition - buttons */
+.button-minimize-enter-active {
+  transition: all 0.7 ease;
+}
+
+.button-minimize-enter {
+  opacity: 0;
+}
+
+.button-minimize-leave-active {
+  transition: all 0.7 ease;
+}
+
+.button-minimize-leave-to {
   opacity: 0;
 }
 </style>
