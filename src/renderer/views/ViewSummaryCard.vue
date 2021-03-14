@@ -2,7 +2,7 @@
 <template>
   <section class="card card__summary">
     <slot name="heading">
-      <h3>Summary Heading</h3>
+      <h4>Summary Heading</h4>
     </slot>
     <slot name="content">
       <p>Section Content. Router Link fetches data for this stuff</p>

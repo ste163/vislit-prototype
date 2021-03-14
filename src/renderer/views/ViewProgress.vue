@@ -1,14 +1,26 @@
 <template>
-  <main>
-    <h1>Progress</h1>
-    <!-- Show all progress -->
-    <!-- Have a card with a button for going up -->
-    <!-- MAYBE have an AppView that uses slots? -->
-  </main>
+  <view-template>
+    <template #title>
+      Progress
+    </template>
+
+    <template #content>
+      <article>Progress Bar</article>
+      <article>Sorted Excel-like Table of Progress</article>
+    </template>
+  </view-template>
+
+  <!-- Show all progress -->
+  <!-- Have a card with a button for going up -->
+  <!-- MAYBE have an AppView that uses slots? -->
 </template>
 
 <script>
-export default {};
+import ViewTemplate from "./ViewTemplate.vue";
+
+export default {
+  components: { ViewTemplate }
+};
 </script>
 
 <style></style>
