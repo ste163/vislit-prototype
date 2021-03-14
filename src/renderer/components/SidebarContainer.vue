@@ -32,7 +32,12 @@
 
     <div class="sidebar__spacer" />
 
-    <button class="btn-dark sidebar__settings" @click="openSettings">
+    <!-- Have conditional class that changes the button width -->
+    <button
+      class="btn-dark sidebar__settings"
+      :class="{ 'sidebar__settings--active': isSidebarMinimized }"
+      @click="openSettings"
+    >
       <app-icon-gear class="settings__gear" />
       <transition name="text-minimize">
         <p v-if="!isSidebarMinimized" class="settings__text">
@@ -154,9 +159,17 @@ export default {
 .sidebar__settings {
   align-self: center;
   margin-top: 10px;
+  width: 110px;
+  transition: all 0.5s;
+}
+
+.sidebar__settings--active {
+  width: 52px;
+  height: 29.95px;
 }
 
 .settings__gear {
+  position: absolute;
   width: 20px;
   height: 20px;
   transition: var(--btnHover);
@@ -165,7 +178,7 @@ export default {
 .settings__text {
   padding: 0;
   margin: 0;
-  margin-left: 5px;
+  margin-left: 25px;
 }
 
 .sidebar__settings:hover > .settings__gear {
@@ -179,12 +192,8 @@ export default {
   overflow: hidden;
 }
 
+.minimize-enter,
 .text-minimize-enter {
-  transform: translateX(-30px);
-  opacity: 0;
-}
-
-.minimize-enter {
   transform: translateX(-30px);
   opacity: 0;
 }
@@ -202,23 +211,6 @@ export default {
 
 .text-minimize-leave-to {
   transform: translateX(-30px);
-  opacity: 0;
-}
-
-/* State transition - buttons */
-.button-minimize-enter-active {
-  transition: all 0.7 ease;
-}
-
-.button-minimize-enter {
-  opacity: 0;
-}
-
-.button-minimize-leave-active {
-  transition: all 0.7 ease;
-}
-
-.button-minimize-leave-to {
   opacity: 0;
 }
 </style>
