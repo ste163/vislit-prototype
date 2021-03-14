@@ -6,6 +6,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    // Layout
+    isSidebarMinimized: false,
+
     // Modals
     isModalOpen: false,
     modalType: "",
@@ -16,6 +19,11 @@ export default new Vuex.Store({
     selectedProject: {}
   },
   mutations: {
+    // Layout
+    setIsSidebarMinimized(state, payload) {
+      state.isSidebarMinimized = payload;
+    },
+
     // Modals
     setIsModalOpen(state, payload) {
       state.isModalOpen = payload;

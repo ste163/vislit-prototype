@@ -2,7 +2,7 @@
   <section
     class="sidebar__container"
     :class="{
-      'sidebar__container--minimized': isSidebarMinimized
+      'sidebar__container--minimized': this.isSidebarMinimized
     }"
   >
     <!-- Swap contents based on route -->
@@ -21,7 +21,7 @@
     <!-- Need separate component for Content Controls/Buttons (for adding/filtering list) -->
     <!-- This will need the :isSidebarMinimized as a prop, so we can conditionally render correct buttons -->
     <!-- (identical to settings button) -->
-    <sidebar-controls-project />
+    <component :is="renderControlsPerRoute" />
 
     <transition name="minimize">
       <section v-if="!isSidebarMinimized" class="sidebar__content">
@@ -70,6 +70,7 @@ import AppIconGear from "./AppIconGear";
 import SidebarContentProject from "./SidebarContentProject.vue";
 import UserFormSettings from "./UserFormSettings.vue";
 import SidebarControlsProject from "./SidebarControlsProject.vue";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   components: {
@@ -77,9 +78,6 @@ export default {
     SidebarContentProject,
     AppIconGear,
     SidebarControlsProject
-  },
-  props: {
-    isSidebarMinimized: Boolean
   },
   data() {
     // SET DEFAULT VALUES BASED ON USER SETTINGS (WHATEVER THE USER LAST CLICKED ON, IS WHAT YOU SHOW)
@@ -92,15 +90,27 @@ export default {
   mixins: [setterMixin],
 
   methods: {
+    ...mapMutations(["setIsSidebarMinimized"]),
     openSettings() {
       this.setModal("Form", UserFormSettings);
     },
     handleSidebarOpen() {
-      this.$emit("sidebar-adjust");
+      this.setIsSidebarMinimized(!this.isSidebarMinimized);
     }
   },
 
   computed: {
+    ...mapState(["isSidebarMinimized"]),
+    renderControlsPerRoute() {
+      const route = this.$route.name;
+      switch (route) {
+        case "Summary":
+          return SidebarControlsProject;
+
+        default:
+          return SidebarControlsProject;
+      }
+    },
     renderContentPerRoute() {
       const route = this.$route.name;
       switch (route) {
@@ -135,7 +145,7 @@ export default {
   display: grid;
   grid-template-columns: 42px 207px;
   align-items: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   height: 41px;
 }
 

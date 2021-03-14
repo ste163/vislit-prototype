@@ -5,7 +5,7 @@
       <slot name="addButtonText">ADD TEXT</slot>
     </button>
 
-    <button class="btn-dark" @click="handleFilter">
+    <button v-if="!isSidebarMinimized" class="btn-dark" @click="handleFilter">
       <app-icon-filter class="sidebar__filter" />
       Filter
     </button>
@@ -13,11 +13,15 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import AppIconFilter from "./AppIconFilter";
 
 export default {
   components: { AppIconFilter },
-  props: { handleAdd: Function, handleFilter: Function }
+  props: { handleAdd: Function, handleFilter: Function },
+  computed: {
+    ...mapState(["isSidebarMinimized"])
+  }
 };
 </script>
 
@@ -26,6 +30,7 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   place-content: space-evenly;
+  margin-bottom: 10px;
 }
 
 .sidebar__filter {

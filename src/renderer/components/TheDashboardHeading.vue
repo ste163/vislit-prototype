@@ -12,7 +12,7 @@ dashboard view
       <h1 class="dashboard__h1">
         {{ selectedProject.title }}
       </h1>
-      <h2>{{ selectedProject.description }}</h2>
+      <h2 class="dashboard__description">{{ selectedProject.description }}</h2>
     </div>
   </section>
 </template>
@@ -29,8 +29,13 @@ export default {
 <style scoped>
 .dashboard__h1 {
   font-family: "Noto";
-  font-size: 2.5rem;
+  font-size: 2.1rem;
   padding: 15px 0 0 0;
   margin: 0;
+}
+
+.dashboard__description {
+  font-size: 1rem;
+  margin: 5px 0 0 0;
 }
 </style>

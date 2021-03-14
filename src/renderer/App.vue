@@ -1,9 +1,7 @@
 <template>
   <section id="app" class="app__layout">
     <sidebar-container
-      :isSidebarMinimized="isSidebarMinimized"
       :class="{ sidebar: true, 'sidebar--minimized': isSidebarMinimized }"
-      @sidebar-adjust="adjustLayout"
     />
 
     <div class="main__container">
@@ -27,22 +25,18 @@ import TheDashboardHeading from "./components/TheDashboardHeading.vue";
 
 export default {
   components: { SidebarContainer, TheControls, TheModal, TheDashboardHeading },
-  data() {
-    return {
-      // Need to save this value in the database. So the user's last used settings always load first.
-      isSidebarMinimized: false
-    };
-  },
 
   methods: {
-    ...mapActions(["getProjects"]),
-    adjustLayout() {
-      this.isSidebarMinimized = !this.isSidebarMinimized;
-    }
+    ...mapActions(["getProjects"])
   },
-
   // Using created() method because we are not changing the DOM, only state.
   // if changing the DOM, use mounted()
+
+  computed: {
+    ...mapState(["isSidebarMinimized"])
+  },
+
+  // added ...mapState outside a method so created() can use it
   ...mapState(["selectedProject"]),
   created() {
     // On page reload/refresh, state resets but not the URL, so id params exist without fetching data, this code resets the url
