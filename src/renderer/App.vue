@@ -39,12 +39,14 @@ export default {
       isSidebarMinimized: false
     };
   },
+
   methods: {
     ...mapActions(["getProjects"]),
     adjustLayout() {
       this.isSidebarMinimized = !this.isSidebarMinimized;
     }
   },
+
   // Using created() method because we are not changing the DOM, only state.
   // if changing the DOM, use mounted()
   ...mapState(["selectedProject"]),
@@ -57,6 +59,7 @@ export default {
     this.getProjects();
     console.log("ROUTE ON CREATE:", this.$router.currentRoute);
   },
+
   watch: {
     // Whenever the route path changes, run this code
     $route() {

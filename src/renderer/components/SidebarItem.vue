@@ -9,20 +9,16 @@
 
 <script>
 import { mapActions } from "vuex";
+import { pathMixin } from "../mixins/routerMixins";
 
 export default {
-  props: {
-    item: Object
-  },
+  props: { item: Object },
+  mixins: [pathMixin],
   methods: {
     ...mapActions(["getSelectedProject"]),
     selectItem() {
       this.getSelectedProject(this.item.id);
-      if (this.item.id === undefined) {
-        this.$router.replace({ path: `/summary` });
-      } else {
-        this.$router.replace({ path: `/summary/${this.item.id}` });
-      }
+      this.changeRouteWithItem(this.item, "summary");
     }
   }
 };

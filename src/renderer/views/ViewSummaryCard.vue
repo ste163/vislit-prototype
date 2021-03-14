@@ -13,14 +13,14 @@
           <div class="arrow" />
         </button>
       </slot>
-      <slot name="btn-add"></slot>
+      <slot @click="handleAdd" name="btn-add"></slot>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  props: { goToRoute: { type: Function, required: true } }
+  props: { goToRoute: { type: Function, required: true }, handleAdd: Function }
 };
 </script>
 

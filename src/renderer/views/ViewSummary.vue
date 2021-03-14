@@ -34,22 +34,15 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { pathMixin } from "../mixins/routerMixins";
 import ViewSummaryCard from "./ViewSummaryCard.vue";
 export default {
   components: { ViewSummaryCard },
-  computed: {
-    ...mapState(["selectedProject"])
-  },
+  mixins: [pathMixin],
   methods: {
     goToProgress() {
-      // fetch all progress
-      // COPIED FROM SidebarItem.vue, maybe make this a mixin
-      if (this.selectedProject.id === undefined) {
-        this.$router.replace({ path: `/progress` });
-      } else {
-        this.$router.replace({ path: `/progress/${this.selectedProject.id}` });
-      }
+      // FETCH PROGRESS
+      this.changeRoute("progress");
     }
   }
 };
