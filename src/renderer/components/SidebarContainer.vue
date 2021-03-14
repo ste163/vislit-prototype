@@ -21,6 +21,7 @@
     <!-- Need separate component for Content Controls/Buttons (for adding/filtering list) -->
     <!-- This will need the :isSidebarMinimized as a prop, so we can conditionally render correct buttons -->
     <!-- (identical to settings button) -->
+    <sidebar-controls-project />
 
     <transition name="minimize">
       <section v-if="!isSidebarMinimized" class="sidebar__content">
@@ -68,9 +69,15 @@ import AppLogo from "./AppLogo";
 import AppIconGear from "./AppIconGear";
 import SidebarContentProject from "./SidebarContentProject.vue";
 import UserFormSettings from "./UserFormSettings.vue";
+import SidebarControlsProject from "./SidebarControlsProject.vue";
 
 export default {
-  components: { AppLogo, SidebarContentProject, AppIconGear },
+  components: {
+    AppLogo,
+    SidebarContentProject,
+    AppIconGear,
+    SidebarControlsProject
+  },
   props: {
     isSidebarMinimized: Boolean
   },

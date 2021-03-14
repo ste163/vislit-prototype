@@ -1,56 +1,41 @@
 // RE-WRITE USING SLOTS
 <template>
-  <div>
-    <sidebar-controls-template
-      :handleAdd="createProject"
-      :handleFilter="filterProjects"
-    >
-      <template #addButtonText>
-        Project
-      </template>
-    </sidebar-controls-template>
+  <section class="sidebar-content__items">
+    <sidebar-item
+      :item="allProjects"
+      :disabled="selectedProject.id === undefined"
+      :class="{
+        'sidebar-content--active': selectedProject.id === undefined
+      }"
+    />
 
-    <!-- NEED TO SET selectedProject state in Vuex on button click. That way these checks will be based on that instead of routes -->
-    <section class="sidebar-content__items">
+    <!-- Headers will be created dynamically from 'filteredProjects' state -->
+    <sidebar-item-header />
+
+    <!-- Items created dynamically from 'filteredProjects' state -->
+    <transition-group name="transition-items">
       <sidebar-item
-        :item="allProjects"
-        :disabled="selectedProject.id === undefined"
+        v-for="project in projects"
+        :key="project.id"
+        :item="project"
+        :disabled="selectedProject.id === project.id"
         :class="{
-          'sidebar-content--active': selectedProject.id === undefined
+          'sidebar-content--active': selectedProject.id === project.id
         }"
       />
-
-      <sidebar-item-header />
-
-      <transition-group name="transition-items">
-        <sidebar-item
-          v-for="project in projects"
-          :key="project.id"
-          :item="project"
-          :disabled="selectedProject.id === project.id"
-          :class="{
-            'sidebar-content--active': selectedProject.id === project.id
-          }"
-        />
-      </transition-group>
-    </section>
-  </div>
+    </transition-group>
+  </section>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import { setterMixin } from "../mixins/modalMixins";
-import ProjectFormCreate from "./ProjectFormCreate";
-import SidebarControlsTemplate from "./SidebarControlsTemplate.vue";
 import SidebarItem from "./SidebarItem.vue";
 import SidebarItemHeader from "./SidebarItemHeader.vue";
-import UserFormSettings from "./UserFormSettings.vue";
 
 export default {
   components: {
     SidebarItem,
-    SidebarItemHeader,
-    SidebarControlsTemplate
+    SidebarItemHeader
   },
   data() {
     return {
@@ -60,18 +45,6 @@ export default {
         description: "See information on all projects"
       }
     };
-  },
-  mixins: [setterMixin],
-  methods: {
-    createProject() {
-      this.setModal("Form", ProjectFormCreate);
-    },
-    filterProjects() {
-      console.log("FILTER PROJECTS");
-    },
-    openSettings() {
-      this.setModal("Form", UserFormSettings);
-    }
   },
   computed: {
     ...mapState(["projects", "selectedProject"])

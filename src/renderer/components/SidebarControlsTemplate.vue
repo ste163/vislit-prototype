@@ -2,7 +2,7 @@
   <header class="sidebar-content__buttons">
     <button class="btn-dark plus__container" @click="handleAdd">
       <div class="plus" />
-      <slot name="addButtonText"></slot>
+      <slot name="addButtonText">ADD TEXT</slot>
     </button>
 
     <button class="btn-dark" @click="handleFilter">
