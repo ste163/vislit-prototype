@@ -61,7 +61,13 @@ const routes = [
   },
   {
     path: "/thesaurus",
-    name: "THesaurus",
+    name: "Thesaurus",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ViewThesaurus.vue")
+  },
+  {
+    path: "/thesaurus/:id",
+    name: "Thesaurus",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/ViewThesaurus.vue")
   }

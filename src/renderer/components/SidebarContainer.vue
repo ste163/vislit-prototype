@@ -148,6 +148,7 @@ export default {
 
 .sidebar__content {
   flex-grow: 1;
+  height: 75%;
   overflow-y: auto;
   overflow-x: hidden;
 }

@@ -2,17 +2,17 @@
 dashboard view
 <template>
   <section>
-    <div :key="1" v-if="this.$route.params.id === undefined">
+    <div v-if="this.$route.params.id === undefined">
       <h1 class="dashboard__h1">
         All Projects
       </h1>
     </div>
 
-    <div :key="2" v-else>
+    <div v-else>
       <h1 class="dashboard__h1">
         {{ selectedProject.title }}
       </h1>
-      <h2>Info about this Project with Id {{ this.$route.params.id }}</h2>
+      <h2>{{ selectedProject.description }}</h2>
     </div>
   </section>
 </template>
