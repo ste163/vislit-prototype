@@ -32,7 +32,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .dashboard__container {
   display: flex;
   flex-flow: row wrap;

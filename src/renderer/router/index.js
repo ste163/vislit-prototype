@@ -46,6 +46,24 @@ const routes = [
     name: "Visualizations by Id",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/ViewVisualizations.vue")
+  },
+  {
+    path: "/notes",
+    name: "Notes",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ViewNotes.vue")
+  },
+  {
+    path: "/notes/:id",
+    name: "Notes by Id",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ViewNotes.vue")
+  },
+  {
+    path: "/thesaurus",
+    name: "THesaurus",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ViewThesaurus.vue")
   }
 ];
 

@@ -1,11 +1,11 @@
 <template>
   <view-template>
     <template #title>
-      Visualizations
+      Thesaurus
     </template>
 
     <template #content>
-      Data visualizations
+      Lexicons, search terms, etc.
     </template>
   </view-template>
 </template>

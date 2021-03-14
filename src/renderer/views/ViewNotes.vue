@@ -1,11 +1,11 @@
 <template>
   <view-template>
     <template #title>
-      Visualizations
+      Notes
     </template>
 
     <template #content>
-      Data visualizations
+      Note cards
     </template>
   </view-template>
 </template>
