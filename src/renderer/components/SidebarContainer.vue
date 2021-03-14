@@ -10,9 +10,9 @@
     <!-- When on Notes, show a list of notes for that project -->
     <div class="sidebar__heading">
       <app-logo class="sidebar__logo" />
-      <transition name="heading-minimize">
+      <transition name="text-minimize">
         <h2 v-if="!isSidebarMinimized" class="heading__title">
-          <!-- Computed property based on route -->
+          <!-- Computed property based on route to show correct sidebar heading -->
           PROJECTS
         </h2>
       </transition>
@@ -34,8 +34,8 @@
 
     <button class="btn-dark sidebar__settings" @click="openSettings">
       <app-icon-gear class="settings__gear" />
-      <transition name="button-minimize">
-        <p class="settings__text" v-if="!isSidebarMinimized">
+      <transition name="text-minimize">
+        <p v-if="!isSidebarMinimized" class="settings__text">
           Settings
         </p>
       </transition>
@@ -174,12 +174,13 @@ export default {
 
 /* State transitions */
 .minimize-enter-active,
-.heading-minimize-enter-active {
+.text-minimize-enter-active {
   transition: all 0.7s ease;
   overflow: hidden;
 }
 
-.heading-minimize-enter {
+.text-minimize-enter {
+  transform: translateX(-30px);
   opacity: 0;
 }
 
@@ -189,7 +190,7 @@ export default {
 }
 
 .minimize-leave-active,
-.heading-minimize-leave-active {
+.text-minimize-leave-active {
   transition: all 1s ease;
   overflow: hidden;
 }
@@ -199,7 +200,8 @@ export default {
   opacity: 0;
 }
 
-.heading-minimize-leave-to {
+.text-minimize-leave-to {
+  transform: translateX(-30px);
   opacity: 0;
 }
 
