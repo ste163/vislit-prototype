@@ -23,13 +23,13 @@ ContentComponent
 import { mapState, mapMutations } from "vuex";
 export default {
   methods: {
-    ...mapMutations(["setIsModalOpen"]),
+    ...mapMutations("modal", ["setIsModalOpen"]),
     handleClose() {
       this.setIsModalOpen(false);
     }
   },
   computed: {
-    ...mapState(["isModalOpen", "modalType", "modalContent"])
+    ...mapState("modal", ["isModalOpen", "modalType", "modalContent"])
   }
 };
 </script>

@@ -21,7 +21,7 @@ dashboard view
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState(["selectedProject"])
+    ...mapState("projects", ["selectedProject"])
   }
 };
 </script>

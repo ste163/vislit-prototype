@@ -38,7 +38,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["addProject"]),
+    ...mapActions("projects", ["addProject"]),
     createForm() {
       return {
         title: "",

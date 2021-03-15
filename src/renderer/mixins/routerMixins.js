@@ -2,7 +2,7 @@ import { mapState } from "vuex";
 
 export const pathMixin = {
   computed: {
-    ...mapState(["selectedProject"])
+    ...mapState("projects", ["selectedProject"])
   },
   methods: {
     changeRoute(route) {

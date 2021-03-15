@@ -1,89 +1,21 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { ipcRenderer } from "electron";
+import modal from "./modules/modal";
+import projects from "./modules/projects";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    modal,
+    projects
+  },
   state: {
-    // Layout
-    isSidebarMinimized: false,
-
-    // Modals
-    isModalOpen: false,
-    modalType: "",
-    modalContent: {},
-
-    // Projects
-    projects: [],
-    selectedProject: {}
+    isSidebarMinimized: false
   },
   mutations: {
-    // Layout
     setIsSidebarMinimized(state, payload) {
       state.isSidebarMinimized = payload;
-    },
-
-    // Modals
-    setIsModalOpen(state, payload) {
-      state.isModalOpen = payload;
-    },
-    setModalType(state, payload) {
-      state.modalType = payload;
-    },
-    setModalContent(state, payload) {
-      state.modalContent = payload;
-    },
-
-    // Projects
-    setProjects(state, payload) {
-      state.projects = payload;
-    },
-    setSelectedProject(state, payload) {
-      state.selectedProject = payload;
     }
-  },
-  actions: {
-    async getProjects({ commit }) {
-      const response = await ipcRenderer.invoke("db-projects-get-all");
-      if (response) {
-        commit("setProjects", response);
-      } else {
-        console.log(
-          "ERROR WHILE GETTING ALL PROJECTS. RESPONSE WAS:",
-          response
-        );
-      }
-    },
-    async addProject({ dispatch }, project) {
-      const response = await ipcRenderer.invoke("db-projects-add", project);
-      if (response) {
-        dispatch("getProjects");
-      } else {
-        console.log("ERROR WHILE ADDING PROJECT. RESPONSE WAS:", response);
-      }
-    },
-    async getSelectedProject({ commit }, projectId) {
-      console.log(projectId);
-      if (projectId === undefined) {
-        commit("setSelectedProject", {});
-        return;
-      }
-
-      const response = await ipcRenderer.invoke(
-        "db-projects-get-selected",
-        projectId
-      );
-
-      if (response) {
-        commit("setSelectedProject", response);
-      } else {
-        console.log(
-          "ERROR WHILE GETTING SELECTED PROJECT. RESPONSE WAS:",
-          response
-        );
-      }
-    }
-  },
-  modules: {}
+  }
 });

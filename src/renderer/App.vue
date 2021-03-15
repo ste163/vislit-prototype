@@ -27,7 +27,7 @@ export default {
   components: { SidebarContainer, TheControls, TheModal, TheDashboardHeading },
 
   methods: {
-    ...mapActions(["getProjects"])
+    ...mapActions("projects", ["getProjects"])
   },
 
   computed: {
@@ -35,7 +35,7 @@ export default {
   },
 
   // added ...mapState outside a method so created() can use it
-  ...mapState(["selectedProject"]),
+  ...mapState("projects", ["selectedProject"]),
   // Using created() method because we are not changing the DOM, only state.
   // if changing the DOM, use mounted()
   created() {

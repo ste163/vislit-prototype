@@ -47,7 +47,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["projects", "selectedProject"])
+    ...mapState("projects", ["projects", "selectedProject"])
   }
 };
 </script>

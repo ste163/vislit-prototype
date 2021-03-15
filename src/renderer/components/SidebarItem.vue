@@ -15,7 +15,7 @@ export default {
   props: { item: Object },
   mixins: [pathMixin],
   methods: {
-    ...mapActions(["getSelectedProject"]),
+    ...mapActions("projects", ["getSelectedProject"]),
     selectItem() {
       this.getSelectedProject(this.item.id);
       this.changeRouteWithItem(this.item, "summary");
