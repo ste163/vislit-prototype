@@ -31,7 +31,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["isSidebarMinimized"])
+    ...mapState("layout", ["isSidebarMinimized"])
   },
 
   // added ...mapState outside a method so created() can use it

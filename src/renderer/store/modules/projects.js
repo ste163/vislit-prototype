@@ -1,9 +1,9 @@
 import { ipcRenderer } from "electron";
 
-const state = {
+const state = () => ({
   projects: [],
   selectedProject: {}
-};
+});
 
 const mutations = {
   setProjects(state, payload) {

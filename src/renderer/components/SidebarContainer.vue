@@ -83,7 +83,7 @@ export default {
   mixins: [setterMixin],
 
   methods: {
-    ...mapMutations(["setIsSidebarMinimized"]),
+    ...mapMutations("layout", ["setIsSidebarMinimized"]),
     openSettings() {
       this.setModal("Form", UserFormSettings);
     },
@@ -93,7 +93,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["isSidebarMinimized"]),
+    ...mapState("layout", ["isSidebarMinimized"]),
     renderControlsPerRoute() {
       const route = this.$route.name;
       switch (route) {
