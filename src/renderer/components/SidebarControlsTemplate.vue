@@ -34,7 +34,7 @@ export default {
   components: { AppIconFilter },
   props: { handleAdd: Function, handleFilter: Function },
   computed: {
-    ...mapState(["isSidebarMinimized"])
+    ...mapState("layout", ["isSidebarMinimized"])
   }
 };
 </script>
