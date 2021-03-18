@@ -94,7 +94,8 @@
   transform: rotate(180deg);
 }
 
-.arrow__container--up:hover {
+.arrow__container--up:hover > .arrow--up::after,
+.arrow--up::before {
   background-color: var(--black);
 }
 
