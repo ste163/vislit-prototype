@@ -68,18 +68,18 @@
 .arrow--down::before {
   content: "";
   display: block;
-  width: 18px;
+  width: 13px;
   height: 3.5px;
   border-radius: 10px;
   background-color: var(--darkGray);
 }
 
 .arrow--down::after {
-  transform: rotate(35deg) translate(-7px, 3px);
+  transform: rotate(45deg) translate(-4px, 1px);
 }
 
 .arrow--down::before {
-  transform: rotate(-35deg) translate(4px, 5px);
+  transform: rotate(-45deg) translate(2px, 4px);
 }
 
 /* Up-facing Arrow */
@@ -91,23 +91,11 @@
   padding-left: 20px;
   justify-content: flex-end;
   align-items: center;
-}
-
-.arrow__container--up:hover > .arrow--up::after,
-.arrow--up::before {
-  background-color: var(--black);
-}
-
-.arrow__container--up:hover > .arrow--up::before {
-  background-color: var(--black);
+  transform: rotate(180deg);
 }
 
 .arrow__container--up:hover {
-  background-color: var(--lightestDarkGray);
-}
-
-.arrow__container--up:active {
-  background-color: var(--lightDarkGray);
+  background-color: var(--black);
 }
 
 .arrow--up::after,
