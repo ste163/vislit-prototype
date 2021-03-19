@@ -17,9 +17,19 @@
 
         <template #content>
           Enter todays progress
+          <!-- Add a form for adding progress -->
+          <!-- On mount, get project data, compute if there's progress for today, if yes, fill out form with today's data -->
+          <form id="todaysProgress" @submit.prevent="addProgress"></form>
         </template>
 
-        <button slot="btn-add" class="btn-gray">SAVE</button>
+        <button
+          type="submit"
+          form="todaysProgress"
+          slot="btn-add"
+          class="btn-gray"
+        >
+          SAVE
+        </button>
       </view-summary-card-template>
 
       <!-- Visualizations -->
@@ -89,6 +99,10 @@ export default {
     goToThesaurus() {
       // FETCH COLLECTIONS (will probably need to get these on initial load (at least their names for search bar))
       this.changeRoute("thesaurus");
+    },
+    addProgress() {
+      // Honestly, this should probs be a mixin
+      console.log("ADD PROGRESS");
     }
   }
 };
