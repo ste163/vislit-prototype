@@ -11,8 +11,12 @@
           Progress
         </template>
 
+        <template #content-heading>
+          Today's Progress
+        </template>
+
         <template #content>
-          <p>Enter todays progress</p>
+          Enter todays progress
         </template>
 
         <button slot="btn-add" class="btn-gray">SAVE</button>
@@ -24,8 +28,12 @@
           Visualizations
         </template>
 
+        <template #content-heading>
+          Goal Progress
+        </template>
+
         <template #content>
-          <p>Progress Bar</p>
+          Progress Bar
         </template>
       </view-summary-card-template>
 
@@ -36,7 +44,7 @@
         </template>
 
         <template #content>
-          <p>Most recent project notes</p>
+          Most recent project notes
         </template>
 
         <button slot="btn-add" class="btn-gray">SAVE</button>
@@ -49,7 +57,7 @@
         </template>
 
         <template #content>
-          <p>Thesaurus search bar</p>
+          Thesaurus search bar
         </template>
 
         <slot name="btn-link" />

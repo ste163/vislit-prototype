@@ -6,10 +6,15 @@
       </slot>
     </h4>
 
-    <section>
-      <slot name="content">
-        <p>Section Content</p>
-      </slot>
+    <section class="summary__content">
+      <h5 class="content__heading">
+        <slot name="content-heading"></slot>
+      </h5>
+      <div class="content__container">
+        <slot name="content">
+          <p>Section Content</p>
+        </slot>
+      </div>
     </section>
 
     <!-- Buttons are setup differently than above sections because add button is optional -->
@@ -44,6 +49,17 @@ export default {
   text-align: center;
   margin: 0;
   padding: 0;
+}
+
+.summary__content {
+  margin: 10px 0;
+}
+
+.content__heading {
+  margin: 0 0 5px 0;
+}
+
+.content__container {
 }
 
 .summary__buttons {
