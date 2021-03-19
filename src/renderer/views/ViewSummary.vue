@@ -16,31 +16,37 @@
         </template>
 
         <template #content>
-          Enter todays progress
-          <!-- Add a form for adding progress -->
           <!-- On mount, get project data, compute if there's progress for today, if yes, fill out form with today's data -->
           <form id="todaysProgress" @submit.prevent="addProgress">
-            <label for="wordsWritten">Words Written</label>
-            <input id="wordsWrittent" name="wordsWritten" type="number" />
+            <div class="form__items">
+              <label for="wordsWritten">Words Written</label>
+              <input id="wordsWrittent" name="wordsWritten" type="number" />
+            </div>
 
-            <label for="edited">Edited</label>
-            <input id="edited" name="edited" type="checkbox" value="edited" />
+            <div class="form__items">
+              <label class="checkbox__label" for="edited">Edited</label>
+              <input id="edited" name="edited" type="checkbox" value="edited" />
+            </div>
 
-            <label for="proofread">Proofread</label>
-            <input
-              id="proofread"
-              name="proofread"
-              type="checkbox"
-              value="proofread"
-            />
+            <div class="form__items">
+              <label class="checkbox__label" for="proofread">Proofread</label>
+              <input
+                id="proofread"
+                name="proofread"
+                type="checkbox"
+                value="proofread"
+              />
+            </div>
 
-            <label for="revised">Revised</label>
-            <input
-              id="revised"
-              name="revised"
-              type="checkbox"
-              value="revised"
-            />
+            <div class="form__items">
+              <label class="checkbox__label" for="revised">Revised</label>
+              <input
+                id="revised"
+                name="revised"
+                type="checkbox"
+                value="revised"
+              />
+            </div>
           </form>
         </template>
 
@@ -131,6 +137,16 @@ export default {
 </script>
 
 <style scoped>
+#todaysProgress {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.form__items {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 /* transition animations */
 .slide-enter-active,
 .slide-leave-active {

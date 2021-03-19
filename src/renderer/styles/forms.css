@@ -57,3 +57,19 @@ input:focus {
 .btn-form:active {
   background-color: var(--vislitDarkBlue);
 }
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox__label {
+  position: relative;
+}
+
+.checkbox__label::after {
+  content: "";
+  background-color: red;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
