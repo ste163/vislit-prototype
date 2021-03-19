@@ -19,7 +19,29 @@
           Enter todays progress
           <!-- Add a form for adding progress -->
           <!-- On mount, get project data, compute if there's progress for today, if yes, fill out form with today's data -->
-          <form id="todaysProgress" @submit.prevent="addProgress"></form>
+          <form id="todaysProgress" @submit.prevent="addProgress">
+            <label for="wordsWritten">Words Written</label>
+            <input id="wordsWrittent" name="wordsWritten" type="number" />
+
+            <label for="edited">Edited</label>
+            <input id="edited" name="edited" type="checkbox" value="edited" />
+
+            <label for="proofread">Proofread</label>
+            <input
+              id="proofread"
+              name="proofread"
+              type="checkbox"
+              value="proofread"
+            />
+
+            <label for="revised">Revised</label>
+            <input
+              id="revised"
+              name="revised"
+              type="checkbox"
+              value="revised"
+            />
+          </form>
         </template>
 
         <button
