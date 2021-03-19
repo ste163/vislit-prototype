@@ -25,27 +25,41 @@
 
             <div class="form__items">
               <label class="checkbox__label" for="edited">Edited</label>
-              <input id="edited" name="edited" type="checkbox" value="edited" />
+              <label class="checkbox__container">
+                <input
+                  id="edited"
+                  name="edited"
+                  type="checkbox"
+                  value="edited"
+                />
+                <span class="checkmark"></span>
+              </label>
             </div>
 
             <div class="form__items">
               <label class="checkbox__label" for="proofread">Proofread</label>
-              <input
-                id="proofread"
-                name="proofread"
-                type="checkbox"
-                value="proofread"
-              />
+              <label class="checkbox__container">
+                <input
+                  id="proofread"
+                  name="proofread"
+                  type="checkbox"
+                  value="proofread"
+                />
+                <span class="checkmark"></span>
+              </label>
             </div>
 
             <div class="form__items">
-              <label class="checkbox__label" for="revised">Revised</label>
-              <input
-                id="revised"
-                name="revised"
-                type="checkbox"
-                value="revised"
-              />
+              <label class="checkbox__container">
+                <label class="checkbox__label" for="revised">Revised</label>
+                <input
+                  id="revised"
+                  name="revised"
+                  type="checkbox"
+                  value="revised"
+                />
+                <span class="checkmark"></span>
+              </label>
             </div>
           </form>
         </template>
