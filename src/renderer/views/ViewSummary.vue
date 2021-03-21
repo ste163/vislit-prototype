@@ -12,7 +12,8 @@
         </template>
 
         <template #content-heading>
-          For Today, March 21, 2021
+          <!-- Make computed for showing current date. Then make it a mixin -->
+          Today: {{ formatDateString(new Date()) }}
         </template>
 
         <template #content>
@@ -106,11 +107,12 @@
 
 <script>
 import { pathMixin } from "../mixins/routerMixins";
+import { dateMixin } from "../mixins/dateMixins";
 import ViewSummaryCardTemplate from "./ViewSummaryCardTemplate.vue";
 import ViewTemplate from "./ViewTemplate.vue";
 export default {
   components: { ViewSummaryCardTemplate, ViewTemplate },
-  mixins: [pathMixin],
+  mixins: [pathMixin, dateMixin],
   methods: {
     goToProgress() {
       // FETCH PROGRESS

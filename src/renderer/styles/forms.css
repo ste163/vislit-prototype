@@ -16,6 +16,10 @@ fieldset {
   border: none;
 }
 
+label {
+  font-size: 0.9rem;
+}
+
 input,
 textarea {
   box-sizing: border-box;
@@ -59,7 +63,9 @@ input:focus {
   background-color: var(--vislitDarkBlue);
 }
 
+/* For custom checkbox: https://www.w3schools.com/howto/howto_css_custom_checkbox.asp */
 input[type="checkbox"] {
   height: 1.5rem;
   width: 1.5rem;
+  margin: 0;
 }

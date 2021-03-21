@@ -57,6 +57,7 @@ export default {
 }
 
 .content__heading {
+  font-size: 0.9rem;
   margin: 0 0 5px 0;
 }
 
