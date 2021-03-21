@@ -59,28 +59,7 @@ input:focus {
   background-color: var(--vislitDarkBlue);
 }
 
-/* placed on a <label> tag that wraps the checkbox input */
-/* based on https://www.youtube.com/watch?v=y1ATUFJyLaI */
-.checkbox__container {
-  box-sizing: border-box;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
-
-.checkbox__container > input {
-  display: none;
-}
-
-.checkbox__container .checkmark {
-  box-sizing: border-box;
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  border: 3px solid gray;
-  border-radius: 30px;
-}
-
-.checkbox__container > input:checked + .checkmark {
-  background-color: red;
+input[type="checkbox"] {
+  height: 1.5rem;
+  width: 1.5rem;
 }

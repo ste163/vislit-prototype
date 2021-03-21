@@ -39,7 +39,7 @@ export default {
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
-  min-width: 20rem;
+  min-width: 21rem;
   flex-basis: 30%;
   margin: 10px;
 }

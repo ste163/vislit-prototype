@@ -12,7 +12,7 @@
         </template>
 
         <template #content-heading>
-          Today's Progress
+          For Today, March 21, 2021
         </template>
 
         <template #content>
@@ -20,46 +20,32 @@
           <form id="todaysProgress" @submit.prevent="addProgress">
             <div class="form__items">
               <label for="wordsWritten">Words Written</label>
-              <input id="wordsWrittent" name="wordsWritten" type="number" />
+              <input id="wordsWritten" name="wordsWritten" type="number" />
             </div>
 
             <div class="form__items">
               <label class="checkbox__label" for="edited">Edited</label>
-              <label class="checkbox__container">
-                <input
-                  id="edited"
-                  name="edited"
-                  type="checkbox"
-                  value="edited"
-                />
-                <span class="checkmark"></span>
-              </label>
+              <input id="edited" name="edited" type="checkbox" value="edited" />
             </div>
 
             <div class="form__items">
               <label class="checkbox__label" for="proofread">Proofread</label>
-              <label class="checkbox__container">
-                <input
-                  id="proofread"
-                  name="proofread"
-                  type="checkbox"
-                  value="proofread"
-                />
-                <span class="checkmark"></span>
-              </label>
+              <input
+                id="proofread"
+                name="proofread"
+                type="checkbox"
+                value="proofread"
+              />
             </div>
 
             <div class="form__items">
-              <label class="checkbox__container">
-                <label class="checkbox__label" for="revised">Revised</label>
-                <input
-                  id="revised"
-                  name="revised"
-                  type="checkbox"
-                  value="revised"
-                />
-                <span class="checkmark"></span>
-              </label>
+              <label class="checkbox__label" for="revised">Revised</label>
+              <input
+                id="revised"
+                name="revised"
+                type="checkbox"
+                value="revised"
+              />
             </div>
           </form>
         </template>
@@ -151,14 +137,21 @@ export default {
 </script>
 
 <style scoped>
+/* Progress form */
 #todaysProgress {
   display: flex;
   flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+#wordsWritten {
+  width: 6.5rem;
 }
 
 .form__items {
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
 }
 
 /* transition animations */
