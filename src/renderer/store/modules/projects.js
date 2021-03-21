@@ -34,7 +34,6 @@ const actions = {
   },
 
   async getSelectedProject({ commit }, projectId) {
-    console.log(projectId);
     if (projectId === undefined) {
       commit("setSelectedProject", {});
       return;

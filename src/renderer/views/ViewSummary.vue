@@ -12,21 +12,31 @@
         </template>
 
         <template #content-heading>
-          <!-- Make computed for showing current date. Then make it a mixin -->
           Today: {{ formatDateString(new Date()) }}
         </template>
 
         <template #content>
           <!-- On mount, get project data, compute if there's progress for today, if yes, fill out form with today's data -->
-          <form id="todaysProgress" @submit.prevent="addProgress">
+          <form id="todaysProgress" @submit.prevent="submitProgressForm">
             <div class="form__items">
               <label for="wordsWritten">Words Written</label>
-              <input id="wordsWritten" name="wordsWritten" type="number" />
+              <input
+                id="wordsWritten"
+                name="wordsWritten"
+                type="number"
+                v-model="progressForm.wordsWritten"
+              />
             </div>
 
             <div class="form__items">
               <label class="checkbox__label" for="edited">Edited</label>
-              <input id="edited" name="edited" type="checkbox" value="edited" />
+              <input
+                id="edited"
+                name="edited"
+                type="checkbox"
+                value="edited"
+                v-model="progressForm.edited"
+              />
             </div>
 
             <div class="form__items">
@@ -36,6 +46,7 @@
                 name="proofread"
                 type="checkbox"
                 value="proofread"
+                v-model="progressForm.proofread"
               />
             </div>
 
@@ -46,6 +57,7 @@
                 name="revised"
                 type="checkbox"
                 value="revised"
+                v-model="progressForm.revised"
               />
             </div>
           </form>
@@ -108,12 +120,19 @@
 <script>
 import { pathMixin } from "../mixins/routerMixins";
 import { dateMixin } from "../mixins/dateMixins";
+import { mapActions } from "vuex";
 import ViewSummaryCardTemplate from "./ViewSummaryCardTemplate.vue";
 import ViewTemplate from "./ViewTemplate.vue";
 export default {
   components: { ViewSummaryCardTemplate, ViewTemplate },
   mixins: [pathMixin, dateMixin],
+  data() {
+    return {
+      progressForm: this.createProgressForm()
+    };
+  },
   methods: {
+    ...mapActions("progress", ["addProgress", "getTodaysProgressByProjectId"]),
     goToProgress() {
       // FETCH PROGRESS
       this.changeRoute("progress");
@@ -130,9 +149,32 @@ export default {
       // FETCH COLLECTIONS (will probably need to get these on initial load (at least their names for search bar))
       this.changeRoute("thesaurus");
     },
-    addProgress() {
-      // Honestly, this should probs be a mixin
-      console.log("ADD PROGRESS");
+    createProgressForm() {
+      return {
+        wordsWritten: 0,
+        edited: false,
+        proofread: false,
+        revised: false,
+        projectId: null
+      };
+    },
+    submitProgressForm() {
+      this.progressForm.projectId = this.$router.currentRoute.params.id;
+      this.addProgress(this.progressForm);
+      this.progressForm = this.createProgressForm();
+    }
+  },
+  mounted() {
+    console.log("FETCH TODAYS PROGRESS & FILL FORM");
+  },
+  watch: {
+    // Whenever the route path changes, run this code
+    $route() {
+      // IF THE ROUTE IS FOR ALL PROJECTS:
+      // IF NO PROGRESS, SAY SO
+      // IF PROGRESS, SAY WHICH PROJECT & THEN THE PROGRESS
+
+      this.progressForm = this.createProgressForm();
     }
   }
 };
