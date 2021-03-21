@@ -118,6 +118,10 @@ ipcMain.handle("db-projects-get-selected", (e, id) => {
   return response;
 });
 
+ipcMain.handle("db-progress-add", (e, progress) => {
+  console.log(progress);
+});
+
 // Need a listener that handles when a db-project-change has occured
 // This will run the 'getAllProjects' code to run
 // then, if it returns successfully, returns the list
