@@ -1,7 +1,7 @@
-const progressRepo = {
+const progressRepository = {
   getBy() {
     console.log("GETTING");
   }
 };
 
-export default progressRepo;
+export default progressRepository;

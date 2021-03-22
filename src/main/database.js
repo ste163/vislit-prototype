@@ -1,7 +1,7 @@
 import { app, dialog } from "electron";
 import { copyFile } from "fs";
 import { nanoid } from "nanoid/non-secure";
-import progressRepo from "./repositories/progress";
+import progressRepository from "./repositories/progress";
 
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
@@ -26,7 +26,7 @@ function generateId(item) {
 }
 
 export function getProgressByProjectId() {
-  progressRepo.getBy();
+  progressRepository.getBy();
 }
 
 export function getAllProjects() {

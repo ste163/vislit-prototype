@@ -21,7 +21,7 @@ const actions = {
     if (response) {
       commit("setProgress", response);
     } else {
-      console.log("ERROR WHILE GETTING ALL PROJECTS. RESPONSE WAS:", response);
+      console.log("ERROR WHILE GETTING ALL PROGRESS. RESPONSE WAS:", response);
     }
   },
 
@@ -33,7 +33,7 @@ const actions = {
     if (response) {
       commit("setTodaysProgress", response);
     } else {
-      console.log("ERROR WHILE GETTING ALL PROJECTS. RESPONSE WAS:", response);
+      console.log("ERROR WHILE GETTING ALL PROGRESS. RESPONSE WAS:", response);
     }
   },
 
@@ -44,7 +44,7 @@ const actions = {
       // Will need to pass in an Id
       dispatch("getProgressByProjectId");
     } else {
-      console.log("ERROR WHILE ADDING PROJECT. RESPONSE WAS:", response);
+      console.log("ERROR WHILE ADDING PROGRESS. RESPONSE WAS:", response);
     }
   }
 };
