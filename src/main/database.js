@@ -1,6 +1,7 @@
 import { app, dialog } from "electron";
 import { copyFile } from "fs";
 import { nanoid } from "nanoid/non-secure";
+import progressRepo from "./repositories/progress";
 
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
@@ -19,9 +20,13 @@ function getDbPath() {
 }
 
 function generateId(item) {
-  // Set id length with 17
-  item.id = nanoid(17);
+  // Set id length with 21, should be enough to never have repeats
+  item.id = nanoid(21);
   return item;
+}
+
+export function getProgressByProjectId() {
+  progressRepo.getBy();
 }
 
 export function getAllProjects() {
@@ -44,7 +49,6 @@ export function getProjectById(id) {
 
 export function addProject(project) {
   // Need to check for if a project with that name is already in the database
-
   if (db) {
     db.get("projects")
       .push(generateId(project))
@@ -59,7 +63,7 @@ export async function exportDatabase(userInput) {
   const dbPath = getDbPath();
   try {
     // Typescript wants an blank anonymous callback
-    await copyFile(dbPath, userInput, () => {});
+    copyFile(dbPath, userInput, () => {});
   } catch {
     dialog.showErrorBox(
       "Export Error",
