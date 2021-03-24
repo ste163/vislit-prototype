@@ -25,10 +25,23 @@ function generateId(item) {
   return item;
 }
 
-export function getProgressByProjectId() {
-  progressRepository.getBy();
+export function checkForValidDatabase(database, repositoryMethod) {
+  if (database) {
+    return repositoryMethod;
+  }
+  return null;
 }
 
+// Figure out how to get the db passed into Repos so the background.js can call the repo methods
+export function getProgressByProjectId() {
+  return progressRepository.getByProjectId();
+}
+
+export function addProgressToProject(progress) {
+  return progressRepository.addProgressToProject(progress);
+}
+
+// Make a wrapper function to do the if (db) return null check, that passes in a function
 export function getAllProjects() {
   if (db) {
     return db.get("projects").value();
@@ -48,8 +61,8 @@ export function getProjectById(id) {
 }
 
 export function addProject(project) {
-  // Need to check for if a project with that name is already in the database
   if (db) {
+    // Need to check for if a project with that name is already in the database
     db.get("projects")
       .push(generateId(project))
       .write();
@@ -58,7 +71,7 @@ export function addProject(project) {
   return null;
 }
 
-// Must be async because Node's copyFile() is async
+// Must be async because Node's copyFile() is async? CHECK THIS
 export async function exportDatabase(userInput) {
   const dbPath = getDbPath();
   try {

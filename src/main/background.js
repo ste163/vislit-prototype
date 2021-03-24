@@ -10,7 +10,7 @@ import {
   addProject,
   getAllProjects,
   getProjectById,
-  getProgressByProjectId
+  addProgressToProject
 } from "./database";
 import { generateContextMenu, generateMenu } from "./ui/menus";
 const isDevelopment = process.env.NODE_ENV !== "production";
@@ -104,9 +104,10 @@ if (isDevelopment) {
   }
 }
 
-// Event Listeners
+// EVENT LISTENERS //
 
 // Database Listeners
+// Projects
 ipcMain.handle("db-projects-get-all", () => {
   const response = getAllProjects();
   return response;
@@ -124,11 +125,7 @@ ipcMain.handle("db-projects-get-selected", (e, id) => {
   return response;
 });
 
+// Progress
 ipcMain.handle("db-progress-add", (e, progress) => {
-  console.log(progress);
-  getProgressByProjectId();
+  addProgressToProject(progress);
 });
-
-// Need a listener that handles when a db-project-change has occured
-// This will run the 'getAllProjects' code to run
-// then, if it returns successfully, returns the list
