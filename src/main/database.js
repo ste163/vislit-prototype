@@ -1,7 +1,7 @@
 import { app, dialog } from "electron";
 import { copyFile } from "fs";
 import { nanoid } from "nanoid/non-secure";
-import progressRepository from "./repositories/progress";
+import progressRepository from "./repositories/progressRepository";
 
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
