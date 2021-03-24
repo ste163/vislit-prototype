@@ -7,11 +7,12 @@ import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import {
   loadDb,
+  checkForValidDatabase,
   addProject,
   getAllProjects,
-  getProjectById,
-  addProgressToProject
+  getProjectById
 } from "./database";
+import progressRepository from "./repositories/progressRepository";
 import { generateContextMenu, generateMenu } from "./ui/menus";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -21,7 +22,11 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 // For now, loadDb here for testing
-loadDb();
+try {
+  loadDb();
+} catch (e) {
+  console.log("COULD NOT LOAD DATABASE. THIS IS VERY BAD");
+}
 
 async function createWindow() {
   // Create the browser window.
@@ -127,5 +132,7 @@ ipcMain.handle("db-projects-get-selected", (e, id) => {
 
 // Progress
 ipcMain.handle("db-progress-add", (e, progress) => {
-  addProgressToProject(progress);
+  return checkForValidDatabase(
+    progressRepository.addProgressToProject(progress)
+  );
 });

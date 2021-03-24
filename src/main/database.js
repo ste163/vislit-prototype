@@ -25,23 +25,13 @@ function generateId(item) {
   return item;
 }
 
-export function checkForValidDatabase(database, repositoryMethod) {
-  if (database) {
+export function checkForValidDatabase(repositoryMethod) {
+  if (db) {
     return repositoryMethod;
   }
   return null;
 }
 
-// Figure out how to get the db passed into Repos so the background.js can call the repo methods
-export function getProgressByProjectId() {
-  return progressRepository.getByProjectId();
-}
-
-export function addProgressToProject(progress) {
-  return progressRepository.addProgressToProject(progress);
-}
-
-// Make a wrapper function to do the if (db) return null check, that passes in a function
 export function getAllProjects() {
   if (db) {
     return db.get("projects").value();
@@ -104,6 +94,9 @@ export function loadDb() {
     collections: [],
     words: []
   }).write();
+
+  // Assign database to all repository instances
+  progressRepository.database = db;
 }
 
 // Must be async because Node's copyFile() is async
