@@ -40,7 +40,7 @@ export function loadDb() {
     words: []
   }).write();
 
-  // Assign database to all repository instances
+  // Assign database to all repository instances instead of using the real db in an attempt at decoupling
   projectRepository.database = db;
   progressRepository.database = db;
 }

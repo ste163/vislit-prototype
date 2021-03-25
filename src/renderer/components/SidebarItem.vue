@@ -3,17 +3,20 @@
   <button @click="selectItem" class="btn-none item__container">
     <h4 class="item__header">{{ item.title }}</h4>
     <p class="item__details">{{ item.description }}</p>
-    <p class="item__date">{{ item.dateCreated }}</p>
+    <p v-if="item.dateCreated" class="item__date">
+      {{ formatDateString(item.dateCreated) }}
+    </p>
   </button>
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import { dateMixin } from "../mixins/dateMixins";
 import { pathMixin } from "../mixins/routerMixins";
 
 export default {
   props: { item: Object },
-  mixins: [pathMixin],
+  mixins: [pathMixin, dateMixin],
   methods: {
     ...mapActions("projects", ["getSelectedProject"]),
     selectItem() {

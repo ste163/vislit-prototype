@@ -47,6 +47,7 @@ export default {
       };
     },
     handleSubmit() {
+      this.form.dateCreated = new Date(this.form.dateCreated);
       this.addProject(this.form);
       this.form = this.createForm();
     }
