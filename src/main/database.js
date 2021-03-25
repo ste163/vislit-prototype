@@ -19,7 +19,7 @@ function getDbPath() {
   return `${userDataDirPath}/vislit-database.json`;
 }
 
-function generateId(item) {
+export function generateId(item) {
   // Set id length with 21, should be enough to never have repeats
   item.id = nanoid(21);
   return item;
@@ -53,10 +53,15 @@ export function getProjectById(id) {
 export function addProject(project) {
   if (db) {
     // Need to check for if a project with that name is already in the database
-    db.get("projects")
-      .push(generateId(project))
-      .write();
-    return true;
+    try {
+      db.get("projects")
+        .push(generateId(project))
+        .write();
+      return true;
+    } catch (error) {
+      console.log("COULD NOT ADD PROJECT. ERROR IS: ", error);
+      return false;
+    }
   }
   return null;
 }
