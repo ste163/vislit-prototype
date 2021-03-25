@@ -15,9 +15,12 @@ const mutations = {
 };
 
 const actions = {
-  async getProgressByProjectId({ commit }) {
+  async getProgressByProjectId({ commit }, payload) {
     // Will need to pass in an Id
-    const response = await ipcRenderer.invoke("db-progress-get-by-project-id");
+    const response = await ipcRenderer.invoke(
+      "db-progress-get-by-project-id",
+      payload
+    );
     if (response) {
       commit("setProgress", response);
     } else {
@@ -42,7 +45,7 @@ const actions = {
     const response = await ipcRenderer.invoke("db-progress-add", progress);
     if (response) {
       // Will need to pass in an Id
-      dispatch("getProgressByProjectId");
+      dispatch("getProgressByProjectId", progress.projectId);
     } else {
       console.log("ERROR WHILE ADDING PROGRESS. RESPONSE WAS:", response);
     }

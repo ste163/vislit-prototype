@@ -122,6 +122,10 @@ ipcMain.handle("db-projects-get-selected", (e, id) => {
 });
 
 // Progress
+ipcMain.handle("db-progress-get-by-project-id", (e, projectId) => {
+  console.log("GET PROGRESS FOR PROJECT ID", projectId);
+});
+
 ipcMain.handle("db-progress-add", (e, progress) => {
   return checkForValidDatabase(
     progressRepository.addProgressToProject(progress)

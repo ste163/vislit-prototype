@@ -1,3 +1,4 @@
+// Generates date for file export
 export function generateDate() {
   const today = new Date();
   let dd = today.getDate();
