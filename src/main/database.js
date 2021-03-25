@@ -20,49 +20,6 @@ function getDbPath() {
   return `${userDataDirPath}/vislit-database.json`;
 }
 
-export function generateId(item) {
-  // Set id length with 21, should be enough to never have repeats
-  item.id = nanoid(21);
-  return item;
-}
-
-export function checkForValidDatabase(repositoryMethod) {
-  if (db) {
-    return repositoryMethod;
-  }
-  return null;
-}
-
-export function addProject(project) {
-  if (db) {
-    // Need to check for if a project with that name is already in the database
-    try {
-      db.get("projects")
-        .push(generateId(project))
-        .write();
-      return true;
-    } catch (error) {
-      console.log("COULD NOT ADD PROJECT. ERROR IS: ", error);
-      return false;
-    }
-  }
-  return null;
-}
-
-// Must be async because Node's copyFile() is async? CHECK THIS
-export async function exportDatabase(userInput) {
-  const dbPath = getDbPath();
-  try {
-    // Typescript wants an blank anonymous callback
-    copyFile(dbPath, userInput, () => {});
-  } catch {
-    dialog.showErrorBox(
-      "Export Error",
-      "Unable to export database. Export operation failed."
-    );
-  }
-}
-
 export function loadDb() {
   // If the file isn't there, it creates it.
   const adapter = new FileSync(getDbPath());
@@ -86,6 +43,20 @@ export function loadDb() {
   // Assign database to all repository instances
   projectRepository.database = db;
   progressRepository.database = db;
+}
+
+// Must be async because Node's copyFile() is async? CHECK THIS
+export async function exportDatabase(userInput) {
+  const dbPath = getDbPath();
+  try {
+    // Typescript wants an blank anonymous callback
+    copyFile(dbPath, userInput, () => {});
+  } catch {
+    dialog.showErrorBox(
+      "Export Error",
+      "Unable to export database. Export operation failed."
+    );
+  }
 }
 
 // Must be async because Node's copyFile() is async
@@ -122,4 +93,18 @@ export async function importDatabase(userInput) {
     );
     return "failed";
   }
+}
+
+// HELPER FUNCTIONS FOR CREATING ITEMS
+export function checkForValidDatabase(repositoryMethod) {
+  if (db) {
+    return repositoryMethod;
+  }
+  return null;
+}
+
+export function generateId(item) {
+  // Set id length with 21, should be enough to never have repeats
+  item.id = nanoid(21);
+  return item;
 }

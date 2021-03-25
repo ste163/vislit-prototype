@@ -14,6 +14,20 @@ const projectRepository = {
       .get("projects")
       .find({ id: id })
       .value();
+  },
+
+  addProject(project) {
+    // Need to check for if a project with that name is already in the database
+    try {
+      this.database
+        .get("projects")
+        .push(generateId(project))
+        .write();
+      return true;
+    } catch (error) {
+      console.log("COULD NOT ADD PROJECT. ERROR IS: ", error);
+      return false;
+    }
   }
 };
 

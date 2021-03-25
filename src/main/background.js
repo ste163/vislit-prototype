@@ -1,11 +1,10 @@
 "use strict";
 
 // Entry point for main process
-
 import { app, protocol, BrowserWindow, ipcMain, Menu } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-import { loadDb, checkForValidDatabase, addProject } from "./database";
+import { loadDb, checkForValidDatabase } from "./database";
 import projectRepository from "./repositories/projectRepository";
 import progressRepository from "./repositories/progressRepository";
 import { generateContextMenu, generateMenu } from "./ui/menus";
@@ -104,7 +103,7 @@ if (isDevelopment) {
   }
 }
 
-// EVENT LISTENERS //
+// *** EVENT LISTENERS *** //
 
 // Database Listeners
 // Projects
@@ -112,9 +111,8 @@ ipcMain.handle("db-projects-get-all", () => {
   return checkForValidDatabase(projectRepository.getAllProjects());
 });
 
-ipcMain.handle("db-projects-add", (e, object) => {
-  const response = addProject(object);
-  return response;
+ipcMain.handle("db-projects-add", (e, project) => {
+  return checkForValidDatabase(projectRepository.addProject(project));
   // Every successfully add (responses should probably be booleans?)
   // have the .then response have a .then(ipcRenderer.invoke('get-whatever-since-you-made-a-change')).catch('unable to read database')
 });
