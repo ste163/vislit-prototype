@@ -1,6 +1,6 @@
 import { app, BrowserWindow, dialog } from "electron";
 import { exportDatabase, importDatabase } from "../database";
-import { generateDate } from "../utils/utils";
+import dateUtils from "../utils/dateUtils";
 
 function showImportDialog() {
   const result = dialog.showOpenDialogSync({
@@ -36,7 +36,7 @@ function showImportDialog() {
 }
 
 export function showExportDialog() {
-  const date = generateDate();
+  const date = dateUtils.generateDateForFileExport();
   const homePath = app.getPath("home");
 
   const result = dialog.showSaveDialogSync({
