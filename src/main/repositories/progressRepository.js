@@ -11,8 +11,6 @@ const progressRepository = {
     // On the off chance the projectId is undefined, do not add progress
     if (progress.projectId !== undefined) {
       try {
-        // ADD PROGRESS DATE
-        console.log("ADDING", progress);
         this.database
           .get("progress")
           .push(generateId(progress))

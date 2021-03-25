@@ -1,4 +1,9 @@
 const dateUtils = {
+  // Create a date method for adding today's date for an item
+  // Will probably be best to store JUST the new Date() object as a string, which happens automatically, it seems
+  // Will need to test it with and without JSON.stringify()
+  // By using the date object, I will probably have the most freedom later.
+
   generateDateForFileExport() {
     const today = new Date();
     let dd = today.getDate();

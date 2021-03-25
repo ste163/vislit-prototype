@@ -155,10 +155,12 @@ export default {
         edited: false,
         proofread: false,
         revised: false,
-        projectId: null
+        projectId: null,
+        dateCreated: null
       };
     },
     submitProgressForm() {
+      this.progressForm.dateCreated = new Date();
       this.progressForm.projectId = this.$router.currentRoute.params.id;
       this.addProgress(this.progressForm);
       this.progressForm = this.createProgressForm();

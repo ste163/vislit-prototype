@@ -96,6 +96,7 @@ export async function importDatabase(userInput) {
 }
 
 // HELPER FUNCTIONS FOR CREATING ITEMS
+// If there becomes too many, move into a databaseUtils.js
 export function checkForValidDatabase(repositoryMethod) {
   if (db) {
     return repositoryMethod;
