@@ -1,6 +1,11 @@
+import { generateId } from "../database";
+
 const projectRepository = {
-  getBy() {
-    console.log("GETTING");
+  database: null,
+
+  getAllProjects() {
+    // may need to wrap in a try catch, just in case
+    return this.database.get("projects").value();
   }
 };
 

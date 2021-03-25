@@ -2,9 +2,11 @@ import { generateId } from "../database";
 
 const progressRepository = {
   database: null,
+
   getByProjectId() {
     console.log("GETTING");
   },
+
   addProgressToProject(progress) {
     // On the off chance the projectId is undefined, do not add progress
     if (progress.projectId !== undefined) {

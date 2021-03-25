@@ -12,6 +12,7 @@ import {
   getAllProjects,
   getProjectById
 } from "./database";
+import projectRepository from "./repositories/projectRepository";
 import progressRepository from "./repositories/progressRepository";
 import { generateContextMenu, generateMenu } from "./ui/menus";
 const isDevelopment = process.env.NODE_ENV !== "production";
@@ -114,8 +115,7 @@ if (isDevelopment) {
 // Database Listeners
 // Projects
 ipcMain.handle("db-projects-get-all", () => {
-  const response = getAllProjects();
-  return response;
+  return checkForValidDatabase(projectRepository.getAllProjects());
 });
 
 ipcMain.handle("db-projects-add", (e, object) => {

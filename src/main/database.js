@@ -2,6 +2,7 @@ import { app, dialog } from "electron";
 import { copyFile } from "fs";
 import { nanoid } from "nanoid/non-secure";
 import progressRepository from "./repositories/progressRepository";
+import projectRepository from "./repositories/projectRepository";
 
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
@@ -28,13 +29,6 @@ export function generateId(item) {
 export function checkForValidDatabase(repositoryMethod) {
   if (db) {
     return repositoryMethod;
-  }
-  return null;
-}
-
-export function getAllProjects() {
-  if (db) {
-    return db.get("projects").value();
   }
   return null;
 }
@@ -101,6 +95,7 @@ export function loadDb() {
   }).write();
 
   // Assign database to all repository instances
+  projectRepository.database = db;
   progressRepository.database = db;
 }
 
