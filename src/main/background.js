@@ -8,6 +8,7 @@ import { loadDb, checkForValidDatabase } from "./database";
 import projectRepository from "./repositories/projectRepository";
 import progressRepository from "./repositories/progressRepository";
 import { generateContextMenu, generateMenu } from "./ui/menus";
+import { searchTest } from "./elasticsearch/test";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
@@ -17,9 +18,10 @@ protocol.registerSchemesAsPrivileged([
 
 // For now, loadDb here for testing
 try {
+  searchTest();
   loadDb();
 } catch (e) {
-  console.log("COULD NOT LOAD DATABASE. THIS IS VERY BAD");
+  console.log("COULD NOT LOAD DATABASE. THIS IS VERY BAD", e);
 }
 
 async function createWindow() {
