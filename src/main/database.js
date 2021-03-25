@@ -33,17 +33,6 @@ export function checkForValidDatabase(repositoryMethod) {
   return null;
 }
 
-export function getProjectById(id) {
-  if (db) {
-    // WILL ALSO NEED TO GET ALL LINKED DATA
-    return db
-      .get("projects")
-      .find({ id: id })
-      .value();
-  }
-  return null;
-}
-
 export function addProject(project) {
   if (db) {
     // Need to check for if a project with that name is already in the database

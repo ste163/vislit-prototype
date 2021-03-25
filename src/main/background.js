@@ -5,13 +5,7 @@
 import { app, protocol, BrowserWindow, ipcMain, Menu } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-import {
-  loadDb,
-  checkForValidDatabase,
-  addProject,
-  getAllProjects,
-  getProjectById
-} from "./database";
+import { loadDb, checkForValidDatabase, addProject } from "./database";
 import projectRepository from "./repositories/projectRepository";
 import progressRepository from "./repositories/progressRepository";
 import { generateContextMenu, generateMenu } from "./ui/menus";
@@ -126,8 +120,7 @@ ipcMain.handle("db-projects-add", (e, object) => {
 });
 
 ipcMain.handle("db-projects-get-selected", (e, id) => {
-  const response = getProjectById(id);
-  return response;
+  return checkForValidDatabase(projectRepository.getProjectById(id));
 });
 
 // Progress
