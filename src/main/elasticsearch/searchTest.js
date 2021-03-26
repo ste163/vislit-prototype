@@ -49,8 +49,9 @@ expressApp.get("/search", function(req, res) {
     size: 200,
     from: 0,
     query: {
-      match: {
-        title: req.query["title"]
+      // https://logz.io/blog/elasticsearch-queries/ - MORE INFO ON QUERIES
+      query_string: {
+        query: req.query["title"]
       }
     }
   };
@@ -75,8 +76,8 @@ export function testSearchResult() {
     size: 200,
     from: 0,
     query: {
-      match: {
-        title: "autumn"
+      query_string: {
+        query: "autumn"
         // name: this.query
       }
     }
