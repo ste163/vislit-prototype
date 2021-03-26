@@ -47,12 +47,12 @@ expressApp.get("/search", function(req, res) {
   // also match any data where the name is like the query string sent in
   let body = {
     size: 200,
-    from: 0
-    // query: {
-    //   match: {
-    //     name: req.query["q"]
-    //   }
-    // }
+    from: 0,
+    query: {
+      match: {
+        title: req.query["title"]
+      }
+    }
   };
   // perform the actual search passing in the index, the search query and the type
   client
@@ -73,13 +73,13 @@ expressApp.listen(expressApp.get("port"), function() {
 export function testSearchResult() {
   var body = {
     size: 200,
-    from: 0
-    // query: {
-    //   match: {
-    //     name: "autumn"
-    //     // name: this.query
-    //   }
-    // }
+    from: 0,
+    query: {
+      match: {
+        title: "autumn"
+        // name: this.query
+      }
+    }
   };
   // search the Elasticsearch passing in the index, query object and type
   client
