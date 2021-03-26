@@ -1,13 +1,6 @@
 "use strict";
-import { app } from "electron";
+import jsonDatabase from "/home/lin/.config/prototype_vislit_vue/vislit-database.json";
 const { Client } = require("elasticsearch");
-
-function getDbPath() {
-  const userDataDirPath = app.getPath("userData");
-  return `${userDataDirPath}/vislit-database.json`;
-}
-
-// const jsonDatabase = getDbPath();
 
 const client = new Client({
   hosts: ["http://localhost:9200"],
@@ -24,10 +17,14 @@ export function elasticSearch() {
         console.error("Elasticsearch is down", error);
       } else {
         console.log("Elastic search is running");
-        console.log("GET JSON DATA FROM", getDbPath());
+        bulkAddAllProjects();
       }
     }
   );
+}
+
+function bulkAddAllProjects() {
+  console.log("DATABASE", jsonDatabase.projects);
 }
 
 // Only needs to run once, to create the index
