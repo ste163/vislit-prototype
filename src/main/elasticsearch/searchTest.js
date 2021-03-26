@@ -1,4 +1,5 @@
 "use strict";
+// Currently unable to dynamically import the json file, hardcoded for prototyping
 import jsonDatabase from "/home/lin/.config/prototype_vislit_vue/vislit-database.json";
 const { Client } = require("elasticsearch");
 
@@ -24,7 +25,19 @@ export function elasticSearch() {
 }
 
 function bulkAddAllProjects() {
-  console.log("DATABASE", jsonDatabase.projects);
+  let bulk = [];
+
+  jsonDatabase.projects.forEach(project => {
+    bulk.push({
+      index: {
+        _index: "vislit-projects",
+        _type: "projects_list"
+      }
+    });
+    bulk.push(project);
+  });
+
+  console.log("BULK", bulk);
 }
 
 // Only needs to run once, to create the index
