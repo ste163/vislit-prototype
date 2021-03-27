@@ -6,10 +6,15 @@
       <!-- Might best to move results into search-bar component -->
       <transition name="results-slide">
         <div class="results" v-if="searchResults.length > 0">
-          <!-- Need transition group for all these -->
-          <p class="result" v-for="result in searchResults" :key="result._id">
-            {{ result._source.title }}
-          </p>
+          <transition-group name="result-change">
+            <button
+              class="btn-none result"
+              v-for="result in searchResults"
+              :key="result._id"
+            >
+              {{ result._source.title }}
+            </button>
+          </transition-group>
         </div>
       </transition>
 
@@ -67,6 +72,7 @@ export default {
 }
 
 .results {
+  min-width: 170px;
   position: absolute;
   top: 55px;
   background-color: var(--white);
@@ -75,12 +81,10 @@ export default {
 }
 
 .result {
-  min-width: 150px;
-  margin: 0;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: all 0.2s;
-  font-weight: var(--weightBold);
+  font-size: 0.9rem;
+  letter-spacing: var(--spacingSmaller);
+  border-radius: 2px;
+  width: 100%;
 }
 
 .result:hover {
@@ -100,5 +104,16 @@ export default {
   margin-top: 40px;
   top: 10px;
   opacity: 0;
+}
+
+/* Transition group */
+.result-change {
+  transition: all 1s;
+}
+
+.result-change-enter,
+.result-change-leave-to {
+  opacity: 0;
+  transform: translateY(5px);
 }
 </style>
