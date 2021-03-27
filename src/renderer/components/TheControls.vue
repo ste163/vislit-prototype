@@ -6,6 +6,10 @@
       <!-- Might best to move results into search-bar component -->
       <transition name="results-slide">
         <div class="results" v-if="searchResults.length > 0">
+          <!-- IF this is being shown, then we need to also have an invisible div covering the entire screen -->
+          <!-- it will act as the click event to hide the results container -->
+          <!-- also have state of IsResultsContainerActive so it's not fully based on a search term value -->
+          <!-- Clicking in the input will always activate the search results container -->
           <transition-group name="result-change">
             <button
               class="btn-none result"
