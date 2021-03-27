@@ -107,7 +107,7 @@ if (isDevelopment) {
 
 // *** EVENT LISTENERS *** //
 
-// Database Listeners
+// *** DATABASE *** //
 // Projects
 ipcMain.handle("db-projects-get-all", () => {
   return checkForValidDatabase(projectRepository.getAllProjects());
@@ -132,4 +132,11 @@ ipcMain.handle("db-progress-add", (e, progress) => {
   return checkForValidDatabase(
     progressRepository.addProgressToProject(progress)
   );
+});
+
+// *** SEARCH *** //
+// Global
+ipcMain.handle("search-globally", (e, query) => {
+  console.log("SEARCHING FOR", query);
+  return searchProjects(query);
 });

@@ -91,7 +91,7 @@ export async function searchProjects(query) {
       type: "projects_list"
     });
 
-    console.log("SEARCH RESULTS", results);
+    return results;
   } catch (e) {
     console.error("SEARCH FAILED", e);
   }
