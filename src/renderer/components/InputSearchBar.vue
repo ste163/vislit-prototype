@@ -1,8 +1,7 @@
 <template>
   <form @submit.prevent="handleSearch">
     <fieldset class="searchbar">
-      Q
-      <input type="text" v-model="inputValue" />
+      <input placeholder="Search..." type="text" v-model="inputValue" />
     </fieldset>
   </form>
 </template>

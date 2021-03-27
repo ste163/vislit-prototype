@@ -3,12 +3,15 @@
     <div class="controls__container">
       <input-search-bar @searched="searchGlobally" />
 
-      <!-- Make a component later -->
-      <div class="results" v-if="searchResults.length > 0">
-        <p class="result" v-for="result in searchResults" :key="result._id">
-          {{ result._source.title }}
-        </p>
-      </div>
+      <!-- Might best to move results into search-bar component -->
+      <transition name="results-slide">
+        <div class="results" v-if="searchResults.length > 0">
+          <!-- Need transition group for all these -->
+          <p class="result" v-for="result in searchResults" :key="result._id">
+            {{ result._source.title }}
+          </p>
+        </div>
+      </transition>
 
       <!-- Date filtering drop-downs populated with currently selected projects available dates -->
       <div>
@@ -68,10 +71,34 @@ export default {
   top: 55px;
   background-color: var(--white);
   border-radius: 20px;
-  padding: 10px;
+  box-shadow: var(--shadowCentered);
 }
 
 .result {
+  min-width: 150px;
   margin: 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all 0.2s;
+  font-weight: var(--weightBold);
+}
+
+.result:hover {
+  border-radius: 20px;
+  background-color: var(--vislitBlue);
+  cursor: pointer;
+}
+
+/* Transitions */
+.results-slide-enter-active,
+.results-slide-leave-active {
+  transition: all 0.2s;
+}
+
+.results-slide-enter,
+.results-slide-leave-to {
+  margin-top: 40px;
+  top: 10px;
+  opacity: 0;
 }
 </style>
