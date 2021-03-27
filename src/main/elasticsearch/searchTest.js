@@ -12,7 +12,7 @@ const client = new Client({
   node: "http://localhost:3001"
 });
 
-export function elasticSearch() {
+export function startElasticSearch() {
   client.ping(
     {
       requestTimeout: 30000
@@ -22,6 +22,7 @@ export function elasticSearch() {
         console.error("Elasticsearch is down", error);
       } else {
         console.log("Elastic search is running");
+        // Only bulk add projects once
         // bulkAddAllProjects();
       }
     }
@@ -51,7 +52,7 @@ expressApp.get("/search", function(req, res) {
     query: {
       // https://logz.io/blog/elasticsearch-queries/ - MORE INFO ON QUERIES
       query_string: {
-        query: req.query["title"]
+        query: req.query["q"]
       }
     }
   };
@@ -71,29 +72,29 @@ expressApp.listen(expressApp.get("port"), function() {
   console.log("Express server listening on port " + expressApp.get("port"));
 });
 
-export function testSearchResult() {
+export async function searchProjects(query) {
+  // Create search object
   var body = {
     size: 200,
     from: 0,
     query: {
       query_string: {
-        query: "autumn"
-        // name: this.query
+        query
       }
     }
   };
   // search the Elasticsearch passing in the index, query object and type
-  client
-    .search({ index: "vislit-projects", body: body, type: "projects_list" })
-    .then(results => {
-      console.log(results);
-      // console.log(`found ${results.hits.total} items in ${results.took}ms`);
-      // set the results to the result array we have
-      // this.results = results.hits.hits;
-    })
-    .catch(err => {
-      console.log(err);
+  try {
+    const results = await client.search({
+      index: "vislit-projects",
+      body: body,
+      type: "projects_list"
     });
+
+    console.log("SEARCH RESULTS", results);
+  } catch (e) {
+    console.error("SEARCH FAILED", e);
+  }
 }
 // function bulkAddAllProjects() {
 //   let bulk = [];
