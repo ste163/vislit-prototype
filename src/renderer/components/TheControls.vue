@@ -1,9 +1,15 @@
 <template>
   <section class="controls">
     <div class="controls__container">
-      <!-- Need search bar component that has the form submit event at the parent -->
       <input-search-bar @searched="searchGlobally" />
-      <!-- Search bar component. Need to pass in a what-to-search-for function that has action to mutate Vuex state of what we have selected-->
+
+      <!-- Make a component later -->
+      <div class="results" v-if="searchResults.length > 0">
+        <p class="result" v-for="result in searchResults" :key="result._id">
+          {{ result._source.title }}
+        </p>
+      </div>
+
       <!-- Date filtering drop-downs populated with currently selected projects available dates -->
       <div>
         Date sorting
@@ -18,6 +24,11 @@ import { ipcRenderer } from "electron";
 import InputSearchBar from "./InputSearchBar.vue";
 
 export default {
+  data() {
+    return {
+      searchResults: []
+    };
+  },
   components: { InputSearchBar },
   methods: {
     async searchGlobally(query) {
@@ -26,7 +37,7 @@ export default {
 
       if (response) {
         console.log(response);
-        // commit("setProjects", response);
+        this.searchResults = response.hits.hits;
       } else {
         console.log("ERROR WHILE SEARCHING. RESPONSE WAS:", response);
       }
@@ -50,5 +61,17 @@ export default {
 .controls__hr {
   background-color: var(--lightGray);
   margin: 15px 0 0 0;
+}
+
+.results {
+  position: absolute;
+  top: 55px;
+  background-color: var(--white);
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.result {
+  margin: 0;
 }
 </style>

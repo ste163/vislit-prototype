@@ -2,7 +2,7 @@
   <form @submit.prevent="handleSearch">
     <fieldset class="searchbar">
       Q
-      <input type="text" v-model="searchInputState" />
+      <input type="text" v-model="inputValue" />
     </fieldset>
   </form>
 </template>
@@ -11,7 +11,7 @@
 export default {
   data() {
     return {
-      searchInputState: ""
+      inputValue: ""
     };
   },
   props: {
@@ -19,7 +19,19 @@ export default {
   },
   methods: {
     handleSearch() {
-      this.$emit("searched", this.searchInputState);
+      // let query = "";
+
+      // if (this.inputValue.length > 1) {
+      //   query = `${this.inputValue} + *`;
+      // }
+
+      this.$emit("searched", this.inputValue);
+    }
+  },
+  watch: {
+    // Whenever the search input changes, search
+    inputValue: function() {
+      this.handleSearch();
     }
   }
 };

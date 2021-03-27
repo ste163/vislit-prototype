@@ -137,6 +137,5 @@ ipcMain.handle("db-progress-add", (e, progress) => {
 // *** SEARCH *** //
 // Global
 ipcMain.handle("search-globally", (e, query) => {
-  console.log("SEARCHING FOR", query);
   return searchProjects(query);
 });
