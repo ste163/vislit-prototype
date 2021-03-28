@@ -35,6 +35,42 @@
   transform: translate(0px, -1.4px);
 }
 
+/* X Icon */
+.x__container {
+  padding: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.x__container:hover > .icon__x::after,
+.icon__x::before {
+  background-color: var(--lightDarkGray);
+}
+
+.x__container:hover > .icon__x::before {
+  background-color: var(--lightDarkGray);
+}
+
+.icon__x::after,
+.icon__x::before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 14px;
+  height: 3px;
+  border-radius: 10px;
+  background-color: var(--darkGray);
+  transition: var(--btnHover);
+}
+
+.icon__x::after {
+  transform: rotate(45deg) translate(-1.4px, 0px);
+}
+
+.icon__x::before {
+  transform: rotate(-45deg) translate(0px, -1.4px);
+}
+
 /* Down-facing Arrow */
 /* arrow buttons */
 .arrow__container--down {

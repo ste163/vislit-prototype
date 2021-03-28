@@ -10,11 +10,11 @@
           v-model="inputValue"
         />
         <!-- X icon - ONCLICK-CLEAR SEARCH -->
-        <button class="btn-none">
-          X
+        <button class="btn-none x__container" @click="clearSearch">
+          <div class="icon__x" />
         </button>
         <hr class="search__hr" />
-        <button class="btn-none">
+        <button class="btn-none btn-magnifying" @click="handleSearch">
           Q
         </button>
         <!-- Magnifiying glass icon - ONCLICK-SEARCH-->
@@ -54,6 +54,9 @@ export default {
   methods: {
     handleSearch() {
       this.$emit("searched", this.inputValue);
+    },
+    clearSearch() {
+      this.inputValue = "";
     }
   },
   watch: {
@@ -70,7 +73,7 @@ export default {
   min-width: 300px;
   position: absolute;
   background-color: var(--white);
-  border-radius: var(--borderRadius);
+  border-radius: 15px;
   box-shadow: var(--shadowCentered);
 }
 
@@ -92,9 +95,14 @@ export default {
   transform: rotate(90deg);
   background-color: var(--lightGray);
   box-shadow: none;
-  height: 4px;
-  margin: 0;
+  height: 3.5px;
+  margin: 0 5px;
   width: 25px;
+}
+
+.btn-magnifying {
+  padding: 0;
+  margin-right: 15px;
 }
 
 .results {
@@ -118,7 +126,7 @@ export default {
 /* Transitions */
 .results-slide-enter-active,
 .results-slide-leave-active {
-  transition: all 0.25s;
+  transition: all 0.15s;
 }
 
 .results-slide-enter,
@@ -129,7 +137,7 @@ export default {
 
 /* Transition group */
 .result-change {
-  transition: all 0.5s;
+  transition: all 0.1s;
 }
 
 .result-change-enter,
