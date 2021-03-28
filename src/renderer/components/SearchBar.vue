@@ -8,11 +8,19 @@
           type="text"
           v-model="inputValue"
         />
-        <button class="btn-none x__container" @click="clearSearch">
+        <button
+          type="button"
+          class="btn-none x__container"
+          @click="clearSearch"
+        >
           <div class="icon__x" />
         </button>
         <hr class="search__hr" />
-        <button class="btn-none btn-magnifying" @click="handleSearch">
+        <button
+          type="submit"
+          class="btn-none btn-magnifying"
+          @click="handleSearch"
+        >
           Q
         </button>
         <!-- Magnifiying glass icon - ONCLICK-SEARCH-->
@@ -27,6 +35,7 @@
         <!-- Clicking in the input will always activate the search results container -->
         <transition-group name="result-change">
           <button
+            @click="selectSearchResult(result)"
             class="btn-none result"
             v-for="result in results"
             :key="result._id"
@@ -40,6 +49,9 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import { pathMixin } from "../mixins/routerMixins";
+
 export default {
   data() {
     return {
@@ -49,12 +61,19 @@ export default {
   props: {
     results: Array
   },
+  mixins: [pathMixin],
   methods: {
+    ...mapActions("projects", ["getSelectedProject"]),
     handleSearch() {
       this.$emit("searched", this.inputValue);
     },
     clearSearch() {
       this.inputValue = "";
+    },
+    selectSearchResult(result) {
+      // LATER will need the type of item the result is. Only projects for now
+      this.selectItem(result._source, this.getSelectedProject);
+      this.clearSearch();
     }
   },
   watch: {
