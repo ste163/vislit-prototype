@@ -4,7 +4,7 @@
       <search-bar @searched="searchGlobally" :results="searchResults" />
 
       <!-- Date filtering drop-downs populated with currently selected projects available dates -->
-      <div>
+      <div class="DATESORTING">
         Date sorting
       </div>
     </div>
@@ -46,9 +46,12 @@ export default {
 }
 
 .controls__container {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
+  height: 2.5rem;
+}
+
+.DATESORTING {
+  margin-top: 8px;
+  float: right;
 }
 
 .controls__hr {

@@ -1,11 +1,22 @@
 <template>
-  <section>
+  <section class="searchbar__container">
     <!-- Input fields need NO styling. We're going to fake the styling to make the entire item look like an input field -->
     <form @submit.prevent="handleSearch">
-      <fieldset class="searchbar">
-        <input placeholder="Search..." type="text" v-model="inputValue" />
+      <fieldset class="searchbar__fieldset">
+        <input
+          class="searchbar__input"
+          placeholder="Search..."
+          type="text"
+          v-model="inputValue"
+        />
         <!-- X icon - ONCLICK-CLEAR SEARCH -->
-        <!-- Horizontal divider icon -->
+        <button class="btn-none">
+          X
+        </button>
+        <hr class="search__hr" />
+        <button class="btn-none">
+          Q
+        </button>
         <!-- Magnifiying glass icon - ONCLICK-SEARCH-->
       </fieldset>
     </form>
@@ -55,25 +66,47 @@ export default {
 </script>
 
 <style scoped>
-.searchbar {
+.searchbar__container {
+  min-width: 300px;
+  position: absolute;
+  background-color: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadowCentered);
+}
+
+.searchbar__fieldset {
+  padding: 0.2rem 0;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
 }
 
+.searchbar__input {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+  padding-left: 15px;
+}
+
+.search__hr {
+  transform: rotate(90deg);
+  background-color: var(--lightGray);
+  box-shadow: none;
+  height: 4px;
+  margin: 0;
+  width: 25px;
+}
+
 .results {
-  min-width: 170px;
-  position: absolute;
-  top: 55px;
   background-color: var(--white);
-  border-radius: 20px;
+  border-radius: var(--borderRadius);
   box-shadow: var(--shadowCentered);
 }
 
 .result {
   font-size: 0.9rem;
   letter-spacing: var(--spacingSmaller);
-  border-radius: 20px;
+  border-radius: var(--borderRadius);
   width: 100%;
 }
 
@@ -85,19 +118,18 @@ export default {
 /* Transitions */
 .results-slide-enter-active,
 .results-slide-leave-active {
-  transition: all 0.2s;
+  transition: all 0.25s;
 }
 
 .results-slide-enter,
 .results-slide-leave-to {
-  margin-top: 40px;
-  top: 10px;
+  margin-top: -5px;
   opacity: 0;
 }
 
 /* Transition group */
 .result-change {
-  transition: all 1s;
+  transition: all 0.5s;
 }
 
 .result-change-enter,
