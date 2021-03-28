@@ -44,11 +44,11 @@
 
 .x__container:hover > .icon__x::after,
 .icon__x::before {
-  background-color: var(--lightDarkGray);
+  background-color: var(--darkBlack);
 }
 
 .x__container:hover > .icon__x::before {
-  background-color: var(--lightDarkGray);
+  background-color: var(--darkBlack);
 }
 
 .icon__x::after,
