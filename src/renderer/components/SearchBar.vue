@@ -21,9 +21,28 @@
           class="btn-none btn-magnifying"
           @click="handleSearch"
         >
-          Q
+          <svg
+            width="15.1"
+            height="15.1"
+            version="1.1"
+            viewBox="0 0 4.5244 4.5244"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              id="search"
+              d="m1.8942 0.0066146c-1.0159 1e-8 -1.8461 0.83069-1.8461 1.8466 6e-8 1.0159 0.83016 1.8482 1.8461 1.8482 0.37298 0 0.72036-0.11323 1.0114-0.30551l1.0281 1.0286a0.3174 0.3174 0 0 0 0.4494 0 0.3174 0.3174 0 0 0 0-0.4494l-1.0156-1.0151c0.23294-0.30942 0.37329-0.69205 0.37329-1.1068 0-1.0159-0.83069-1.8466-1.8466-1.8466zm0 0.65221c0.66386 5e-8 1.1944 0.53055 1.1944 1.1944 0 0.66386-0.53055 1.196-1.1944 1.196-0.66386 0-1.196-0.53211-1.196-1.196 0-0.66386 0.53211-1.1944 1.196-1.1944z"
+              color="#000000"
+              color-rendering="auto"
+              dominant-baseline="auto"
+              fill="#484848"
+              image-rendering="auto"
+              shape-rendering="auto"
+              solid-color="#000000"
+              stop-color="#000000"
+              style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;font-variation-settings:normal;inline-size:0;isolation:auto;mix-blend-mode:normal;shape-margin:0;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"
+            />
+          </svg>
         </button>
-        <!-- Magnifiying glass icon - ONCLICK-SEARCH-->
       </fieldset>
     </form>
 
@@ -112,13 +131,14 @@ export default {
   background-color: var(--lightGray);
   box-shadow: none;
   height: 3.5px;
-  margin: 0 5px;
+  margin: 0 1px 0 5px;
   width: 25px;
 }
 
 .btn-magnifying {
   padding: 0;
-  margin-right: 15px;
+  padding-top: 1px;
+  margin-right: 13px;
 }
 
 .results {
