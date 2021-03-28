@@ -18,6 +18,10 @@ export const pathMixin = {
       } else {
         this.$router.replace({ path: `/${route}/${item.id}` });
       }
+    },
+    selectItem(item, getSelectedItem) {
+      getSelectedItem(item.id);
+      this.changeRouteWithItem(item, "summary");
     }
   }
 };

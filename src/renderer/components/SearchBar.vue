@@ -1,6 +1,5 @@
 <template>
   <section class="searchbar__container">
-    <!-- Input fields need NO styling. We're going to fake the styling to make the entire item look like an input field -->
     <form @submit.prevent="handleSearch">
       <fieldset class="searchbar__fieldset">
         <input
@@ -9,7 +8,6 @@
           type="text"
           v-model="inputValue"
         />
-        <!-- X icon - ONCLICK-CLEAR SEARCH -->
         <button class="btn-none x__container" @click="clearSearch">
           <div class="icon__x" />
         </button>
@@ -70,7 +68,6 @@ export default {
 
 <style scoped>
 .searchbar__container {
-  min-width: 300px;
   position: absolute;
   background-color: var(--white);
   border-radius: 15px;

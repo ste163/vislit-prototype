@@ -16,6 +16,7 @@
     <transition-group name="transition-items">
       <sidebar-item
         v-for="project in projects"
+        @item-selected="selectProject"
         :key="project.id"
         :item="project"
         :disabled="selectedProject.id === project.id"
@@ -28,9 +29,10 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import SidebarItem from "./SidebarItem.vue";
 import SidebarItemHeader from "./SidebarItemHeader.vue";
+import { pathMixin } from "../mixins/routerMixins";
 
 export default {
   components: {
@@ -45,6 +47,13 @@ export default {
         description: "See information on all projects"
       }
     };
+  },
+  mixins: [pathMixin],
+  methods: {
+    ...mapActions("projects", ["getSelectedProject"]),
+    selectProject(item) {
+      this.selectItem(item, this.getSelectedProject);
+    }
   },
   computed: {
     ...mapState("projects", ["projects", "selectedProject"])

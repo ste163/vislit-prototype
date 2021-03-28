@@ -1,6 +1,6 @@
 <template>
   <!-- Clicking sets the id in route param -->
-  <button @click="selectItem" class="btn-none item__container">
+  <button @click="handleItemSelect" class="btn-none item__container">
     <h4 class="item__header">{{ item.title }}</h4>
     <p class="item__details">{{ item.description }}</p>
     <p v-if="item.dateCreated" class="item__date">
@@ -10,18 +10,14 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import { dateMixin } from "../mixins/dateMixins";
-import { pathMixin } from "../mixins/routerMixins";
 
 export default {
   props: { item: Object },
-  mixins: [pathMixin, dateMixin],
+  mixins: [dateMixin],
   methods: {
-    ...mapActions("projects", ["getSelectedProject"]),
-    selectItem() {
-      this.getSelectedProject(this.item.id);
-      this.changeRouteWithItem(this.item, "summary");
+    handleItemSelect() {
+      this.$emit("item-selected", this.item);
     }
   }
 };
