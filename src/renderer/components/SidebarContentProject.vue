@@ -3,6 +3,7 @@
   <section class="sidebar-content__items">
     <sidebar-item
       :item="allProjects"
+      @item-selected="selectProject"
       :disabled="selectedProject.id === undefined"
       :class="{
         'sidebar-content--active': selectedProject.id === undefined
