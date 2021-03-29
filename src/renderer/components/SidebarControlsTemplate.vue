@@ -75,6 +75,10 @@ export default {
   transition: var(--btnHover);
 }
 
+.controls__filter:hover > .filter__icon {
+  fill: var(--lightDarkGray);
+}
+
 .btn-dark:hover > .sidebar__controls {
   fill: var(--lightDarkGray);
 }
