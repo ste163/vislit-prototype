@@ -9,7 +9,10 @@ export const pathMixin = {
       if (this.selectedProject.id === undefined) {
         this.$router.replace({ path: `/${route}` });
       } else {
-        // CHECK if the current route matches the route we want to change to, if it does, do not change it
+        // Check if we're trying to go to the same path, if so, don't allow it
+        if (this.$route.path === `/${route}/${this.selectedProject.id}`) {
+          return null;
+        }
         this.$router.replace({ path: `/${route}/${this.selectedProject.id}` });
       }
     },
@@ -17,7 +20,10 @@ export const pathMixin = {
       if (item.id === undefined) {
         this.$router.replace({ path: `/${route}` });
       } else {
-        // CHECK if the current route matches the route we want to change to, if it does, do not change it
+        // Check if we're trying to go to the same path, if so, don't allow it
+        if (this.$route.path === `/${route}/${item.id}`) {
+          return null;
+        }
         this.$router.replace({ path: `/${route}/${item.id}` });
       }
     },
