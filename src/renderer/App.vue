@@ -53,7 +53,14 @@ export default {
 
   watch: {
     // Whenever the route path changes, run this code
-    $route() {
+    $route(to, from) {
+      const initialRouteId = from.params.id;
+      const nextRouteId = to.params.id;
+
+      if (initialRouteId !== nextRouteId) {
+        console.log("GOING TO NEW ID, ANIMATE!");
+      }
+
       // Need to ensure the user can not go back or forwards through URLs
       // https://forum.vuejs.org/t/vue-router-is-there-a-way-to-flush-the-history/6798/3
       // above link talks about storing the previous route to compare it to the one the user is trying to go to
