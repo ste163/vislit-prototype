@@ -7,6 +7,9 @@
     <div class="main__container">
       <the-controls class="controls" />
       <the-dashboard-heading class="dashboard__heading" />
+      <!-- To have route-based transitions,
+      need to watch the route and check where we are and where we're going
+      and dynamically change the class-->
       <transition name="slide-up">
         <router-view class="dashboard" />
       </transition>

@@ -1,4 +1,6 @@
 "use strict";
+// Code based on: https://www.digitalocean.com/community/tutorials/how-to-build-a-real-time-search-engine-with-node-vue-and-elasticsearch
+
 // Currently unable to dynamically import the json file, hardcoded for prototyping
 // import jsonDatabase from "/home/lin/.config/prototype_vislit_vue/vislit-database.json";
 const express = require("express");

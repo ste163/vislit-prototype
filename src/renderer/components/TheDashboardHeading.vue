@@ -2,18 +2,15 @@
 dashboard view
 <template>
   <section>
-    <div v-if="this.$route.params.id === undefined">
+    <transition name="fade">
       <h1 class="dashboard__h1">
-        All Projects
+        {{ projectTitle }}
       </h1>
-    </div>
+    </transition>
 
-    <div v-else>
-      <h1 class="dashboard__h1">
-        {{ selectedProject.title }}
-      </h1>
-      <h2 class="dashboard__description">{{ selectedProject.description }}</h2>
-    </div>
+    <h2 class="dashboard__description">
+      {{ selectedProject.description }}
+    </h2>
   </section>
 </template>
 
@@ -21,7 +18,24 @@ dashboard view
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState("projects", ["selectedProject"])
+    ...mapState("projects", ["selectedProject"]),
+    projectTitle() {
+      if (this.$route.params.id === undefined) {
+        return "All Projects";
+      } else {
+        return this.selectedProject.title;
+      }
+    }
+
+    // watch: {
+    //   $route(to, from) {
+    //     console.log("TO", to);
+    //     console.log("FROM", from);
+    //     // if (this.$route.params.id) {
+    //     //   console.log("SOMETHING HAPPENED???")
+    //     // }
+    //   }
+    // }
   }
 };
 </script>
@@ -37,5 +51,17 @@ export default {
 .dashboard__description {
   font-size: 1rem;
   margin: 5px 0 0 0;
+}
+
+/* Transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.4s;
+  position: absolute;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
