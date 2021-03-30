@@ -73,9 +73,6 @@ expressApp.listen(expressApp.get("port"), function() {
 });
 
 export async function searchProjects(query) {
-  if (query === "") {
-    return null;
-  }
   // Get each individual word
   const regex = /[ ,]+/;
   const matches = query.split(regex);
@@ -84,20 +81,20 @@ export async function searchProjects(query) {
   const wildCardQueries = matches.map(match => `${match}*`);
 
   // Turn array into a space-delimited string. ToString returns comma-delimited string
-  const finalQuery = wildCardQueries.toString().replace(/[,]+/g, " ");
+  let finalQuery = wildCardQueries.toString().replace(/[,]+/g, " ");
 
-  console.log("ORIGINAL: ", query);
-  console.log("FINAL: ", finalQuery);
+  if (finalQuery === "*") {
+    finalQuery = "";
+  }
 
   // Create search object
   var body = {
     size: 200,
     from: 0,
     query: {
-      match: {
+      wildcard: {
         title: {
-          query: finalQuery,
-          fuzziness: "AUTO"
+          value: finalQuery
         }
       }
     }
