@@ -6,12 +6,17 @@
 
     <div class="main__container">
       <the-controls class="controls" />
-      <the-dashboard-heading class="dashboard__heading" />
-      <!-- To have route-based transitions,
+
+      <transition name="project-fade">
+        <div :key="this.dashboardTransitionKey">
+          <the-dashboard-heading class="dashboard__heading" />
+          <!-- To have route-based transitions,
       need to watch the route and check where we are and where we're going
       and dynamically change the class-->
-      <transition name="slide-up">
-        <router-view class="dashboard" />
+          <transition name="slide-up">
+            <router-view class="dashboard" />
+          </transition>
+        </div>
       </transition>
     </div>
 
@@ -28,9 +33,18 @@ import TheDashboardHeading from "./components/TheDashboardHeading.vue";
 
 export default {
   components: { SidebarContainer, TheControls, TheModal, TheDashboardHeading },
+  data() {
+    return {
+      dashboardTransitionKey: 0
+    };
+  },
 
   methods: {
-    ...mapActions("projects", ["getProjects"])
+    ...mapActions("projects", ["getProjects"]),
+    // forces component to rerender because changes in state do not force re-renders
+    forceRerender() {
+      this.dashboardTransitionKey++;
+    }
   },
 
   computed: {
@@ -39,6 +53,7 @@ export default {
 
   // added ...mapState outside a method so created() can use it
   ...mapState("projects", ["selectedProject"]),
+
   // Using created() method because we are not changing the DOM, only state.
   // if changing the DOM, use mounted()
   created() {
@@ -46,9 +61,9 @@ export default {
     if (this.selectedProject === undefined && this.$route.path !== "/summary") {
       this.$router.push("/summary");
     }
+    // TODO
     // Need to check, on create, if slectedProject state is === an empty object, if it is, set route to /summary
     this.getProjects();
-    console.log("ROUTE ON CREATE:", this.$router.currentRoute.path);
   },
 
   watch: {
@@ -57,8 +72,10 @@ export default {
       const initialRouteId = from.params.id;
       const nextRouteId = to.params.id;
 
+      // Check if transition class should change if the project changes
       if (initialRouteId !== nextRouteId) {
-        console.log("GOING TO NEW ID, ANIMATE!");
+        console.log("GOING TO NEW ID, TRANSITION!");
+        this.forceRerender();
       }
 
       // Need to ensure the user can not go back or forwards through URLs
@@ -106,7 +123,19 @@ export default {
   z-index: -1;
 }
 
-/* Dashboard transition animations */
+/* Header transitions */
+.project-fade-enter-active,
+.project-fade-leave-active {
+  transition: all 0.5s;
+  position: absolute;
+}
+
+.project-fade-enter,
+.project-fade-leave-to {
+  opacity: 0;
+}
+
+/* Dashboard transitions */
 /* Currently not drilling down and then rising on reverse, will need to add that logic */
 /* https://router.vuejs.org/guide/advanced/transitions.html#route-based-dynamic-transition */
 .slide-up-enter-active,
