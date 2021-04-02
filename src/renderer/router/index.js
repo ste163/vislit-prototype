@@ -27,49 +27,55 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ViewProgress.vue")
+      import(/* webpackChunkName: "Progress" */ "../views/ViewProgress.vue")
   },
   {
     path: "/progress/:id",
     name: "Progress by Id",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ViewProgress.vue")
+      import(/* webpackChunkName: "ProgressById" */ "../views/ViewProgress.vue")
   },
   {
     path: "/visualizations",
     name: "Visualizations",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ViewVisualizations.vue")
+      import(
+        /* webpackChunkName: "Visualizations" */ "../views/ViewVisualizations.vue"
+      )
   },
   {
     path: "/visualizations/:id",
     name: "Visualizations by Id",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ViewVisualizations.vue")
+      import(
+        /* webpackChunkName: "VisualizationsById" */ "../views/ViewVisualizations.vue"
+      )
   },
   {
     path: "/notes",
     name: "Notes",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ViewNotes.vue")
+      import(/* webpackChunkName: "Notes" */ "../views/ViewNotes.vue")
   },
   {
     path: "/notes/:id",
     name: "Notes by Id",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ViewNotes.vue")
+      import(/* webpackChunkName: "NotesById" */ "../views/ViewNotes.vue")
   },
   {
     path: "/thesaurus",
     name: "Thesaurus",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ViewThesaurus.vue")
+      import(/* webpackChunkName: "Thesaurus" */ "../views/ViewThesaurus.vue")
   },
   {
     path: "/thesaurus/:id",
     name: "Thesaurus by Id",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ViewThesaurus.vue")
+      import(
+        /* webpackChunkName: "ThesaurusById" */ "../views/ViewThesaurus.vue"
+      )
   }
 ];
 

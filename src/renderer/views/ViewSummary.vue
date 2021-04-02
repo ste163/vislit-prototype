@@ -168,6 +168,11 @@ export default {
   },
   mounted() {
     console.log("FETCH TODAYS PROGRESS & FILL FORM");
+    // Need to also have an isLoading state and an error state
+    // When we fetch all the data, set loading to false
+    // If there's any error, set the error state from null to a string
+    // In the template, put <div>{{error}}</div> at the bottom. This will only ever actually show up IF there is an error
+    // So you don't need to add any if/else checking
   },
   watch: {
     // Whenever the route path changes, run this code

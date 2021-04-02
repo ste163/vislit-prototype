@@ -126,7 +126,7 @@ export default {
 /* Header transitions */
 .project-fade-enter-active,
 .project-fade-leave-active {
-  transition: all 0.5s;
+  transition: all 0.3s;
   position: absolute;
 }
 
