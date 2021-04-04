@@ -4,7 +4,7 @@
       <button
         v-if="!this.$router.currentRoute.path.includes('summary')"
         @click="goToSummary"
-        class="btn-gray arrow__container--up"
+        class="btn-white arrow__container--up"
       >
         <div class="arrow--down" />
       </button>

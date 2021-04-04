@@ -3,6 +3,18 @@
   background-color: var(--gray);
 }
 
+.btn-white {
+  background-color: var(--white);
+}
+
+.btn-white:hover {
+  background-color: var(--lighterGray);
+}
+
+.btn-white:active {
+  background-color: var(--lightGray);
+}
+
 .btn-gray {
   background-color: var(--lightGray);
 }

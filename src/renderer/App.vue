@@ -111,6 +111,7 @@ export default {
 
 .main__container {
   width: 100%;
+  overflow-y: scroll;
 }
 
 .controls,
