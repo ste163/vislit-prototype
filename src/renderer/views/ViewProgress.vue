@@ -1,3 +1,6 @@
+// This COULD be best if it uses the data range at the top, and displays a full
+table for each month in the range
+
 <template>
   <view-template>
     <template #title>
@@ -15,22 +18,18 @@
             <th class="table__heading">Revised</th>
           </tr>
         </thead>
-
-        <!-- table with computed property rows, hard-coded for now -->
-        <!-- For testing, just use the current month -->
         <!-- WHAT WE NEED -->
-        <!-- Current Month -->
         <!-- How many days are in the current month -->
         <!-- Loop through that many days and generate a single form with that information -->
         <!-- As we loop through, need to check to see if we have data in database for that date -->
         <!-- And if so, populate the form with that data -->
         <tbody name="table">
-          <tr>
-            <td class="data data__date">12/21/2021</td>
-            <td class="data data__words">350</td>
-            <td class="data data__check">X</td>
-            <td class="data data__check">_</td>
-            <td class="data data__check">_</td>
+          <tr v-for="row in rows" :key="row.createdDate">
+            <td class="data data__date">{{ row.createdDate }}</td>
+            <td class="data data__words">{{ row.wordsWritten }}</td>
+            <td class="data data__check">{{ row.proofread }}</td>
+            <td class="data data__check">{{ row.edited }}</td>
+            <td class="data data__check">{{ row.revised }}</td>
           </tr>
         </tbody>
       </section>
@@ -88,7 +87,55 @@
 import ViewTemplate from "./ViewTemplate.vue";
 
 export default {
-  components: { ViewTemplate }
+  components: { ViewTemplate },
+
+  data() {
+    return {
+      rows: null
+    };
+  },
+  methods: {
+    daysInMonth(month, year) {
+      // Month here is 1-indexed (January is 1, February is 2, etc). This is
+      // because we're using 0 as the day so that it returns the last day
+      // of the last month, so you have to add 1 to the month number
+      // so it returns the correct amount of days
+      return new Date(year, month, 0).getDate();
+    },
+    daysInSelectedMonth() {
+      // Currently setup for April, 2021
+      // NEEDS TO GET THE MONTH & YEAR FROM STATE
+      const days = this.daysInMonth(4, 2021);
+      return days;
+    },
+    progressRows() {
+      const days = this.daysInSelectedMonth();
+      const rows = [];
+
+      // Create new progress object for each day
+      for (let day = 1; day <= days; day++) {
+        console.log(day);
+        // Need to check if there is progress on this day in the database, if so, add that data.
+        // CHECK THIS TO ENSURE IT'S THE SAME MODEL AS OTHER PROGRESS (NEED TO MAKE ERD)
+        const progress = {
+          // Hardcoding year and month. The month is 1 less than daysInSelectedMonth
+          createdDate: new Date(2021, 3, day),
+          wordsWritten: null,
+          edited: false,
+          proofread: false,
+          revised: false
+        };
+
+        // Add created progress to rows
+        rows.push(progress);
+      }
+      this.rows = rows;
+    }
+  },
+  mounted() {
+    // On mount, for testing, get progress rows
+    this.progressRows();
+  }
 };
 </script>
 
@@ -110,7 +157,10 @@ export default {
   padding-top: 0.25rem;
 }
 
-.data__date,
+.data__date {
+  text-align: left;
+}
+
 .data__check {
   text-align: center;
 }
