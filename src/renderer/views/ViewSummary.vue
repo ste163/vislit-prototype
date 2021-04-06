@@ -29,17 +29,6 @@
             </div>
 
             <div class="form__items">
-              <label class="checkbox__label" for="edited">Edited</label>
-              <input
-                id="edited"
-                name="edited"
-                type="checkbox"
-                value="edited"
-                v-model="progressForm.edited"
-              />
-            </div>
-
-            <div class="form__items">
               <label class="checkbox__label" for="proofread">Proofread</label>
               <input
                 id="proofread"
@@ -47,6 +36,17 @@
                 type="checkbox"
                 value="proofread"
                 v-model="progressForm.proofread"
+              />
+            </div>
+
+            <div class="form__items">
+              <label class="checkbox__label" for="edited">Edited</label>
+              <input
+                id="edited"
+                name="edited"
+                type="checkbox"
+                value="edited"
+                v-model="progressForm.edited"
               />
             </div>
 
