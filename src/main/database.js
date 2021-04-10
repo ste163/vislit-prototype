@@ -36,6 +36,7 @@ export function loadDb() {
     types: [],
     progress: [],
     notes: [],
+    projectCollection: [],
     collections: [],
     words: []
   }).write();
