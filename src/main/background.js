@@ -8,7 +8,6 @@ import { loadDb, checkForValidDatabase } from "./database";
 import projectRepository from "./repositories/projectRepository";
 import progressRepository from "./repositories/progressRepository";
 import { generateContextMenu, generateMenu } from "./ui/menus";
-import { startElasticSearch, searchProjects } from "./elasticsearch/searchTest";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
@@ -19,7 +18,6 @@ protocol.registerSchemesAsPrivileged([
 // For now, loadDb here for testing
 try {
   loadDb();
-  startElasticSearch();
 } catch (e) {
   console.log("COULD NOT LOAD DATABASE. THIS IS VERY BAD", e);
 }
@@ -137,5 +135,6 @@ ipcMain.handle("db-progress-add", (e, progress) => {
 // *** SEARCH *** //
 // Global
 ipcMain.handle("search-globally", (e, query) => {
-  return searchProjects(query);
+  console.log("SEARCH BACKEND WITH", query);
+  // return searchProjects(query);
 });
