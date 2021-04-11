@@ -30,8 +30,7 @@ export default {
 
       if (response) {
         console.log(response);
-        // console.log(response.hits);
-        // this.searchResults = response.hits.hits;
+        this.searchResults = response;
       } else {
         console.log("ERROR WHILE SEARCHING. RESPONSE WAS:", response);
       }

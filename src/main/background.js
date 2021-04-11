@@ -8,6 +8,10 @@ import { loadDb, checkForValidDatabase } from "./database";
 import projectRepository from "./repositories/projectRepository";
 import progressRepository from "./repositories/progressRepository";
 import { generateContextMenu, generateMenu } from "./ui/menus";
+import {
+  searchInstantiator,
+  searchProjects
+} from "./search/searchInstantiator";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
@@ -18,6 +22,9 @@ protocol.registerSchemesAsPrivileged([
 // For now, loadDb here for testing
 try {
   loadDb();
+  // After the database loads (and this should all be synchronous right now)
+  // instantiate all instances of MiniSearch
+  searchInstantiator();
 } catch (e) {
   console.log("COULD NOT LOAD DATABASE. THIS IS VERY BAD", e);
 }
@@ -136,6 +143,5 @@ ipcMain.handle("db-progress-add", (e, progress) => {
 // Global
 ipcMain.handle("search-globally", (e, query) => {
   console.log("SEARCH BACKEND WITH", query);
-  return query;
-  // return searchProjects(query);
+  return searchProjects(query);
 });

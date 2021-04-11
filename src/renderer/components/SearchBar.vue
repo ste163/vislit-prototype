@@ -49,9 +49,9 @@
             @click="selectSearchResult(result)"
             class="btn-none result"
             v-for="result in results"
-            :key="result._id"
+            :key="result.id"
           >
-            {{ result._source.title }}
+            {{ result.title }}
           </button>
         </transition-group>
       </div>
@@ -83,7 +83,7 @@ export default {
     },
     selectSearchResult(result) {
       // LATER will need the type of item the result is. Only projects for now
-      this.selectItem(result._source, this.getSelectedProject);
+      this.selectItem(result, this.getSelectedProject);
       this.clearSearch();
     }
   },
