@@ -29,7 +29,6 @@ export default {
       const response = await ipcRenderer.invoke("search-globally", query);
 
       if (response) {
-        console.log(response);
         this.searchResults = response;
       } else {
         console.log("ERROR WHILE SEARCHING. RESPONSE WAS:", response);
