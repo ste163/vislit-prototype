@@ -8,7 +8,14 @@ dashboard view
     <h2 class="heading__description">
       {{ selectedProject.description }}
     </h2>
-    <button class="btn-white heading__btn" @click="openPopout">MORE</button>
+    <!-- Only display ellipsis button if it's not All Projects -->
+    <button
+      v-if="this.$route.params.id !== undefined"
+      class="btn-white heading__btn btn-ellipsis"
+      @click="openPopout"
+    >
+      <app-icon-ellipsis />
+    </button>
     <!-- Need to make a pop-out component that the button Opens & Closes
     and that I just pass content with functionality into -->
   </section>
@@ -16,7 +23,10 @@ dashboard view
 
 <script>
 import { mapState } from "vuex";
+import AppIconEllipsis from "./AppIconEllipsis.vue";
+
 export default {
+  components: { AppIconEllipsis },
   methods: {
     openPopout() {
       console.log("OPEN POPOUT");
