@@ -12,13 +12,40 @@
     - Switch for the route to show specifics for Progress, Notes, Etc. if needed
    -->
 <template>
-  <section>
-    Menu!
+  <section class="popout__container">
+    <slot>
+      Menu Items Here
+    </slot>
   </section>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    isOpen: { type: Boolean, required: true }
+  }
+};
 </script>
 
-<style></style>
+<style>
+.popout__container {
+  position: absolute;
+  background-color: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadowRight);
+}
+
+.popout__container > button {
+  width: 100%;
+  box-shadow: none;
+}
+
+.popout__container > button:hover {
+  background-color: var(--vislitBlue);
+}
+
+.popout__container > button:active {
+  background-color: var(--vislitDarkBlue);
+  color: var(--white);
+}
+</style>

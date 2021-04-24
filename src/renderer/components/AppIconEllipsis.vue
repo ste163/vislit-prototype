@@ -13,5 +13,6 @@
 
 .btn-ellipsis:hover > #icon__ellipsis > circle {
   fill: var(--darkBlack);
+  transition: var(--btnHover);
 }
 </style>

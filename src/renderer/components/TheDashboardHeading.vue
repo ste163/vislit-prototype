@@ -16,17 +16,18 @@ dashboard view
     >
       <app-icon-ellipsis />
     </button>
-    <!-- Need to make a pop-out component that the button Opens & Closes
-    and that I just pass content with functionality into -->
+
+    <popout-menu-ellipsis />
   </section>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import AppIconEllipsis from "./AppIconEllipsis.vue";
+import PopoutMenuEllipsis from "./PopoutMenuEllipsis.vue";
 
 export default {
-  components: { AppIconEllipsis },
+  components: { AppIconEllipsis, PopoutMenuEllipsis },
   methods: {
     openPopout() {
       console.log("OPEN POPOUT");

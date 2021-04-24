@@ -21,5 +21,6 @@
 
 .btn-magnifying:hover > #icon__search > #search__path {
   fill: var(--darkBlack);
+  transition: var(--btnHover);
 }
 </style>

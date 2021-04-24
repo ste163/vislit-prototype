@@ -141,6 +141,11 @@ export default {
   cursor: pointer;
 }
 
+.result:active {
+  background-color: var(--vislitDarkBlue);
+  color: var(--white);
+}
+
 /* Transitions */
 .results-slide-enter-active,
 .results-slide-leave-active {
