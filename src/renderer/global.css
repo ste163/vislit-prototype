@@ -109,7 +109,8 @@
   --borderRadius: 20px;
 
   /* Shadows */
-  --shadowCentered: 0 0 5px rgba(0, 0, 0, 0.1);
+  --shadowCentered: 2px 1px 5px rgba(0, 0, 0, 0.1);
+  --shadowCenteredInverted: -2px -1px 5px rgba(0, 0, 0, 0.1);
   --shadowRight: 2px 0 5px rgba(0, 0, 0, 0.1);
 
   /* transitions */

@@ -1,19 +1,27 @@
 // Holds the Project Title, Description, Goal, Last updated. Used on every
 dashboard view
 <template>
-  <section>
-    <h1 class="dashboard__h1">
+  <section class="heading__container">
+    <h1 class="heading__h1">
       {{ projectTitle }}
     </h1>
-    <h2 class="dashboard__description">
+    <h2 class="heading__description">
       {{ selectedProject.description }}
     </h2>
+    <button class="btn-white heading__btn" @click="openPopout">MORE</button>
+    <!-- Need to make a pop-out component that the button Opens & Closes
+    and that I just pass content with functionality into -->
   </section>
 </template>
 
 <script>
 import { mapState } from "vuex";
 export default {
+  methods: {
+    openPopout() {
+      console.log("OPEN POPOUT");
+    }
+  },
   computed: {
     ...mapState("projects", ["selectedProject"]),
     projectTitle: function() {
@@ -28,15 +36,32 @@ export default {
 </script>
 
 <style scoped>
-.dashboard__h1 {
+.heading__container {
+  display: grid;
+  width: 95%;
+}
+
+.heading__h1 {
   font-family: "Noto";
   font-size: 2.1rem;
+  grid-row: 1;
+  grid-column: 1;
   padding: 15px 0 0 0;
   margin: 0;
 }
 
-.dashboard__description {
+.heading__description {
+  grid-row: 2;
+  grid-column: 1;
   font-size: 1rem;
   margin: 5px 0 0 0;
+}
+
+.heading__btn {
+  grid-row: 1;
+  grid-column: 2;
+  place-self: end;
+  align-self: baseline;
+  margin-top: 15px;
 }
 </style>

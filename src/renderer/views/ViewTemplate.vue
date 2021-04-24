@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="main">
     <header class="view__header">
       <button
         v-if="!this.$router.currentRoute.path.includes('summary')"
@@ -33,6 +33,10 @@ export default {
 </script>
 
 <style scoped>
+.main {
+  padding-left: 5px;
+}
+
 .dashboard__container {
   display: flex;
   flex-flow: row wrap;
