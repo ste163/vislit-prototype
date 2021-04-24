@@ -12,7 +12,8 @@
     - Switch for the route to show specifics for Progress, Notes, Etc. if needed
    -->
 <template>
-  <section class="popout__container">
+  <!-- NEED TO WRAP IN A TRANSITION!! FOR ANIMATING! -->
+  <section v-if="this.isOpen" class="popout__container">
     <slot>
       Menu Items Here
     </slot>
@@ -27,7 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .popout__container {
   position: absolute;
   background-color: var(--white);

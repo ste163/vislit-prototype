@@ -1,5 +1,5 @@
 <template>
-  <popout-menu-template>
+  <popout-menu-template :isOpen="this.isOpen">
     <button>Edit</button>
     <button>Delete</button>
   </popout-menu-template>

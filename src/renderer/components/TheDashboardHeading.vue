@@ -8,16 +8,17 @@ dashboard view
     <h2 class="heading__description">
       {{ selectedProject.description }}
     </h2>
+
     <!-- Only display ellipsis button if it's not All Projects -->
     <button
       v-if="this.$route.params.id !== undefined"
       class="btn-white heading__btn btn-ellipsis"
-      @click="openPopout"
+      @click="handlePopoutMenu"
     >
       <app-icon-ellipsis />
     </button>
-
-    <popout-menu-ellipsis />
+    <!-- Try wrapping button & popout in a div to properly align the popout related to button position -->
+    <popout-menu-ellipsis :isOpen="this.isEllispsisMenuOpen" />
   </section>
 </template>
 
@@ -28,9 +29,14 @@ import PopoutMenuEllipsis from "./PopoutMenuEllipsis.vue";
 
 export default {
   components: { AppIconEllipsis, PopoutMenuEllipsis },
+  data() {
+    return {
+      isEllispsisMenuOpen: false
+    };
+  },
   methods: {
-    openPopout() {
-      console.log("OPEN POPOUT");
+    handlePopoutMenu() {
+      this.isEllispsisMenuOpen = !this.isEllispsisMenuOpen;
     }
   },
   computed: {
