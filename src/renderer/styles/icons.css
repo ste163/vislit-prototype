@@ -128,7 +128,7 @@
   justify-content: flex-end;
   align-items: center;
   transform: rotate(180deg);
-  box-shadow: var(--shadowCenteredInverted);
+  /* If I want to change the box shadow, need to invert it because of the transform */
 }
 
 .arrow__container--up:hover > .arrow--up::after,
