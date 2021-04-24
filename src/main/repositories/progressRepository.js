@@ -4,7 +4,7 @@ const progressRepository = {
   database: null,
 
   getByProjectId() {
-    console.log("GETTING");
+    console.log("GETTING PROGRESS BY ID");
   },
 
   addProgressToProject(progress) {
@@ -17,7 +17,7 @@ const progressRepository = {
           .write();
         return true;
       } catch (error) {
-        console.log("Unable to add progress. Error is: ", error);
+        console.error("Unable to add progress. Error is: ", error);
         return false;
       }
     }

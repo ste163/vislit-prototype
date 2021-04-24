@@ -1,21 +1,32 @@
 import { generateId } from "../database";
 
-// May need to wrap each method in a try/catch in case there's a problem so I could show a dynamic error alert box
+// TODO: Dynamic alert messages based on when these fail
 const projectRepository = {
   database: null,
 
   getAllProjects() {
-    return this.database.get("projects").value();
+    try {
+      return this.database.get("projects").value();
+    } catch (error) {
+      console.error("UNABLE TO GET ALL PROJECTS. ERROR IS: ", error);
+      return null;
+    }
   },
 
   getProjectById(id) {
     // WILL ALSO NEED TO GET ALL LINKED DATA
-    return this.database
-      .get("projects")
-      .find({ id: id })
-      .value();
+    try {
+      return this.database
+        .get("projects")
+        .find({ id: id })
+        .value();
+    } catch (error) {
+      console.error("UNABLE TO GET PROJECT BY ID. ERROR IS: ", error);
+      return null;
+    }
   },
 
+  // Add does not return a value by default; to ensure it works, return true or false
   addProject(project) {
     // Need to check for if a project with that name is already in the database
     try {
@@ -25,7 +36,22 @@ const projectRepository = {
         .write();
       return true;
     } catch (error) {
-      console.log("COULD NOT ADD PROJECT. ERROR IS: ", error);
+      console.error("UNABLE TO ADD PROJECT. ERROR IS: ", error);
+      return false;
+    }
+  },
+
+  // Delete does not return a value by default; to ensure it works, return true or false
+  // WRITTEN BASED ON DOCS BUT NOT TESTED
+  deleteProject(projectId) {
+    try {
+      this.database
+        .get("project")
+        .remove({ id: projectId })
+        .write();
+      return true;
+    } catch (error) {
+      console.error("UNABLE TO REMOVE PROJECT. ERROR IS: ", error);
       return false;
     }
   }

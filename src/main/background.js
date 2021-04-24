@@ -118,14 +118,20 @@ ipcMain.handle("db-projects-get-all", () => {
   return checkForValidDatabase(projectRepository.getAllProjects());
 });
 
+ipcMain.handle("db-projects-get-selected", (e, id) => {
+  return checkForValidDatabase(projectRepository.getProjectById(id));
+});
+
 ipcMain.handle("db-projects-add", (e, project) => {
   return checkForValidDatabase(projectRepository.addProject(project));
   // Every successfully add (responses should probably be booleans?)
-  // have the .then response have a .then(ipcRenderer.invoke('get-whatever-since-you-made-a-change')).catch('unable to read database')
+  // have the .then response have a
+  // .then(ipcRenderer.invoke('get-whatever-since-you-made-a-change')
+  // .catch('unable to read database')
 });
 
-ipcMain.handle("db-projects-get-selected", (e, id) => {
-  return checkForValidDatabase(projectRepository.getProjectById(id));
+ipcMain.handle("db-projects-delete", (e, projectId) => {
+  console.log("DELETE: ", projectId);
 });
 
 // Progress
