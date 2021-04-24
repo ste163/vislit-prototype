@@ -69,7 +69,7 @@
           slot="btn-add"
           class="btn-gray"
         >
-          SAVE
+          Save
         </button>
       </view-summary-card-template>
 
@@ -98,7 +98,7 @@
           Most recent project notes
         </template>
 
-        <button slot="btn-add" class="btn-gray">SAVE</button>
+        <button slot="btn-add" class="btn-gray">Save</button>
       </view-summary-card-template>
 
       <!-- Thesaurus -->
