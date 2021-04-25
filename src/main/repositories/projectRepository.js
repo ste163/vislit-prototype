@@ -32,10 +32,17 @@ const projectRepository = {
     // - check for if a project with that name is already in the database
     // - return the project that was just created instead of a true or false
     try {
+      // search for if a project for that name is already in the database
+      // if it is NOT in the db, continue
+      // else, thrown a very specific error message so we can display a notification
+
+      // Add item to database
       this.database
         .get("projects")
         .push(generateId(project))
         .write();
+
+      // Retrieve that item we just added from the database
       return true;
     } catch (error) {
       console.error("UNABLE TO ADD PROJECT. ERROR IS: ", error);
@@ -45,7 +52,7 @@ const projectRepository = {
 
   deleteProject(projectId) {
     // NEED TO GET ALL RELATED PROGRESS FOR PROJECT & DELETE THAT AS WELL!!!
-    // WARNING MODAL NEEDS TO BE VERY CLEAR ON EVERYTHING BEING DELETED!
+    // WARNING MODAL NEEDS TO BE VERY CLEAR ON EVERYTHING THAT WILL BE DELETED!
     try {
       this.database
         .get("projects")
