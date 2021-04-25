@@ -46,7 +46,7 @@ const projectRepository = {
   deleteProject(projectId) {
     try {
       this.database
-        .get("project")
+        .get("projects")
         .remove({ id: projectId })
         .write();
       return true;

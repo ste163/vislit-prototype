@@ -60,8 +60,12 @@ const actions = {
   async deleteProject({ commit }, projectId) {
     const response = await ipcRenderer.invoke("db-projects-delete", projectId);
 
-    console.log("commit", commit);
-    console.log(response);
+    if (response) {
+      commit("setSelectedProject", {});
+      return;
+    } else {
+      console.error("ERROR WHILE DELETING PROJECT. RESPONSE WAS: ", response);
+    }
   }
 };
 

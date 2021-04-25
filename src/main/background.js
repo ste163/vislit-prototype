@@ -131,7 +131,7 @@ ipcMain.handle("db-projects-add", (e, project) => {
 });
 
 ipcMain.handle("db-projects-delete", (e, projectId) => {
-  console.log("DELETE: ", projectId);
+  return checkForValidDatabase(projectRepository.deleteProject(projectId));
 });
 
 // Progress
