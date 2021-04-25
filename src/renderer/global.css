@@ -170,7 +170,7 @@ button {
 
 a:focus,
 button:focus {
-  outline: 0.5px solid #76cdc749;
+  outline: 2px solid #76cdc749;
 }
 
 /* Scroll bars */

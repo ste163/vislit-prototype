@@ -41,9 +41,9 @@ const projectRepository = {
     }
   },
 
-  // Delete does not return a value by default; to ensure it works, return true or false
-  // WRITTEN BASED ON DOCS BUT NOT TESTED
   deleteProject(projectId) {
+    // NEED TO GET ALL RELATED PROGRESS FOR PROJECT & DELETE THAT AS WELL!!!
+    // WARNING MODAL NEEDS TO BE VERY CLEAR ON EVERYTHING BEING DELETED!
     try {
       this.database
         .get("projects")
