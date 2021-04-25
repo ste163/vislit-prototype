@@ -20,7 +20,10 @@ const actions = {
     if (response) {
       commit("setProjects", response);
     } else {
-      console.log("ERROR WHILE GETTING ALL PROJECTS. RESPONSE WAS:", response);
+      console.error(
+        "ERROR WHILE GETTING ALL PROJECTS. RESPONSE WAS:",
+        response
+      );
     }
   },
 
@@ -29,7 +32,7 @@ const actions = {
     if (response) {
       dispatch("getProjects");
     } else {
-      console.log("ERROR WHILE ADDING PROJECT. RESPONSE WAS:", response);
+      console.error("ERROR WHILE ADDING PROJECT. RESPONSE WAS:", response);
     }
   },
 
@@ -47,11 +50,18 @@ const actions = {
     if (response) {
       commit("setSelectedProject", response);
     } else {
-      console.log(
+      console.error(
         "ERROR WHILE GETTING SELECTED PROJECT. RESPONSE WAS:",
         response
       );
     }
+  },
+
+  async deleteProject({ commit }, projectId) {
+    const response = await ipcRenderer.invoke("db-projects-delete", projectId);
+
+    console.log("commit", commit);
+    console.log(response);
   }
 };
 
