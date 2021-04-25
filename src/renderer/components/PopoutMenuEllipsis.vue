@@ -1,7 +1,7 @@
 <template>
   <popout-menu-template :isOpen="this.isOpen">
-    <button>Edit</button>
-    <button>Delete</button>
+    <button @click="handleEdit">Edit</button>
+    <button @click="handleDelete">Delete</button>
   </popout-menu-template>
 </template>
 
@@ -11,7 +11,15 @@ export default {
   props: {
     isOpen: { type: Boolean, required: true }
   },
-  components: { PopoutMenuTemplate }
+  components: { PopoutMenuTemplate },
+  methods: {
+    handleEdit() {
+      console.log("EDIT PROJECT");
+    },
+    handleDelete() {
+      console.log("OPEN DELETE MODAL");
+    }
+  }
 };
 </script>
 

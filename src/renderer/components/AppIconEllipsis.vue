@@ -1,5 +1,5 @@
 <template>
-  <svg id="icon__ellipsis" title="ellipsis" height="8" width="32">
+  <svg id="icon__ellipsis" title="ellipsis" height="8" width="33">
     <circle cx="4" cy="4" r="4" fill="#484848" />
     <circle cx="16" cy="4" r="4" fill="#484848" />
     <circle cx="28" cy="4" r="4" fill="#484848" />
@@ -8,6 +8,7 @@
 
 <style>
 #icon__ellipsis {
+  padding: 10px 15px;
   transition: var(--btnHover);
 }
 

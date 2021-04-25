@@ -30,10 +30,10 @@ export default {
 
 <style scoped>
 .popout__container {
-  position: absolute;
+  /* position: absolute; */
   background-color: var(--white);
   border-radius: var(--borderRadius);
-  box-shadow: var(--shadowRight);
+  box-shadow: var(--shadowCentered);
 }
 
 .popout__container > button {

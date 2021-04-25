@@ -16,9 +16,8 @@ dashboard view
       @click="handlePopoutMenu"
     >
       <app-icon-ellipsis />
+      <popout-menu-ellipsis :isOpen="this.isEllispsisMenuOpen" />
     </button>
-    <!-- Try wrapping button & popout in a div to properly align the popout related to button position -->
-    <popout-menu-ellipsis :isOpen="this.isEllispsisMenuOpen" />
   </section>
 </template>
 
@@ -54,6 +53,7 @@ export default {
 
 <style scoped>
 .heading__container {
+  position: relative;
   display: grid;
   width: 95%;
 }
@@ -75,10 +75,12 @@ export default {
 }
 
 .heading__btn {
-  grid-row: 1;
-  grid-column: 2;
-  place-self: end;
-  align-self: baseline;
   margin-top: 15px;
+  position: absolute;
+  right: 0;
+  /* Inner */
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 0;
 }
 </style>
