@@ -117,7 +117,6 @@ export default {
 .controls,
 .dashboard__heading {
   background-color: var(--darkestWhite);
-  z-index: 5;
 }
 
 .dashboard {

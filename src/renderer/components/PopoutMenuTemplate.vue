@@ -13,40 +13,67 @@
    -->
 <template>
   <!-- NEED TO WRAP IN A TRANSITION!! FOR ANIMATING! -->
-  <section v-if="this.isOpen" class="popout__container">
-    <slot>
-      Menu Items Here
-    </slot>
+  <section class="popout__container">
+    <button class="btn-white icon__btn" @click="handlePopoutMenu">
+      <slot name="popout-btn-icon">
+        Icon
+      </slot>
+    </button>
+    <transition name="open-slide">
+      <section v-if="this.isOpen" class="container__items">
+        <slot name="popout-content">
+          Items Here
+        </slot>
+      </section>
+    </transition>
   </section>
 </template>
 
 <script>
 export default {
-  props: {
-    isOpen: { type: Boolean, required: true }
+  data() {
+    return {
+      isOpen: false
+    };
+  },
+  methods: {
+    handlePopoutMenu() {
+      this.isOpen = !this.isOpen;
+    }
   }
 };
 </script>
 
 <style scoped>
+.icon__btn {
+  padding: 0;
+  width: 4.5rem;
+  display: flex;
+  justify-content: center;
+  box-shadow: none;
+}
+
 .popout__container {
-  /* position: absolute; */
   background-color: var(--white);
   border-radius: var(--borderRadius);
   box-shadow: var(--shadowCentered);
 }
 
-.popout__container > button {
-  width: 100%;
-  box-shadow: none;
+.container__items {
+  background-color: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadowCentered);
 }
 
-.popout__container > button:hover {
-  background-color: var(--vislitBlue);
+/* Transitions */
+.open-slide-enter-active,
+.open-slide-leave-active {
+  transition: all 0.1s;
 }
 
-.popout__container > button:active {
-  background-color: var(--vislitDarkBlue);
-  color: var(--white);
+.open-slide-enter,
+.open-slide-leave-to {
+  margin-top: -30px;
+  opacity: 0;
 }
 </style>

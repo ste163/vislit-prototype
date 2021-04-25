@@ -1,7 +1,11 @@
 <template>
   <section class="controls">
     <div class="controls__container">
-      <search-bar @searched="searchGlobally" :results="searchResults" />
+      <search-bar
+        @searched="searchGlobally"
+        :results="searchResults"
+        class="controls__searchbar"
+      />
 
       <!-- Date filtering drop-downs populated with currently selected projects available dates -->
       <div class="DATESORTING">
@@ -46,6 +50,11 @@ export default {
 
 .controls__container {
   height: 2.5rem;
+}
+
+/* CHANGE TO ACTIVE 1 or 0 BASED ON GLOBAL IS MODAL OPEN STATE!!! */
+.controls__searchbar {
+  z-index: 1;
 }
 
 .DATESORTING {
