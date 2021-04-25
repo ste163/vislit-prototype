@@ -20,12 +20,14 @@ export default {
     ...mapActions("projects", ["deleteProject"]),
     handleEdit() {
       console.log("EDIT PROJECT", this.selectedProject.id);
+      this.$toast("TEST!");
     },
     handleDelete() {
-      console.log("OPEN DELETE MODAL", this.selectedProject.id);
+      const projectTitle = this.selectedProject.title;
       const response = this.deleteProject(this.selectedProject.id);
       if (response) {
         this.$router.replace({ path: `/` });
+        this.$toast.success(`${projectTitle} deleted!`);
       } else {
         console.error("UNABLE TO RE-ROUTE AFTER PROJECT DELETE");
       }
