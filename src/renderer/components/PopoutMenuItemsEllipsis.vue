@@ -11,6 +11,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import { deletedMessage } from "../utils/ToastMessages";
 
 export default {
   computed: {
@@ -27,7 +28,8 @@ export default {
       const response = this.deleteProject(this.selectedProject.id);
       if (response) {
         this.$router.replace({ path: `/` });
-        this.$toast.success(`${projectTitle} deleted!`);
+        console.log("PROJECT TITLE", projectTitle);
+        this.$toast.success(deletedMessage(projectTitle, "project"));
       } else {
         console.error("UNABLE TO RE-ROUTE AFTER PROJECT DELETE");
       }

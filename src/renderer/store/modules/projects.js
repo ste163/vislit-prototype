@@ -30,6 +30,8 @@ const actions = {
   async addProject({ dispatch }, project) {
     const response = await ipcRenderer.invoke("db-projects-add", project);
     if (response) {
+      // Need to get the project id on the return
+      // So we can re-route to that ID after we get projects
       dispatch("getProjects");
     } else {
       console.error("ERROR WHILE ADDING PROJECT. RESPONSE WAS:", response);

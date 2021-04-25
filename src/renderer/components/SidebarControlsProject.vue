@@ -22,6 +22,7 @@ export default {
       this.setModal("Form", ProjectFormCreate);
     },
     filterProjects() {
+      // SETUP POP-OUT MENU FOR FILTER PROJECTS!
       console.log("FILTER PROJECTS");
     }
   }

@@ -28,7 +28,9 @@ const projectRepository = {
 
   // Add does not return a value by default; to ensure it works, return true or false
   addProject(project) {
-    // Need to check for if a project with that name is already in the database
+    // TODO:
+    // - check for if a project with that name is already in the database
+    // - return the project that was just created instead of a true or false
     try {
       this.database
         .get("projects")

@@ -123,11 +123,9 @@ ipcMain.handle("db-projects-get-selected", (e, id) => {
 });
 
 ipcMain.handle("db-projects-add", (e, project) => {
+  // WRAP in try catch. if we return the newly added project, return it
+  // IF we return NULL, then throw the error alert box.
   return checkForValidDatabase(projectRepository.addProject(project));
-  // Every successfully add (responses should probably be booleans?)
-  // have the .then response have a
-  // .then(ipcRenderer.invoke('get-whatever-since-you-made-a-change')
-  // .catch('unable to read database')
 });
 
 ipcMain.handle("db-projects-delete", (e, projectId) => {
