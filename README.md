@@ -38,7 +38,7 @@ Vue-version of Vislit prototype
 - ~~[Lowdb](https://github.com/typicode/lowdb) - data storage~~
 - ~~[nanoid](https://github.com/ai/nanoid/) - unique id generator for lowdb~~
 - ~~[MiniSearch](https://github.com/lucaong/minisearch) - high-quality real-time search~~
-- [vue-toastification](https://github.com/Maronato/vue-toastification/tree/next) - toast notifications
+- [vue-toastification](https://github.com/Maronato/vue-toastification) - toast notifications
 - [D3.js](https://d3js.org/) - data visualizations
 - [TipTap](https://github.com/ueberdosis/tiptap) - rich text editor under MIT, made for Vue, with a V2 coming very soon. Exports to HTML for easy conversion to word or reloading into the app.
 - [Quilljs](https://quilljs.com/) - rich text editor (Will require copyright notice in Documentation). Exports to Deltas (Quill's file format)
