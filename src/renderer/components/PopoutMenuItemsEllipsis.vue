@@ -23,7 +23,12 @@ export default {
     },
     handleDelete() {
       console.log("OPEN DELETE MODAL", this.selectedProject.id);
-      this.deleteProject(this.selectedProject.id);
+      const response = this.deleteProject(this.selectedProject.id);
+      if (response) {
+        this.$router.replace({ path: `/` });
+      } else {
+        console.error("UNABLE TO RE-ROUTE AFTER PROJECT DELETE");
+      }
     }
   }
 };

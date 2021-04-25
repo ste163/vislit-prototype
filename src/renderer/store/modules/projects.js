@@ -57,14 +57,16 @@ const actions = {
     }
   },
 
-  async deleteProject({ commit }, projectId) {
+  async deleteProject({ dispatch, commit }, projectId) {
     const response = await ipcRenderer.invoke("db-projects-delete", projectId);
 
     if (response) {
+      dispatch("getProjects");
       commit("setSelectedProject", {});
-      return;
+      return true;
     } else {
       console.error("ERROR WHILE DELETING PROJECT. RESPONSE WAS: ", response);
+      return false;
     }
   }
 };
