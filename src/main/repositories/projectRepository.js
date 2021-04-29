@@ -4,8 +4,8 @@ import {
   displayGetAllError,
   displayGetByIdError,
   displayRemoveError
-} from "../messages/errorsConsole";
-import { projAddFail, projTitleDuplication } from "../messages/errorsThrown";
+} from "../utils/errorsConsole";
+import { projAddFail, projTitleDuplication } from "../utils/errorsThrown";
 
 // **** IF EVERY REPO IS ALMOST IDENTICAL TO THIS *****
 // Could make a single baseRepo that takes in a "Table name"
@@ -15,6 +15,7 @@ import { projAddFail, projTitleDuplication } from "../messages/errorsThrown";
 // NOTE: Only show the app-locking pop-up alert warning for MAJOR freakin' issues
 // Smaller issues like duplicate project titles can be notifications
 const projectRepository = {
+  // On initial load, we assign the database
   database: null,
 
   // Private repo helpers

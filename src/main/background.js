@@ -10,9 +10,9 @@ import progressRepository from "./repositories/progressRepository";
 import { generateContextMenu, generateMenu } from "./ui/menus";
 import {
   searchInstantiator,
-  searchProjects,
-  addProjectToIndex
+  searchProjects
 } from "./search/searchInstantiator";
+import projectController from "./controllers/projectController";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
@@ -111,7 +111,7 @@ if (isDevelopment) {
   }
 }
 
-// *** EVENT LISTENERS *** //
+// *** EVENT LISTENERS AKA ENDPOINTS *** //
 
 // *** DATABASE *** //
 // Projects
@@ -124,26 +124,7 @@ ipcMain.handle("db-projects-get-selected", (e, id) => {
 });
 
 ipcMain.handle("db-projects-add", (e, project) => {
-  const response = checkForValidDatabase(projectRepository.addProject(project));
-
-  // If it's a string, we have an error message.
-  if (typeof response === "string") {
-    // Return response so frontend can properly handle what notification to display.
-    // Honestly, make the error messages dope enough that I can just display those suckers :P
-    return response;
-  }
-
-  // If the response has a "title" property, it added properly
-  if ("title" in response) {
-    try {
-      addProjectToIndex(response);
-      return response;
-    } catch (error) {
-      // Display a REALLY serious error message!
-      // Possibly return something other than null?
-      return null;
-    }
-  }
+  projectController.addProject(project);
 });
 
 ipcMain.handle("db-projects-delete", (e, projectId) => {
