@@ -123,14 +123,24 @@ ipcMain.handle("db-projects-get-selected", (e, id) => {
 });
 
 ipcMain.handle("db-projects-add", (e, project) => {
-  // The return value will either be the object or an error message as a string
-  // Based on the error message, we can display the correct error.
+  const response = checkForValidDatabase(projectRepository.addProject(project));
 
-  // NO! NEED TO CHECK WHAT THE RETURN VALUE IS
-  // If return value is a string, we have an error message
-  // If it's an object with the property of .Title, then it can be added to index
-  // So add it to index here
-  return checkForValidDatabase(projectRepository.addProject(project));
+  // If it's a string, we have an error message.
+  if (typeof response === "string") {
+    // Return response so frontend can properly handle what notification to display.
+    // Honestly, make the error messages dope enough that I can just display those suckers :P
+    return response;
+  }
+
+  // If the response has a "title" property, it added properly
+  if ("title" in response) {
+    // TRY to add this item to search index
+    // Add this object to the search index
+    // If we can't add it, shoot an app-locking error message
+    // ELSE
+    // If it's been added, return the response
+    return response;
+  }
 });
 
 ipcMain.handle("db-projects-delete", (e, projectId) => {

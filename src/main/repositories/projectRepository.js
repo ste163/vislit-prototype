@@ -12,6 +12,8 @@ import { projAddFail, projTitleDuplication } from "../messages/errorsThrown";
 // Just depends on how similar each is...
 
 // TODO: Dynamic alert messages based on when these fail
+// NOTE: Only show the app-locking pop-up alert warning for MAJOR freakin' issues
+// Smaller issues like duplicate project titles can be notifications
 const projectRepository = {
   database: null,
 
@@ -49,7 +51,7 @@ const projectRepository = {
   // to ensure it works, return the object we just added or an error message
   addProject(project) {
     try {
-      // SHOULD I NORMALIZE THE TITLES? - Title and TITLE can be added to db
+      // NOTE: SHOULD I NORMALIZE TITLES? - Title and TITLE can be added to db
       // Check if the name for the project we want to create is already in db
       const isProjectInDb = this._isProjectInDb(project);
 
