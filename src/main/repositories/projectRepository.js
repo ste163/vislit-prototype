@@ -1,4 +1,15 @@
 import { generateId } from "../database";
+import {
+  displayAddError,
+  displayGetAllError,
+  displayGetByIdError,
+  displayRemoveError
+} from "../messages/errorsConsole";
+import { projAddFail, projTitleDuplication } from "../messages/errorsThrown";
+
+// **** IF EVERY REPO IS ALMOST IDENTICAL TO THIS *****
+// Could make a single baseRepo that takes in a "Table name"
+// Just depends on how similar each is...
 
 // TODO: Dynamic alert messages based on when these fail
 const projectRepository = {
@@ -16,7 +27,7 @@ const projectRepository = {
     try {
       return this.database.get("projects").value();
     } catch (error) {
-      console.error("UNABLE TO GET ALL PROJECTS. ERROR IS: ", error);
+      displayGetAllError("projects", error);
       return null;
     }
   },
@@ -29,7 +40,7 @@ const projectRepository = {
         .find({ id: id })
         .value();
     } catch (error) {
-      console.error("UNABLE TO GET PROJECT BY ID. ERROR IS: ", error);
+      displayGetByIdError("project", error);
       return null;
     }
   },
@@ -44,7 +55,7 @@ const projectRepository = {
 
       // If the result is not undefined, that title has been taken
       if (isProjectInDb !== undefined) {
-        throw "TITLE TAKEN";
+        throw projTitleDuplication();
       }
 
       // Add item to database
@@ -58,12 +69,12 @@ const projectRepository = {
 
       // On the off chance the project didn't get added
       if (addedProject === undefined) {
-        throw "PROJECT FAILED TO BE ADDED TO DATABASE";
+        throw projAddFail();
       }
 
       return addedProject;
     } catch (error) {
-      console.error("UNABLE TO ADD PROJECT. ERROR IS: ", error);
+      displayAddError("project", error);
       return error;
     }
   },
@@ -78,7 +89,7 @@ const projectRepository = {
         .write();
       return true;
     } catch (error) {
-      console.error("UNABLE TO REMOVE PROJECT. ERROR IS: ", error);
+      displayRemoveError("project", error);
       return false;
     }
   }
