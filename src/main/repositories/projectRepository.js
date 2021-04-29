@@ -5,15 +5,21 @@ import {
   displayGetByIdError,
   displayRemoveError
 } from "../utils/errorsConsole";
-import { projAddFail, projTitleDuplication } from "../utils/errorsThrown";
+import {
+  databaseUnassigned,
+  projAddFail,
+  projTitleDuplication
+} from "../utils/errorsThrown";
 
 const projectRepository = {
   // On initial load, we assign the database
   database: null,
 
+  // TODO: Test if the correct level of error handling can be done in projectController
+  // or if the MAJOR ERROR if statement also needs to be here.
   _checkForDatabase() {
     if (this.database === null) {
-      throw "no database THIS IS REALLY BAD! BIG ERROR!";
+      throw databaseUnassigned("project");
     }
   },
 

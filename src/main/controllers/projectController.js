@@ -1,4 +1,6 @@
+import { dialog } from "electron";
 import { addProjectToIndex } from "../search/searchInstantiator";
+import { repoUnassigned } from "../utils/errorsThrown";
 
 const projectController = {
   // On initial load, we assign the repo
@@ -6,7 +8,7 @@ const projectController = {
 
   _checkForProjectRepo() {
     if (this.projectRepository === null) {
-      throw "project repo never assigned! VERY BAD ERROR";
+      throw repoUnassigned("project");
     }
   },
 
@@ -34,8 +36,13 @@ const projectController = {
         }
       }
     } catch (error) {
-      // Do some cool error handling
-      return error;
+      // MOVE THIS ERROR HANDER INTO A FUNCTION!
+      // IN UTILS?
+      if (error.includes("MAJOR ERROR")) {
+        dialog.showErrorBox("Operation failed!", `${error}`);
+      } else {
+        return error;
+      }
     }
   }
 };
