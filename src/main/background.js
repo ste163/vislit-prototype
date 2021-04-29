@@ -4,15 +4,15 @@
 import { app, protocol, BrowserWindow, ipcMain, Menu } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-import { loadDb, checkForValidDatabase } from "./database";
+import { loadDb } from "./database";
 import projectRepository from "./repositories/projectRepository";
 import progressRepository from "./repositories/progressRepository";
+import projectController from "./controllers/projectController";
 import { generateContextMenu, generateMenu } from "./ui/menus";
 import {
   searchInstantiator,
   searchProjects
 } from "./search/searchInstantiator";
-import projectController from "./controllers/projectController";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
@@ -116,19 +116,19 @@ if (isDevelopment) {
 // *** DATABASE *** //
 // Projects
 ipcMain.handle("db-projects-get-all", () => {
-  return checkForValidDatabase(projectRepository.getAllProjects());
+  return projectRepository.getAllProjects();
 });
 
 ipcMain.handle("db-projects-get-selected", (e, id) => {
-  return checkForValidDatabase(projectRepository.getProjectById(id));
+  return projectRepository.getProjectById(id);
 });
 
 ipcMain.handle("db-projects-add", (e, project) => {
-  projectController.addProject(project);
+  return projectController.addProject(project);
 });
 
 ipcMain.handle("db-projects-delete", (e, projectId) => {
-  return checkForValidDatabase(projectRepository.deleteProject(projectId));
+  return projectRepository.deleteProject(projectId);
 });
 
 // Progress
@@ -137,9 +137,7 @@ ipcMain.handle("db-progress-get-by-project-id", (e, projectId) => {
 });
 
 ipcMain.handle("db-progress-add", (e, progress) => {
-  return checkForValidDatabase(
-    progressRepository.addProgressToProject(progress)
-  );
+  return progressRepository.addProgressToProject(progress);
 });
 
 // *** SEARCH *** //

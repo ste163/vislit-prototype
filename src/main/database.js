@@ -1,6 +1,7 @@
 import { app, dialog } from "electron";
 import { copyFile } from "fs";
 import { nanoid } from "nanoid/non-secure";
+import projectController from "./controllers/projectController";
 import progressRepository from "./repositories/progressRepository";
 import projectRepository from "./repositories/projectRepository";
 
@@ -41,9 +42,12 @@ export function loadDb() {
     words: []
   }).write();
 
-  // Assign database to all repository instances instead of using the real db in an attempt at decoupling
+  // Assign database to repository instances instead of using the real db in an attempt at decoupling
   projectRepository.database = db;
   progressRepository.database = db;
+
+  // Assign controller instances to repositories
+  projectController.projectRepository = projectRepository;
 }
 
 // Must be async because Node's copyFile() is async? CHECK THIS
@@ -97,14 +101,6 @@ export async function importDatabase(userInput) {
 }
 
 // HELPER FUNCTIONS FOR CREATING ITEMS
-// If there becomes too many, move into a databaseUtils.js
-export function checkForValidDatabase(repositoryMethod) {
-  if (db) {
-    return repositoryMethod;
-  }
-  return null;
-}
-
 export function generateId(item) {
   // Set id length with 21, should be enough to never have repeats
   item.id = nanoid(21);

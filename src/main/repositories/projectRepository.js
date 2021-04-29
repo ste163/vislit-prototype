@@ -7,18 +7,16 @@ import {
 } from "../utils/errorsConsole";
 import { projAddFail, projTitleDuplication } from "../utils/errorsThrown";
 
-// **** IF EVERY REPO IS ALMOST IDENTICAL TO THIS *****
-// Could make a single baseRepo that takes in a "Table name"
-// Just depends on how similar each is...
-
-// TODO: Dynamic alert messages based on when these fail
-// NOTE: Only show the app-locking pop-up alert warning for MAJOR freakin' issues
-// Smaller issues like duplicate project titles can be notifications
 const projectRepository = {
   // On initial load, we assign the database
   database: null,
 
-  // Private repo helpers
+  _checkForDatabase() {
+    if (this.database === null) {
+      throw "no database THIS IS REALLY BAD! BIG ERROR!";
+    }
+  },
+
   _isProjectInDb(project) {
     return this.database
       .get("projects")
@@ -28,6 +26,8 @@ const projectRepository = {
 
   getAllProjects() {
     try {
+      this._checkForDatabase();
+
       return this.database.get("projects").value();
     } catch (error) {
       displayGetAllError("projects", error);
@@ -38,6 +38,8 @@ const projectRepository = {
   getProjectById(id) {
     // WILL ALSO NEED TO GET ALL LINKED DATA
     try {
+      this._checkForDatabase();
+
       return this.database
         .get("projects")
         .find({ id: id })
@@ -52,6 +54,8 @@ const projectRepository = {
   // to ensure it works, return the object we just added or an error message
   addProject(project) {
     try {
+      this._checkForDatabase();
+
       // NOTE: SHOULD I NORMALIZE TITLES? - Title and TITLE can be added to db
       // Check if the name for the project we want to create is already in db
       const isProjectInDb = this._isProjectInDb(project);
@@ -86,6 +90,8 @@ const projectRepository = {
     // NEED TO GET ALL RELATED PROGRESS FOR PROJECT & DELETE THAT AS WELL!!!
     // WARNING MODAL NEEDS TO BE VERY CLEAR ON EVERYTHING THAT WILL BE DELETED!
     try {
+      this._checkForDatabase();
+
       this.database
         .get("projects")
         .remove({ id: projectId })

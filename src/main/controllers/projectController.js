@@ -1,4 +1,3 @@
-import { checkForValidDatabase } from "../database";
 import { addProjectToIndex } from "../search/searchInstantiator";
 
 const projectController = {
@@ -15,11 +14,7 @@ const projectController = {
     try {
       this._checkForProjectRepo();
 
-      // MAKE CHECK FOR VALID DB A HELPER IN THE REPO!!!
-      const response = checkForValidDatabase(
-        this.projectRepository.addProject(project)
-      );
-
+      const response = this.projectRepository.addProject(project);
       // If it's a string, we have an error message.
       if (typeof response === "string") {
         // Return response so frontend can properly handle what notification to display.
