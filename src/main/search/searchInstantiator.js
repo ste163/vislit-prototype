@@ -30,3 +30,7 @@ export function searchProjects(query) {
   // searchProjects using the default settings created during instantiation
   return projectMiniSearch.search(query);
 }
+
+export function addProjectToIndex(project) {
+  projectMiniSearch.add(project);
+}

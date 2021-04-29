@@ -10,7 +10,8 @@ import progressRepository from "./repositories/progressRepository";
 import { generateContextMenu, generateMenu } from "./ui/menus";
 import {
   searchInstantiator,
-  searchProjects
+  searchProjects,
+  addProjectToIndex
 } from "./search/searchInstantiator";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -134,12 +135,14 @@ ipcMain.handle("db-projects-add", (e, project) => {
 
   // If the response has a "title" property, it added properly
   if ("title" in response) {
-    // TRY to add this item to search index
-    // Add this object to the search index
-    // If we can't add it, shoot an app-locking error message
-    // ELSE
-    // If it's been added, return the response
-    return response;
+    try {
+      addProjectToIndex(response);
+      return response;
+    } catch (error) {
+      // Display a REALLY serious error message!
+      // Possibly return something other than null?
+      return null;
+    }
   }
 });
 
