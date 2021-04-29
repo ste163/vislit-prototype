@@ -123,8 +123,13 @@ ipcMain.handle("db-projects-get-selected", (e, id) => {
 });
 
 ipcMain.handle("db-projects-add", (e, project) => {
-  // WRAP in try catch. if we return the newly added project, return it
-  // IF we return NULL, then throw the error alert box.
+  // The return value will either be the object or an error message as a string
+  // Based on the error message, we can display the correct error.
+
+  // NO! NEED TO CHECK WHAT THE RETURN VALUE IS
+  // If return value is a string, we have an error message
+  // If it's an object with the property of .Title, then it can be added to index
+  // So add it to index here
   return checkForValidDatabase(projectRepository.addProject(project));
 });
 

@@ -4,6 +4,14 @@ import { generateId } from "../database";
 const projectRepository = {
   database: null,
 
+  // Private repo helpers
+  _isProjectInDb(project) {
+    return this.database
+      .get("projects")
+      .find({ title: project.title })
+      .value();
+  },
+
   getAllProjects() {
     try {
       return this.database.get("projects").value();
@@ -26,15 +34,18 @@ const projectRepository = {
     }
   },
 
-  // Add does not return a value by default; to ensure it works, return true or false
+  // Add does not return a value by default;
+  // to ensure it works, return the object we just added or an error message
   addProject(project) {
-    // TODO:
-    // - check for if a project with that name is already in the database
-    // - return the project that was just created instead of a true or false
     try {
-      // search for if a project for that name is already in the database
-      // if it is NOT in the db, continue
-      // else, thrown a very specific error message so we can display a notification
+      // SHOULD I NORMALIZE THE TITLES? - Title and TITLE can be added to db
+      // Check if the name for the project we want to create is already in db
+      const isProjectInDb = this._isProjectInDb(project);
+
+      // If the result is not undefined, that title has been taken
+      if (isProjectInDb !== undefined) {
+        throw "TITLE TAKEN";
+      }
 
       // Add item to database
       this.database
@@ -42,11 +53,18 @@ const projectRepository = {
         .push(generateId(project))
         .write();
 
-      // Retrieve that item we just added from the database
-      return true;
+      // Retrieve item we just added from the database
+      const addedProject = this._isProjectInDb(project);
+
+      // On the off chance the project didn't get added
+      if (addedProject === undefined) {
+        throw "PROJECT FAILED TO BE ADDED TO DATABASE";
+      }
+
+      return addedProject;
     } catch (error) {
       console.error("UNABLE TO ADD PROJECT. ERROR IS: ", error);
-      return false;
+      return error;
     }
   },
 
