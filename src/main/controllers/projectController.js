@@ -36,6 +36,7 @@ const projectController = {
         }
       }
     } catch (error) {
+      // TODO:
       // MOVE THIS ERROR HANDER INTO A FUNCTION!
       // IN UTILS?
       if (error.includes("MAJOR ERROR")) {

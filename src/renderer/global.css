@@ -118,6 +118,10 @@
 }
 
 /* Default overrides */
+html {
+  font-size: 0.9rem;
+}
+
 body {
   font-family: "Heebo";
   font-weight: var(--weightLight);
