@@ -27,6 +27,10 @@
     </form>
 
     <transition name="results-slide">
+      <!-- To have the searchbar close-able on an off-click event
+      1. Need a click handler for open & close
+      2. And have by default, if we get a result, open
+      3. But if we click outside of search results, hide the results bar -->
       <div class="results" v-if="results.length > 0">
         <!-- IF this is being shown, then we need to also have an invisible div covering the entire screen -->
         <!-- it will act as the click event to hide the results container -->

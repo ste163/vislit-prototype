@@ -21,6 +21,7 @@ const toastDefaults = {
 Vue.use(Toast, toastDefaults);
 
 // Custom Directives
+// outside-click event from: https://tahazsh.com/detect-outside-click-in-vue
 let handleOutsideClick;
 
 Vue.directive("closable", {
