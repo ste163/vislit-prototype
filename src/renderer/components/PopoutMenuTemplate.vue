@@ -6,13 +6,24 @@
 <template>
   <!-- NEED TO WRAP IN A TRANSITION!! FOR ANIMATING! -->
   <section class="popout__container">
-    <button class="btn-white icon__btn" @click="handlePopoutMenu">
+    <button
+      ref="popoutButton"
+      class="btn-white icon__btn"
+      @click="handlePopoutMenu"
+    >
       <slot name="popout-btn-icon">
         Icon
       </slot>
     </button>
     <transition name="open-slide">
-      <section v-if="this.isOpen" class="container__items">
+      <section
+        v-if="this.isOpen"
+        v-closable="{
+          exclude: ['popoutButton'],
+          handler: 'handlePopoutMenu'
+        }"
+        class="container__items"
+      >
         <slot name="popout-content">
           Items Here
         </slot>
