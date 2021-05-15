@@ -7,8 +7,6 @@ import {
 } from "../utils/errorsConsole";
 import { projAddFail, projTitleDuplication } from "../utils/errorsThrown";
 
-// TODO: Test if the correct level of error handling can be done in projectController
-// or if the MAJOR ERROR if statement also needs to be here.
 export default class ProjectRepository {
   constructor(database) {
     this.database = database;
@@ -31,7 +29,7 @@ export default class ProjectRepository {
   }
 
   getProjectById(id) {
-    // WILL ALSO NEED TO GET ALL LINKED DATA
+    // TODO: get all linked data (currently just progress)
     try {
       return this.database
         .get("projects")
@@ -78,7 +76,7 @@ export default class ProjectRepository {
   }
 
   deleteProject(projectId) {
-    // NEED TO GET ALL RELATED PROGRESS FOR PROJECT & DELETE THAT AS WELL!!!
+    // TODO: get all related progress & delete that first
     // WARNING MODAL NEEDS TO BE VERY CLEAR ON EVERYTHING THAT WILL BE DELETED!
     try {
       this.database

@@ -10,8 +10,6 @@ const FileSync = require("lowdb/adapters/FileSync");
 // Maybe have the user be able to decide where the database file should load from. As in, on app load
 // Initially check localStorage for a db location. So the user could place the db in cloud storage
 
-// Depending on how this class refactoring goes, may want to move this into a Database class
-
 // Use database globally
 let db;
 
