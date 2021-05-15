@@ -1,9 +1,6 @@
 import { app, dialog } from "electron";
 import { copyFile } from "fs";
 import { nanoid } from "nanoid/non-secure";
-import projectController from "./controllers/projectController";
-import progressRepository from "./repositories/progressRepository";
-import projectRepository from "./repositories/projectRepository";
 
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
@@ -12,6 +9,8 @@ const FileSync = require("lowdb/adapters/FileSync");
 // POSSIBILITY
 // Maybe have the user be able to decide where the database file should load from. As in, on app load
 // Initially check localStorage for a db location. So the user could place the db in cloud storage
+
+// Depending on how this class refactoring goes, may want to move this into a Database class
 
 // Use database globally
 let db;
@@ -29,7 +28,7 @@ export function loadDb() {
   // Set default json structure
   db.defaults({
     database: "vislit",
-    shownWelcome: false,
+    shownWelcome: false, // welcome message will ask where the user wants to save their data & welcome them
     saveDataPath:
       "userOnFirst load will be asked to set this. Can change later",
     user: [],
@@ -42,12 +41,7 @@ export function loadDb() {
     words: []
   }).write();
 
-  // Assign database to repository instances instead of using the real db in an attempt at decoupling
-  projectRepository.database = db;
-  progressRepository.database = db;
-
-  // Assign controller instances to repositories
-  projectController.projectRepository = projectRepository;
+  return db;
 }
 
 // Must be async because Node's copyFile() is async? CHECK THIS

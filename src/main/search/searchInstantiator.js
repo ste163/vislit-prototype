@@ -1,5 +1,4 @@
 import MiniSearch from "minisearch";
-import projectRepository from "../repositories/projectRepository";
 // Call Constructor in main process to create the needed MiniSearch instances for
 
 // Once they're created, will need to go to the database, fetch all the items, and add them to the correct miniSearch index
@@ -7,7 +6,10 @@ import projectRepository from "../repositories/projectRepository";
 export let projectMiniSearch = [];
 
 // The constructor will also hold the logic for what we want to search by
-export function searchInstantiator() {
+// turn into a CLASS!! Maybe just call it the search Contrller
+// and it takes in all the controllers we need
+// but for testing, it's just the repos until it's fully switched over
+export function searchInstantiator(projectRepository) {
   // Needs to get all Projects (add Notes, Collections, etc. as they're added)
   const projectsForIndex = projectRepository.getAllProjects();
   // new MiniSearch instance based on only searching certain project fields

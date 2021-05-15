@@ -5,15 +5,21 @@ import { app, protocol, BrowserWindow, ipcMain, Menu } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { loadDb } from "./database";
-import projectRepository from "./repositories/projectRepository";
-import progressRepository from "./repositories/progressRepository";
-import projectController from "./controllers/projectController";
 import { generateContextMenu, generateMenu } from "./ui/menus";
+import progressRepository from "./repositories/progressRepository";
+import ProjectRepository from "./repositories/projectRepository";
+import ProjectController from "./controllers/projectController";
 import {
   searchInstantiator,
   searchProjects
 } from "./search/searchInstantiator";
 const isDevelopment = process.env.NODE_ENV !== "production";
+
+// Have to assign them globally to be used by IPC
+// BUT will be able to remove the REPOSITORIES once I get them converted
+// to classes. Will only need global controllers
+let projectRepository;
+let projectController;
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -22,12 +28,22 @@ protocol.registerSchemesAsPrivileged([
 
 // For now, loadDb here for testing
 try {
-  loadDb();
+  // Should probably move database into a Database Class!
+  const database = loadDb();
   // After the database loads (and this should all be synchronous right now)
   // instantiate all instances of MiniSearch
-  searchInstantiator();
+
+  // Instantiate Repositories
+  projectRepository = new ProjectRepository(database);
+
+  // Instantiate Controllers
+  projectController = new ProjectController(database, projectRepository);
+
+  searchInstantiator(projectRepository);
 } catch (e) {
-  console.log("COULD NOT LOAD DATABASE. THIS IS VERY BAD", e);
+  console.log("");
+  console.log("*************************************************");
+  console.log("UNABLE TO COMPLETE DATABASE/REPO/CONTROLLER SETUP:", e);
 }
 
 async function createWindow() {
@@ -116,6 +132,7 @@ if (isDevelopment) {
 // *** DATABASE *** //
 // Projects
 ipcMain.handle("db-projects-get-all", () => {
+  console.log("5. GETTING PROJECTS");
   return projectRepository.getAllProjects();
 });
 

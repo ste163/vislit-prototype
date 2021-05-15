@@ -1,21 +1,14 @@
 import { dialog } from "electron";
 import { addProjectToIndex } from "../search/searchInstantiator";
-import { repoUnassigned } from "../utils/errorsThrown";
 
-const projectController = {
-  // On initial load, we assign the repo
-  projectRepository: null,
-
-  _checkForProjectRepo() {
-    if (this.projectRepository === null) {
-      throw repoUnassigned("project");
-    }
-  },
+export default class ProjectController {
+  constructor(database, projectRepository) {
+    this.database = database;
+    this.projectRepository = projectRepository;
+  }
 
   addProject(project) {
     try {
-      this._checkForProjectRepo();
-
       const response = this.projectRepository.addProject(project);
       // If it's a string, we have an error message.
       if (typeof response === "string") {
@@ -46,6 +39,4 @@ const projectController = {
       }
     }
   }
-};
-
-export default projectController;
+}
