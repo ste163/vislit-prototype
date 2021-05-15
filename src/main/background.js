@@ -9,10 +9,7 @@ import { generateContextMenu, generateMenu } from "./ui/menus";
 import progressRepository from "./repositories/progressRepository";
 import ProjectRepository from "./repositories/projectRepository";
 import ProjectController from "./controllers/projectController";
-import {
-  searchInstantiator,
-  searchProjects
-} from "./search/searchInstantiator";
+import SearchController from "./controllers/searchController";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Have to assign them globally to be used by IPC
@@ -20,6 +17,7 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 // to classes. Will only need global controllers
 let projectRepository;
 let projectController;
+let searchController;
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -37,9 +35,12 @@ try {
   projectRepository = new ProjectRepository(database);
 
   // Instantiate Controllers
-  projectController = new ProjectController(database, projectRepository);
-
-  searchInstantiator(projectRepository);
+  searchController = new SearchController(projectRepository); // must come first
+  projectController = new ProjectController(
+    database,
+    projectRepository,
+    searchController
+  );
 } catch (e) {
   console.log("");
   console.log("*************************************************");
@@ -132,7 +133,6 @@ if (isDevelopment) {
 // *** DATABASE *** //
 // Projects
 ipcMain.handle("db-projects-get-all", () => {
-  console.log("5. GETTING PROJECTS");
   return projectRepository.getAllProjects();
 });
 
@@ -160,5 +160,5 @@ ipcMain.handle("db-progress-add", (e, progress) => {
 // *** SEARCH *** //
 // Global
 ipcMain.handle("search-globally", (e, query) => {
-  return searchProjects(query);
+  return searchController.searchProjects(query);
 });

@@ -1,26 +1,29 @@
 import { dialog } from "electron";
-import { addProjectToIndex } from "../search/searchInstantiator";
 
 export default class ProjectController {
-  constructor(database, projectRepository) {
+  constructor(database, projectRepository, searchController) {
     this.database = database;
     this.projectRepository = projectRepository;
+    this.searchController = searchController;
   }
 
   addProject(project) {
     try {
+      // See if we have this project in the database
       const response = this.projectRepository.addProject(project);
       // If it's a string, we have an error message.
       if (typeof response === "string") {
-        // Return response so frontend can properly handle what notification to display.
-        // Honestly, make the error messages dope enough that I can just display those suckers :P
+        // Return response with an error.message that can be displayed on the frontend
+        // That way, the strings will all live somewhere in the backend instead of
+        // Both front & back
         return response;
       }
 
-      // If the response has a "title" property, it added properly
+      // If response has a "title" property, it was added properly
       if ("title" in response) {
         try {
-          addProjectToIndex(response);
+          // Add to search index
+          this.searchController.addProjectToIndex(response);
           return response;
         } catch (error) {
           // Display a REALLY serious error message!
