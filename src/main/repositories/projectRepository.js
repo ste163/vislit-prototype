@@ -1,4 +1,3 @@
-import { generateId } from "../database";
 import {
   displayAddError,
   displayGetAllError,
@@ -13,7 +12,7 @@ export default class ProjectRepository {
   }
 
   _isProjectInDb(project) {
-    return this.database
+    return this.database.db
       .get("projects")
       .find({ title: project.title })
       .value();
@@ -21,7 +20,7 @@ export default class ProjectRepository {
 
   getAllProjects() {
     try {
-      return this.database.get("projects").value();
+      return this.database.db.get("projects").value();
     } catch (error) {
       displayGetAllError("projects", error);
       return null;
@@ -31,7 +30,7 @@ export default class ProjectRepository {
   getProjectById(id) {
     // TODO: get all linked data (currently just progress)
     try {
-      return this.database
+      return this.database.db
         .get("projects")
         .find({ id: id })
         .value();
@@ -55,9 +54,9 @@ export default class ProjectRepository {
       }
 
       // Add item to database
-      this.database
+      this.database.db
         .get("projects")
-        .push(generateId(project))
+        .push(this.database.generateId(project))
         .write();
 
       // Retrieve item we just added from the database
@@ -79,7 +78,7 @@ export default class ProjectRepository {
     // TODO: get all related progress & delete that first
     // WARNING MODAL NEEDS TO BE VERY CLEAR ON EVERYTHING THAT WILL BE DELETED!
     try {
-      this.database
+      this.database.db
         .get("projects")
         .remove({ id: projectId })
         .write();

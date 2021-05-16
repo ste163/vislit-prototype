@@ -1,13 +1,12 @@
 import { Menu, shell } from "electron";
-import { showImportWarningDialog, showExportDialog } from "./dialogs";
 // export the menu to be created by main (background.js) process.
 
-export function generateMenu(mainWindow) {
+export function generateMenu(mainWindow, dialogs) {
   // Check if OS is darwin or not
   const template =
     process.platform === "darwin"
       ? buildDarwinTemplate(mainWindow)
-      : buildDefaultTemplate(mainWindow);
+      : buildDefaultTemplate(mainWindow, dialogs);
   // Make menu
   const mainMenu = Menu.buildFromTemplate(template);
   return mainMenu;
@@ -23,7 +22,7 @@ function buildDarwinTemplate() {
   return {};
 }
 
-function buildDefaultTemplate(mainWindow) {
+function buildDefaultTemplate(mainWindow, dialogs) {
   const defaultTemplate = [
     {
       label: "&File",
@@ -32,14 +31,14 @@ function buildDefaultTemplate(mainWindow) {
           label: "&Import Database",
           accelerator: "Ctrl+Shift+I",
           click: () => {
-            showImportWarningDialog();
+            dialogs.showImportWarningDialog();
           }
         },
         {
           label: "&Export Database",
           accelerator: "Ctrl+Shift+E",
           click: () => {
-            showExportDialog();
+            dialogs.showExportDialog();
           }
         },
         {

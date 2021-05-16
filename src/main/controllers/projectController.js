@@ -6,8 +6,7 @@ import { dialog } from "electron";
 // If repose have an error, they throw a message
 // and I can react from this file
 export default class ProjectController {
-  constructor(database, projectRepository, searchController) {
-    this.database = database;
+  constructor(projectRepository, searchController) {
     this.projectRepository = projectRepository;
     this.searchController = searchController;
   }
@@ -32,8 +31,6 @@ export default class ProjectController {
           return response;
         } catch (error) {
           // Display a REALLY serious error message!
-          // Possibly return something other than null?
-          // What happens if the search controller fails?
           return null;
         }
       } else {
@@ -41,9 +38,6 @@ export default class ProjectController {
         // so we couldn't add it to the index?
       }
     } catch (error) {
-      // TODO:
-      // MOVE THIS ERROR HANDER INTO A FUNCTION!
-      // IN UTILS?
       if (error.includes("MAJOR ERROR")) {
         dialog.showErrorBox("Operation failed!", `${error}`);
       } else {

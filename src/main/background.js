@@ -4,17 +4,20 @@
 import { app, protocol, BrowserWindow, ipcMain, Menu } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-import { loadDb } from "./database";
 import { generateContextMenu, generateMenu } from "./ui/menus";
+import Database from "./database";
 import progressRepository from "./repositories/progressRepository";
 import ProjectRepository from "./repositories/projectRepository";
 import ProjectController from "./controllers/projectController";
 import SearchController from "./controllers/searchController";
+import Dialogs from "./ui/dialogs";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Have to assign them globally to be used by IPC
 // BUT will be able to remove the REPOSITORIES once I get them converted
 // to classes. Will only need global controllers
+let database;
+let dialogs;
 let projectRepository;
 let projectController;
 let searchController;
@@ -26,10 +29,10 @@ protocol.registerSchemesAsPrivileged([
 
 // For now, loadDb here for testing
 try {
-  // Should probably move database into a Database Class!
-  const database = loadDb();
-  // After the database loads (and this should all be synchronous right now)
-  // instantiate all instances of MiniSearch
+  database = new Database();
+
+  // Instantiate dialog menus
+  dialogs = new Dialogs(database);
 
   // Instantiate Repositories
   projectRepository = new ProjectRepository(database);
@@ -37,7 +40,6 @@ try {
   // Instantiate Controllers
   searchController = new SearchController(projectRepository); // must come first
   projectController = new ProjectController(
-    database,
     projectRepository,
     searchController
   );
@@ -80,7 +82,7 @@ async function createWindow() {
   });
 
   // Create app menu based on OS
-  Menu.setApplicationMenu(generateMenu(mainWindow));
+  Menu.setApplicationMenu(generateMenu(mainWindow, dialogs));
 }
 
 // Quit when all windows are closed.
