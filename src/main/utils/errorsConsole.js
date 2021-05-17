@@ -1,3 +1,5 @@
+import { dialog } from "electron";
+
 const errorMessage = error => `Error Message: ${error}.`;
 
 export const displayGetAllError = (typeString, error) =>
@@ -6,9 +8,7 @@ export const displayGetAllError = (typeString, error) =>
   );
 
 export const displayGetByIdError = (typeString, error) =>
-  console.error(
-    `ERROR: Unable to get ${typeString} by id. ${errorMessage(error)}.`
-  );
+  dialog.showErrorBox("Error", `Unable to ${typeString} ${error}`);
 
 export const displayAddError = (typeString, error) =>
   console.error(`ERROR: Unable to add ${typeString}. ${errorMessage(error)}`);

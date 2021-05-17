@@ -49,6 +49,7 @@ export default {
     handleSubmit() {
       this.form.dateCreated = new Date(this.form.dateCreated);
       this.addProject(this.form);
+      // Only reset form if add Project returns true
       this.form = this.createForm();
     }
   }

@@ -1,10 +1,10 @@
+import errorMessages from "../errorHandling/errorMessages";
 import {
   displayAddError,
   displayGetAllError,
   displayGetByIdError,
   displayRemoveError
 } from "../utils/errorsConsole";
-import { projAddFail, projTitleDuplication } from "../utils/errorsThrown";
 
 export default class ProjectRepository {
   constructor(database) {
@@ -40,8 +40,6 @@ export default class ProjectRepository {
     }
   }
 
-  // Add does not return a value by default;
-  // to ensure it works, return the object we just added or an error message
   addProject(project) {
     try {
       // NOTE: SHOULD I NORMALIZE TITLES? - Title and TITLE can be added to db
@@ -50,13 +48,13 @@ export default class ProjectRepository {
 
       // If the result is not undefined, that title has been taken
       if (isProjectInDb !== undefined) {
-        throw projTitleDuplication();
+        throw errorMessages.projectTitleDuplication();
       }
 
       // Add item to database
       this.database.db
         .get("projects")
-        .push(this.database.generateId(project))
+        .push(this.database.generateUniqueId(project))
         .write();
 
       // Retrieve item we just added from the database
@@ -64,7 +62,7 @@ export default class ProjectRepository {
 
       // On the off chance the project didn't get added
       if (addedProject === undefined) {
-        throw projAddFail();
+        throw errorMessages.projectAddFailure();
       }
 
       return addedProject;

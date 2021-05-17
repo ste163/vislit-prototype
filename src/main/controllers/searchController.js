@@ -24,12 +24,12 @@ export default class SearchController {
     return projectMiniSearch;
   }
 
-  searchProjects(query) {
-    return this.projectMiniSearch.search(query);
-  }
-
   addProjectToIndex(project) {
     this.projectMiniSearch.add(project);
+  }
+
+  searchProjects(query) {
+    return this.projectMiniSearch.search(query);
   }
 
   // REMOVE PROJECT FROM INDEX

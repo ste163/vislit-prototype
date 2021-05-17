@@ -28,7 +28,12 @@ const actions = {
   },
 
   async addProject({ dispatch }, project) {
+    // TODO:
+    // Test if we wrap the endpoint in a try/catch
+    // and if it has an error
+    // does triggering that cause a try/catch here to trigger?
     const response = await ipcRenderer.invoke("db-projects-add", project);
+    console.log("RENDERER RESPONSE:", response);
     if (response) {
       // Need to get the project id on the return
       // So we can re-route to that ID after we get projects
