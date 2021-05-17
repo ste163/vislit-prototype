@@ -21,7 +21,8 @@ export default class ProjectController {
       return response; // Everything went well! Done!
     } catch (error) {
       // Display a "unable to add project to search index message"
-      return null;
+      return null; // this is bad because we've already added the item to the database
+      // So we should still return the response, just send an error
     }
   }
 }
