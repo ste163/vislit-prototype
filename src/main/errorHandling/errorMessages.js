@@ -11,9 +11,6 @@ function errorGenerator(error, isMajorError) {
 const errorMessages = {
   projectTitleDuplication() {
     return errorGenerator("Project title duplication in database.", false);
-  },
-  projectAddFailure() {
-    return errorGenerator("Project failed to be added to database.", true);
   }
 };
 

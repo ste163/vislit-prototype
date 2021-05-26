@@ -1,14 +1,15 @@
 import { app, dialog } from "electron";
 import { copyFile } from "fs";
 import { nanoid } from "nanoid/non-secure";
-
-const low = require("lowdb");
-const FileSync = require("lowdb/adapters/FileSync");
+import low from "lowdb";
+import FileSync from "lowdb/adapters/FileSync";
+// NOTE:
 // Load lowdb database from 'userData' dir or create if no db in dir
 // On Linux, default location is: /userName/.config/projectTitle
-// POSSIBILITY
-// Maybe have the user be able to decide where the database file should load from. As in, on app load
-// Initially check localStorage for a db location. So the user could place the db in cloud storage
+// TODO:
+// User can decide database save location
+// Initially check localStorage for a db location,
+// So the user could place the db in cloud storage
 
 export default class Database {
   constructor() {
@@ -16,10 +17,8 @@ export default class Database {
   }
 
   _loadDatabase() {
-    // If the file isn't there, it creates it.
-    const adapter = new FileSync(this.getDbPath());
-    // Connect lowdb to the db.json file
-    const db = low(adapter);
+    const adapter = new FileSync(this.getDbPath()); // If file isn't there, create it
+    const db = low(adapter); // Connect lowdb to db.json
     // Set default json structure
     db.defaults({
       database: "vislit",
@@ -93,7 +92,7 @@ export default class Database {
   }
 
   generateUniqueId(item) {
-    item.id = nanoid(21); // 21 probably won't ever have repeats
+    item.id = nanoid(21);
     return item;
   }
 }

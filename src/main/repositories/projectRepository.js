@@ -1,9 +1,7 @@
 import errorMessages from "../errorHandling/errorMessages";
 import {
-  displayAddError,
   displayGetAllError,
-  displayGetByIdError,
-  displayRemoveError
+  displayGetByIdError
 } from "../utils/errorsConsole";
 
 export default class ProjectRepository {
@@ -11,10 +9,10 @@ export default class ProjectRepository {
     this.database = database;
   }
 
-  _isProjectInDb(project) {
+  _getProjectByTitle(title) {
     return this.database.db
       .get("projects")
-      .find({ title: project.title })
+      .find({ title })
       .value();
   }
 
@@ -32,7 +30,7 @@ export default class ProjectRepository {
     try {
       return this.database.db
         .get("projects")
-        .find({ id: id })
+        .find({ id })
         .value();
     } catch (error) {
       displayGetByIdError("project", error);
@@ -42,48 +40,42 @@ export default class ProjectRepository {
 
   addProject(project) {
     try {
-      // NOTE: SHOULD I NORMALIZE TITLES? - Title and TITLE can be added to db
-      // Check if the name for the project we want to create is already in db
-      const isProjectInDb = this._isProjectInDb(project);
+      const isProjectInDb = this._getProjectByTitle(project.title);
 
-      // If the result is not undefined, that title has been taken
       if (isProjectInDb !== undefined) {
         throw errorMessages.projectTitleDuplication();
       }
 
-      // Add item to database
       this.database.db
         .get("projects")
         .push(this.database.generateUniqueId(project))
         .write();
 
-      // Retrieve item we just added from the database
-      const addedProject = this._isProjectInDb(project);
-
-      // On the off chance the project didn't get added
-      if (addedProject === undefined) {
-        throw errorMessages.projectAddFailure();
-      }
+      const addedProject = this._getProjectByTitle(project.title);
 
       return addedProject;
     } catch (error) {
-      displayAddError("project", error);
+      // Error is passed up to controller, then frontend
       return error;
     }
   }
 
-  deleteProject(projectId) {
-    // TODO: get all related progress & delete that first
-    // WARNING MODAL NEEDS TO BE VERY CLEAR ON EVERYTHING THAT WILL BE DELETED!
+  deleteProject(id) {
+    // NOTE:
+    // Warning modal needs to be very specific on what will be deleted
+
+    // TODO:
+    // get all related project data
+    // delete all that data first, in correct order
+
     try {
       this.database.db
         .get("projects")
-        .remove({ id: projectId })
+        .remove({ id })
         .write();
       return true;
     } catch (error) {
-      displayRemoveError("project", error);
-      return false;
+      return error;
     }
   }
 }
