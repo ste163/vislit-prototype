@@ -1,4 +1,5 @@
 import MiniSearch from "minisearch";
+// Not testing searchController as MiniSearch should always work
 
 export default class SearchController {
   constructor(projectRepository) {

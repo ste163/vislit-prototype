@@ -4,25 +4,17 @@ export default class ProjectController {
     this.searchController = searchController;
   }
 
-  // Don't wrap in try/catch; .addProject always has a return
   addProject(project) {
-    // Check if project is in db
     const response = this.projectRepository.addProject(project);
-    //  If we have a 'status' we have an error
+
+    //  "status" is only when an error was thrown
     if ("status" in response) {
       if (response.status === "error") {
         return response; // returns error object we can check for in background.js
       }
     }
-    try {
-      // may not need to wrap in try/catch depending on how testing goes
-      // May be able to handle just like .addProject
-      this.searchController.addProjectToIndex(response);
-      return response; // Everything went well! Done!
-    } catch (error) {
-      // Display a "unable to add project to search index message"
-      return null; // this is bad because we've already added the item to the database
-      // So we should still return the response, just send an error
-    }
+
+    this.searchController.addProjectToIndex(response);
+    return response;
   }
 }

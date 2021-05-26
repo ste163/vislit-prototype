@@ -1,7 +1,5 @@
 import ProjectController from "./projectController";
 
-// TODO: Add tests for when adding fails
-
 test("can add a project", () => {
   const projectRepository = {
     addProject: jest.fn(project => project)
