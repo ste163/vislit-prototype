@@ -2,7 +2,7 @@
 
 > The main project's [github repo](https://github.com/ste163/vislit)
 
-Vue-version of Vislit prototype
+Vue-version of Vislit prototype. Made using Vue version 2. If going to update to Vue version 3, need to check all dependencies.
 
 ## Features Roadmap
 
@@ -40,8 +40,8 @@ Vue-version of Vislit prototype
 - [vee-validate](https://github.com/logaretm/vee-validate) - form validation
 - [D3.js](https://d3js.org/) - data visualizations
 - [TipTap](https://github.com/ueberdosis/tiptap) - rich text editor under MIT, made for Vue, Exports to HTML for easy conversion to Word or reloading into the app.
-- [vue-smooth-dnd](https://github.com/kutlugsahin/vue-smooth-dnd) - animated drag and drop feature --- may not be needed
-- [vue-good-table](https://github.com/xaksis/vue-good-table) - advanced tables --- might not be needed as I could do my own settings for "rows to show" and pagination-
+- [vue-smooth-dnd](https://github.com/kutlugsahin/vue-smooth-dnd) - animated drag and drop feature --- might not be needed
+- [vue-good-table](https://github.com/xaksis/vue-good-table) - advanced tables --- might not be needed as I could do my own settings for "rows to show" and pagination
 
 ### Tested & in prototype
 
