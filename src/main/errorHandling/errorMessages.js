@@ -1,16 +1,14 @@
-function errorGenerator(error, isMajorError) {
+function errorGenerator(error, isToastError) {
   return {
     status: "error",
     message: `ERROR: ${error}`,
-    isMajorError // use this to check in the errorHandler for if we should
-    // do a toast on the frontend (pass the error object all the way to the frontend)
-    // or show the error dialog
+    isToastError: isToastError
   };
 }
 
 const errorMessages = {
   projectTitleDuplication() {
-    return errorGenerator("Project title duplication in database.", false);
+    return errorGenerator("Project title duplication in database.", true);
   }
 };
 
