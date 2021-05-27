@@ -7,7 +7,7 @@ export default class ProjectController {
   addProject(project) {
     const response = this.projectRepository.addProject(project);
 
-    //  "status" is only when an error was thrown
+    // "status" is only when an error was thrown
     if ("status" in response) {
       if (response.status === "error") {
         return response; // returns error object we can check for in background.js

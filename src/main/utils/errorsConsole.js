@@ -1,5 +1,5 @@
 import { dialog } from "electron";
-
+// Will most likely get rid of this entire file!
 const errorMessage = error => `Error Message: ${error}.`;
 
 export const displayGetAllError = (typeString, error) =>
