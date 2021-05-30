@@ -1,7 +1,7 @@
 "use strict";
 
 // Entry point for main process
-import { app, protocol, BrowserWindow, ipcMain, Menu } from "electron";
+import { app, protocol, BrowserWindow, ipcMain, Menu, dialog } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { generateContextMenu, generateMenu } from "./ui/menus";
@@ -29,7 +29,7 @@ protocol.registerSchemesAsPrivileged([
 
 // For now, loadDb here for testing
 try {
-  database = new Database();
+  database = new Database(app, dialog);
 
   // Instantiate dialog menus
   dialogs = new Dialogs(database);

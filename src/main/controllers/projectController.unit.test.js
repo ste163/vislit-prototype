@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import ProjectController from "./projectController";
 
 test("can add a project", () => {

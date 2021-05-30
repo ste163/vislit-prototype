@@ -1,5 +1,4 @@
-import { app, dialog } from "electron";
-import { copyFile } from "fs";
+import { copyFile, unlinkSync } from "fs";
 import { nanoid } from "nanoid/non-secure";
 import low from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
@@ -12,20 +11,37 @@ import FileSync from "lowdb/adapters/FileSync";
 // So the user could place the db in cloud storage
 
 export default class Database {
-  constructor() {
+  constructor(app, dialog) {
+    this.app = app; // electron app instance (or spectron for testing)
+    this.dialog = dialog;
     this.db = this._loadDatabase();
+    this._isTestEnv = process.env.IS_TEST;
+  }
+
+  _getDatabasePath() {
+    const userDataDirPath = this.app.getPath("userData");
+    if (this._isTestEnv === true) {
+      return `${userDataDirPath}/vislit-test-database.json`;
+    } else {
+      return `${userDataDirPath}/vislit-database.json`;
+    }
   }
 
   _loadDatabase() {
-    const isTestEnv = process.env.IS_TEST;
-    const adapter = new FileSync(this.getDbPath()); // If file isn't there, create it
+    const adapter = new FileSync(this._getDatabasePath()); // If file isn't there, create it
     const db = low(adapter); // Connect lowdb to db.json
     // Set default json structure
-    if (isTestEnv === true) {
+    if (this._isTestEnv === true) {
       db.defaults({
-        database: "vislit-test",
+        database: "vislit",
         user: [],
-        projects: [],
+        projects: [
+          { title: "It", description: "An evil clown attacks a town." },
+          {
+            title: "The Shining",
+            description: "An evil hotel possesses a groundskeeper."
+          }
+        ],
         types: [],
         progress: [],
         notes: [],
@@ -53,6 +69,11 @@ export default class Database {
     return db;
   }
 
+  deleteDatabase() {
+    const dbFile = this._getDatabasePath();
+    unlinkSync(dbFile);
+  }
+
   async importDatabase(userInput) {
     // Set lowdb specifics here so we can reset them to null when finished
     let adapter;
@@ -72,7 +93,7 @@ export default class Database {
 
       // Typescript wants a blank anonymous callback
       // Overwite database in UserData with user-selected database
-      await copyFile(userInput, this.getDbPath(), () => {});
+      await copyFile(userInput, this._getDatabasePath(), () => {});
       // Reload database file from UserData
       this._loadDatabase();
       // Send a return value to check if import succeeded
@@ -80,7 +101,7 @@ export default class Database {
     } catch {
       newDb = null;
       adapter = null;
-      dialog.showErrorBox(
+      this.dialog.showErrorBox(
         "Import Error",
         "Selected file may not be a valid Vislit database file or an issue occurred during import."
       );
@@ -89,21 +110,16 @@ export default class Database {
   }
 
   exportDatabase(userInput) {
-    const dbPath = this.getDbPath();
+    const dbPath = this._getDatabasePath();
     try {
       // Typescript wants a blank anonymous callback
       copyFile(dbPath, userInput, () => {});
     } catch {
-      dialog.showErrorBox(
+      this.dialog.showErrorBox(
         "Export Error",
         "Unable to export database. Export operation failed."
       );
     }
-  }
-
-  getDbPath() {
-    const userDataDirPath = app.getPath("userData");
-    return `${userDataDirPath}/vislit-database.json`;
   }
 
   generateUniqueId(item) {
