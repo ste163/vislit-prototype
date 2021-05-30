@@ -1,5 +1,9 @@
 import projectRepository from "./projectRepository";
 
+// Why only integration tests?
+// No value in mocking the entire lowdb database functions.
+// The repository relies too much on lowdb to mock the Database class.
+
 // Tests todo:
 // - getAllProjects - returns all projects
 // - getAllProjects - error
@@ -11,6 +15,8 @@ import projectRepository from "./projectRepository";
 // - deleteProject - error
 
 // TODO:
-// Will need to create a mock database class with all the methods
+// 1. Create the actual TEST version of the database when tests start
+// 2. Delete TEST database when all tests complete
+// Will need to create a mock projectRepo
 
 test("can get projects", () => {});

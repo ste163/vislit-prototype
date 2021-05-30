@@ -17,23 +17,38 @@ export default class Database {
   }
 
   _loadDatabase() {
+    const isTestEnv = process.env.IS_TEST;
     const adapter = new FileSync(this.getDbPath()); // If file isn't there, create it
     const db = low(adapter); // Connect lowdb to db.json
     // Set default json structure
-    db.defaults({
-      database: "vislit",
-      shownWelcome: false, // welcome message will ask where the user wants to save their data & welcome them
-      saveDataPath:
-        "userOnFirst load will be asked to set this. Can change later",
-      user: [],
-      projects: [],
-      types: [],
-      progress: [],
-      notes: [],
-      projectCollection: [],
-      collections: [],
-      words: []
-    }).write();
+    if (isTestEnv === true) {
+      db.defaults({
+        database: "vislit-test",
+        user: [],
+        projects: [],
+        types: [],
+        progress: [],
+        notes: [],
+        projectCollection: [],
+        collections: [],
+        words: []
+      }).write();
+    } else {
+      db.defaults({
+        database: "vislit",
+        shownWelcome: false, // welcome message will ask where the user wants to save their data & welcome them
+        saveDataPath:
+          "userOnFirst load will be asked to set this. Can change later",
+        user: [],
+        projects: [],
+        types: [],
+        progress: [],
+        notes: [],
+        projectCollection: [],
+        collections: [],
+        words: []
+      }).write();
+    }
 
     return db;
   }
@@ -55,7 +70,7 @@ export default class Database {
         throw { message: "Could not load db" };
       }
 
-      // Typescript wants an blank anonymous callback
+      // Typescript wants a blank anonymous callback
       // Overwite database in UserData with user-selected database
       await copyFile(userInput, this.getDbPath(), () => {});
       // Reload database file from UserData
@@ -76,7 +91,7 @@ export default class Database {
   exportDatabase(userInput) {
     const dbPath = this.getDbPath();
     try {
-      // Typescript wants an blank anonymous callback
+      // Typescript wants a blank anonymous callback
       copyFile(dbPath, userInput, () => {});
     } catch {
       dialog.showErrorBox(
