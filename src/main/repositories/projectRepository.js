@@ -71,7 +71,6 @@ export default class ProjectRepository {
     // TODO:
     // get all related project data
     // delete all that data first, in correct order
-
     try {
       this.database.db.chain
         .get("projects")

@@ -19,6 +19,7 @@ import Database from "../database";
 // - deleteProject - error
 
 // TODO:
+// Use the in-memory version of lowdb instead of actually making the database
 // Once tests finish, delete the database at the hard-coded path
 let database = null;
 let projectRepository = null;
@@ -42,6 +43,8 @@ beforeEach(() => {
 
 afterEach(() => {
   // Remove everything from the database
+  // Should be as simple as resetting everything to an empty string
+  // with the new version of lowdb
 });
 
 test("can get projects", async () => {

@@ -1,6 +1,6 @@
+import lodash from "lodash";
 import { copyFile, unlinkSync } from "fs";
 import { LowSync, JSONFileSync } from "lowdb";
-import lodash from "lodash";
 import { nanoid } from "nanoid/non-secure";
 // NOTE:
 // Load lowdb database from 'userData' dir or create if no db in dir
@@ -70,7 +70,7 @@ export default class Database {
       }
     }
 
-    // Add lodash functionality for using find
+    // Add lodash to database after it has been setup
     db.chain = lodash.chain(db.data);
 
     return db;
