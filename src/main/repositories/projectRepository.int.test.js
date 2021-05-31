@@ -19,26 +19,33 @@ import Database from "../database";
 // - deleteProject - error
 
 // TODO:
-// 1. Create the actual TEST version of the database when tests start
-// using a mock app function to get the hard-coded path
-// 2. Once tests finish, delete the database at the hard-coded path
+// Once tests finish, delete the database at the hard-coded path
 let database = null;
 let projectRepository = null;
 
 beforeAll(() => {
-  console.log(process.env.IS_TEST);
   const app = {
-    getPath: jest.fn(() => "/home/lin/Desktop/"), // if this works, change to an .ENV
+    getPath: jest.fn(() => ""), // if this works, change to an .ENV
     dialog: jest.fn(() => {})
   };
   database = new Database(app, app.dialog);
   projectRepository = new ProjectRepository(database);
 });
 
+afterAll(() => {
+  database.deleteDatabase();
+});
+
+beforeEach(() => {
+  // Add all the projects to the database
+});
+
+afterEach(() => {
+  // Remove everything from the database
+});
+
 test("can get projects", async () => {
   const projects = projectRepository.getAllProjects();
-
-  console.log("PROEJCTS", projects);
 
   expect(projects).toEqual(
     { title: "It", description: "An evil clown attacks a town." },

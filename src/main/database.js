@@ -1,7 +1,6 @@
 import { copyFile, unlinkSync } from "fs";
+import { LowSync, JSONFileSync } from "lowdb";
 import { nanoid } from "nanoid/non-secure";
-import low from "lowdb";
-import FileSync from "lowdb/adapters/FileSync";
 // NOTE:
 // Load lowdb database from 'userData' dir or create if no db in dir
 // On Linux, default location is: /userName/.config/projectTitle
@@ -21,51 +20,59 @@ export default class Database {
   _getDatabasePath() {
     const userDataDirPath = this.app.getPath("userData");
     if (this._isTestEnv === "test") {
-      return `${userDataDirPath}/vislit-test-database.json`;
+      // Create test database in projects root
+      return `${process.env.PWD}/vislit-test-database.json`;
     } else {
       return `${userDataDirPath}/vislit-database.json`;
     }
   }
 
   _loadDatabase() {
-    const adapter = new FileSync(this._getDatabasePath()); // If file isn't there, create it
-    const db = low(adapter); // Connect lowdb to db.json
-    // Set default json structure
-    if (this._isTestEnv === "test") {
-      db.defaults({
-        database: "vislit",
-        user: [],
-        projects: [],
-        types: [],
-        progress: [],
-        notes: [],
-        projectCollection: [],
-        collections: [],
-        words: []
-      }).write();
-    } else {
-      db.defaults({
-        database: "vislit",
-        shownWelcome: false, // welcome message will ask where the user wants to save their data & welcome them
-        saveDataPath:
-          "userOnFirst load will be asked to set this. Can change later",
-        user: [],
-        projects: [],
-        types: [],
-        progress: [],
-        notes: [],
-        projectCollection: [],
-        collections: [],
-        words: []
-      }).write();
-    }
+    // TODO: Use the (new MemorySync()) in lowdb for having the db only live in memory
+    const adapter = new JSONFileSync(this._getDatabasePath()); // If file isn't there, create it
+    const db = new LowSync(adapter); // Connect lowdb to vislit-database.json
 
+    db.read();
+
+    if (db.data === null) {
+      // Set default database structure
+      if (this._isTestEnv === "test") {
+        db.data = {
+          database: "vislit",
+          user: [],
+          projects: [],
+          types: [],
+          progress: [],
+          notes: [],
+          projectCollection: [],
+          collections: [],
+          words: []
+        };
+        db.write();
+      } else {
+        db.data = {
+          database: "vislit",
+          shownWelcome: false, // welcome message will ask where the user wants to save their data & welcome them
+          saveDataPath:
+            "userOnFirst load will be asked to set this. Can change later",
+          user: [],
+          projects: [],
+          types: [],
+          progress: [],
+          notes: [],
+          projectCollection: [],
+          collections: [],
+          words: []
+        };
+        db.write();
+      }
+    }
     return db;
   }
 
   deleteDatabase() {
     const dbFile = this._getDatabasePath();
-    unlinkSync(dbFile);
+    unlinkSync(dbFile); // deletes file
   }
 
   async importDatabase(userInput) {
@@ -75,8 +82,8 @@ export default class Database {
     // Verify db file user selected is a legitimate vislit database by loading it into lowdb
     try {
       // Load user-selected .json file
-      adapter = new FileSync(userInput);
-      newDb = low(adapter);
+      adapter = new JSONFileSync(userInput);
+      newDb = new LowSync(adapter);
       const databaseType = newDb.get("database").value();
       // Check if .json file has a database property & value of database: vislit
       if (databaseType !== "vislit") {

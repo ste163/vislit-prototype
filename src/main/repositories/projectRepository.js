@@ -16,9 +16,9 @@ export default class ProjectRepository {
       .value();
   }
 
-  getAllProjects() {
+  async getAllProjects() {
     try {
-      return this.database.db.get("projects").value();
+      return await this.database.db.data.projects;
     } catch (error) {
       displayGetAllError("projects", error);
       return null;
