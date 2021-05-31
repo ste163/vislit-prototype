@@ -12,15 +12,15 @@ import FileSync from "lowdb/adapters/FileSync";
 
 export default class Database {
   constructor(app, dialog) {
+    this._isTestEnv = process.env.NODE_ENV;
     this.app = app; // electron app instance (or spectron for testing)
     this.dialog = dialog;
     this.db = this._loadDatabase();
-    this._isTestEnv = process.env.IS_TEST;
   }
 
   _getDatabasePath() {
     const userDataDirPath = this.app.getPath("userData");
-    if (this._isTestEnv === true) {
+    if (this._isTestEnv === "test") {
       return `${userDataDirPath}/vislit-test-database.json`;
     } else {
       return `${userDataDirPath}/vislit-database.json`;
@@ -31,17 +31,11 @@ export default class Database {
     const adapter = new FileSync(this._getDatabasePath()); // If file isn't there, create it
     const db = low(adapter); // Connect lowdb to db.json
     // Set default json structure
-    if (this._isTestEnv === true) {
+    if (this._isTestEnv === "test") {
       db.defaults({
         database: "vislit",
         user: [],
-        projects: [
-          { title: "It", description: "An evil clown attacks a town." },
-          {
-            title: "The Shining",
-            description: "An evil hotel possesses a groundskeeper."
-          }
-        ],
+        projects: [],
         types: [],
         progress: [],
         notes: [],

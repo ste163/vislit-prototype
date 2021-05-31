@@ -38,7 +38,6 @@
     "eslint-plugin-vue": "^6.2.2",
     "jest": "^27.0.3",
     "prettier": "^1.19.1",
-    "spectron": "^15.0.0",
     "vue-cli-plugin-electron-builder": "^2.0.0",
     "vue-template-compiler": "^2.6.11"
   }
