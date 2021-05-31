@@ -15,6 +15,7 @@
   "main": "background.js",
   "dependencies": {
     "core-js": "^3.6.5",
+    "lodash": "^4.17.21",
     "lowdb": "github:dankreiger/lowdb#chore/esm-cjs-hybrid-WITH-LIB",
     "minisearch": "^3.0.2",
     "nanoid": "^3.1.20",

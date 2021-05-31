@@ -10,15 +10,17 @@ export default class ProjectRepository {
   }
 
   _getProjectByTitle(title) {
-    return this.database.db
+    // Only use db.chain when you need lodash methods
+    return this.database.db.chain
       .get("projects")
       .find({ title })
       .value();
   }
 
-  async getAllProjects() {
+  getAllProjects() {
     try {
-      return await this.database.db.data.projects;
+      // Use db.data for everything that doesn't require lodash
+      return this.database.db.data.projects;
     } catch (error) {
       displayGetAllError("projects", error);
       return null;
@@ -28,7 +30,7 @@ export default class ProjectRepository {
   getProjectById(id) {
     // TODO: get all linked data (currently just progress)
     try {
-      return this.database.db
+      return this.database.db.chain
         .get("projects")
         .find({ id })
         .value();
@@ -46,16 +48,18 @@ export default class ProjectRepository {
         throw errorMessages.projectTitleDuplication();
       }
 
-      this.database.db
-        .get("projects")
-        .push(this.database.generateUniqueId(project))
-        .write();
+      this.database.db.data.projects.push(
+        this.database.generateUniqueId(project)
+      );
+
+      this.database.db.write();
 
       const addedProject = this._getProjectByTitle(project.title);
 
       return addedProject;
     } catch (error) {
       // Error is passed up to controller, then frontend
+      console.log(error);
       return error;
     }
   }
@@ -69,12 +73,13 @@ export default class ProjectRepository {
     // delete all that data first, in correct order
 
     try {
-      this.database.db
+      this.database.db.chain
         .get("projects")
         .remove({ id })
-        .write();
+        .value();
       return true;
     } catch (error) {
+      console.log(error);
       return error;
     }
   }

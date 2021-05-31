@@ -1,5 +1,6 @@
 import { copyFile, unlinkSync } from "fs";
 import { LowSync, JSONFileSync } from "lowdb";
+import lodash from "lodash";
 import { nanoid } from "nanoid/non-secure";
 // NOTE:
 // Load lowdb database from 'userData' dir or create if no db in dir
@@ -29,6 +30,7 @@ export default class Database {
 
   _loadDatabase() {
     // TODO: Use the (new MemorySync()) in lowdb for having the db only live in memory
+    // https://github.com/typicode/lowdb/tree/main/examples
     const adapter = new JSONFileSync(this._getDatabasePath()); // If file isn't there, create it
     const db = new LowSync(adapter); // Connect lowdb to vislit-database.json
 
@@ -67,6 +69,10 @@ export default class Database {
         db.write();
       }
     }
+
+    // Add lodash functionality for using find
+    db.chain = lodash.chain(db.data);
+
     return db;
   }
 
@@ -75,7 +81,7 @@ export default class Database {
     unlinkSync(dbFile); // deletes file
   }
 
-  async importDatabase(userInput) {
+  importDatabase(userInput) {
     // Set lowdb specifics here so we can reset them to null when finished
     let adapter;
     let newDb;
@@ -94,7 +100,7 @@ export default class Database {
 
       // Typescript wants a blank anonymous callback
       // Overwite database in UserData with user-selected database
-      await copyFile(userInput, this._getDatabasePath(), () => {});
+      copyFile(userInput, this._getDatabasePath(), () => {});
       // Reload database file from UserData
       this._loadDatabase();
       // Send a return value to check if import succeeded
