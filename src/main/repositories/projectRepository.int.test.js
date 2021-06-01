@@ -9,15 +9,19 @@ jest.mock("../errorHandling/errorMessages");
 // No value in mocking the entire lowdb database functions.
 // The repository relies too much on lowdb to mock the Database class.
 
-// Tests todo:
-// - DONE- getAllProjects - returns all projects
-// - DONE - getAllProjects - error
-// - DONE - getProjectById - returns project
+// Current Tests
+// - getAllProjects - returns all projects
+// - getAllProjects - error
+// - getProjectById - returns project
 // - getProjectById - error
-// - addProject -  success
-// - addProject - project title already in database
 // - deleteProject - success
-// - deleteProject - error
+
+// Tests todo:
+// - addProject -  success, one new item in database
+// - addProject - project title already in database
+// - addProject - bad database returns the error message
+// - deleteProject - returns error & ensure item is still in database
+// - deleteProject - deletes all related data
 
 let database = null;
 let projectRepository = null;
@@ -85,3 +89,36 @@ test("can get project by Id", () => {
     description: "An evil hotel possesses a groundskeeper."
   });
 });
+
+test("failing to get project by Id displays error & returns null", () => {
+  const erroringProjectRepository = new ProjectRepository(null, errorMessages);
+
+  const project = erroringProjectRepository.getProjectById("2");
+
+  const mockErrorMessageInstance = ErrorMessages.mock.instances[0];
+
+  expect(mockErrorMessageInstance.displayGetByIdError).toHaveBeenCalled();
+  expect(project).toBeNull();
+});
+
+// THIS NEEDS ANOTHER CHECK. IF IT'S NOT IN DATABASE, IT NEEDS TO THROW AN ERROR
+// INSTEAD, IT SAYS "undefined".
+test("can not get a project by id not in database", () => {
+  // const project = projectRepository.getProjectById("666");
+});
+
+test("can delete a project", () => {
+  const success = projectRepository.deleteProject("1");
+
+  const projects = projectRepository.getAllProjects();
+
+  expect(success).toEqual(true);
+  expect(projects.length).toEqual(1);
+});
+
+// UNABLE TO FINISH TESTING. NEED TO ADD getById check in delete method
+// test("can not delete a project not in database", () => {
+//   // const error = projectRepository.deleteProject("666");
+
+//   expect(projectRepository.deleteProject("666")).toThrow();
+// });

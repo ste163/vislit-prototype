@@ -23,8 +23,12 @@ export default class ProjectRepository {
   }
 
   getProjectById(id) {
-    // TODO: get all linked data (currently just progress)
+    // TODO:
+    // get all linked data (currently just progress)
     try {
+      // Add check for if the returned value is undefined,
+      // throw an error of "Project Not In Database"
+      // otherwise, return the project
       return this.database.db.chain
         .get("projects")
         .find({ id })
@@ -67,6 +71,10 @@ export default class ProjectRepository {
     // get all related project data
     // delete all that data first, in correct order
     try {
+      // See if this project is in the database
+      // if it is not, throw an error
+      // if it is in the database, continue execution
+
       this.database.db.chain
         .get("projects")
         .remove({ id })
