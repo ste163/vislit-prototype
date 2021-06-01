@@ -1,62 +1,87 @@
 /**
  * @jest-environment node
  */
-
-import ProjectRepository from "./projectRepository";
 import Database from "../database";
+import ErrorMessages from "../errorHandling/errorMessages";
+import ProjectRepository from "./projectRepository";
+jest.mock("../errorHandling/errorMessages");
 // Why only integration tests?
 // No value in mocking the entire lowdb database functions.
 // The repository relies too much on lowdb to mock the Database class.
 
 // Tests todo:
-// - getAllProjects - returns all projects
-// - getAllProjects - error
-// - getProjectById - returns project
+// - DONE- getAllProjects - returns all projects
+// - DONE - getAllProjects - error
+// - DONE - getProjectById - returns project
 // - getProjectById - error
 // - addProject -  success
 // - addProject - project title already in database
 // - deleteProject - success
 // - deleteProject - error
 
-// TODO:
-// Use the in-memory version of lowdb instead of actually making the database
-// Once tests finish, delete the database at the hard-coded path
 let database = null;
 let projectRepository = null;
+let errorMessages = null;
 
-beforeAll(() => {
+beforeEach(() => {
+  // Clear all instances & calls to constructor & methods
+  ErrorMessages.mockClear();
+
   const app = {
     getPath: jest.fn(() => ""), // if this works, change to an .ENV
     dialog: jest.fn(() => {})
   };
+
+  errorMessages = new ErrorMessages();
   database = new Database(app, app.dialog);
-  projectRepository = new ProjectRepository(database);
-});
+  projectRepository = new ProjectRepository(database, errorMessages);
 
-afterAll(() => {
-  database.deleteDatabase();
-});
-
-beforeEach(() => {
-  // Add all the projects to the database
-});
-
-afterEach(() => {
-  // Remove everything from the database
-  // Should be as simple as resetting everything to an empty string
-  // with the new version of lowdb
-});
-
-test("can get projects", async () => {
-  const projects = projectRepository.getAllProjects();
-
-  expect(projects).toEqual(
-    { title: "It", description: "An evil clown attacks a town." },
+  database.db.data.projects = [
+    { id: "1", title: "It", description: "An evil clown attacks a town." },
     {
+      id: "2",
       title: "The Shining",
       description: "An evil hotel possesses a groundskeeper."
     }
-  );
+  ];
+});
 
-  console.log("FINISHED ALL TESTS");
+test("can get all projects", () => {
+  expect(ErrorMessages).toHaveBeenCalled();
+
+  const projects = projectRepository.getAllProjects();
+
+  // Ensure no error messages were called
+  const mockErrorMessageInstance = ErrorMessages.mock.instances[0];
+  expect(mockErrorMessageInstance.displayGetAllError).not.toHaveBeenCalled();
+
+  expect(projects).toEqual([
+    { id: "1", title: "It", description: "An evil clown attacks a town." },
+    {
+      id: "2",
+      title: "The Shining",
+      description: "An evil hotel possesses a groundskeeper."
+    }
+  ]);
+});
+
+test("failing to get all projects displays error & returns null", () => {
+  const erroringProjectRepository = new ProjectRepository(null, errorMessages);
+
+  const projects = erroringProjectRepository.getAllProjects();
+
+  const mockErrorMessageInstance = ErrorMessages.mock.instances[0];
+
+  expect(mockErrorMessageInstance.displayGetAllError).toHaveBeenCalled();
+  expect(projects).toBeNull();
+});
+
+test("can get project by Id", () => {
+  const project = projectRepository.getProjectById("2");
+
+  expect(project).toEqual({
+    id: "2",
+    title: "The Shining",
+    description: "An evil hotel possesses a groundskeeper."
+  });
 });

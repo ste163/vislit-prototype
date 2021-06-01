@@ -1,6 +1,6 @@
 import lodash from "lodash";
 import { copyFile, unlinkSync } from "fs";
-import { LowSync, JSONFileSync } from "lowdb";
+import { LowSync, JSONFileSync, MemorySync } from "lowdb";
 import { nanoid } from "nanoid/non-secure";
 // NOTE:
 // Load lowdb database from 'userData' dir or create if no db in dir
@@ -20,54 +20,35 @@ export default class Database {
 
   _getDatabasePath() {
     const userDataDirPath = this.app.getPath("userData");
-    if (this._isTestEnv === "test") {
-      // Create test database in projects root
-      return `${process.env.PWD}/vislit-test-database.json`;
-    } else {
-      return `${userDataDirPath}/vislit-database.json`;
-    }
+    return `${userDataDirPath}/vislit-database.json`;
   }
 
   _loadDatabase() {
-    // TODO: Use the (new MemorySync()) in lowdb for having the db only live in memory
-    // https://github.com/typicode/lowdb/tree/main/examples
-    const adapter = new JSONFileSync(this._getDatabasePath()); // If file isn't there, create it
+    const adapter =
+      this._isTestEnv === "test"
+        ? new MemorySync() // In-memory test database
+        : new JSONFileSync(this._getDatabasePath()); // If file isn't there, create it
     const db = new LowSync(adapter); // Connect lowdb to vislit-database.json
 
     db.read();
 
     if (db.data === null) {
       // Set default database structure
-      if (this._isTestEnv === "test") {
-        db.data = {
-          database: "vislit",
-          user: [],
-          projects: [],
-          types: [],
-          progress: [],
-          notes: [],
-          projectCollection: [],
-          collections: [],
-          words: []
-        };
-        db.write();
-      } else {
-        db.data = {
-          database: "vislit",
-          shownWelcome: false, // welcome message will ask where the user wants to save their data & welcome them
-          saveDataPath:
-            "userOnFirst load will be asked to set this. Can change later",
-          user: [],
-          projects: [],
-          types: [],
-          progress: [],
-          notes: [],
-          projectCollection: [],
-          collections: [],
-          words: []
-        };
-        db.write();
-      }
+      db.data = {
+        database: "vislit",
+        shownWelcome: false, // welcome message will ask where the user wants to save their data & welcome them
+        saveDataPath:
+          "userOnFirst load will be asked to set this. Can change later",
+        user: [],
+        projects: [],
+        types: [],
+        progress: [],
+        notes: [],
+        projectCollection: [],
+        collections: [],
+        words: []
+      };
+      db.write();
     }
 
     // Add lodash to database after it has been setup
@@ -76,6 +57,7 @@ export default class Database {
     return db;
   }
 
+  // Probably won't need this. If testing with in-memory works out, delete this method
   deleteDatabase() {
     const dbFile = this._getDatabasePath();
     unlinkSync(dbFile); // deletes file

@@ -5,22 +5,22 @@ import { app, protocol, BrowserWindow, ipcMain, Menu, dialog } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { generateContextMenu, generateMenu } from "./ui/menus";
+import ErrorMessages from "./errorHandling/errorMessages";
 import Database from "./database";
+import Dialogs from "./ui/dialogs";
 import progressRepository from "./repositories/progressRepository";
 import ProjectRepository from "./repositories/projectRepository";
 import ProjectController from "./controllers/projectController";
 import SearchController from "./controllers/searchController";
-import Dialogs from "./ui/dialogs";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Have to assign them globally to be used by IPC
 // BUT will be able to remove the REPOSITORIES once I get them converted
 // to classes. Will only need global controllers
-let database;
-let dialogs;
-let projectRepository;
-let projectController;
-let searchController;
+let dialogs = null;
+let projectRepository = null;
+let projectController = null;
+let searchController = null;
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -29,13 +29,16 @@ protocol.registerSchemesAsPrivileged([
 
 // For now, loadDb here for testing
 try {
-  database = new Database(app, dialog);
+  // Instantiate errorMessage class
+  const errorMessages = new ErrorMessages(dialog);
+
+  const database = new Database(app, dialog);
 
   // Instantiate dialog menus
   dialogs = new Dialogs(database);
 
   // Instantiate Repositories
-  projectRepository = new ProjectRepository(database);
+  projectRepository = new ProjectRepository(database, errorMessages);
 
   // Instantiate Controllers
   searchController = new SearchController(projectRepository); // must come first

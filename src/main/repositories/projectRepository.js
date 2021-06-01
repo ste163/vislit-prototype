@@ -1,12 +1,7 @@
-import errorMessages from "../errorHandling/errorMessages";
-import {
-  displayGetAllError,
-  displayGetByIdError
-} from "../utils/errorsConsole";
-
 export default class ProjectRepository {
-  constructor(database) {
+  constructor(database, errorMessages) {
     this.database = database;
+    this.errorMessages = errorMessages;
   }
 
   _getProjectByTitle(title) {
@@ -22,7 +17,7 @@ export default class ProjectRepository {
       // Use db.data for everything that doesn't require lodash
       return this.database.db.data.projects;
     } catch (error) {
-      displayGetAllError("projects", error);
+      this.errorMessages.displayGetAllError("projects", error);
       return null;
     }
   }
@@ -35,7 +30,7 @@ export default class ProjectRepository {
         .find({ id })
         .value();
     } catch (error) {
-      displayGetByIdError("project", error);
+      this.errorMessages.displayGetByIdError("project", error);
       return null;
     }
   }
@@ -45,7 +40,7 @@ export default class ProjectRepository {
       const isProjectInDb = this._getProjectByTitle(project.title);
 
       if (isProjectInDb !== undefined) {
-        throw errorMessages.projectTitleDuplication();
+        throw this.errorMessages.projectTitleDuplication();
       }
 
       this.database.db.data.projects.push(
