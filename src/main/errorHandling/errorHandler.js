@@ -1,20 +1,14 @@
 // Handle displaying  dialog.showErrorBox("Title", "Message: ${error}"
 // for catch(error) blocks
 
-// Make this a class so we can mock the functions
-
-// const errorMessage = error => `Error Message: ${error}.`;
-
-// export const displayGetByIdError = (typeString, error) =>
-//
-
 export default class ErrorHandler {
   constructor(dialog) {
     this.dialog = dialog;
   }
 
-  // NOT NEEDED AS I'll be using the new Error("Unable to whatever")
-  // AND PASSING THAT ERROR object into these
+  // VERY GOOD CHANCE I WILL NOT NEED THIS CLASS ANYMORE
+  // AS THE new Error() has a lot of it's own stuff built in
+  // May be able to just pass the "dialog" into the controller classes
 
   // DO NOT NEED .isToastError
   // Because if we're passing the error to the frontend,

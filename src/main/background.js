@@ -18,7 +18,6 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 // BUT will be able to remove the REPOSITORIES once I get them converted
 // to classes. Will only need global controllers
 let dialogs = null;
-let projectRepository = null;
 let projectController = null;
 let searchController = null;
 
@@ -30,7 +29,8 @@ protocol.registerSchemesAsPrivileged([
 // FOR NOW: instantiate all classes here
 // Will probably need to move it to the app.on() later
 try {
-  // Instantiate errorMessage class
+  // Instantiate errorHandler class
+  // May be able to delete errorHandler
   const errorHandler = new ErrorHandler(dialog);
 
   const database = new Database(app, dialog);
@@ -39,7 +39,7 @@ try {
   dialogs = new Dialogs(database);
 
   // Instantiate Repositories
-  projectRepository = new ProjectRepository(database, errorHandler);
+  const projectRepository = new ProjectRepository(database);
 
   // Instantiate Controllers
   searchController = new SearchController(projectRepository); // must come first
@@ -51,6 +51,7 @@ try {
   console.log("");
   console.log("*************************************************");
   console.log("UNABLE TO COMPLETE DATABASE/REPO/CONTROLLER SETUP:", e);
+  console.log("*************************************************");
 }
 
 async function createWindow() {
@@ -139,11 +140,18 @@ if (isDevelopment) {
 // *** DATABASE *** //
 // Projects
 ipcMain.handle("db-projects-get-all", () => {
-  return projectController.getAllProjects();
+  try {
+    return projectController.getAllProjects();
+  } catch (error) {
+    console.log(
+      "SHOW TOAST HERE? This runs if the database is null at least",
+      error
+    );
+  }
 });
 
 ipcMain.handle("db-projects-get-selected", (e, id) => {
-  return projectRepository.getProjectById(id);
+  return projectController.getProjectById(id);
 });
 
 ipcMain.handle("db-projects-add", (e, project) => {
@@ -151,7 +159,7 @@ ipcMain.handle("db-projects-add", (e, project) => {
 });
 
 ipcMain.handle("db-projects-delete", (e, projectId) => {
-  return projectRepository.deleteProject(projectId);
+  return projectController.deleteProject(projectId);
 });
 
 // Progress

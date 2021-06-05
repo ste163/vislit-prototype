@@ -67,6 +67,9 @@ test("adding a project with the same name throws an error", () => {
 // OLD PROJECT REPO TESTS THAT USED THE ERRORHANDLER
 // FOR EXAMPLE TO REWRITE THE CONTROLLER
 
+// import ErrorHandler from "../errorHandling/errorHandler";
+// jest.mock("../errorHandling/errorHandler");
+
 // beforeEach(() => {
 //   // Clear all instances & calls to constructor & methods
 //   ErrorHandler.mockClear();

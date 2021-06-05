@@ -9,10 +9,6 @@ jest.mock("../errorHandling/errorHandler");
 // It could be legit to have unit tests instead of only integration tests
 // Because then the only integration tests would be through the controller!
 
-// Why only integration tests?
-// No value in mocking the entire lowdb database functions.
-// The repository relies too much on lowdb to mock the Database class.
-
 // Current Tests
 // - getAllProjects - returns all projects
 // - getAllProjects - error

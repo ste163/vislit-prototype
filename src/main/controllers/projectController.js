@@ -10,14 +10,24 @@ export default class ProjectController {
   // Then the controller decides how to react on errors
   // That's how I setup Lexicon.
 
-  // See what happens if we remove the try.catch from the repo
-  // What errors occur & can we catch them here
-  getAllProjects() {
-    const projects = this.projectRepository.getAllProjects();
+  // Need to DECIDE:
+  // Do we, on error, return the error or null
+  // If we return the error we can display that string on the frontend
 
-    return projects;
+  getAllProjects() {
+    return this.projectRepository.getAllProjects();
   }
 
+  getProjectById(id) {
+    try {
+      return this.projectRepository.getProjectById(id);
+    } catch (error) {
+      console.error(error); // show this as a toast. Most should be toasts
+      return null; // probably means we should return the error then, instead of null
+    }
+  }
+
+  // Need to rewrite to catch the duplication error
   addProject(project) {
     const response = this.projectRepository.addProject(project);
 
@@ -30,5 +40,15 @@ export default class ProjectController {
 
     this.searchController.addProjectToIndex(response);
     return response;
+  }
+
+  deleteProject(id) {
+    try {
+      return this.projectRepository.deleteProject(id);
+    } catch (error) {
+      console.error(error);
+      return error; // or maybe return false? Probably false if we return true on sucess
+      // Or return the error message so we can pass it to frontend...
+    }
   }
 }

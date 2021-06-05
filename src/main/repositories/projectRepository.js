@@ -1,8 +1,9 @@
 export default class ProjectRepository {
-  constructor(database, errorMessages) {
+  constructor(database) {
     this.database = database;
-    this.errorMessages = errorMessages;
   }
+
+  _PROJ_NOT_IN_DB = "Project not in database";
 
   _getProjectByTitle(title) {
     // Only use db.chain when you need lodash methods
@@ -21,45 +22,34 @@ export default class ProjectRepository {
   getProjectById(id) {
     // TODO:
     // get all linked data (currently just progress)
-    try {
-      const project = this.database.db.chain
-        .get("projects")
-        .find({ id })
-        .value();
+    const project = this.database.db.chain
+      .get("projects")
+      .find({ id })
+      .value();
 
-      if (project === undefined) {
-        throw new Error("Project not in database");
-      }
-
-      return project;
-    } catch (error) {
-      this.errorMessages.displayGetByIdError("project", error);
-      return null;
+    if (project === undefined) {
+      throw new Error(this._PROJ_NOT_IN_DB);
     }
+
+    return project;
   }
 
   addProject(project) {
-    try {
-      const isProjectInDb = this._getProjectByTitle(project.title);
+    const isProjectTitleTaken = this._getProjectByTitle(project.title);
 
-      if (isProjectInDb !== undefined) {
-        throw this.errorMessages.projectTitleDuplication();
-      }
-
-      this.database.db.data.projects.push(
-        this.database.generateUniqueId(project)
-      );
-
-      this.database.db.write();
-
-      const addedProject = this._getProjectByTitle(project.title);
-
-      return addedProject;
-    } catch (error) {
-      // Error is passed up to controller, then frontend
-      console.log(error);
-      return error;
+    if (isProjectTitleTaken !== undefined) {
+      throw new Error("Project title already in database");
     }
+
+    this.database.db.data.projects.push(
+      this.database.generateUniqueId(project)
+    );
+
+    this.database.db.write();
+
+    const addedProject = this._getProjectByTitle(project.title);
+
+    return addedProject;
   }
 
   deleteProject(id) {
@@ -69,19 +59,17 @@ export default class ProjectRepository {
     // TODO:
     // get all related project data
     // delete all that data first, in correct order
-    try {
-      // See if this project is in the database
-      // if it is not, throw an error
-      // if it is in the database, continue execution
 
-      this.database.db.chain
-        .get("projects")
-        .remove({ id })
-        .value();
-      return true;
-    } catch (error) {
-      console.log(error);
-      return error;
+    const project = this.getProjectById(id);
+
+    if (project === undefined) {
+      throw new Error(this._PROJ_NOT_IN_DB);
     }
+
+    this.database.db.chain
+      .get("projects")
+      .remove({ id })
+      .value();
+    return true;
   }
 }
