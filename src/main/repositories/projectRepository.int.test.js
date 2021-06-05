@@ -2,9 +2,13 @@
  * @jest-environment node
  */
 import Database from "../database";
-import ErrorMessages from "../errorHandling/errorMessages";
+import ErrorHandler from "../errorHandling/errorHandler";
 import ProjectRepository from "./projectRepository";
-jest.mock("../errorHandling/errorMessages");
+jest.mock("../errorHandling/errorHandler");
+// Now that I'm going to be throwing errors
+// It could be legit to have unit tests instead of only integration tests
+// Because then the only integration tests would be through the controller!
+
 // Why only integration tests?
 // No value in mocking the entire lowdb database functions.
 // The repository relies too much on lowdb to mock the Database class.
@@ -25,20 +29,19 @@ jest.mock("../errorHandling/errorMessages");
 
 let database = null;
 let projectRepository = null;
-let errorMessages = null;
+let errorHandler = null;
 
 beforeEach(() => {
   // Clear all instances & calls to constructor & methods
-  ErrorMessages.mockClear();
+  ErrorHandler.mockClear();
 
   const app = {
-    getPath: jest.fn(() => ""), // if this works, change to an .ENV
     dialog: jest.fn(() => {})
   };
 
-  errorMessages = new ErrorMessages();
+  errorHandler = new ErrorHandler();
   database = new Database(app, app.dialog);
-  projectRepository = new ProjectRepository(database, errorMessages);
+  projectRepository = new ProjectRepository(database, errorHandler);
 
   database.db.data.projects = [
     { id: "1", title: "It", description: "An evil clown attacks a town." },
@@ -51,13 +54,7 @@ beforeEach(() => {
 });
 
 test("can get all projects", () => {
-  expect(ErrorMessages).toHaveBeenCalled();
-
   const projects = projectRepository.getAllProjects();
-
-  // Ensure no error messages were called
-  const mockErrorMessageInstance = ErrorMessages.mock.instances[0];
-  expect(mockErrorMessageInstance.displayGetAllError).not.toHaveBeenCalled();
 
   expect(projects).toEqual([
     { id: "1", title: "It", description: "An evil clown attacks a town." },
@@ -69,16 +66,15 @@ test("can get all projects", () => {
   ]);
 });
 
-test("failing to get all projects displays error & returns null", () => {
-  const erroringProjectRepository = new ProjectRepository(null, errorMessages);
+// test("failing to get all projects displays error & returns null", () => {
+//   // Need to mock the database.db.data.projects
+//   // We will never have a null database.
+//   const erroringProjectRepository = new ProjectRepository(null, errorHandler);
 
-  const projects = erroringProjectRepository.getAllProjects();
+//   const projects = erroringProjectRepository.getAllProjects();
 
-  const mockErrorMessageInstance = ErrorMessages.mock.instances[0];
-
-  expect(mockErrorMessageInstance.displayGetAllError).toHaveBeenCalled();
-  expect(projects).toBeNull();
-});
+//   expect(projects).toBeNull();
+// });
 
 test("can get project by Id", () => {
   const project = projectRepository.getProjectById("2");
@@ -90,21 +86,27 @@ test("can get project by Id", () => {
   });
 });
 
-test("failing to get project by Id displays error & returns null", () => {
-  const erroringProjectRepository = new ProjectRepository(null, errorMessages);
+// test("failing to get project by Id displays error & returns null", () => {
+//   const erroringProjectRepository = new ProjectRepository(null, errorHandler);
 
-  const project = erroringProjectRepository.getProjectById("2");
+//   const project = erroringProjectRepository.getProjectById("2");
 
-  const mockErrorMessageInstance = ErrorMessages.mock.instances[0];
+//   const mockErrorMessageInstance = ErrorHandler.mock.instances[0];
 
-  expect(mockErrorMessageInstance.displayGetByIdError).toHaveBeenCalled();
-  expect(project).toBeNull();
-});
+//   expect(mockErrorMessageInstance.displayGetByIdError).toHaveBeenCalled();
+//   expect(project).toBeNull();
+// });
 
 // THIS NEEDS ANOTHER CHECK. IF IT'S NOT IN DATABASE, IT NEEDS TO THROW AN ERROR
 // INSTEAD, IT SAYS "undefined".
 test("can not get a project by id not in database", () => {
-  // const project = projectRepository.getProjectById("666");
+  function getProjectNotInDb() {
+    return projectRepository.getProjectById("666");
+  }
+
+  const project = getProjectNotInDb();
+
+  expect(project).toBeNull();
 });
 
 test("can delete a project", () => {

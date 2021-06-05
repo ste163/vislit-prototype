@@ -5,7 +5,7 @@ import { app, protocol, BrowserWindow, ipcMain, Menu, dialog } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { generateContextMenu, generateMenu } from "./ui/menus";
-import ErrorMessages from "./errorHandling/errorMessages";
+import ErrorHandler from "./errorHandling/errorHandler";
 import Database from "./database";
 import Dialogs from "./ui/dialogs";
 import progressRepository from "./repositories/progressRepository";
@@ -27,10 +27,11 @@ protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { secure: true, standard: true } }
 ]);
 
-// For now, loadDb here for testing
+// FOR NOW: instantiate all classes here
+// Will probably need to move it to the app.on() later
 try {
   // Instantiate errorMessage class
-  const errorMessages = new ErrorMessages(dialog);
+  const errorHandler = new ErrorHandler(dialog);
 
   const database = new Database(app, dialog);
 
@@ -38,7 +39,7 @@ try {
   dialogs = new Dialogs(database);
 
   // Instantiate Repositories
-  projectRepository = new ProjectRepository(database, errorMessages);
+  projectRepository = new ProjectRepository(database, errorHandler);
 
   // Instantiate Controllers
   searchController = new SearchController(projectRepository); // must come first
@@ -138,7 +139,7 @@ if (isDevelopment) {
 // *** DATABASE *** //
 // Projects
 ipcMain.handle("db-projects-get-all", () => {
-  return projectRepository.getAllProjects();
+  return projectController.getAllProjects();
 });
 
 ipcMain.handle("db-projects-get-selected", (e, id) => {

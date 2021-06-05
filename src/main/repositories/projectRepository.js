@@ -13,26 +13,25 @@ export default class ProjectRepository {
   }
 
   getAllProjects() {
-    try {
-      // Use db.data for everything that doesn't require lodash
-      return this.database.db.data.projects;
-    } catch (error) {
-      this.errorMessages.displayGetAllError("projects", error);
-      return null;
-    }
+    // This will always at least return an []
+    // So no need for undefined check
+    return this.database.db.data.projects;
   }
 
   getProjectById(id) {
     // TODO:
     // get all linked data (currently just progress)
     try {
-      // Add check for if the returned value is undefined,
-      // throw an error of "Project Not In Database"
-      // otherwise, return the project
-      return this.database.db.chain
+      const project = this.database.db.chain
         .get("projects")
         .find({ id })
         .value();
+
+      if (project === undefined) {
+        throw new Error("Project not in database");
+      }
+
+      return project;
     } catch (error) {
       this.errorMessages.displayGetByIdError("project", error);
       return null;
