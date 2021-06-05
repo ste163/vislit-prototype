@@ -2,12 +2,11 @@
  * @jest-environment node
  */
 import Database from "../database";
-import ErrorHandler from "../errorHandling/errorHandler";
 import ProjectRepository from "./projectRepository";
 jest.mock("../errorHandling/errorHandler");
-// Now that I'm going to be throwing errors
-// It could be legit to have unit tests instead of only integration tests
-// Because then the only integration tests would be through the controller!
+// Why only projectRepo integration tests?
+// Not enough value with mocking entire database class
+// The only unit tests would be if errors were thrown, which I'm testing here
 
 // Current Tests
 // - getAllProjects - returns all projects
@@ -25,19 +24,13 @@ jest.mock("../errorHandling/errorHandler");
 
 let database = null;
 let projectRepository = null;
-let errorHandler = null;
 
 beforeEach(() => {
-  // Clear all instances & calls to constructor & methods
-  ErrorHandler.mockClear();
-
   const app = {
     dialog: jest.fn(() => {})
   };
-
-  errorHandler = new ErrorHandler();
   database = new Database(app, app.dialog);
-  projectRepository = new ProjectRepository(database, errorHandler);
+  projectRepository = new ProjectRepository(database);
 
   database.db.data.projects = [
     { id: "1", title: "It", description: "An evil clown attacks a town." },
