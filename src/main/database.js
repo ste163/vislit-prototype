@@ -1,5 +1,5 @@
 import lodash from "lodash";
-import { copyFile, unlinkSync } from "fs";
+import { copyFile } from "fs";
 import { LowSync, JSONFileSync, MemorySync } from "lowdb";
 import { nanoid } from "nanoid/non-secure";
 // NOTE:
@@ -57,26 +57,20 @@ export default class Database {
     return db;
   }
 
-  // Probably won't need this. If testing with in-memory works out, delete this method
-  deleteDatabase() {
-    const dbFile = this._getDatabasePath();
-    unlinkSync(dbFile); // deletes file
-  }
-
   importDatabase(userInput) {
     // Set lowdb specifics here so we can reset them to null when finished
-    let adapter;
+    let newAdapter;
     let newDb;
     // Verify db file user selected is a legitimate vislit database by loading it into lowdb
     try {
       // Load user-selected .json file
-      adapter = new JSONFileSync(userInput);
-      newDb = new LowSync(adapter);
+      newAdapter = new JSONFileSync(userInput);
+      newDb = new LowSync(newAdapter);
       const databaseType = newDb.get("database").value();
       // Check if .json file has a database property & value of database: vislit
       if (databaseType !== "vislit") {
         newDb = null;
-        adapter = null;
+        newAdapter = null;
         throw { message: "Could not load db" };
       }
 
@@ -86,15 +80,19 @@ export default class Database {
       // Reload database file from UserData
       this._loadDatabase();
       // Send a return value to check if import succeeded
-      return "imported";
+      return "imported"; // probably better to return true
     } catch {
       newDb = null;
-      adapter = null;
+      newAdapter = null;
+      // TODO:
+      // Separate errors out:
+      // 1. cehck for valid vislit database
+      // then if there is an error, show this
       this.dialog.showErrorBox(
         "Import Error",
         "Selected file may not be a valid Vislit database file or an issue occurred during import."
       );
-      return "failed";
+      return "failed"; // probably better to return false
     }
   }
 
