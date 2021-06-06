@@ -40,9 +40,25 @@ test("can get all projects", () => {
   ]);
 });
 
-// Test getting project with title
+test("can get a project by title", () => {
+  const project = projectRepository.getProjectByTitle("The Shining");
 
-// Test throwing error when title not in database
+  expect(project).toEqual({
+    id: "2",
+    title: "The Shining",
+    description: "An evil hotel possesses a groundskeeper."
+  });
+});
+
+test("trying to get project by title not in database throws error", () => {
+  function getProjectNotInDb() {
+    projectRepository.getProjectByTitle("The Dead Zone");
+  }
+
+  expect(getProjectNotInDb).toThrowError(
+    new Error("Project with that title not in database")
+  );
+});
 
 test("can get project by id", () => {
   const project = projectRepository.getProjectById("2");
@@ -54,7 +70,7 @@ test("can get project by id", () => {
   });
 });
 
-test("getting a project by id not in database throws error", () => {
+test("trying to get project by id not in database throws error", () => {
   function getProjectNotInDb() {
     return projectRepository.getProjectById("666");
   }
@@ -64,9 +80,20 @@ test("getting a project by id not in database throws error", () => {
   );
 });
 
-// Test Can add a project to database
+test("can add project to database", () => {
+  const newProject = {
+    title: "The Dead Zone",
+    description: "An evil man becomes president and could cause a nuclear war."
+  };
 
-test("can delete a project", () => {
+  projectRepository.addProject(newProject);
+
+  const projects = projectRepository.getAllProjects();
+
+  expect(projects.length).toEqual(3);
+});
+
+test("can delete project", () => {
   projectRepository.deleteProject("1");
 
   const projects = projectRepository.getAllProjects();
