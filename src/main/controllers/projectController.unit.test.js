@@ -2,19 +2,16 @@
  * @jest-environment node
  */
 import ProjectController from "./projectController";
-// These unit tests mock the entire projectRepo
-// They are only testing the logic for if an error occurs,
-// Are we successfully returning the correct response from IPC
+// No unit tests for thew following as not enough controller logic exists to check:
+// - getAllProjects
+// - getProjectById
 
-test("can get all projects", () => {
-  // What happens when it all works, what happens when the repo fails?
-  // That's an integration test
-});
-
-test("can add a project", () => {
+test("can add project", () => {
   const projectRepository = {
+    getProjectByTitle: jest.fn(() => undefined),
     addProject: jest.fn(project => project)
   };
+
   const searchController = {
     addProjectToIndex: jest.fn(() => true)
   };
@@ -35,15 +32,11 @@ test("can add a project", () => {
   });
 });
 
-test("adding a project with the same name throws an error", () => {
+test("trying to add project with same name throws error", () => {
   const projectRepository = {
-    addProject: jest.fn(() => {
-      return {
-        status: "error",
-        message: "ERROR: Duplication!"
-      };
-    })
+    getProjectByTitle: jest.fn(project => project) // causes error to be thrown
   };
+
   const searchController = {
     addProjectToIndex: jest.fn(() => true)
   };
@@ -58,88 +51,47 @@ test("adding a project with the same name throws an error", () => {
     Description: "A murderous clown attacks a town"
   };
 
-  expect(projectController.addProject(project)).toEqual({
-    status: "error",
-    message: "ERROR: Duplication!"
-  });
+  function addFailingProject() {
+    projectController.addProject(project);
+  }
+  expect(addFailingProject).toThrowError(
+    new Error("Project title already in database")
+  );
 });
 
-// OLD PROJECT REPO TESTS THAT USED THE ERRORHANDLER
-// FOR EXAMPLE TO REWRITE THE CONTROLLER
+// TODO:
+// Add searchController to delete project
+test("can delete project", () => {
+  const projectRepository = {
+    deleteProject: jest.fn(() => {})
+  };
 
-// import ErrorHandler from "../errorHandling/errorHandler";
-// jest.mock("../errorHandling/errorHandler");
+  const searchController = {};
 
-// beforeEach(() => {
-//   // Clear all instances & calls to constructor & methods
-//   ErrorHandler.mockClear();
+  const projectController = new ProjectController(
+    projectRepository,
+    searchController
+  );
 
-//   const app = {
-//     getPath: jest.fn(() => ""), // if this works, change to an .ENV
-//     dialog: jest.fn(() => {})
-//   };
+  const success = projectController.deleteProject(1);
 
-//   errorHandler = new ErrorHandler();
-//   database = new Database(app, app.dialog);
-//   projectRepository = new ProjectRepository(database, errorHandler);
+  expect(success).toEqual(true);
+});
 
-//   database.db.data.projects = [
-//     { id: "1", title: "It", description: "An evil clown attacks a town." },
-//     {
-//       id: "2",
-//       title: "The Shining",
-//       description: "An evil hotel possesses a groundskeeper."
-//     }
-//   ];
-// });
+test("trying to delete project with id not in database throws error", () => {
+  const projectRepository = {
+    getProjectById: jest.fn(() => undefined),
+    deleteProject: jest.fn(() => {})
+  };
 
-// test("can get all projects", () => {
-//   expect(ErrorHandler).toHaveBeenCalled();
+  const searchController = {};
 
-//   const projects = projectRepository.getAllProjects();
+  const projectController = new ProjectController(
+    projectRepository,
+    searchController
+  );
 
-//   // Ensure no error messages were called
-//   const mockErrorMessageInstance = ErrorHandler.mock.instances[0];
-//   expect(mockErrorMessageInstance.displayGetAllError).not.toHaveBeenCalled();
+  const error = projectController.deleteProject(1);
 
-//   expect(projects).toEqual([
-//     { id: "1", title: "It", description: "An evil clown attacks a town." },
-//     {
-//       id: "2",
-//       title: "The Shining",
-//       description: "An evil hotel possesses a groundskeeper."
-//     }
-//   ]);
-// });
-
-// test("failing to get all projects displays error & returns null", () => {
-//   const erroringProjectRepository = new ProjectRepository(null, errorHandler);
-
-//   const projects = erroringProjectRepository.getAllProjects();
-
-//   const mockErrorMessageInstance = ErrorHandler.mock.instances[0];
-
-//   expect(mockErrorMessageInstance.displayGetAllError).toHaveBeenCalled();
-//   expect(projects).toBeNull();
-// });
-
-// test("can get project by Id", () => {
-//   const project = projectRepository.getProjectById("2");
-
-//   expect(project).toEqual({
-//     id: "2",
-//     title: "The Shining",
-//     description: "An evil hotel possesses a groundskeeper."
-//   });
-// });
-
-// test("failing to get project by Id displays error & returns null", () => {
-//   const erroringProjectRepository = new ProjectRepository(null, errorHandler);
-
-//   const project = erroringProjectRepository.getProjectById("2");
-
-//   const mockErrorMessageInstance = ErrorHandler.mock.instances[0];
-
-//   expect(mockErrorMessageInstance.displayGetByIdError).toHaveBeenCalled();
-//   expect(project).toBeNull();
-// });
+  expect(error).toEqual(new Error("Project not in database"));
+});
