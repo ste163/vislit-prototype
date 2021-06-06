@@ -41,7 +41,7 @@ export default class ProjectController {
 
       const response = this.projectRepository.add(project);
 
-      this.searchController.add(response);
+      this.searchController.addProject(response);
       return response;
     } catch (error) {
       console.error(error);

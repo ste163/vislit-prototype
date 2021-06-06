@@ -18,7 +18,7 @@ test("can add project", () => {
   };
 
   const searchController = {
-    add: jest.fn(() => true)
+    addProject: jest.fn(() => true)
   };
 
   const projectController = new ProjectController(
@@ -43,7 +43,7 @@ test("trying to add project with same name returns error", () => {
   };
 
   const searchController = {
-    add: jest.fn(() => true)
+    addProject: jest.fn(() => true)
   };
 
   const projectController = new ProjectController(

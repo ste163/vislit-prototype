@@ -35,14 +35,14 @@ beforeEach(() => {
   projectRepository = new ProjectRepository(database);
 
   searchController = new SearchController(projectRepository);
-});
 
-test("can get all projects", () => {
   projectController = new ProjectController(
     projectRepository,
     searchController
   );
+});
 
+test("can get all projects", () => {
   const projects = projectController.getAll();
 
   expect(projects).toEqual([
@@ -65,21 +65,65 @@ test("trying to get all projects with bad database returns error", () => {
   expect(projects).toBeInstanceOf(Error);
 });
 
-// test("can get project by id")
+test("can get project by id", () => {
+  const project = projectController.getById("2");
 
-// test("trying to get project by id not in database returns error")
+  expect(project).toEqual({
+    id: "2",
+    title: "The Shining",
+    description: "An evil hotel possesses a groundskeeper."
+  });
+});
 
-// test("can add project")
+test("trying to get project by id not in database returns error", () => {
+  const project = projectController.getById("666");
 
-// test("trying to add project with name already in database returns error")
+  expect(project).toBeInstanceOf(Error);
+  expect(project).toEqual(new Error(`Project with id 666 not in database`));
+});
 
-// test("can delete project")
+test("can add project", () => {
+  const projectToAdd = {
+    title: "The Dead Zone",
+    description: "An evil man becomes president and could cause a nuclear war."
+  };
 
-// test("trying to delete project by id not in database returns error")
+  const response = projectController.add(projectToAdd);
 
-//
+  const projects = projectController.getAll();
 
-//
+  expect(response.title).toEqual("The Dead Zone");
+  expect(projects.length).toEqual(3);
+});
+
+test("trying to add project with name already in database returns error", () => {
+  const projectToAdd = { title: "It" };
+
+  const response = projectController.add(projectToAdd);
+
+  expect(response).toBeInstanceOf(Error);
+  expect(response).toEqual(new Error("Project title already in database"));
+});
+
+test("can delete project", () => {
+  const response = projectController.delete("2");
+
+  const projects = projectController.getAll();
+
+  expect(response).toEqual(true);
+  expect(projects.length).toEqual(1);
+  expect(projects[0].title).toEqual("It");
+});
+
+test("trying to delete project by id not in database returns error", () => {
+  const response = projectController.delete("666");
+
+  const projects = projectController.getAll();
+
+  expect(response).toBeInstanceOf(Error);
+  expect(response).toEqual(new Error("Project not in database"));
+  expect(projects.length).toEqual(2);
+});
 
 // HOW TO MOCK A CLASS:
 // import ErrorHandler from "../errorHandling/errorHandler";
