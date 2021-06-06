@@ -2,9 +2,8 @@
  * @jest-environment node
  */
 import ProjectController from "./projectController";
-// No unit tests for thew following as not enough controller logic exists to check:
-// - getAllProjects
-// - getProjectById
+// No unit tests for getAllProjects
+// not enough controller logic exists to check
 
 beforeEach(() => {
   // Disables the console.error messages jest displays
@@ -38,7 +37,7 @@ test("can add project", () => {
   });
 });
 
-test("trying to add project with same name throws error", () => {
+test("trying to add project with same name returns error", () => {
   const projectRepository = {
     getProjectByTitle: jest.fn(project => project) // causes error to be thrown
   };
@@ -57,10 +56,7 @@ test("trying to add project with same name throws error", () => {
     Description: "A murderous clown attacks a town"
   };
 
-  function addFailingProject() {
-    projectController.addProject(project);
-  }
-  expect(addFailingProject).toThrowError(
+  expect(projectController.addProject(project)).toEqual(
     new Error("Project title already in database")
   );
 });
@@ -69,6 +65,7 @@ test("trying to add project with same name throws error", () => {
 // Add searchController to delete project
 test("can delete project", () => {
   const projectRepository = {
+    getProjectById: jest.fn(id => id),
     deleteProject: jest.fn(() => {})
   };
 
@@ -84,7 +81,7 @@ test("can delete project", () => {
   expect(success).toEqual(true);
 });
 
-test("trying to delete project with id not in database throws error", () => {
+test("trying to delete project with id not in database returns error", () => {
   const projectRepository = {
     getProjectById: jest.fn(() => undefined),
     deleteProject: jest.fn(() => {})
@@ -97,9 +94,9 @@ test("trying to delete project with id not in database throws error", () => {
     searchController
   );
 
-  function deleteFails() {
-    projectController.deleteProject(1);
-  }
+  projectController.deleteProject(666);
 
-  expect(deleteFails).toThrowError(new Error("Project not in database"));
+  expect(projectController.deleteProject(666)).toEqual(
+    new Error("Project not in database")
+  );
 });

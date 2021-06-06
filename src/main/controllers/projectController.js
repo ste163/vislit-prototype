@@ -55,13 +55,13 @@ export default class ProjectController {
     try {
       const project = this.getProjectById(id);
 
-      if (project === undefined) {
+      if (project instanceof Error) {
         throw new Error("Project not in database");
       }
 
       this.projectRepository.deleteProject(id);
 
-      // THEN delete it from the search index
+      // THEN delete project from search index
 
       return true;
     } catch (error) {
