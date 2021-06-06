@@ -52,6 +52,7 @@ try {
   console.log("*************************************************");
   console.log("UNABLE TO COMPLETE DATABASE/REPO/CONTROLLER SETUP:", e);
   console.log("*************************************************");
+  console.log("");
 }
 
 async function createWindow() {
@@ -140,14 +141,7 @@ if (isDevelopment) {
 // *** DATABASE *** //
 // Projects
 ipcMain.handle("db-projects-get-all", () => {
-  try {
-    return projectController.getAllProjects();
-  } catch (error) {
-    console.log(
-      "SHOW TOAST HERE? This runs if the database is null at least",
-      error
-    );
-  }
+  return projectController.getAllProjects();
 });
 
 ipcMain.handle("db-projects-get-selected", (e, id) => {

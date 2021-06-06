@@ -13,30 +13,17 @@ export default class ProjectRepository {
     // TODO:
     // get all linked data (currently just progress)
     // Only use db.chain when you need lodash methods
-    const project = this.database.db.chain
+    return this.database.db.chain
       .get("projects")
       .find({ id })
       .value();
-
-    // This check is needed; otherwise it'd be 'undefined' which is less specific
-    if (project === undefined) {
-      throw new Error("Project with that id not in database");
-    }
-
-    return project;
   }
 
   getProjectByTitle(title) {
-    const project = this.database.db.chain
+    return this.database.db.chain
       .get("projects")
       .find({ title })
       .value();
-
-    if (project === undefined) {
-      throw new Error("Project with that title not in database");
-    }
-
-    return project;
   }
 
   addProject(project) {

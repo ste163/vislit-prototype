@@ -5,14 +5,23 @@ export default class ProjectController {
   }
 
   getAllProjects() {
-    // No special checks needed for getAll because it has no params
-    // Will always return empty array, so no possible errors
-    return this.projectRepository.getAllProjects();
+    try {
+      return this.projectRepository.getAllProjects();
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
   }
 
   getProjectById(id) {
     try {
-      return this.projectRepository.getProjectById(id);
+      const project = this.projectRepository.getProjectById(id);
+
+      if (project === undefined) {
+        throw new Error(`Project with id ${id} not in database`);
+      }
+
+      return project;
     } catch (error) {
       console.error(error);
       return error;
@@ -20,33 +29,44 @@ export default class ProjectController {
   }
 
   addProject(project) {
-    const projectInDatabase = this.projectRepository.getProjectByTitle(
-      project.title
-    );
+    try {
+      const projectInDatabase = this.projectRepository.getProjectByTitle(
+        project.title
+      );
 
-    if (projectInDatabase !== undefined) {
-      throw new Error("Project title already in database");
+      // Only add a project if projectInDatabase is undefined
+      if (projectInDatabase !== undefined) {
+        throw new Error("Project title already in database");
+      }
+
+      const response = this.projectRepository.addProject(project);
+
+      this.searchController.addProject(response);
+      return response;
+    } catch (error) {
+      console.error(error);
+      return error;
     }
-
-    const response = this.projectRepository.addProject(project);
-
-    this.searchController.addProject(response);
-    return response;
   }
 
-  // Need an EDIT project
+  // EDIT PROJECT
 
   deleteProject(id) {
-    const project = this.getProjectById(id);
+    try {
+      const project = this.getProjectById(id);
 
-    if (project === undefined) {
-      throw new Error("Project not in database");
+      if (project === undefined) {
+        throw new Error("Project not in database");
+      }
+
+      this.projectRepository.deleteProject(id);
+
+      // THEN delete it from the search index
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return error;
     }
-
-    this.projectRepository.deleteProject(id);
-
-    // THEN delete it from the search index
-
-    return true;
   }
 }

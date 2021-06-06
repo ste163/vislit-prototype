@@ -51,14 +51,10 @@ test("can get a project by title", () => {
   });
 });
 
-test("trying to get project by title not in database throws error", () => {
-  function getProjectNotInDb() {
-    projectRepository.getProjectByTitle("The Dead Zone");
-  }
+test("trying to get project by title not in database returns undefined", () => {
+  const project = projectRepository.getProjectByTitle("The Dead Zone");
 
-  expect(getProjectNotInDb).toThrowError(
-    new Error("Project with that title not in database")
-  );
+  expect(project).toBeUndefined();
 });
 
 test("can get project by id", () => {
@@ -72,13 +68,9 @@ test("can get project by id", () => {
 });
 
 test("trying to get project by id not in database throws error", () => {
-  function getProjectNotInDb() {
-    return projectRepository.getProjectById("666");
-  }
+  const project = projectRepository.getProjectById("666");
 
-  expect(getProjectNotInDb).toThrowError(
-    new Error("Project with that id not in database")
-  );
+  expect(project).toBeUndefined();
 });
 
 test("can add project to database", () => {
