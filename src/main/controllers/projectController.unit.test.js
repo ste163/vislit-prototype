@@ -6,6 +6,12 @@ import ProjectController from "./projectController";
 // - getAllProjects
 // - getProjectById
 
+beforeEach(() => {
+  // Disables the console.error messages jest displays
+  // In the catch blocks
+  jest.spyOn(console, "error").mockImplementation(() => {});
+});
+
 test("can add project", () => {
   const projectRepository = {
     getProjectByTitle: jest.fn(() => undefined),
@@ -13,7 +19,7 @@ test("can add project", () => {
   };
 
   const searchController = {
-    addProjectToIndex: jest.fn(() => true)
+    addProject: jest.fn(() => true)
   };
 
   const projectController = new ProjectController(
@@ -38,7 +44,7 @@ test("trying to add project with same name throws error", () => {
   };
 
   const searchController = {
-    addProjectToIndex: jest.fn(() => true)
+    addProject: jest.fn(() => true)
   };
 
   const projectController = new ProjectController(

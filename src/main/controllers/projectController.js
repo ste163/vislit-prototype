@@ -30,7 +30,7 @@ export default class ProjectController {
 
     const response = this.projectRepository.addProject(project);
 
-    this.searchController.addProjectToIndex(response);
+    this.searchController.addProject(response);
     return response;
   }
 

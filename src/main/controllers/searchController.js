@@ -5,7 +5,7 @@ import MiniSearch from "minisearch";
 export default class SearchController {
   constructor(projectRepository) {
     this.projectRepository = projectRepository;
-    this.projectMiniSearch = this.createProjectMiniSearch(
+    this._projectMiniSearch = this.createProjectMiniSearch(
       this.projectRepository
     );
   }
@@ -26,12 +26,12 @@ export default class SearchController {
     return projectMiniSearch;
   }
 
-  addProjectToIndex(project) {
-    this.projectMiniSearch.add(project);
+  addProject(project) {
+    this._projectMiniSearch.add(project);
   }
 
   searchProjects(query) {
-    return this.projectMiniSearch.search(query);
+    return this._projectMiniSearch.search(query);
   }
 
   // REMOVE PROJECT FROM INDEX

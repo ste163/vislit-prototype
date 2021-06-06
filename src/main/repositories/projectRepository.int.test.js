@@ -17,6 +17,7 @@ beforeEach(() => {
   database = new Database(app, app.dialog);
   projectRepository = new ProjectRepository(database);
 
+  // Add mock data to database
   database.db.data.projects = [
     { id: "1", title: "It", description: "An evil clown attacks a town." },
     {

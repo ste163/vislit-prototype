@@ -2,9 +2,13 @@
 // With a real in-memory database
 // Real projectRepo
 
-// OLD PROJECT REPO TESTS THAT USED THE ERRORHANDLER
-// FOR EXAMPLE TO REWRITE THE CONTROLLER
+// TODO:
+// Implement in-memory database
+// Implement real projectRepo
+// NEED TO TEST BEFORE I CAN DO: searchController
+// Implement real projectController
 
+// HOW TO MOCK A CLASS:
 // import ErrorHandler from "../errorHandling/errorHandler";
 // jest.mock("../errorHandling/errorHandler");
 
@@ -13,7 +17,6 @@
 //   ErrorHandler.mockClear();
 
 //   const app = {
-//     getPath: jest.fn(() => ""), // if this works, change to an .ENV
 //     dialog: jest.fn(() => {})
 //   };
 
@@ -48,36 +51,4 @@
 //       description: "An evil hotel possesses a groundskeeper."
 //     }
 //   ]);
-// });
-
-// test("failing to get all projects displays error & returns null", () => {
-//   const erroringProjectRepository = new ProjectRepository(null, errorHandler);
-
-//   const projects = erroringProjectRepository.getAllProjects();
-
-//   const mockErrorMessageInstance = ErrorHandler.mock.instances[0];
-
-//   expect(mockErrorMessageInstance.displayGetAllError).toHaveBeenCalled();
-//   expect(projects).toBeNull();
-// });
-
-// test("can get project by Id", () => {
-//   const project = projectRepository.getProjectById("2");
-
-//   expect(project).toEqual({
-//     id: "2",
-//     title: "The Shining",
-//     description: "An evil hotel possesses a groundskeeper."
-//   });
-// });
-
-// test("failing to get project by Id displays error & returns null", () => {
-//   const erroringProjectRepository = new ProjectRepository(null, errorHandler);
-
-//   const project = erroringProjectRepository.getProjectById("2");
-
-//   const mockErrorMessageInstance = ErrorHandler.mock.instances[0];
-
-//   expect(mockErrorMessageInstance.displayGetByIdError).toHaveBeenCalled();
-//   expect(project).toBeNull();
 // });
