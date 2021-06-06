@@ -49,5 +49,7 @@ export default class ProjectRepository {
       .get("projects")
       .remove({ id })
       .value();
+
+    this.database.db.write();
   }
 }

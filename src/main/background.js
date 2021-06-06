@@ -5,7 +5,6 @@ import { app, protocol, BrowserWindow, ipcMain, Menu, dialog } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { generateContextMenu, generateMenu } from "./ui/menus";
-import ErrorHandler from "./errorHandling/errorHandler";
 import Database from "./database";
 import Dialogs from "./ui/dialogs";
 import progressRepository from "./repositories/progressRepository";
@@ -15,8 +14,6 @@ import SearchController from "./controllers/searchController";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Have to assign them globally to be used by IPC
-// BUT will be able to remove the REPOSITORIES once I get them converted
-// to classes. Will only need global controllers
 let dialogs = null;
 let projectController = null;
 let searchController = null;
@@ -29,13 +26,7 @@ protocol.registerSchemesAsPrivileged([
 // FOR NOW: instantiate all classes here
 // Will probably need to move it to the app.on() later
 try {
-  // Instantiate errorHandler class
-  // May be able to delete errorHandler
-  const errorHandler = new ErrorHandler(dialog);
-
   const database = new Database(app, dialog);
-
-  // Instantiate dialog menus
   dialogs = new Dialogs(database);
 
   // Instantiate Repositories
@@ -141,19 +132,19 @@ if (isDevelopment) {
 // *** DATABASE *** //
 // Projects
 ipcMain.handle("db-projects-get-all", () => {
-  return projectController.getAllProjects();
+  return projectController.getAll();
 });
 
 ipcMain.handle("db-projects-get-selected", (e, id) => {
-  return projectController.getProjectById(id);
+  return projectController.getById(id);
 });
 
 ipcMain.handle("db-projects-add", (e, project) => {
-  return projectController.addProject(project);
+  return projectController.add(project);
 });
 
 ipcMain.handle("db-projects-delete", (e, projectId) => {
-  return projectController.deleteProject(projectId);
+  return projectController.delete(projectId);
 });
 
 // Progress
