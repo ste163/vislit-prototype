@@ -14,11 +14,11 @@ beforeEach(() => {
 test("can add project", () => {
   const projectRepository = {
     getByTitle: jest.fn(() => undefined),
-    addProject: jest.fn(project => project)
+    add: jest.fn(project => project)
   };
 
   const searchController = {
-    addProject: jest.fn(() => true)
+    add: jest.fn(() => true)
   };
 
   const projectController = new ProjectController(
@@ -31,7 +31,7 @@ test("can add project", () => {
     Description: "A murderous clown attacks a town"
   };
 
-  expect(projectController.addProject(project)).toEqual({
+  expect(projectController.add(project)).toEqual({
     title: "It",
     Description: "A murderous clown attacks a town"
   });
@@ -43,7 +43,7 @@ test("trying to add project with same name returns error", () => {
   };
 
   const searchController = {
-    addProject: jest.fn(() => true)
+    add: jest.fn(() => true)
   };
 
   const projectController = new ProjectController(
@@ -56,7 +56,7 @@ test("trying to add project with same name returns error", () => {
     Description: "A murderous clown attacks a town"
   };
 
-  expect(projectController.addProject(project)).toEqual(
+  expect(projectController.add(project)).toEqual(
     new Error("Project title already in database")
   );
 });
@@ -66,7 +66,7 @@ test("trying to add project with same name returns error", () => {
 test("can delete project", () => {
   const projectRepository = {
     getById: jest.fn(id => id),
-    deleteProject: jest.fn(() => {})
+    delete: jest.fn(() => {})
   };
 
   const searchController = {};
@@ -76,7 +76,7 @@ test("can delete project", () => {
     searchController
   );
 
-  const success = projectController.deleteProject(1);
+  const success = projectController.delete(1);
 
   expect(success).toEqual(true);
 });
@@ -84,7 +84,7 @@ test("can delete project", () => {
 test("trying to delete project with id not in database returns error", () => {
   const projectRepository = {
     getById: jest.fn(() => undefined),
-    deleteProject: jest.fn(() => {})
+    delete: jest.fn(() => {})
   };
 
   const searchController = {};
@@ -94,9 +94,9 @@ test("trying to delete project with id not in database returns error", () => {
     searchController
   );
 
-  projectController.deleteProject(666);
+  projectController.delete(666);
 
-  expect(projectController.deleteProject(666)).toEqual(
+  expect(projectController.delete(666)).toEqual(
     new Error("Project not in database")
   );
 });

@@ -26,7 +26,7 @@ export default class ProjectRepository {
       .value();
   }
 
-  addProject(project) {
+  add(project) {
     this.database.db.data.projects.push(
       this.database.generateUniqueId(project)
     );
@@ -38,7 +38,7 @@ export default class ProjectRepository {
     return addedProject;
   }
 
-  deleteProject(id) {
+  delete(id) {
     // NOTE:
     // Warning modal needs to be very specific on what will be deleted
 

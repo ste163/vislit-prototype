@@ -78,7 +78,7 @@ test("can add project to database", () => {
     description: "An evil man becomes president and could cause a nuclear war."
   };
 
-  projectRepository.addProject(newProject);
+  projectRepository.add(newProject);
 
   const projects = projectRepository.getAll();
 
@@ -86,7 +86,7 @@ test("can add project to database", () => {
 });
 
 test("can delete project", () => {
-  projectRepository.deleteProject("1");
+  projectRepository.delete("1");
 
   const projects = projectRepository.getAll();
 

@@ -6,6 +6,9 @@ import ProjectRepository from "../repositories/projectRepository";
 import ProjectController from "./projectController";
 import SearchController from "./searchController";
 
+let database = null;
+let projectRepository = null;
+let searchController = null;
 let projectController = null;
 
 beforeEach(() => {
@@ -17,7 +20,7 @@ beforeEach(() => {
     dialog: jest.fn(() => {})
   };
 
-  const database = new Database(app, app.dialog);
+  database = new Database(app, app.dialog);
 
   // Add mock data to database
   database.db.data.projects = [
@@ -29,21 +32,38 @@ beforeEach(() => {
     }
   ];
 
-  const projectRepository = new ProjectRepository(database);
+  projectRepository = new ProjectRepository(database);
 
-  const searchController = new SearchController(projectRepository);
+  searchController = new SearchController(projectRepository);
+});
 
+test("can get all projects", () => {
   projectController = new ProjectController(
     projectRepository,
     searchController
   );
+
+  const projects = projectController.getAll();
+
+  expect(projects).toEqual([
+    { id: "1", title: "It", description: "An evil clown attacks a town." },
+    {
+      id: "2",
+      title: "The Shining",
+      description: "An evil hotel possesses a groundskeeper."
+    }
+  ]);
 });
 
-test("can get all projects", () => {
-  // const projects = projectController.getAll();
-});
+test("trying to get all projects with bad database returns error", () => {
+  const badRepo = new ProjectRepository(null);
 
-// test("trying to get all projects with bad repo returns error")
+  projectController = new ProjectController(badRepo, searchController);
+
+  const projects = projectController.getAll();
+
+  expect(projects).toBeInstanceOf(Error);
+});
 
 // test("can get project by id")
 

@@ -28,7 +28,7 @@ export default class ProjectController {
     }
   }
 
-  addProject(project) {
+  add(project) {
     try {
       const projectInDatabase = this.projectRepository.getByTitle(
         project.title
@@ -39,9 +39,9 @@ export default class ProjectController {
         throw new Error("Project title already in database");
       }
 
-      const response = this.projectRepository.addProject(project);
+      const response = this.projectRepository.add(project);
 
-      this.searchController.addProject(response);
+      this.searchController.add(response);
       return response;
     } catch (error) {
       console.error(error);
@@ -49,9 +49,10 @@ export default class ProjectController {
     }
   }
 
-  // EDIT PROJECT
+  // TODO:
+  // Edit
 
-  deleteProject(id) {
+  delete(id) {
     try {
       const project = this.getById(id);
 
@@ -59,7 +60,7 @@ export default class ProjectController {
         throw new Error("Project not in database");
       }
 
-      this.projectRepository.deleteProject(id);
+      this.projectRepository.delete(id);
 
       // THEN delete project from search index
 
