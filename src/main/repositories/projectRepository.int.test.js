@@ -7,14 +7,13 @@ import ProjectRepository from "./projectRepository";
 // Not enough value with mocking entire database class
 // The only unit tests would be if errors were thrown, which I'm testing here
 
-let database = null;
 let projectRepository = null;
 
 beforeEach(() => {
   const app = {
     dialog: jest.fn(() => {})
   };
-  database = new Database(app, app.dialog);
+  const database = new Database(app, app.dialog);
   projectRepository = new ProjectRepository(database);
 
   // Add mock data to database
@@ -29,7 +28,7 @@ beforeEach(() => {
 });
 
 test("can get all projects", () => {
-  const projects = projectRepository.getAllProjects();
+  const projects = projectRepository.getAll();
 
   expect(projects).toEqual([
     { id: "1", title: "It", description: "An evil clown attacks a town." },
@@ -42,7 +41,7 @@ test("can get all projects", () => {
 });
 
 test("can get a project by title", () => {
-  const project = projectRepository.getProjectByTitle("The Shining");
+  const project = projectRepository.getByTitle("The Shining");
 
   expect(project).toEqual({
     id: "2",
@@ -52,13 +51,13 @@ test("can get a project by title", () => {
 });
 
 test("trying to get project by title not in database returns undefined", () => {
-  const project = projectRepository.getProjectByTitle("The Dead Zone");
+  const project = projectRepository.getByTitle("The Dead Zone");
 
   expect(project).toBeUndefined();
 });
 
 test("can get project by id", () => {
-  const project = projectRepository.getProjectById("2");
+  const project = projectRepository.getById("2");
 
   expect(project).toEqual({
     id: "2",
@@ -68,7 +67,7 @@ test("can get project by id", () => {
 });
 
 test("trying to get project by id not in database throws error", () => {
-  const project = projectRepository.getProjectById("666");
+  const project = projectRepository.getById("666");
 
   expect(project).toBeUndefined();
 });
@@ -81,7 +80,7 @@ test("can add project to database", () => {
 
   projectRepository.addProject(newProject);
 
-  const projects = projectRepository.getAllProjects();
+  const projects = projectRepository.getAll();
 
   expect(projects.length).toEqual(3);
 });
@@ -89,7 +88,7 @@ test("can add project to database", () => {
 test("can delete project", () => {
   projectRepository.deleteProject("1");
 
-  const projects = projectRepository.getAllProjects();
+  const projects = projectRepository.getAll();
 
   expect(projects.length).toEqual(1);
 });

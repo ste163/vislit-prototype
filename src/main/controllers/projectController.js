@@ -4,18 +4,18 @@ export default class ProjectController {
     this.searchController = searchController;
   }
 
-  getAllProjects() {
+  getAll() {
     try {
-      return this.projectRepository.getAllProjects();
+      return this.projectRepository.getAll();
     } catch (error) {
       console.error(error);
       return error;
     }
   }
 
-  getProjectById(id) {
+  getById(id) {
     try {
-      const project = this.projectRepository.getProjectById(id);
+      const project = this.projectRepository.getById(id);
 
       if (project === undefined) {
         throw new Error(`Project with id ${id} not in database`);
@@ -30,7 +30,7 @@ export default class ProjectController {
 
   addProject(project) {
     try {
-      const projectInDatabase = this.projectRepository.getProjectByTitle(
+      const projectInDatabase = this.projectRepository.getByTitle(
         project.title
       );
 
@@ -53,7 +53,7 @@ export default class ProjectController {
 
   deleteProject(id) {
     try {
-      const project = this.getProjectById(id);
+      const project = this.getById(id);
 
       if (project instanceof Error) {
         throw new Error("Project not in database");

@@ -13,7 +13,7 @@ beforeEach(() => {
 
 test("can add project", () => {
   const projectRepository = {
-    getProjectByTitle: jest.fn(() => undefined),
+    getByTitle: jest.fn(() => undefined),
     addProject: jest.fn(project => project)
   };
 
@@ -39,7 +39,7 @@ test("can add project", () => {
 
 test("trying to add project with same name returns error", () => {
   const projectRepository = {
-    getProjectByTitle: jest.fn(project => project) // causes error to be thrown
+    getByTitle: jest.fn(project => project) // causes error to be thrown
   };
 
   const searchController = {
@@ -65,7 +65,7 @@ test("trying to add project with same name returns error", () => {
 // Add searchController to delete project
 test("can delete project", () => {
   const projectRepository = {
-    getProjectById: jest.fn(id => id),
+    getById: jest.fn(id => id),
     deleteProject: jest.fn(() => {})
   };
 
@@ -83,7 +83,7 @@ test("can delete project", () => {
 
 test("trying to delete project with id not in database returns error", () => {
   const projectRepository = {
-    getProjectById: jest.fn(() => undefined),
+    getById: jest.fn(() => undefined),
     deleteProject: jest.fn(() => {})
   };
 

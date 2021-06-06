@@ -11,7 +11,7 @@ export default class SearchController {
   }
 
   createProjectMiniSearch(projectRepository) {
-    const projectsForIndex = projectRepository.getAllProjects();
+    const projectsForIndex = projectRepository.getAll();
     // Set search options
     const projectMiniSearch = new MiniSearch({
       fields: ["title", "description"],

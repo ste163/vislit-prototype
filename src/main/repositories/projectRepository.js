@@ -3,13 +3,13 @@ export default class ProjectRepository {
     this.database = database;
   }
 
-  getAllProjects() {
+  getAll() {
     // This will always at least return an []
     // So no need for undefined check
     return this.database.db.data.projects;
   }
 
-  getProjectById(id) {
+  getById(id) {
     // TODO:
     // get all linked data (currently just progress)
     // Only use db.chain when you need lodash methods
@@ -19,7 +19,7 @@ export default class ProjectRepository {
       .value();
   }
 
-  getProjectByTitle(title) {
+  getByTitle(title) {
     return this.database.db.chain
       .get("projects")
       .find({ title })
@@ -33,7 +33,7 @@ export default class ProjectRepository {
 
     this.database.db.write();
 
-    const addedProject = this.getProjectByTitle(project.title);
+    const addedProject = this.getByTitle(project.title);
 
     return addedProject;
   }

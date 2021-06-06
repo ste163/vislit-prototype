@@ -1,20 +1,47 @@
 /**
  * @jest-environment node
  */
+import Database from "../database";
+import ProjectRepository from "../repositories/projectRepository";
+import ProjectController from "./projectController";
+import SearchController from "./searchController";
 
-// TODO:
-// Implement in-memory database
-// Implement real projectRepo
-// Implement real searchController
-// Implement real projectController
+let projectController = null;
 
 beforeEach(() => {
   // Disables the console.error messages jest displays
   // In the catch blocks
   jest.spyOn(console, "error").mockImplementation(() => {});
+
+  const app = {
+    dialog: jest.fn(() => {})
+  };
+
+  const database = new Database(app, app.dialog);
+
+  // Add mock data to database
+  database.db.data.projects = [
+    { id: "1", title: "It", description: "An evil clown attacks a town." },
+    {
+      id: "2",
+      title: "The Shining",
+      description: "An evil hotel possesses a groundskeeper."
+    }
+  ];
+
+  const projectRepository = new ProjectRepository(database);
+
+  const searchController = new SearchController(projectRepository);
+
+  projectController = new ProjectController(
+    projectRepository,
+    searchController
+  );
 });
 
-// test("can get all projects")
+test("can get all projects", () => {
+  // const projects = projectController.getAll();
+});
 
 // test("trying to get all projects with bad repo returns error")
 
