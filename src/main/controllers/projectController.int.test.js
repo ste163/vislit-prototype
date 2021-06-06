@@ -1,12 +1,30 @@
-// Test the projectController
-// With a real in-memory database
-// Real projectRepo
+/**
+ * @jest-environment node
+ */
 
 // TODO:
 // Implement in-memory database
 // Implement real projectRepo
-// NEED TO TEST BEFORE I CAN DO: searchController
+// Implement real searchController
 // Implement real projectController
+
+beforeEach(() => {
+  // Disables the console.error messages jest displays
+  // In the catch blocks
+  jest.spyOn(console, "error").mockImplementation(() => {});
+});
+
+// test("can get all projects")
+
+// test("can get project by id")
+
+// test("trying to get project by id not in database returns error")
+
+// test("can add project")
+
+// test("trying to add project with name already in database throws error")
+
+// test
 
 // HOW TO MOCK A CLASS:
 // import ErrorHandler from "../errorHandling/errorHandler";

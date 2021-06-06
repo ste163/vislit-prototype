@@ -97,7 +97,9 @@ test("trying to delete project with id not in database throws error", () => {
     searchController
   );
 
-  const error = projectController.deleteProject(1);
+  function deleteFails() {
+    projectController.deleteProject(1);
+  }
 
-  expect(error).toEqual(new Error("Project not in database"));
+  expect(deleteFails).toThrowError(new Error("Project not in database"));
 });

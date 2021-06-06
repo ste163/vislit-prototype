@@ -20,11 +20,11 @@ export default class ProjectController {
   }
 
   addProject(project) {
-    const isProjectTitleTaken = this.projectRepository.getProjectByTitle(
+    const projectInDatabase = this.projectRepository.getProjectByTitle(
       project.title
     );
 
-    if (isProjectTitleTaken !== undefined) {
+    if (projectInDatabase !== undefined) {
       throw new Error("Project title already in database");
     }
 
@@ -37,21 +37,16 @@ export default class ProjectController {
   // Need an EDIT project
 
   deleteProject(id) {
-    try {
-      const project = this.getProjectById(id);
+    const project = this.getProjectById(id);
 
-      if (project === undefined) {
-        throw new Error("Project not in database");
-      }
-
-      this.projectRepository.deleteProject(id);
-
-      // THEN delete it from the search index
-
-      return true;
-    } catch (error) {
-      console.error(error);
-      return error;
+    if (project === undefined) {
+      throw new Error("Project not in database");
     }
+
+    this.projectRepository.deleteProject(id);
+
+    // THEN delete it from the search index
+
+    return true;
   }
 }
