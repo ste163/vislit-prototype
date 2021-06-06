@@ -3,24 +3,9 @@
  */
 import Database from "../database";
 import ProjectRepository from "./projectRepository";
-jest.mock("../errorHandling/errorHandler");
 // Why only projectRepo integration tests?
 // Not enough value with mocking entire database class
 // The only unit tests would be if errors were thrown, which I'm testing here
-
-// Current Tests
-// - getAllProjects - returns all projects
-// - getAllProjects - error
-// - getProjectById - returns project
-// - getProjectById - error
-// - deleteProject - success
-
-// Tests todo:
-// - addProject -  success, one new item in database
-// - addProject - project title already in database
-// - addProject - bad database returns the error message
-// - deleteProject - returns error & ensure item is still in database
-// - deleteProject - deletes all related data
 
 let database = null;
 let projectRepository = null;
@@ -55,17 +40,11 @@ test("can get all projects", () => {
   ]);
 });
 
-// test("failing to get all projects displays error & returns null", () => {
-//   // Need to mock the database.db.data.projects
-//   // We will never have a null database.
-//   const erroringProjectRepository = new ProjectRepository(null, errorHandler);
+// Test getting project with title
 
-//   const projects = erroringProjectRepository.getAllProjects();
+// Test throwing error when title not in database
 
-//   expect(projects).toBeNull();
-// });
-
-test("can get project by Id", () => {
+test("can get project by id", () => {
   const project = projectRepository.getProjectById("2");
 
   expect(project).toEqual({
@@ -75,41 +54,22 @@ test("can get project by Id", () => {
   });
 });
 
-// test("failing to get project by Id displays error & returns null", () => {
-//   const erroringProjectRepository = new ProjectRepository(null, errorHandler);
-
-//   const project = erroringProjectRepository.getProjectById("2");
-
-//   const mockErrorMessageInstance = ErrorHandler.mock.instances[0];
-
-//   expect(mockErrorMessageInstance.displayGetByIdError).toHaveBeenCalled();
-//   expect(project).toBeNull();
-// });
-
-// THIS NEEDS ANOTHER CHECK. IF IT'S NOT IN DATABASE, IT NEEDS TO THROW AN ERROR
-// INSTEAD, IT SAYS "undefined".
-test("can not get a project by id not in database", () => {
+test("getting a project by id not in database throws error", () => {
   function getProjectNotInDb() {
     return projectRepository.getProjectById("666");
   }
 
-  const project = getProjectNotInDb();
-
-  expect(project).toBeNull();
+  expect(getProjectNotInDb).toThrowError(
+    new Error("Project with that id not in database")
+  );
 });
 
+// Test Can add a project to database
+
 test("can delete a project", () => {
-  const success = projectRepository.deleteProject("1");
+  projectRepository.deleteProject("1");
 
   const projects = projectRepository.getAllProjects();
 
-  expect(success).toEqual(true);
   expect(projects.length).toEqual(1);
 });
-
-// UNABLE TO FINISH TESTING. NEED TO ADD getById check in delete method
-// test("can not delete a project not in database", () => {
-//   // const error = projectRepository.deleteProject("666");
-
-//   expect(projectRepository.deleteProject("666")).toThrow();
-// });

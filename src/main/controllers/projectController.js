@@ -27,8 +27,17 @@ export default class ProjectController {
     }
   }
 
-  // Need to rewrite to catch the duplication error
+  // NEED TO rewrite to have the title duplication check happen here
   addProject(project) {
+    // 1. Check if title is in database with repo.getProjectByTitle
+    // 2. If the title is there, throw the error
+    // 3. If the title isn't there, add the project, because it'll work
+    // const isProjectTitleTaken = this.getProjectByTitle(project.title);
+
+    // if (isProjectTitleTaken !== undefined) {
+    //   throw new Error("Project title already in database");
+    // }
+
     const response = this.projectRepository.addProject(project);
 
     // "status" is only when an error was thrown
@@ -44,7 +53,17 @@ export default class ProjectController {
 
   deleteProject(id) {
     try {
-      return this.projectRepository.deleteProject(id);
+      const project = this.getProjectById(id);
+
+      if (project === undefined) {
+        throw new Error("Project not in database");
+      }
+
+      this.projectRepository.deleteProject(id);
+
+      // THEN delete it from the search index
+
+      return true;
     } catch (error) {
       console.error(error);
       return error; // or maybe return false? Probably false if we return true on sucess
