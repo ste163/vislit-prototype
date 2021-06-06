@@ -16,15 +16,23 @@ beforeEach(() => {
 
 // test("can get all projects")
 
+// test("trying to get all projects with bad repo returns error")
+
 // test("can get project by id")
 
 // test("trying to get project by id not in database returns error")
 
 // test("can add project")
 
-// test("trying to add project with name already in database throws error")
+// test("trying to add project with name already in database returns error")
 
-// test
+// test("can delete project")
+
+// test("trying to delete project by id not in database returns error")
+
+//
+
+//
 
 // HOW TO MOCK A CLASS:
 // import ErrorHandler from "../errorHandling/errorHandler";
