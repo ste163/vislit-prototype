@@ -43,6 +43,14 @@ const actions = {
     }
   },
 
+  async updateProject({ dispatch }, project) {
+    const response = await ipcRenderer.invoke("db-projects-update", project);
+
+    if (response) {
+      dispatch("getProjects");
+    }
+  },
+
   async getSelectedProject({ commit }, projectId) {
     if (projectId === undefined) {
       commit("setSelectedProject", {});

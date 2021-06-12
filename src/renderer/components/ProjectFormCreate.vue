@@ -1,7 +1,8 @@
 <template>
   <form class="form" @submit.prevent="handleSubmit">
     <h3 class="form__h3">Create Project</h3>
-    <!-- Create form holds BOTH Project & Goal forms. A circle indicator at top/bottom of form can show how many steps -->
+    <!-- Create form holds BOTH Project & Goal forms.
+     A circle indicator at top/bottom of form can show how many steps -->
 
     <!-- PROJECT FORM -->
     <fieldset>
@@ -49,7 +50,7 @@ export default {
     handleSubmit() {
       this.form.dateCreated = new Date(this.form.dateCreated);
       this.addProject(this.form);
-      // Only reset form if add Project returns true
+      // Only reset form if add Project returns the project
       this.form = this.createForm();
     }
   }

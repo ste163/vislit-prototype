@@ -11,17 +11,19 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import { setterMixin } from "../mixins/modalMixins";
 import { deletedMessage } from "../utils/ToastMessages";
+import ProjectFormEdit from "./ProjectFormEdit";
 
 export default {
   computed: {
     ...mapState("projects", ["selectedProject"])
   },
+  mixins: [setterMixin],
   methods: {
     ...mapActions("projects", ["deleteProject"]),
     handleEdit() {
-      console.log("EDIT PROJECT", this.selectedProject.id);
-      this.$toast("TEST!");
+      this.setModal("Edit", ProjectFormEdit);
     },
     handleDelete() {
       const projectTitle = this.selectedProject.title;

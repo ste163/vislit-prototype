@@ -101,7 +101,7 @@ app.on("activate", () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", async () => {
-  if (isDevelopment && !process.env.IS_TEST) {
+  if (isDevelopment) {
     // Install Vue Devtools
     try {
       await installExtension(VUEJS_DEVTOOLS);
@@ -141,6 +141,11 @@ ipcMain.handle("db-projects-get-selected", (e, id) => {
 
 ipcMain.handle("db-projects-add", (e, project) => {
   return projectController.add(project);
+});
+
+ipcMain.handle("db-projects-update", (e, project) => {
+  console.log(project);
+  return null;
 });
 
 ipcMain.handle("db-projects-delete", (e, projectId) => {
