@@ -28,12 +28,12 @@ test("can add project", () => {
 
   const project = {
     title: "It",
-    Description: "A murderous clown attacks a town"
+    description: "A murderous clown attacks a town"
   };
 
   expect(projectController.add(project)).toEqual({
     title: "It",
-    Description: "A murderous clown attacks a town"
+    description: "A murderous clown attacks a town"
   });
 });
 
@@ -53,7 +53,7 @@ test("trying to add project with same name returns error", () => {
 
   const project = {
     title: "It",
-    Description: "A murderous clown attacks a town"
+    description: "A murderous clown attacks a town"
   };
 
   expect(projectController.add(project)).toEqual(
@@ -61,10 +61,93 @@ test("trying to add project with same name returns error", () => {
   );
 });
 
-// TODO:
-// Updating a project works
-// Updating a project by id not in database returns an error
-// Updating a project to a title already in database returns an error
+test("can update project", () => {
+  const projectRepository = {
+    getById: jest.fn(() => {
+      return {
+        id: "1",
+        title: "It",
+        description: "A murderous clown attacks a town"
+      };
+    }),
+    getByTitle: jest.fn(() => undefined),
+    update: jest.fn(project => project)
+  };
+
+  const searchController = {
+    updateProject: jest.fn(() => {})
+  };
+
+  const projectController = new ProjectController(
+    projectRepository,
+    searchController
+  );
+
+  const project = {
+    id: "1",
+    title: "It",
+    description: "A murderous clown attacks a town"
+  };
+
+  expect(projectController.update(project)).toEqual({
+    id: "1",
+    title: "It",
+    description: "A murderous clown attacks a town"
+  });
+});
+
+test("trying to update project with id not in database returns error", () => {
+  const projectRepository = {
+    getById: jest.fn(() => undefined)
+  };
+
+  const searchController = {};
+
+  const projectController = new ProjectController(
+    projectRepository,
+    searchController
+  );
+
+  const project = {
+    id: "1",
+    title: "It",
+    description: "A murderous clown attacks a town"
+  };
+
+  expect(projectController.update(project)).toEqual(
+    new Error(`Project with id 1 not in database`)
+  );
+});
+
+test("trying to update project with title already in database returns error", () => {
+  const projectRepository = {
+    getById: jest.fn(() => {
+      return {
+        id: "1",
+        title: "It",
+        description: "A murderous clown attacks a town"
+      };
+    }),
+    getByTitle: jest.fn(project => project)
+  };
+
+  const searchController = {};
+
+  const projectController = new ProjectController(
+    projectRepository,
+    searchController
+  );
+
+  const project = {
+    id: "1",
+    title: "It",
+    description: "A murderous clown attacks a town"
+  };
+
+  expect(projectController.update(project)).toEqual(
+    new Error("Project title already in database")
+  );
+});
 
 test("can delete project", () => {
   const projectRepository = {
