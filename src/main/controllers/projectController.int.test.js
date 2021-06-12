@@ -105,6 +105,11 @@ test("trying to add project with name already in database returns error", () => 
   expect(response).toEqual(new Error("Project title already in database"));
 });
 
+// TODO:
+// Updating a project works
+// Updating a project by id not in database returns an error
+// Updating a project to a title already in database returns an error
+
 test("can delete project", () => {
   const response = projectController.delete("2");
 

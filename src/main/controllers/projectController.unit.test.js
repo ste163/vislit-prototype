@@ -66,15 +66,15 @@ test("trying to add project with same name returns error", () => {
 // Updating a project by id not in database returns an error
 // Updating a project to a title already in database returns an error
 
-// TODO:
-// Add searchController to delete project
 test("can delete project", () => {
   const projectRepository = {
     getById: jest.fn(id => id),
     delete: jest.fn(() => {})
   };
 
-  const searchController = {};
+  const searchController = {
+    removeProject: jest.fn(() => {})
+  };
 
   const projectController = new ProjectController(
     projectRepository,
@@ -92,7 +92,9 @@ test("trying to delete project with id not in database returns error", () => {
     delete: jest.fn(() => {})
   };
 
-  const searchController = {};
+  const searchController = {
+    removeProject: jest.fn(() => {})
+  };
 
   const projectController = new ProjectController(
     projectRepository,

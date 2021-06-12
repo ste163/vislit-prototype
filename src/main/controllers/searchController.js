@@ -35,9 +35,8 @@ export default class SearchController {
   }
 
   updateProject(originalProject, updatedProject) {
-    // Must remove the original project before adding
-    // Trying to remove project that doesn't match index
-    // Corrupts index
+    // Must remove the original project before adding.
+    // Trying to remove project that doesn't match index corrupts index
     this.removeProject(originalProject);
     this.addProject(updatedProject);
   }

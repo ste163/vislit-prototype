@@ -53,20 +53,17 @@ export default class ProjectController {
     }
   }
 
-  // NEED TESTS:
-  // INT & UNIT
   update(project) {
     try {
       const projectToUpdate = this.getById(project.id);
 
-      // Check if project is in database
       if (projectToUpdate instanceof Error) {
-        return projectToUpdate;
+        return projectToUpdate; // return thrown error
       }
 
       // Must get a copy of original project
-      // Before its updated, so it can be removed from search index
-      const originalProjectForSearch = this.getById(project.id);
+      // before its updated, so it can be removed from search index
+      const originalProjectForIndex = this.getById(project.id);
 
       this._checkForTitleTaken(project.title);
 
@@ -79,7 +76,7 @@ export default class ProjectController {
       const updatedProject = this.projectRepository.update(projectToUpdate);
 
       this.searchController.updateProject(
-        originalProjectForSearch,
+        originalProjectForIndex,
         updatedProject
       );
 
@@ -90,9 +87,6 @@ export default class ProjectController {
     }
   }
 
-  // NEED TO ADD
-  // SEARCH CONTROLLER DELETING
-  // AND TESTS
   delete(id) {
     try {
       const project = this.getById(id);
@@ -103,9 +97,7 @@ export default class ProjectController {
 
       this.projectRepository.delete(id);
 
-      // TODO:
-      // Once update is finished:
-      // THEN delete project from search index
+      this.searchController.removeProject(project);
 
       return true;
     } catch (error) {
