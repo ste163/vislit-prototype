@@ -4,6 +4,17 @@ export default class ProjectController {
     this.searchController = searchController;
   }
 
+  _checkForTitleTaken(title) {
+    const project = this.projectRepository.getByTitle(title);
+
+    // Only add/update project if it's undefined
+    if (project !== undefined) {
+      throw new Error("Project title already in database");
+    }
+
+    // Otherwise, continue running code because no error was thrown
+  }
+
   getAll() {
     try {
       return this.projectRepository.getAll();
@@ -28,20 +39,9 @@ export default class ProjectController {
     }
   }
 
-  // Create a new method that is .getByTitle
-  // Because both Add & Update need that
-  // Model it on the getById method
-
   add(project) {
     try {
-      const projectInDatabase = this.projectRepository.getByTitle(
-        project.title
-      );
-
-      // Only add a project if projectInDatabase is undefined
-      if (projectInDatabase !== undefined) {
-        throw new Error("Project title already in database");
-      }
+      this._checkForTitleTaken(project.title);
 
       const response = this.projectRepository.add(project);
 
@@ -57,18 +57,19 @@ export default class ProjectController {
     try {
       const projectToUpdate = this.getById(project.id);
 
+      // Check if project is in database
       if (projectToUpdate instanceof Error) {
         return projectToUpdate;
       }
 
-      // CAN NOT Update a project to have the same name as one already in the database
+      this._checkForTitleTaken(project.title);
 
+      // When here, we're good to update!
       // Update only certain properties
       projectToUpdate.title = project.title;
       projectToUpdate.description = project.description;
-      // NOTE: Add a last updated field?
+      // NOTE: Add a last updated field???
 
-      // NOTE MADE
       const response = this.projectRepository.update(projectToUpdate);
 
       // NOT MADE
