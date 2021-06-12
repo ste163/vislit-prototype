@@ -105,10 +105,45 @@ test("trying to add project with name already in database returns error", () => 
   expect(response).toEqual(new Error("Project title already in database"));
 });
 
-// TODO:
-// Updating a project works
-// Updating a project by id not in database returns an error
-// Updating a project to a title already in database returns an error
+test("can update project", () => {
+  const projectToUpdate = {
+    id: "2",
+    title: "The Shinning",
+    description: "It hurts when you scrape you knee."
+  };
+
+  const response = projectController.update(projectToUpdate);
+
+  expect(response.id).toEqual("2");
+  expect(response.title).toEqual("The Shinning");
+  expect(response.description).toEqual("It hurts when you scrape you knee.");
+});
+
+test("trying to update a project by id not in database returns error", () => {
+  const projectToUpdate = {
+    id: "666",
+    title: "The Shinning",
+    description: "It hurts when you scrape you knee."
+  };
+
+  const response = projectController.update(projectToUpdate);
+
+  expect(response).toBeInstanceOf(Error);
+  expect(response).toEqual(new Error("Project with id 666 not in database"));
+});
+
+test("trying to update a project by a title already in database returns error", () => {
+  const projectToUpdate = {
+    id: "1", // It's id
+    title: "The Shining",
+    description: "Is a scary book."
+  };
+
+  const response = projectController.update(projectToUpdate);
+
+  expect(response).toBeInstanceOf(Error);
+  expect(response).toEqual(new Error("Project title already in database"));
+});
 
 test("can delete project", () => {
   const response = projectController.delete("2");
