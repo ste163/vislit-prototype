@@ -28,6 +28,10 @@ export default class ProjectController {
     }
   }
 
+  // Create a new method that is .getByTitle
+  // Because both Add & Update need that
+  // Model it on the getById method
+
   add(project) {
     try {
       const projectInDatabase = this.projectRepository.getByTitle(
@@ -49,8 +53,33 @@ export default class ProjectController {
     }
   }
 
-  // TODO:
-  // Edit
+  update(project) {
+    try {
+      const projectToUpdate = this.getById(project.id);
+
+      if (projectToUpdate instanceof Error) {
+        return projectToUpdate;
+      }
+
+      // CAN NOT Update a project to have the same name as one already in the database
+
+      // Update only certain properties
+      projectToUpdate.title = project.title;
+      projectToUpdate.description = project.description;
+      // NOTE: Add a last updated field?
+
+      // NOTE MADE
+      const response = this.projectRepository.update(projectToUpdate);
+
+      // NOT MADE
+      // this.searchController.updateProject(response);
+
+      return response;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  }
 
   delete(id) {
     try {
@@ -62,6 +91,8 @@ export default class ProjectController {
 
       this.projectRepository.delete(id);
 
+      // TODO:
+      // Once update is finished:
       // THEN delete project from search index
 
       return true;

@@ -14,6 +14,12 @@ const mutations = {
   }
 };
 
+// TODO:
+// Change all actions to use
+// A error handler with
+// (response instanceof Error) {
+// display error toast
+// }
 const actions = {
   async getProjects({ commit }) {
     const response = await ipcRenderer.invoke("db-projects-get-all");
@@ -29,14 +35,11 @@ const actions = {
 
   async addProject({ dispatch }, project) {
     // TODO:
-    // Test if we wrap the endpoint in a try/catch
-    // and if it has an error
-    // does triggering that cause a try/catch here to trigger?
+    // Return the project's ID
+    // So we can re-route to the newly created project after creation
     const response = await ipcRenderer.invoke("db-projects-add", project);
     console.log("RENDERER RESPONSE:", response);
     if (response) {
-      // Need to get the project id on the return
-      // So we can re-route to that ID after we get projects
       dispatch("getProjects");
     } else {
       console.error("ERROR WHILE ADDING PROJECT. RESPONSE WAS:", response);
@@ -45,6 +48,13 @@ const actions = {
 
   async updateProject({ dispatch }, project) {
     const response = await ipcRenderer.invoke("db-projects-update", project);
+
+    // THIS WORKS
+    if (response instanceof Error) {
+      // If you're an error, display the error toast
+      // And the error message
+      console.log("YOURE AN ERROR!", response);
+    }
 
     if (response) {
       dispatch("getProjects");

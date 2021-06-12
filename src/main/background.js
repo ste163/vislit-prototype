@@ -144,8 +144,7 @@ ipcMain.handle("db-projects-add", (e, project) => {
 });
 
 ipcMain.handle("db-projects-update", (e, project) => {
-  console.log(project);
-  return null;
+  return projectController.update(project);
 });
 
 ipcMain.handle("db-projects-delete", (e, projectId) => {

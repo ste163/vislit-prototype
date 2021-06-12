@@ -38,13 +38,24 @@ export default class ProjectRepository {
     return addedProject;
   }
 
+  update(project) {
+    this.database.db.chain
+      .get("projects")
+      .assign({ project })
+      .value();
+
+    this.database.db.write();
+  }
+
   delete(id) {
     // NOTE:
     // Warning modal needs to be very specific on what will be deleted
 
     // TODO:
     // get all related project data
-    // delete all that data first, in correct order
+    // and delete it
+    // Because this is not a legit relational database
+    // The ordering does not matter
     this.database.db.chain
       .get("projects")
       .remove({ id })

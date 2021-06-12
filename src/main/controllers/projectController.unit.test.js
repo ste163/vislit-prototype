@@ -62,6 +62,11 @@ test("trying to add project with same name returns error", () => {
 });
 
 // TODO:
+// Updating a project works
+// Updating a project by id not in database returns an error
+// Updating a project to a title already in database returns an error
+
+// TODO:
 // Add searchController to delete project
 test("can delete project", () => {
   const projectRepository = {

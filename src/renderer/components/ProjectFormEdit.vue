@@ -27,6 +27,7 @@ export default {
   data() {
     return {
       form: {
+        id: "",
         title: "",
         description: ""
       }
@@ -44,6 +45,7 @@ export default {
 
   mounted() {
     this.form = {
+      id: this.selectedProject.id,
       title: this.selectedProject.title,
       description: this.selectedProject.description
     };
