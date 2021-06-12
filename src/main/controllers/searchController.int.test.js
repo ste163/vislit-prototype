@@ -51,6 +51,47 @@ test("can add project to projectMiniSearch index", () => {
   expect(newCount).toBeGreaterThan(originalCount);
 });
 
+test("can delete project from projectMiniSearch index", () => {
+  const searchController = new SearchController(projectRepository);
+
+  const originalCount = searchController._projectMiniSearch.documentCount;
+
+  const projectToRemove = {
+    id: "2",
+    title: "The Shining",
+    description: "An evil hotel possesses a groundskeeper."
+  };
+
+  searchController.removeProject(projectToRemove);
+
+  const newCount = searchController._projectMiniSearch.documentCount;
+
+  expect(newCount).toBeLessThan(originalCount);
+});
+
+test("can update project in projectMiniSearch index", () => {
+  const searchController = new SearchController(projectRepository);
+
+  const originalProject = searchController._projectMiniSearch._storedFields[1];
+
+  const projectToUpdate = {
+    id: "2",
+    title: "The Shining",
+    description: "An evil hotel attacks a family."
+  };
+
+  searchController.updateProject(originalProject, projectToUpdate);
+
+  const updatedProject = searchController._projectMiniSearch._storedFields[2];
+
+  expect(originalProject.description).not.toEqual(updatedProject.description);
+  expect(updatedProject).toEqual({
+    id: "2",
+    title: "The Shining",
+    description: "An evil hotel attacks a family."
+  });
+});
+
 test("can search for projects by title", () => {
   const searchController = new SearchController(projectRepository);
 

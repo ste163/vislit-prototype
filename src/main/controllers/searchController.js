@@ -30,11 +30,19 @@ export default class SearchController {
     this._projectMiniSearch.add(project);
   }
 
+  removeProject(project) {
+    this._projectMiniSearch.remove(project);
+  }
+
+  updateProject(originalProject, updatedProject) {
+    // Must remove the original project before adding
+    // Trying to remove project that doesn't match index
+    // Corrupts index
+    this.removeProject(originalProject);
+    this.addProject(updatedProject);
+  }
+
   searchProjects(query) {
     return this._projectMiniSearch.search(query);
   }
-
-  // REMOVE PROJECT FROM INDEX
-
-  // UPDATE PROJECT IN INDEX THAT COMBINES ADD & REMOVE??
 }

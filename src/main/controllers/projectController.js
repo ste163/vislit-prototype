@@ -53,6 +53,8 @@ export default class ProjectController {
     }
   }
 
+  // NEED TO WRITE TESTS FOR THIS
+  // INT & UNIT
   update(project) {
     try {
       const projectToUpdate = this.getById(project.id);
@@ -68,7 +70,7 @@ export default class ProjectController {
       // Update only certain properties
       projectToUpdate.title = project.title;
       projectToUpdate.description = project.description;
-      // NOTE: Add a last updated field???
+      // NOTE: Add a last updated field??? - might be good?
 
       const response = this.projectRepository.update(projectToUpdate);
 
