@@ -53,7 +53,7 @@ export default class ProjectController {
     }
   }
 
-  // NEED TO WRITE TESTS FOR THIS
+  // NEED TESTS:
   // INT & UNIT
   update(project) {
     try {
@@ -64,6 +64,10 @@ export default class ProjectController {
         return projectToUpdate;
       }
 
+      // Must get a copy of original project
+      // Before its updated, so it can be removed from search index
+      const originalProjectForSearch = this.getById(project.id);
+
       this._checkForTitleTaken(project.title);
 
       // When here, we're good to update!
@@ -72,18 +76,23 @@ export default class ProjectController {
       projectToUpdate.description = project.description;
       // NOTE: Add a last updated field??? - might be good?
 
-      const response = this.projectRepository.update(projectToUpdate);
+      const updatedProject = this.projectRepository.update(projectToUpdate);
 
-      // NOT MADE
-      // this.searchController.updateProject(response);
+      this.searchController.updateProject(
+        originalProjectForSearch,
+        updatedProject
+      );
 
-      return response;
+      return updatedProject;
     } catch (error) {
       console.error(error);
       return error;
     }
   }
 
+  // NEED TO ADD
+  // SEARCH CONTROLLER DELETING
+  // AND TESTS
   delete(id) {
     try {
       const project = this.getById(id);
