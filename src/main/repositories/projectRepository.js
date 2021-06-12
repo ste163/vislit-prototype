@@ -39,12 +39,21 @@ export default class ProjectRepository {
   }
 
   update(project) {
+    // Some code duplication from delete & add
+    // It's needed because we only should .write()
+    // Once we're finished updated
     this.database.db.chain
       .get("projects")
-      .assign({ project })
+      .remove({ id: project.id })
       .value();
 
+    this.database.db.data.projects.push(project);
+
     this.database.db.write();
+
+    const updatedProject = this.getById(project.id);
+
+    return updatedProject;
   }
 
   delete(id) {

@@ -9,6 +9,9 @@ import { nanoid } from "nanoid/non-secure";
 // User can decide database save location
 // Initially check localStorage for a db location,
 // So the user could place the db in cloud storage
+// NOTE:
+// Because lowdb is not a real relational database
+// I have more freedom with deleting & updating data
 
 export default class Database {
   constructor(app, dialog) {

@@ -85,6 +85,22 @@ test("can add project to database", () => {
   expect(projects.length).toEqual(3);
 });
 
+test("can update project", () => {
+  const updatedProject = {
+    id: "1",
+    title: "It - by S.K.",
+    description: "It's really scary"
+  };
+
+  const response = projectRepository.update(updatedProject);
+
+  expect(response).toEqual({
+    id: "1",
+    title: "It - by S.K.",
+    description: "It's really scary"
+  });
+});
+
 test("can delete project", () => {
   projectRepository.delete("1");
 
