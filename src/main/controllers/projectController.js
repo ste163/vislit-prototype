@@ -56,14 +56,13 @@ export default class ProjectController {
   update(project) {
     try {
       const projectToUpdate = this.getById(project.id);
+      // Must get a copy of original project
+      // before its updated, so it can be removed from search index
+      const originalProjectForIndex = { ...projectToUpdate };
 
       if (projectToUpdate instanceof Error) {
         return projectToUpdate; // return thrown error
       }
-
-      // Must get a copy of original project
-      // before its updated, so it can be removed from search index
-      const originalProjectForIndex = this.getById(project.id);
 
       this._checkForTitleTaken(project.title);
 
