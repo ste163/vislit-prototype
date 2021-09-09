@@ -2,7 +2,7 @@
 
 > The main project's [github repo](https://github.com/ste163/vislit)
 
-Vue-version of Vislit prototype. Made using Vue version 2. If going to update to Vue version 3, need to check all dependencies.
+Prototype using Vue 2 and JavaScript. No longer being tested.
 
 ## Features Roadmap
 
